@@ -22,7 +22,7 @@ launch_buttons:
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/SerHol17/Pensamiento_Computacional  # Online location of your book
+  url: https://github.com/SerHol17/CienciaDatosAplicada # Online location of your book
   branch: main  # Which branch of the repository should be used when creating links (optional)
 
 # Add GitHub buttons to your book
@@ -34,5 +34,3 @@ html:
 sphinx:
   config:
     language: es
-  extra_extensions:
-    - sphinx.ext.autosummary

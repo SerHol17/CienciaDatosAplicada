@@ -97,7 +97,7 @@ Facultad de ingeniería e inteligencia artificial
 
 ::::
 
----
+
 
 ## Objetivos del curso:
 
@@ -111,7 +111,7 @@ Capacitar al estudiante en el diseño, desarrollo e implementación de solucione
 * **Unidad 2 (Proyectos de Ciencia de Datos):** Estructurar y gestionar el ciclo de vida completo de un proyecto de ciencia de datos, aplicando metodologías estandarizadas para formular el problema, analizar la información y evaluar los resultados con rigor técnico y científico.
 
 * **Unidad 3 (Aplicación de Pipelines de Ciencia de Datos):** Diseñar e implementar pipelines de procesamiento de datos y aprendizaje automático escalables, garantizando la automatización, reproducibilidad y el despliegue efectivo de los modelos en entornos de producción.
----
+
 
 
 ## Contenido del curso
@@ -156,7 +156,7 @@ Capacitar al estudiante en el diseño, desarrollo e implementación de solucione
 
 
 ::::
----
+
 
 ## Información del curso
 
@@ -168,7 +168,7 @@ Capacitar al estudiante en el diseño, desarrollo e implementación de solucione
   <img src="_static/images/recomendaciones.png" />
 </div>
 
----
+
 
 ## Bibliografía
 Estas son algunas de las referencias usadas para este curso.
@@ -200,56 +200,15 @@ Estas son algunas de las referencias usadas para este curso.
 
 ::::
 
----
+
 
 ## Reglas de Juego
 
 * Trabajo en clase y actividades: Notebooks y repositorios.
 * Proyecto Final.
 
-### Distribución de Evaluación
-
-::::{card-carousel} 2
-
-:::{card}
-:margin: 3
-:class-body: text-center
-:class-header: bg-light text-center
-
-```{image} _static/images/parcial1.png
-:height: 300
-```
-
-:::
-
-:::{card}
-:margin: 3
-:class-body: text-center
-:class-header: bg-light text-center
-
-```{image} _static/images/parcial2.png
-:height: 300
-```
-
-
-:::
-
-:::{card}
-:margin: 3
-:class-body: text-center
-:class-header: bg-light text-center
-
-```{image} _static/images/parcial3.png
-:height: 300
-```
-
-
-:::
-
-::::
 
 ## ¿Qué vamos a ver durante el curso?
 
 ```{tableofcontents}
 ```
----
