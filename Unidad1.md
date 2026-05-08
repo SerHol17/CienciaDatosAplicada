@@ -1,4 +1,4 @@
-# Deep Learning Avanzado
+# 1. Deep Learning Avanzado
 
 ## Introduccion
 

@@ -1,4 +1,4 @@
-# Segmentación con Inteligencia Artificial
+# 1.6 Segmentación con Inteligencia Artificial
 
 ## ¿Qué es la segmentación?
 
