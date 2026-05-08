@@ -61,9 +61,12 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Deep Learning Avanzado" href="Unidad1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="es"/>
   <meta name="docsearch:version" content="" />
@@ -169,7 +172,29 @@
                 </a>
             </li>
         </ul>
-        
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="Unidad1.html">Deep Learning Avanzado</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Unidad%201/01_introduccion_ia.html">1.1 Tópicos Emergentes de la IA — 2026</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="Unidad%201/02_Autoencoders.html">1.2 Autoencoders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Unidad%201/autoencoders.html">1.3 Autoencoders: teoria, implementacion y aplicaciones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Unidad%201/Gans_teoria.html">1.4 Redes Generativas Adversariales (GANs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Unidad%201/gans.html">1.5 Redes Generativas Adversariales (GANs)</a></li>
+</ul>
+</details></li>
+</ul>
+
     </div>
 </nav></div>
     </div>
@@ -408,6 +433,19 @@ Mario Alejandro Bravo O.</div>
 </div>
 </div>
 </div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-header bg-light text-center docutils">
+<a class="rounded reference internal image-reference" href="_images/rts.png"><img alt="_images/rts.png" class="rounded" src="_images/rts.png" style="height: 100px;" />
+</a>
+</div>
+<div class="sd-card-body text-center docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Ph.D. Reinel Tabares</div>
+<p class="sd-card-text"><a class="reference external" href="mailto:reinel&#46;tabares&#37;&#52;&#48;ucaldas&#46;edu&#46;co"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKUAAACUCAMAAADF0xngAAAAllBMVEXx9ff////4RDfc5ur4+/z4PzH9w7/4KRTx///2WE/Z8vf4QjXx+/34Lxzx+Pr4PS78rKf4OSn+8vHn7vHb6+/3b2j92dj8tLD6iYP5U0j+7ez3eXL9z835a2P/9/b4TkH3IgT5Y1r1lI/7j4ry6uvy2NjzxMLy4OD8urbzu7n6gXnz0dDznJjqqajou7zg19rjycvrn56WGFDjAAAF80lEQVR4nO3c63aiMBAAYKqLaBPAuLVqLSJUa1vtZd//5TZxrQtJmAQIgZ7D/KblMzNkAkqcm58QTtsAreiV5qJXmoteaS56pbnoleaiV5qLXmkueOXm4X60mLKY/bIds/N5F6P7hw2o3LwsV77ns/CSI3ZsBj4mlzP7q+XLplj5mBDiDi4RDl7HgTVjMH6lZ7yES0gyKlBu3rZXIgvkpztbzGCX+ih7cnf7tpEpH9b+IB+IrHd2so53a4K4s/vrB1E5m5OBEGRlpTjxcSU7+XwmKJf8SP4rznCKm856EEzDUHZyf8krH6VIlvXUaXY4sZMK2f5mPuaVs8iVH0gHPtk3ycT7pGCA6CUUzXLKUVjwcRgzfm6OiZ9jSUl+JzIc5ZRPxYfSj+Q2VZwBnrqFSWQD9JRVbmLo2AHympmS6ATkFeeQjU+8yShnW+hY9qGi/dg8ch9BKWSxnWWU9yolnZI+DGc9wM/yCSinvM8oR57qcNovT0azHjgnH8z2ObxROSWdOecGmdiZF82StZRG+6W8JxpRDkK0MFKcAV4MlCVZWUkXfmlQfzhxkBJw5quppK01OdRl4kNxTzSkpMVZs1/iR72SrKWs2S9VPdGUcoC2y8pTEt4t4Z5oTFmjX44Pyp5YUgl95NB/rpB12hMJNAFJzqhSxmD5IHJyyjJpTwTbjevGZZVuovjcZF7yTgM74n1iNuh6ZiIMjEo5YTUE/deS/VLRExGJPm+rKOn1CH/4wYv2w48Av4A9EZHl510lJb0FXYBZd8NUszhZSUJl7pL34XBYTUlnjn0CpkmzX+JDBK4lSfJ1W0OpnIXJ5KieOcfHCfhZPZrtYR0lLagTOCW5yocftCeG4H9wT2djHSW7OOGR2KZgv8S7VJGNjwuyllJdVdGhOOuKnoj86PMbWU/JHjeBWaf9MpBnPQjg3sCyfUXWVNLSegWek7DiPEmZQXACS5LEH/+NtZXnZ07QDI/IWtIvsfMG/1HylUXWV7J7FXhYVsKUpLjs3PDpLoc0oKTZe0FQifFfFuQe58uOR+/DPNKEkl3rKyiB9P4y0y8DBxx7ROIvzmhISae+J7DO/Og6c+LdHJq9zosLHmlISQdo4UFZJMmlOMdHsP+73h8+2waV6tP7UzolqdZSZCJm26iSpvINTKWf7sb8N0z8IWtJts0qz0/0wCkp2su+Ofr/j/2TLNuGlSzr4L1BCJfu6uNWbjSspI1orv2ghwt/Li/JBpRsMgSzXhSunxZluwElayzg8kMeYfxemO0mlCzrk7JZ9xMg280oadbh+2A+EHmDst2QUrn8yAdbXKiiCSVbmg10i1O2uLCkZPfBGt/ZsHazVGW7QSW7I9J4ju+SP3cayMaU7JGk8ik5bTc6xgaV55UkeK0jEulku2GlE+ygLxQR3G6sKVnWC6ekEGlmu3HlefkhL04CLS5sK+md99NWzDraak1A1pR00fka81mni4syRhtK8Rc3ysVFG0p2R5SZkujiouDupl0lvdbfrz/ECMN3rXZjX0mL87sRabebNpSXXygiUnQv2w0lewyPQjctn22rSup8jj+qEO0qHRxUGkjLShq/f4SyItO2shrTutJxfoaywnC2oSzPbEVZmtmOsmxxtqUsN5ytKUsx21OWyXqbSv3hbFWpzWxXqctsWalZnK0rtYazfaUOswNKjax3QqlkdkOpynpHlApmV5QwszNK0NkhJcDskrKY2Sll4ZTUMWXBcHZNKWd2Tilldk8pK84uKsXhVCnFtzYtKAWmRJl7a1N8A9aGkmfKlNk3YMW3ia0oOaeozL9NLL6ZbUmZY4rK/JvZ4lvutpRZpqDk33IXdgywpsxMSYKS3zFA2H3BovI6nIKS331B2MnCpvKbySvFnSz4XUGsKi9MTinbFYTbYcWu8l9x5pXSHVa43WpsK9lwZpVFu9Xc5Hb+sa6kzKuS7fzzmIUV7aLkxbaVzu/b2NPZRekmsyPVwvqGVL/wQm9Hqq5GrzQXvdJc9Epz0SvNRa80F73SXPRKc/EzlH8BPDfUhTE97R0AAAAASUVORK5CYII=" width="25" height="20"></a></p>
+</div>
+</div>
+</div>
 <div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
 <div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 sd-flex-row-reverse docutils">
 <div class="sd-col sd-d-flex-column sd-col-4 sd-col-xs-4 sd-col-sm-4 sd-col-md-4 sd-col-lg-4 sd-m-auto docutils">
@@ -465,7 +503,7 @@ Capacitar al estudiante en el diseño, desarrollo e implementación de solucione
 <div class="sd-card-body docutils">
 <p class="sd-card-text"><strong>Deep Learning Avanzado</strong></p>
 </div>
-<span class="sd-stretched-link sd-hide-link-text">Unidad1</span></div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="Unidad1.html"><span class="doc">Deep Learning Avanzado</span></a></div>
 </div>
 <div class="sd-col sd-d-flex-row docutils">
 <div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
@@ -528,6 +566,11 @@ Capacitar al estudiante en el diseño, desarrollo e implementación de solucione
 </section>
 <section id="que-vamos-a-ver-durante-el-curso">
 <h2>¿Qué vamos a ver durante el curso?<a class="headerlink" href="#que-vamos-a-ver-durante-el-curso" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Unidad1.html">Deep Learning Avanzado</a></li>
+</ul>
+</div>
 </section>
 </section>
 
@@ -561,6 +604,15 @@ Capacitar al estudiante en el diseño, desarrollo e implementación de solucione
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="right-next"
+       href="Unidad1.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Deep Learning Avanzado</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               

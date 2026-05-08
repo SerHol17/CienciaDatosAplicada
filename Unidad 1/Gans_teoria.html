@@ -1,0 +1,1042 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1.4 Redes Generativas Adversariales (GANs) &#8212; Ciencia de Datos Aplicada- 01 Ucaldas</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unidad 1/Gans_teoria';</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="1.5 Redes Generativas Adversariales (GANs)" href="gans.html" />
+    <link rel="prev" title="1.3 Autoencoders: teoria, implementacion y aplicaciones" href="autoencoders.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Ciencia de Datos Aplicada- 01 Ucaldas - Home"/>
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark pst-js-only" alt="Ciencia de Datos Aplicada- 01 Ucaldas - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Ciencia de datos aplicada
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Unidad1.html">Deep Learning Avanzado</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_introduccion_ia.html">1.1 Tópicos Emergentes de la IA — 2026</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02_Autoencoders.html">1.2 Autoencoders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoencoders.html">1.3 Autoencoders: teoria, implementacion y aplicaciones</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.4 Redes Generativas Adversariales (GANs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gans.html">1.5 Redes Generativas Adversariales (GANs)</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/CienciaDatosAplicada" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/CienciaDatosAplicada/issues/new?title=Issue%20on%20page%20%2FUnidad 1/Gans_teoria.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Unidad 1/Gans_teoria.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>1.4 Redes Generativas Adversariales (GANs)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-una-gan">¿Qué es una GAN?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuicion-el-falsificador-y-el-detective">Intuición: el falsificador y el detective</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitectura">Arquitectura</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generador-g">Generador G</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discriminador-d">Discriminador D</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-de-perdida-original-minimax">Función de pérdida original (minimax)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proceso-de-entrenamiento">Proceso de entrenamiento</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-gans">Tipos de GANs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gan-condicional-cgan">GAN Condicional (cGAN)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dcgan-deep-convolutional-gan">DCGAN — Deep Convolutional GAN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pix2pix-gan-para-traduccion-imagen-a-imagen">Pix2Pix — GAN para traducción imagen-a-imagen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cyclegan-traduccion-sin-pares-de-datos">CycleGAN — Traducción sin pares de datos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stylegan-stylegan2-stylegan3">StyleGAN / StyleGAN2 / StyleGAN3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wgan-wasserstein-gan">WGAN — Wasserstein GAN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#progan-progressive-growing-gan">ProGAN — Progressive Growing GAN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#biggan">BigGAN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gan-para-video-videogan-mocogan-sora">GAN para Video — VideoGAN / MoCoGAN / SORA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-to-image-gans-stackgan-attngan">Text-to-Image GANs — StackGAN / AttnGAN</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problemas-comunes-en-el-entrenamiento-de-gans">Problemas comunes en el entrenamiento de GANs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mode-collapse">Mode Collapse</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inestabilidad-en-el-entrenamiento">Inestabilidad en el entrenamiento</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vanishing-gradients">Vanishing Gradients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memorizacion">Memorización</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas-de-evaluacion">Métricas de evaluación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gans-vs-modelos-de-difusion">GANs vs. Modelos de Difusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicaciones-de-las-gans">Aplicaciones de las GANs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frameworks-y-recursos">Frameworks y recursos</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="redes-generativas-adversariales-gans">
+<h1>1.4 Redes Generativas Adversariales (GANs)<a class="headerlink" href="#redes-generativas-adversariales-gans" title="Link to this heading">#</a></h1>
+<section id="que-es-una-gan">
+<h2>¿Qué es una GAN?<a class="headerlink" href="#que-es-una-gan" title="Link to this heading">#</a></h2>
+<p>Una <strong>Generative Adversarial Network (GAN)</strong> (Goodfellow et al., 2014) es un framework de aprendizaje profundo compuesto por <strong>dos redes neuronales que compiten entre sí</strong> en un juego de suma cero:</p>
+<ul class="simple">
+<li><p>El <strong>Generador (G)</strong> aprende a crear datos sintéticos indistinguibles de los reales.</p></li>
+<li><p>El <strong>Discriminador (D)</strong> aprende a distinguir datos reales de sintéticos.</p></li>
+</ul>
+<p>La competencia entre ambas redes impulsa a cada una a mejorar continuamente hasta que G produce muestras de altísima calidad.</p>
+<img src="../_static/images/gans1.png" width="600" />
+</section>
+<hr class="docutils" />
+<section id="intuicion-el-falsificador-y-el-detective">
+<h2>Intuición: el falsificador y el detective<a class="headerlink" href="#intuicion-el-falsificador-y-el-detective" title="Link to this heading">#</a></h2>
+<p>La analogía más usada para entender GANs:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Red</p></th>
+<th class="head"><p>Rol</p></th>
+<th class="head"><p>Objetivo</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Generador G</strong></p></td>
+<td><p>Falsificador de arte</p></td>
+<td><p>Crear cuadros tan buenos que el detective no los detecte.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Discriminador D</strong></p></td>
+<td><p>Detective / experto</p></td>
+<td><p>Distinguir cuadros originales de falsificaciones.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Ambos mejoran al mismo tiempo: el detective obliga al falsificador a ser mejor, y el falsificador obliga al detective a ser más preciso.</p>
+</section>
+<hr class="docutils" />
+<section id="arquitectura">
+<h2>Arquitectura<a class="headerlink" href="#arquitectura" title="Link to this heading">#</a></h2>
+<section id="generador-g">
+<h3>Generador G<a class="headerlink" href="#generador-g" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Entrada</strong>: vector de ruido aleatorio <code class="docutils literal notranslate"><span class="pre">z</span></code> muestreado de una distribución (normalmente N(0,1)).</p></li>
+<li><p><strong>Salida</strong>: muestra sintética <code class="docutils literal notranslate"><span class="pre">G(z)</span></code> en el espacio de los datos (imagen, audio, texto…).</p></li>
+<li><p><strong>Objetivo</strong>: engañar al discriminador → maximizar <code class="docutils literal notranslate"><span class="pre">log</span> <span class="pre">D(G(z))</span></code>.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>z ~ N(0, I)  →  [G]  →  G(z)  (imagen sintética)
+</pre></div>
+</div>
+</section>
+<section id="discriminador-d">
+<h3>Discriminador D<a class="headerlink" href="#discriminador-d" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Entrada</strong>: muestra real <code class="docutils literal notranslate"><span class="pre">x</span></code> o muestra sintética <code class="docutils literal notranslate"><span class="pre">G(z)</span></code>.</p></li>
+<li><p><strong>Salida</strong>: escalar en [0, 1] → probabilidad de que la muestra sea real.</p></li>
+<li><p><strong>Objetivo</strong>: clasificar correctamente → maximizar <code class="docutils literal notranslate"><span class="pre">log</span> <span class="pre">D(x)</span> <span class="pre">+</span> <span class="pre">log(1</span> <span class="pre">-</span> <span class="pre">D(G(z)))</span></code>.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>x (real)    →  [D]  →  D(x)   ≈ 1
+G(z) (falso) →  [D]  →  D(G(z)) ≈ 0
+</pre></div>
+</div>
+<img src="../_static/images/gans2.png" width="600" />
+</section>
+</section>
+<hr class="docutils" />
+<section id="funcion-de-perdida-original-minimax">
+<h2>Función de pérdida original (minimax)<a class="headerlink" href="#funcion-de-perdida-original-minimax" title="Link to this heading">#</a></h2>
+<p>El entrenamiento de una GAN es un <strong>juego minimax</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">min_G</span>  <span class="n">max_D</span>  <span class="n">V</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">G</span><span class="p">)</span> <span class="o">=</span> <span class="n">E</span><span class="p">[</span><span class="n">log</span> <span class="n">D</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span> <span class="o">+</span> <span class="n">E</span><span class="p">[</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">D</span><span class="p">(</span><span class="n">G</span><span class="p">(</span><span class="n">z</span><span class="p">)))]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>D</strong> maximiza: clasifica bien reales e impostores.</p></li>
+<li><p><strong>G</strong> minimiza: hace que D(G(z)) sea lo más cercano a 1 posible.</p></li>
+</ul>
+<p>En la práctica, para evitar gradientes saturados en las primeras etapas, G maximiza <code class="docutils literal notranslate"><span class="pre">log</span> <span class="pre">D(G(z))</span></code> en lugar de minimizar <code class="docutils literal notranslate"><span class="pre">log(1</span> <span class="pre">-</span> <span class="pre">D(G(z)))</span></code>.</p>
+</section>
+<hr class="docutils" />
+<section id="proceso-de-entrenamiento">
+<h2>Proceso de entrenamiento<a class="headerlink" href="#proceso-de-entrenamiento" title="Link to this heading">#</a></h2>
+<p>El entrenamiento alterna entre actualizar D y G:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Para cada iteración:
+
+  ── Paso 1: Entrenar el Discriminador ──
+  1. Tomar un batch de datos reales x
+  2. Generar un batch de datos falsos G(z)
+  3. Calcular: L_D = -[log D(x) + log(1 - D(G(z)))]
+  4. Actualizar pesos de D (G se congela)
+
+  ── Paso 2: Entrenar el Generador ──
+  1. Generar un batch de datos falsos G(z)
+  2. Calcular: L_G = -log D(G(z))
+  3. Actualizar pesos de G (D se congela)
+</pre></div>
+</div>
+<img src="../_static/images/gans3.png" width="600" />
+<blockquote>
+<div><p>El equilibrio teórico (Nash) se alcanza cuando G reproduce la distribución real y D no puede hacer mejor que 50% de acierto.</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="tipos-de-gans">
+<h2>Tipos de GANs<a class="headerlink" href="#tipos-de-gans" title="Link to this heading">#</a></h2>
+<section id="gan-condicional-cgan">
+<h3>GAN Condicional (cGAN)<a class="headerlink" href="#gan-condicional-cgan" title="Link to this heading">#</a></h3>
+<p>Condiciona tanto G como D en una etiqueta o señal adicional <code class="docutils literal notranslate"><span class="pre">y</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>G(z, y) → muestra del tipo y
+D(x, y) → ¿es x una muestra real del tipo y?
+</pre></div>
+</div>
+<img src="../_static/images/gans4.png" width="600" />
+<p><strong>Permite controlar</strong> qué tipo de muestra se genera (ej. generar solo el dígito «7», o una imagen de perro).</p>
+<p><strong>Usos</strong>: generación controlada, síntesis condicionada, transferencia de estilo.</p>
+</section>
+<hr class="docutils" />
+<section id="dcgan-deep-convolutional-gan">
+<h3>DCGAN — Deep Convolutional GAN<a class="headerlink" href="#dcgan-deep-convolutional-gan" title="Link to this heading">#</a></h3>
+<p>Arquitectura estabilizadora que introdujo convoluciones transpuestas en G y convoluciones strided en D:</p>
+<p><strong>Generador</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>z (100) → FC → Reshape → ConvTranspose2D × 4 → imagen (64×64×3)
+</pre></div>
+</div>
+<p><strong>Discriminador</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>imagen → Conv2D (stride 2) × 4 → FC → sigmoid
+</pre></div>
+</div>
+<p>Reglas clave que estabilizan el entrenamiento:</p>
+<ul class="simple">
+<li><p>Batch Normalization en todas las capas (excepto entrada de D y salida de G).</p></li>
+<li><p>Activación <strong>ReLU</strong> en G, <strong>LeakyReLU</strong> en D.</p></li>
+<li><p>Eliminar capas de pooling → usar stride en su lugar.</p></li>
+</ul>
+<img src="../_static/images/gans5.png" width="600" />
+</section>
+<hr class="docutils" />
+<section id="pix2pix-gan-para-traduccion-imagen-a-imagen">
+<h3>Pix2Pix — GAN para traducción imagen-a-imagen<a class="headerlink" href="#pix2pix-gan-para-traduccion-imagen-a-imagen" title="Link to this heading">#</a></h3>
+<p>Traduce una imagen de un dominio a otro usando pares de imágenes de entrenamiento:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Imagen fuente (A)  →  [G tipo U-Net]  →  Imagen objetivo (B)
+                              ↓
+                        [D tipo PatchGAN]
+                       ¿El par (A, B) es real o falso?
+</pre></div>
+</div>
+<p><strong>PatchGAN</strong>: el discriminador evalúa parches locales (ej. 70×70 px) en lugar de la imagen completa → captura mejor texturas y detalles finos.</p>
+<p><strong>Pérdida combinada</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>L = L_adversarial + λ · L_L1
+</pre></div>
+</div>
+<img src="../_static/images/gans6.png" width="600" />
+<p><strong>Aplicaciones</strong>: sketch a foto, mapa a satélite, día a noche, blanco y negro a color, plano a fachada.</p>
+</section>
+<hr class="docutils" />
+<section id="cyclegan-traduccion-sin-pares-de-datos">
+<h3>CycleGAN — Traducción sin pares de datos<a class="headerlink" href="#cyclegan-traduccion-sin-pares-de-datos" title="Link to this heading">#</a></h3>
+<p>Aprende a traducir entre dominios A y B <strong>sin imágenes pareadas</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>G: A → B   (traduce de A a B)
+F: B → A   (traduce de B a A)
+</pre></div>
+</div>
+<p><strong>Pérdida de consistencia de ciclo</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>F(G(x)) ≈ x   (ciclo A → B → A)
+G(F(y)) ≈ y   (ciclo B → A → B)
+</pre></div>
+</div>
+<img src="../_static/images/gans7.png" width="600" />
+<p><strong>Aplicaciones</strong>: caballo ↔ cebra, verano ↔ invierno, foto ↔ pintura, manzana ↔ naranja.</p>
+</section>
+<hr class="docutils" />
+<section id="stylegan-stylegan2-stylegan3">
+<h3>StyleGAN / StyleGAN2 / StyleGAN3<a class="headerlink" href="#stylegan-stylegan2-stylegan3" title="Link to this heading">#</a></h3>
+<p>Arquitectura de NVIDIA que separa el contenido del estilo mediante una red de mapeo:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>z → [Mapping Network f] → w (vector de estilo)
+w → [Síntesis por AdaIN en cada capa] → imagen de alta resolución
+</pre></div>
+</div>
+<img src="../_static/images/gans8.png" width="600" />
+<p><strong>Innovaciones</strong>:</p>
+<ul class="simple">
+<li><p><strong>AdaIN (Adaptive Instance Normalization)</strong>: inyecta el estilo en cada capa.</p></li>
+<li><p><strong>Progressive Growing</strong>: entrena primero en baja resolución, escala progresivamente.</p></li>
+<li><p><strong>Stochastic Variation</strong>: ruido por capa para detalles estocásticos (poros, pelo).</p></li>
+</ul>
+<p><strong>Aplicaciones</strong>: generación de caras fotorrealistas, generación de arte, avatares digitales, síntesis de datos médicos.</p>
+</section>
+<hr class="docutils" />
+<section id="wgan-wasserstein-gan">
+<h3>WGAN — Wasserstein GAN<a class="headerlink" href="#wgan-wasserstein-gan" title="Link to this heading">#</a></h3>
+<p>Reemplaza la función de pérdida minimax por la <strong>distancia de Wasserstein</strong> (Earth Mover’s Distance):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>min_G  max_{||D||_L ≤ 1}  E[D(x)] - E[D(G(z))]
+</pre></div>
+</div>
+<p>El discriminador se convierte en un <strong>crítico</strong> (ya no produce probabilidades, sino scores reales).</p>
+<p><strong>Ventajas sobre GAN original</strong>:</p>
+<ul class="simple">
+<li><p>Gradientes más estables durante el entrenamiento.</p></li>
+<li><p>La pérdida del crítico correlaciona con la calidad de las imágenes generadas → se puede monitorear.</p></li>
+<li><p>Menos susceptible a mode collapse.</p></li>
+</ul>
+<p><strong>Variante WGAN-GP</strong>: usa <strong>gradient penalty</strong> en lugar de weight clipping para imponer la restricción de Lipschitz.</p>
+</section>
+<hr class="docutils" />
+<section id="progan-progressive-growing-gan">
+<h3>ProGAN — Progressive Growing GAN<a class="headerlink" href="#progan-progressive-growing-gan" title="Link to this heading">#</a></h3>
+<p>Entrena la GAN de forma <strong>progresiva</strong>: comienza generando imágenes de 4×4 px y va aumentando la resolución añadiendo capas.</p>
+<p><strong>Ventajas</strong>:</p>
+<ul class="simple">
+<li><p>Estabilidad: primero aprende estructura global (baja resolución), luego detalles finos.</p></li>
+<li><p>Permite generar imágenes de alta resolución (1024×1024) con calidad fotorrealista.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="biggan">
+<h3>BigGAN<a class="headerlink" href="#biggan" title="Link to this heading">#</a></h3>
+<p>Escala las GANs a resoluciones y datasets grandes (ImageNet 128×128):</p>
+<ul class="simple">
+<li><p>Batch sizes mucho mayores → mayor estabilidad.</p></li>
+<li><p>Condicionamiento de clase en cada capa mediante <strong>class embeddings</strong>.</p></li>
+<li><p>Introduce el parámetro <strong>truncation trick</strong>: controla el trade-off diversidad/calidad.</p></li>
+</ul>
+<img src="../_static/images/gans9.png" width="600" />
+</section>
+<hr class="docutils" />
+<section id="gan-para-video-videogan-mocogan-sora">
+<h3>GAN para Video — VideoGAN / MoCoGAN / SORA<a class="headerlink" href="#gan-para-video-videogan-mocogan-sora" title="Link to this heading">#</a></h3>
+<p>Extienden las GANs al dominio temporal:</p>
+<ul class="simple">
+<li><p><strong>Contenido</strong>: qué aparece en el video (estático).</p></li>
+<li><p><strong>Movimiento</strong>: cómo cambia a lo largo del tiempo.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>z_contenido + z_movimiento(t) → [G] → frame_t
+</pre></div>
+</div>
+<p><strong>SORA</strong> (OpenAI, 2024) va más allá: genera video de alta calidad condicionado por texto usando un modelo de difusión + Transformers, superando las limitaciones de las GANs clásicas para video.</p>
+</section>
+<hr class="docutils" />
+<section id="text-to-image-gans-stackgan-attngan">
+<h3>Text-to-Image GANs — StackGAN / AttnGAN<a class="headerlink" href="#text-to-image-gans-stackgan-attngan" title="Link to this heading">#</a></h3>
+<p>Generan imágenes a partir de descripciones en texto:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&quot;Un pájaro rojo con alas azules&quot; → [GAN + CLIP/BERT] → imagen
+</pre></div>
+</div>
+<img src="../_static/images/gans10.png" width="600" />
+<p>Superadas hoy por modelos de difusión (Stable Diffusion, DALL-E), pero son el antecedente directo.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="problemas-comunes-en-el-entrenamiento-de-gans">
+<h2>Problemas comunes en el entrenamiento de GANs<a class="headerlink" href="#problemas-comunes-en-el-entrenamiento-de-gans" title="Link to this heading">#</a></h2>
+<section id="mode-collapse">
+<h3>Mode Collapse<a class="headerlink" href="#mode-collapse" title="Link to this heading">#</a></h3>
+<p>El generador aprende a producir <strong>solo unas pocas variaciones</strong> (o una sola), ignorando la diversidad real de los datos.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Datos</span> <span class="n">reales</span><span class="p">:</span> <span class="mi">10</span> <span class="n">dígitos</span> <span class="n">distintos</span>
+<span class="n">Generador</span> <span class="n">colapsado</span><span class="p">:</span> <span class="n">produce</span> <span class="n">solo</span> <span class="s2">&quot;1&quot;</span> <span class="n">con</span> <span class="n">diferentes</span> <span class="n">estilos</span>
+</pre></div>
+</div>
+<img src="../_static/images/gans11.png" width="600" />
+<p><strong>Soluciones</strong>:</p>
+<ul class="simple">
+<li><p>Minibatch discrimination: penaliza similitud dentro del batch.</p></li>
+<li><p>Unrolled GANs.</p></li>
+<li><p>WGAN / WGAN-GP.</p></li>
+<li><p>Aumentar la diversidad del ruido de entrada.</p></li>
+</ul>
+</section>
+<section id="inestabilidad-en-el-entrenamiento">
+<h3>Inestabilidad en el entrenamiento<a class="headerlink" href="#inestabilidad-en-el-entrenamiento" title="Link to this heading">#</a></h3>
+<p>D y G no convergen al mismo ritmo → uno domina al otro.</p>
+<p><strong>Síntomas</strong>:</p>
+<ul class="simple">
+<li><p>Pérdida de G sube mientras D llega a 0 (D demasiado poderoso).</p></li>
+<li><p>Imágenes generadas se degradan repentinamente.</p></li>
+</ul>
+<p><strong>Soluciones</strong>:</p>
+<ul class="simple">
+<li><p>Tasas de aprendizaje distintas para G y D.</p></li>
+<li><p>Actualizar D varias veces por cada actualización de G (o viceversa).</p></li>
+<li><p>Label smoothing: en vez de etiquetas 0/1, usar 0.9/0.1.</p></li>
+<li><p>Spectral Normalization en D.</p></li>
+</ul>
+</section>
+<section id="vanishing-gradients">
+<h3>Vanishing Gradients<a class="headerlink" href="#vanishing-gradients" title="Link to this heading">#</a></h3>
+<p>Cuando D es perfecto, el gradiente que llega a G se anula → G no puede aprender.</p>
+<p><strong>Solución</strong>: usar pérdida de Wasserstein (WGAN) o Feature Matching.</p>
+</section>
+<section id="memorizacion">
+<h3>Memorización<a class="headerlink" href="#memorizacion" title="Link to this heading">#</a></h3>
+<p>G memoriza los datos de entrenamiento en lugar de generalizar.</p>
+<p><strong>Solución</strong>: más datos, regularización, aumentación.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="metricas-de-evaluacion">
+<h2>Métricas de evaluación<a class="headerlink" href="#metricas-de-evaluacion" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Métrica</p></th>
+<th class="head"><p>Descripción</p></th>
+<th class="head"><p>Qué mide</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>FID (Fréchet Inception Distance)</strong></p></td>
+<td><p>Distancia entre distribuciones de características reales y sintéticas.</p></td>
+<td><p>Calidad + diversidad. Menor es mejor.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>IS (Inception Score)</strong></p></td>
+<td><p>Mide nitidez y diversidad usando un clasificador Inception.</p></td>
+<td><p>Mayor es mejor.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>LPIPS</strong></p></td>
+<td><p>Similitud perceptual entre imagen real y generada.</p></td>
+<td><p>Calidad de reconstrucción.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Precision &amp; Recall (GANs)</strong></p></td>
+<td><p>Precision = fidelidad; Recall = diversidad.</p></td>
+<td><p>Trade-off calidad/diversidad.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>KID (Kernel Inception Distance)</strong></p></td>
+<td><p>Similar a FID pero más robusto con datasets pequeños.</p></td>
+<td><p>Calidad + diversidad.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<img src="../_static/images/gans12.png" width="600" />
+<blockquote>
+<div><p><strong>FID</strong> es la métrica estándar en investigación. Valores &lt; 10 indican calidad muy alta; &lt; 50 calidad aceptable.</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="gans-vs-modelos-de-difusion">
+<h2>GANs vs. Modelos de Difusión<a class="headerlink" href="#gans-vs-modelos-de-difusion" title="Link to this heading">#</a></h2>
+<p>Los <strong>modelos de difusión</strong> (Stable Diffusion, DALL-E 3, Midjourney) han superado a las GANs en muchas tareas generativas:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Criterio</p></th>
+<th class="head"><p>GANs</p></th>
+<th class="head"><p>Difusión</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Calidad de imagen</p></td>
+<td><p>Muy alta</p></td>
+<td><p>Estado del arte</p></td>
+</tr>
+<tr class="row-odd"><td><p>Diversidad</p></td>
+<td><p>Media (mode collapse)</p></td>
+<td><p>Alta</p></td>
+</tr>
+<tr class="row-even"><td><p>Estabilidad de entrenamiento</p></td>
+<td><p>Difícil</p></td>
+<td><p>Estable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Velocidad de inferencia</p></td>
+<td><p>Muy rápida (una pasada)</p></td>
+<td><p>Más lenta (múltiples pasos)</p></td>
+</tr>
+<tr class="row-even"><td><p>Control semántico</p></td>
+<td><p>Moderado</p></td>
+<td><p>Alto (con texto)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Datos necesarios</p></td>
+<td><p>Muchos</p></td>
+<td><p>Muchos</p></td>
+</tr>
+<tr class="row-even"><td><p>Interpretabilidad del latente</p></td>
+<td><p>Media</p></td>
+<td><p>Baja</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p>Las GANs siguen siendo relevantes cuando la <strong>velocidad de inferencia</strong> es crítica (ej. tiempo real) o cuando se trabaja con arquitecturas de edición imagen-a-imagen.</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="aplicaciones-de-las-gans">
+<h2>Aplicaciones de las GANs<a class="headerlink" href="#aplicaciones-de-las-gans" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Dominio</p></th>
+<th class="head"><p>Aplicación</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Arte y creatividad</strong></p></td>
+<td><p>Generación de obras de arte, avatares, diseño gráfico.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Medicina</strong></p></td>
+<td><p>Síntesis de imágenes médicas (MRI, CT) para aumentar datasets.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Moda</strong></p></td>
+<td><p>Generación de prendas virtuales, prueba de ropa virtual.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Videojuegos</strong></p></td>
+<td><p>Generación de texturas, personajes y escenarios.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Cine / VFX</strong></p></td>
+<td><p>Deepfakes, envejecimiento digital, intercambio de rostros.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Ciencias</strong></p></td>
+<td><p>Simulación de moléculas, diseño de proteínas, física de partículas.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Datos sintéticos</strong></p></td>
+<td><p>Aumentación de datasets escasos (médicos, industriales).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Superresolución</strong></p></td>
+<td><p>SRGAN: aumentar resolución de imágenes de baja calidad.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Restauración</strong></p></td>
+<td><p>Colorización, eliminación de artefactos, inpainting.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Voz</strong></p></td>
+<td><p>Síntesis de voz realista, conversión de voz entre personas.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="frameworks-y-recursos">
+<h2>Frameworks y recursos<a class="headerlink" href="#frameworks-y-recursos" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Herramienta</p></th>
+<th class="head"><p>Uso</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PyTorch</span></code></p></td>
+<td><p>Implementación de cualquier arquitectura GAN.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">TensorFlow</span> <span class="pre">/</span> <span class="pre">Keras</span></code></p></td>
+<td><p>APIs de alto nivel, tutoriales oficiales de GANs.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Hugging</span> <span class="pre">Face</span> <span class="pre">Diffusers</span></code></p></td>
+<td><p>GANs + Difusión (StyleGAN, GAN-based inpainting).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MONAI</span></code></p></td>
+<td><p>GANs para imágenes médicas.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MMGeneration</span></code></p></td>
+<td><p>Colección de GANs de investigación en PyTorch.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">StyleGAN2-ADA</span></code> (NVIDIA)</p></td>
+<td><p>Implementación oficial de StyleGAN con aumentación adaptativa.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Runway</span> <span class="pre">ML</span></code></p></td>
+<td><p>Plataforma no-code para usar GANs en producción.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Unidad 1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="autoencoders.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">1.3 Autoencoders: teoria, implementacion y aplicaciones</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="gans.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">1.5 Redes Generativas Adversariales (GANs)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-una-gan">¿Qué es una GAN?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuicion-el-falsificador-y-el-detective">Intuición: el falsificador y el detective</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitectura">Arquitectura</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generador-g">Generador G</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discriminador-d">Discriminador D</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-de-perdida-original-minimax">Función de pérdida original (minimax)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proceso-de-entrenamiento">Proceso de entrenamiento</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-gans">Tipos de GANs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gan-condicional-cgan">GAN Condicional (cGAN)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dcgan-deep-convolutional-gan">DCGAN — Deep Convolutional GAN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pix2pix-gan-para-traduccion-imagen-a-imagen">Pix2Pix — GAN para traducción imagen-a-imagen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cyclegan-traduccion-sin-pares-de-datos">CycleGAN — Traducción sin pares de datos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stylegan-stylegan2-stylegan3">StyleGAN / StyleGAN2 / StyleGAN3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wgan-wasserstein-gan">WGAN — Wasserstein GAN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#progan-progressive-growing-gan">ProGAN — Progressive Growing GAN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#biggan">BigGAN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gan-para-video-videogan-mocogan-sora">GAN para Video — VideoGAN / MoCoGAN / SORA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-to-image-gans-stackgan-attngan">Text-to-Image GANs — StackGAN / AttnGAN</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problemas-comunes-en-el-entrenamiento-de-gans">Problemas comunes en el entrenamiento de GANs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mode-collapse">Mode Collapse</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inestabilidad-en-el-entrenamiento">Inestabilidad en el entrenamiento</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vanishing-gradients">Vanishing Gradients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memorizacion">Memorización</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas-de-evaluacion">Métricas de evaluación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gans-vs-modelos-de-difusion">GANs vs. Modelos de Difusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicaciones-de-las-gans">Aplicaciones de las GANs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frameworks-y-recursos">Frameworks y recursos</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Sergio Alejandro Holguin García
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

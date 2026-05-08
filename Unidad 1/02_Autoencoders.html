@@ -1,0 +1,1036 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1.2 Autoencoders &#8212; Ciencia de Datos Aplicada- 01 Ucaldas</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unidad 1/02_Autoencoders';</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="1.3 Autoencoders: teoria, implementacion y aplicaciones" href="autoencoders.html" />
+    <link rel="prev" title="1.1 Tópicos Emergentes de la IA — 2026" href="01_introduccion_ia.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Ciencia de Datos Aplicada- 01 Ucaldas - Home"/>
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark pst-js-only" alt="Ciencia de Datos Aplicada- 01 Ucaldas - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Ciencia de datos aplicada
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Unidad1.html">Deep Learning Avanzado</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_introduccion_ia.html">1.1 Tópicos Emergentes de la IA — 2026</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.2 Autoencoders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoencoders.html">1.3 Autoencoders: teoria, implementacion y aplicaciones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Gans_teoria.html">1.4 Redes Generativas Adversariales (GANs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gans.html">1.5 Redes Generativas Adversariales (GANs)</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/CienciaDatosAplicada" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/CienciaDatosAplicada/issues/new?title=Issue%20on%20page%20%2FUnidad 1/02_Autoencoders.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Unidad 1/02_Autoencoders.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>1.2 Autoencoders</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-un-autoencoder">¿Qué es un Autoencoder?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitectura-base">Arquitectura base</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encoder">Encoder</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#espacio-latente-bottleneck">Espacio latente (Bottleneck)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decoder">Decoder</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-de-perdida">Función de pérdida</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#para-datos-continuos-mse-mean-squared-error">Para datos continuos — MSE (Mean Squared Error)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#para-datos-binarios-probabilisticos-binary-cross-entropy">Para datos binarios / probabilísticos — Binary Cross-Entropy</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento">Entrenamiento</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-autoencoders">Tipos de Autoencoders</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencoder-undercomplete-basico">1. Autoencoder Undercomplete (básico)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencoder-convolucional">2. Autoencoder Convolucional</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#denoising-autoencoder-dae">3. Denoising Autoencoder (DAE)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sparse-autoencoder">4. Sparse Autoencoder</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contractive-autoencoder-cae">5. Contractive Autoencoder (CAE)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variational-autoencoder-vae">6. Variational Autoencoder (VAE)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-de-perdida-del-vae">Función de pérdida del VAE</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#propiedades-del-espacio-latente-del-vae">Propiedades del espacio latente del VAE</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vae">7. β-VAE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencoder-secuencial-seq2seq-autoencoder">8. Autoencoder Secuencial (Seq2Seq Autoencoder)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#masked-autoencoder-mae">9. Masked Autoencoder (MAE)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-espacio-latente-corazon-del-autoencoder">El Espacio Latente: corazón del autoencoder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicaciones-de-los-autoencoders">Aplicaciones de los Autoencoders</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reduccion-de-dimensionalidad">Reducción de dimensionalidad</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deteccion-de-anomalias">Detección de anomalías</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eliminacion-de-ruido-denoising">Eliminación de ruido (Denoising)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compresion-de-datos">Compresión de datos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generacion-de-datos-sinteticos">Generación de datos sintéticos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preentrenamiento-de-representaciones">Preentrenamiento de representaciones</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sistemas-de-recomendacion">Sistemas de recomendación</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#procesamiento-de-lenguaje-natural">Procesamiento de lenguaje natural</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencoders-vs-otras-tecnicas-de-representacion">Autoencoders vs. otras técnicas de representación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperparametros-clave">Hiperparámetros clave</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnostico-que-puede-salir-mal">Diagnóstico: ¿qué puede salir mal?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frameworks-y-recursos">Frameworks y recursos</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="autoencoders">
+<h1>1.2 Autoencoders<a class="headerlink" href="#autoencoders" title="Link to this heading">#</a></h1>
+<section id="que-es-un-autoencoder">
+<h2>¿Qué es un Autoencoder?<a class="headerlink" href="#que-es-un-autoencoder" title="Link to this heading">#</a></h2>
+<p>Un <strong>autoencoder</strong> es una red neuronal que aprende a <strong>comprimir</strong> una entrada en una representación interna de menor dimensión y luego <strong>reconstruirla</strong> lo más fielmente posible. No requiere etiquetas externas — la propia entrada es el objetivo → <strong>aprendizaje no supervisado / auto-supervisado</strong>.</p>
+<img src="../_static/images/autoencoder1.png" width="600" />
+<p>La idea central: si la red logra reconstruir bien la entrada pasando por un cuello de botella estrecho, ese cuello de botella ha capturado lo <strong>esencial</strong> de los datos.</p>
+</section>
+<hr class="docutils" />
+<section id="arquitectura-base">
+<h2>Arquitectura base<a class="headerlink" href="#arquitectura-base" title="Link to this heading">#</a></h2>
+<p>Un autoencoder tiene tres componentes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  Entrada x          Espacio latente z         Reconstrucción x̂
+  (dim alta)  →  [ENCODER f]  →  (dim baja)  →  [DECODER g]  →  (dim alta)
+</pre></div>
+</div>
+<section id="encoder">
+<h3>Encoder<a class="headerlink" href="#encoder" title="Link to this heading">#</a></h3>
+<p>Transforma la entrada <code class="docutils literal notranslate"><span class="pre">x</span></code> en una representación comprimida <code class="docutils literal notranslate"><span class="pre">z</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Reduce progresivamente la dimensionalidad.</p></li>
+<li><p>Aprende a retener la información más relevante.</p></li>
+<li><p>Puede estar compuesto de capas densas, convolucionales, recurrentes, etc.</p></li>
+</ul>
+</section>
+<section id="espacio-latente-bottleneck">
+<h3>Espacio latente (Bottleneck)<a class="headerlink" href="#espacio-latente-bottleneck" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Vector de dimensión <code class="docutils literal notranslate"><span class="pre">d_z</span> <span class="pre">&lt;&lt;</span> <span class="pre">d_x</span></code>.</p></li>
+<li><p>Cada dimensión captura un <strong>factor de variación</strong> latente de los datos.</p></li>
+<li><p>La geometría de este espacio determina qué tan útil es la representación aprendida.</p></li>
+</ul>
+</section>
+<section id="decoder">
+<h3>Decoder<a class="headerlink" href="#decoder" title="Link to this heading">#</a></h3>
+<p>Reconstruye la entrada original a partir de <code class="docutils literal notranslate"><span class="pre">z</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x̂</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Simetría respecto al encoder (capas inversas).</p></li>
+<li><p>Aprende a «descomprimir» la representación latente.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="funcion-de-perdida">
+<h2>Función de pérdida<a class="headerlink" href="#funcion-de-perdida" title="Link to this heading">#</a></h2>
+<p>El objetivo es minimizar el <strong>error de reconstrucción</strong> entre <code class="docutils literal notranslate"><span class="pre">x</span></code> y <code class="docutils literal notranslate"><span class="pre">x̂</span></code>:</p>
+<section id="para-datos-continuos-mse-mean-squared-error">
+<h3>Para datos continuos — MSE (Mean Squared Error)<a class="headerlink" href="#para-datos-continuos-mse-mean-squared-error" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>L = (1/n) Σ ||x - x̂||²
+</pre></div>
+</div>
+<p>Penaliza diferencias absolutas entre píxeles o valores numéricos.</p>
+</section>
+<section id="para-datos-binarios-probabilisticos-binary-cross-entropy">
+<h3>Para datos binarios / probabilísticos — Binary Cross-Entropy<a class="headerlink" href="#para-datos-binarios-probabilisticos-binary-cross-entropy" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>L = -Σ [x · log(x̂) + (1 - x) · log(1 - x̂)]
+</pre></div>
+</div>
+<p>Útil cuando los valores de entrada están en [0, 1].</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="entrenamiento">
+<h2>Entrenamiento<a class="headerlink" href="#entrenamiento" title="Link to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.</span> <span class="n">Alimentar</span> <span class="n">la</span> <span class="n">red</span> <span class="n">con</span> <span class="n">un</span> <span class="n">batch</span> <span class="n">de</span> <span class="n">ejemplos</span> <span class="n">x</span>
+<span class="mf">2.</span> <span class="n">El</span> <span class="n">encoder</span> <span class="n">comprime</span><span class="p">:</span> <span class="n">z</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="mf">3.</span> <span class="n">El</span> <span class="n">decoder</span> <span class="n">reconstruye</span><span class="p">:</span> <span class="n">x̂</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+<span class="mf">4.</span> <span class="n">Calcular</span> <span class="n">la</span> <span class="n">pérdida</span><span class="p">:</span> <span class="n">L</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x̂</span><span class="p">)</span>
+<span class="mf">5.</span> <span class="n">Retropropagación</span><span class="p">:</span> <span class="n">actualizar</span> <span class="n">pesos</span> <span class="n">de</span> <span class="n">encoder</span> <span class="n">y</span> <span class="n">decoder</span>
+<span class="mf">6.</span> <span class="n">Repetir</span> <span class="n">hasta</span> <span class="n">convergencia</span>
+</pre></div>
+</div>
+<p>Los pesos del encoder y decoder se actualizan <strong>conjuntamente</strong> con retropropagación estándar. No hay etiquetas externas — el gradiente proviene del error de reconstrucción.</p>
+<img src="../_static/images/autoencoder2.png" width="600" />
+</section>
+<hr class="docutils" />
+<section id="tipos-de-autoencoders">
+<h2>Tipos de Autoencoders<a class="headerlink" href="#tipos-de-autoencoders" title="Link to this heading">#</a></h2>
+<section id="autoencoder-undercomplete-basico">
+<h3>1. Autoencoder Undercomplete (básico)<a class="headerlink" href="#autoencoder-undercomplete-basico" title="Link to this heading">#</a></h3>
+<p>El tipo más simple. El espacio latente tiene <strong>menor dimensión</strong> que la entrada, forzando a aprender una representación comprimida.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Entrada: 784 dim → Encoder → 32 dim → Decoder → 784 dim
+</pre></div>
+</div>
+<p><strong>Riesgo</strong>: si el modelo es demasiado poderoso (sin regularización), puede aprender a «copiar» la entrada sin extraer estructura útil.</p>
+<p><strong>Usos</strong>: reducción de dimensionalidad, inicialización de redes más grandes.</p>
+</section>
+<hr class="docutils" />
+<section id="autoencoder-convolucional">
+<h3>2. Autoencoder Convolucional<a class="headerlink" href="#autoencoder-convolucional" title="Link to this heading">#</a></h3>
+<p>Usa <strong>capas convolucionales</strong> en lugar de capas densas, preservando la estructura espacial de las imágenes.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Encoder:
+  Conv2D(32, 3) + ReLU → MaxPool(2)   → (H/2, W/2, 32)
+  Conv2D(64, 3) + ReLU → MaxPool(2)   → (H/4, W/4, 64)
+
+Decoder:
+  Conv2DTranspose(64, 3, stride=2)    → (H/2, W/2, 64)
+  Conv2DTranspose(32, 3, stride=2)    → (H, W, 32)
+  Conv2D(C, 1, sigmoid)               → (H, W, C)
+</pre></div>
+</div>
+<img src="../_static/images/autoencoder3.png" width="600" />
+<p><strong>Usos</strong>: compresión de imágenes, eliminación de ruido, extracción de características visuales.</p>
+</section>
+<hr class="docutils" />
+<section id="denoising-autoencoder-dae">
+<h3>3. Denoising Autoencoder (DAE)<a class="headerlink" href="#denoising-autoencoder-dae" title="Link to this heading">#</a></h3>
+<p>Se introduce <strong>ruido artificialmente</strong> en la entrada y se entrena al modelo para reconstruir la versión limpia original.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>x  →  x̃ (entrada corrompida)  →  Encoder  →  z  →  Decoder  →  x̂ ≈ x (limpia)
+</pre></div>
+</div>
+<p>Tipos de corrupción usados:</p>
+<ul class="simple">
+<li><p>Ruido gaussiano aditivo.</p></li>
+<li><p>Enmascaramiento aleatorio (<em>dropout</em> de entradas).</p></li>
+<li><p>Sal y pimienta.</p></li>
+</ul>
+<img src="../_static/images/autoencoder4.png" width="600" />
+<p><strong>Ventaja clave</strong>: fuerza al modelo a aprender representaciones <strong>robustas</strong> que no dependen de los píxeles individuales, sino de la estructura global.</p>
+<p><strong>Usos</strong>: restauración de imágenes, preprocesamiento médico, robustez ante datos corruptos.</p>
+</section>
+<hr class="docutils" />
+<section id="sparse-autoencoder">
+<h3>4. Sparse Autoencoder<a class="headerlink" href="#sparse-autoencoder" title="Link to this heading">#</a></h3>
+<p>Agrega una <strong>penalización de dispersión (sparsity)</strong> a las activaciones del espacio latente, forzando a que solo pocas neuronas estén activas simultáneamente.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>L_total = L_reconstrucción + β · L_sparsity
+</pre></div>
+</div>
+<p>Donde <code class="docutils literal notranslate"><span class="pre">L_sparsity</span></code> puede ser la divergencia KL entre la activación media y un objetivo de activación ρ (típicamente ~0.05).</p>
+<img src="../_static/images/autoencoder5.png" width="600" />
+<p><strong>Interpretación</strong>: cada neurona activa representa una «característica» específica y distinguible de los datos.</p>
+<p><strong>Usos</strong>: extracción de características interpretables, análisis de señales biomédicas, aprendizaje de diccionarios.</p>
+</section>
+<hr class="docutils" />
+<section id="contractive-autoencoder-cae">
+<h3>5. Contractive Autoencoder (CAE)<a class="headerlink" href="#contractive-autoencoder-cae" title="Link to this heading">#</a></h3>
+<p>Penaliza la sensibilidad del encoder a pequeñas variaciones en la entrada, usando la <strong>norma de Frobenius del Jacobiano</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>L_total = L_reconstrucción + λ · ||∂f(x)/∂x||²_F
+</pre></div>
+</div>
+<p>Aprende representaciones que son <strong>insensibles a perturbaciones</strong> locales pero robustas a variaciones globales.</p>
+<p><strong>Usos</strong>: aprendizaje de variedades (<em>manifold learning</em>), representaciones robustas para clasificación.</p>
+</section>
+<hr class="docutils" />
+<section id="variational-autoencoder-vae">
+<h3>6. Variational Autoencoder (VAE)<a class="headerlink" href="#variational-autoencoder-vae" title="Link to this heading">#</a></h3>
+<p>El más influyente de los autoencoders generativos. En lugar de mapear <code class="docutils literal notranslate"><span class="pre">x</span></code> a un vector fijo <code class="docutils literal notranslate"><span class="pre">z</span></code>, el encoder aprende una <strong>distribución de probabilidad</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Encoder → μ (media) y σ (desviación estándar)
+z ~ N(μ, σ²)  ← muestreo con reparametrización: z = μ + ε·σ, ε ~ N(0,1)
+Decoder → x̂
+</pre></div>
+</div>
+<img src="../_static/images/autoencoder6.png" width="600" />
+<section id="funcion-de-perdida-del-vae">
+<h4>Función de pérdida del VAE<a class="headerlink" href="#funcion-de-perdida-del-vae" title="Link to this heading">#</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>L_VAE = L_reconstrucción + β · KL(q(z|x) || p(z))
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>L_reconstrucción</strong>: fidelidad de la salida.</p></li>
+<li><p><strong>KL divergence</strong>: regulariza el espacio latente para que sea continuo y siga N(0,1).</p></li>
+</ul>
+</section>
+<section id="propiedades-del-espacio-latente-del-vae">
+<h4>Propiedades del espacio latente del VAE<a class="headerlink" href="#propiedades-del-espacio-latente-del-vae" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Continuidad</strong>: puntos cercanos en <code class="docutils literal notranslate"><span class="pre">z</span></code> generan salidas similares.</p></li>
+<li><p><strong>Completitud</strong>: cualquier punto del espacio latente produce una salida válida.</p></li>
+<li><p>Permite <strong>interpolación suave</strong> entre ejemplos.</p></li>
+<li><p>Permite <strong>generar</strong> nuevas muestras muestreando <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">~</span> <span class="pre">N(0,1)</span></code>.</p></li>
+</ul>
+<img src="../_static/images/autoencoder7.png" width="600" />
+<p><strong>Usos</strong>: generación de imágenes, síntesis de datos, representación disentangled, drug discovery.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="vae">
+<h3>7. β-VAE<a class="headerlink" href="#vae" title="Link to this heading">#</a></h3>
+<p>Extensión del VAE con un hiperparámetro <code class="docutils literal notranslate"><span class="pre">β</span> <span class="pre">&gt;</span> <span class="pre">1</span></code> que aumenta el peso de la regularización KL:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>L = L_reconstrucción + β · KL(...)
+</pre></div>
+</div>
+<p>Fuerza al modelo a aprender representaciones <strong>disentangled</strong>: cada dimensión del espacio latente controla un factor de variación independiente (color, forma, rotación, etc.).</p>
+<img src="../_static/images/autoencoder8.png" width="600" />
+</section>
+<hr class="docutils" />
+<section id="autoencoder-secuencial-seq2seq-autoencoder">
+<h3>8. Autoencoder Secuencial (Seq2Seq Autoencoder)<a class="headerlink" href="#autoencoder-secuencial-seq2seq-autoencoder" title="Link to this heading">#</a></h3>
+<p>Usa <strong>redes recurrentes (LSTM / GRU)</strong> en encoder y decoder para comprimir secuencias de longitud variable.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Secuencia x₁,x₂,...,xₙ → LSTM Encoder → z → LSTM Decoder → x̂₁,x̂₂,...,x̂ₙ
+</pre></div>
+</div>
+<img src="../_static/images/autoencoder9.png" width="600" />
+<p><strong>Usos</strong>: compresión de series temporales, preentrenamiento de modelos de lenguaje, anomaly detection en señales temporales.</p>
+</section>
+<hr class="docutils" />
+<section id="masked-autoencoder-mae">
+<h3>9. Masked Autoencoder (MAE)<a class="headerlink" href="#masked-autoencoder-mae" title="Link to this heading">#</a></h3>
+<p>Inspirado en BERT pero para imágenes. Enmascara un alto porcentaje de parches de la imagen (75–90%) y entrena al modelo para reconstruirlos.</p>
+<img src="../_static/images/autoencoder10.png" width="600" />
+<ul class="simple">
+<li><p>El encoder solo procesa los parches visibles.</p></li>
+<li><p>El decoder reconstruye los parches enmascarados.</p></li>
+<li><p>Muy eficiente computacionalmente y produce representaciones de alta calidad.</p></li>
+</ul>
+<p><strong>Base de modelos</strong>: MAE de Meta, BEiT, SimMIM.</p>
+<p><strong>Usos</strong>: preentrenamiento de Vision Transformers (ViT), transferencia a tareas downstream con pocos datos.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="el-espacio-latente-corazon-del-autoencoder">
+<h2>El Espacio Latente: corazón del autoencoder<a class="headerlink" href="#el-espacio-latente-corazon-del-autoencoder" title="Link to this heading">#</a></h2>
+<p>El espacio latente <code class="docutils literal notranslate"><span class="pre">z</span></code> es la representación aprendida de los datos. Sus propiedades determinan para qué sirve el autoencoder:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Propiedad</p></th>
+<th class="head"><p>Autoencoder</p></th>
+<th class="head"><p>Efecto</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Comprimido (d_z &lt;&lt; d_x)</p></td>
+<td><p>Todos</p></td>
+<td><p>Elimina redundancia</p></td>
+</tr>
+<tr class="row-odd"><td><p>Disperso</p></td>
+<td><p>Sparse AE</p></td>
+<td><p>Interpretabilidad</p></td>
+</tr>
+<tr class="row-even"><td><p>Suave y continuo</p></td>
+<td><p>VAE</p></td>
+<td><p>Generación e interpolación</p></td>
+</tr>
+<tr class="row-odd"><td><p>Robusto al ruido</p></td>
+<td><p>DAE, CAE</p></td>
+<td><p>Representaciones robustas</p></td>
+</tr>
+<tr class="row-even"><td><p>Disentangled</p></td>
+<td><p>β-VAE</p></td>
+<td><p>Control de factores latentes</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="aplicaciones-de-los-autoencoders">
+<h2>Aplicaciones de los Autoencoders<a class="headerlink" href="#aplicaciones-de-los-autoencoders" title="Link to this heading">#</a></h2>
+<section id="reduccion-de-dimensionalidad">
+<h3>Reducción de dimensionalidad<a class="headerlink" href="#reduccion-de-dimensionalidad" title="Link to this heading">#</a></h3>
+<p>Alternativa no lineal a PCA. El espacio latente captura estructuras complejas que PCA no puede.</p>
+</section>
+<section id="deteccion-de-anomalias">
+<h3>Detección de anomalías<a class="headerlink" href="#deteccion-de-anomalias" title="Link to this heading">#</a></h3>
+<p>Entrenar el autoencoder <strong>solo con datos normales</strong>. Al intentar reconstruir una anomalía, el error de reconstrucción será alto → señal de anomalía.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Error de reconstrucción alto → Anomalía
+Error de reconstrucción bajo → Normal
+</pre></div>
+</div>
+<p><strong>Usos</strong>: fraude financiero, defectos industriales, intrusiones en redes, patología médica rara.</p>
+</section>
+<section id="eliminacion-de-ruido-denoising">
+<h3>Eliminación de ruido (Denoising)<a class="headerlink" href="#eliminacion-de-ruido-denoising" title="Link to this heading">#</a></h3>
+<p>Restaurar imágenes, señales de audio o series temporales corrompidas.</p>
+</section>
+<section id="compresion-de-datos">
+<h3>Compresión de datos<a class="headerlink" href="#compresion-de-datos" title="Link to this heading">#</a></h3>
+<p>El encoder actúa como compresor y el decoder como descompresor. Aprendido end-to-end para minimizar el error de reconstrucción.</p>
+</section>
+<section id="generacion-de-datos-sinteticos">
+<h3>Generación de datos sintéticos<a class="headerlink" href="#generacion-de-datos-sinteticos" title="Link to this heading">#</a></h3>
+<p>Los VAE pueden generar nuevas muestras muestreando del espacio latente. Útil para aumentar datasets pequeños.</p>
+</section>
+<section id="preentrenamiento-de-representaciones">
+<h3>Preentrenamiento de representaciones<a class="headerlink" href="#preentrenamiento-de-representaciones" title="Link to this heading">#</a></h3>
+<p>El encoder preentrenado se usa como <strong>extractor de características</strong> para tareas supervisadas downstream (clasificación, detección…), especialmente útil con pocos datos etiquetados.</p>
+</section>
+<section id="sistemas-de-recomendacion">
+<h3>Sistemas de recomendación<a class="headerlink" href="#sistemas-de-recomendacion" title="Link to this heading">#</a></h3>
+<p>Comprimir el historial de interacciones de un usuario en un vector latente para hacer recomendaciones personalizadas.</p>
+</section>
+<section id="procesamiento-de-lenguaje-natural">
+<h3>Procesamiento de lenguaje natural<a class="headerlink" href="#procesamiento-de-lenguaje-natural" title="Link to this heading">#</a></h3>
+<p>Seq2Seq autoencoders comprimen oraciones en vectores semánticos usados para búsqueda, clustering de textos y transferencia de estilo.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="autoencoders-vs-otras-tecnicas-de-representacion">
+<h2>Autoencoders vs. otras técnicas de representación<a class="headerlink" href="#autoencoders-vs-otras-tecnicas-de-representacion" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Técnica</p></th>
+<th class="head"><p>Lineal</p></th>
+<th class="head"><p>Generativa</p></th>
+<th class="head"><p>Escalable</p></th>
+<th class="head"><p>Representación no lineal</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>PCA</strong></p></td>
+<td><p>✅</p></td>
+<td><p>❌</p></td>
+<td><p>✅</p></td>
+<td><p>❌</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Autoencoder</strong></p></td>
+<td><p>❌</p></td>
+<td><p>❌</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>VAE</strong></p></td>
+<td><p>❌</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>GAN</strong></p></td>
+<td><p>❌</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>t-SNE / UMAP</strong></p></td>
+<td><p>❌</p></td>
+<td><p>❌</p></td>
+<td><p>❌ (solo visualización)</p></td>
+<td><p>✅</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="hiperparametros-clave">
+<h2>Hiperparámetros clave<a class="headerlink" href="#hiperparametros-clave" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Hiperparámetro</p></th>
+<th class="head"><p>Efecto</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Dimensión del espacio latente</strong></p></td>
+<td><p>Muy pequeño → pérdida de info. Muy grande → no aprende a comprimir.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Profundidad del encoder/decoder</strong></p></td>
+<td><p>Mayor profundidad → representaciones más abstractas.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Función de activación</strong></p></td>
+<td><p>ReLU para capas intermedias; Sigmoid/Tanh para salida según dominio.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>β (en VAE)</strong></p></td>
+<td><p>Mayor β → más disentanglement, pero peor reconstrucción.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Tasa de corrupción (DAE)</strong></p></td>
+<td><p>Mayor ruido → representaciones más robustas, entrenamiento más difícil.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="diagnostico-que-puede-salir-mal">
+<h2>Diagnóstico: ¿qué puede salir mal?<a class="headerlink" href="#diagnostico-que-puede-salir-mal" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Problema</p></th>
+<th class="head"><p>Causa</p></th>
+<th class="head"><p>Solución</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Reconstrucción borrosa</p></td>
+<td><p>Pérdida MSE promedia modos</p></td>
+<td><p>Usar pérdida perceptual o adversarial</p></td>
+</tr>
+<tr class="row-odd"><td><p>Posterior collapse (VAE)</p></td>
+<td><p>KL domina desde el inicio</p></td>
+<td><p>KL annealing (aumentar β gradualmente)</p></td>
+</tr>
+<tr class="row-even"><td><p>Sobreajuste del espacio latente</p></td>
+<td><p>Sin regularización</p></td>
+<td><p>Añadir dropout, sparse penalty, KL</p></td>
+</tr>
+<tr class="row-odd"><td><p>Espacio latente no estructurado</p></td>
+<td><p>AE básico sin restricciones</p></td>
+<td><p>Cambiar a VAE o agregar regularización</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="frameworks-y-recursos">
+<h2>Frameworks y recursos<a class="headerlink" href="#frameworks-y-recursos" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Herramienta</p></th>
+<th class="head"><p>Uso</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PyTorch</span></code></p></td>
+<td><p>Implementación flexible de cualquier variante.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Keras</span> <span class="pre">/</span> <span class="pre">TensorFlow</span></code></p></td>
+<td><p>APIs de alto nivel para AE y VAE.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Hugging</span> <span class="pre">Face</span></code></p></td>
+<td><p>MAE, BEiT preentrenados para ViT.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">PyTorch</span> <span class="pre">Lightning</span></code></p></td>
+<td><p>Entrenamiento estructurado y reproducible.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code></p></td>
+<td><p>PCA como baseline para comparar con AE.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Unidad 1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01_introduccion_ia.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">1.1 Tópicos Emergentes de la IA — 2026</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="autoencoders.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">1.3 Autoencoders: teoria, implementacion y aplicaciones</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-un-autoencoder">¿Qué es un Autoencoder?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitectura-base">Arquitectura base</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encoder">Encoder</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#espacio-latente-bottleneck">Espacio latente (Bottleneck)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decoder">Decoder</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-de-perdida">Función de pérdida</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#para-datos-continuos-mse-mean-squared-error">Para datos continuos — MSE (Mean Squared Error)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#para-datos-binarios-probabilisticos-binary-cross-entropy">Para datos binarios / probabilísticos — Binary Cross-Entropy</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento">Entrenamiento</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-autoencoders">Tipos de Autoencoders</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencoder-undercomplete-basico">1. Autoencoder Undercomplete (básico)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencoder-convolucional">2. Autoencoder Convolucional</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#denoising-autoencoder-dae">3. Denoising Autoencoder (DAE)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sparse-autoencoder">4. Sparse Autoencoder</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contractive-autoencoder-cae">5. Contractive Autoencoder (CAE)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variational-autoencoder-vae">6. Variational Autoencoder (VAE)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-de-perdida-del-vae">Función de pérdida del VAE</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#propiedades-del-espacio-latente-del-vae">Propiedades del espacio latente del VAE</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vae">7. β-VAE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencoder-secuencial-seq2seq-autoencoder">8. Autoencoder Secuencial (Seq2Seq Autoencoder)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#masked-autoencoder-mae">9. Masked Autoencoder (MAE)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-espacio-latente-corazon-del-autoencoder">El Espacio Latente: corazón del autoencoder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicaciones-de-los-autoencoders">Aplicaciones de los Autoencoders</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reduccion-de-dimensionalidad">Reducción de dimensionalidad</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deteccion-de-anomalias">Detección de anomalías</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eliminacion-de-ruido-denoising">Eliminación de ruido (Denoising)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compresion-de-datos">Compresión de datos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generacion-de-datos-sinteticos">Generación de datos sintéticos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preentrenamiento-de-representaciones">Preentrenamiento de representaciones</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sistemas-de-recomendacion">Sistemas de recomendación</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#procesamiento-de-lenguaje-natural">Procesamiento de lenguaje natural</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencoders-vs-otras-tecnicas-de-representacion">Autoencoders vs. otras técnicas de representación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperparametros-clave">Hiperparámetros clave</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnostico-que-puede-salir-mal">Diagnóstico: ¿qué puede salir mal?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frameworks-y-recursos">Frameworks y recursos</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Sergio Alejandro Holguin García
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

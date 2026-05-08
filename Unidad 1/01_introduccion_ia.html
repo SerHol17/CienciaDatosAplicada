@@ -1,0 +1,2325 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1.1 Tópicos Emergentes de la IA — 2026 &#8212; Ciencia de Datos Aplicada- 01 Ucaldas</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unidad 1/01_introduccion_ia';</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="1.2 Autoencoders" href="02_Autoencoders.html" />
+    <link rel="prev" title="Deep Learning Avanzado" href="../Unidad1.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Ciencia de Datos Aplicada- 01 Ucaldas - Home"/>
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark pst-js-only" alt="Ciencia de Datos Aplicada- 01 Ucaldas - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Ciencia de datos aplicada
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Unidad1.html">Deep Learning Avanzado</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.1 Tópicos Emergentes de la IA — 2026</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02_Autoencoders.html">1.2 Autoencoders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoencoders.html">1.3 Autoencoders: teoria, implementacion y aplicaciones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Gans_teoria.html">1.4 Redes Generativas Adversariales (GANs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gans.html">1.5 Redes Generativas Adversariales (GANs)</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/CienciaDatosAplicada" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/CienciaDatosAplicada/issues/new?title=Issue%20on%20page%20%2FUnidad 1/01_introduccion_ia.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Unidad 1/01_introduccion_ia.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>1.1 Tópicos Emergentes de la IA — 2026</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1.1 Tópicos Emergentes de la IA — 2026</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenidos">Contenidos</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-1-introduccion-a-la-inteligencia-artificial">Módulo 1 — Introducción a la Inteligencia Artificial</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-la-inteligencia-artificial">¿Qué es la Inteligencia Artificial?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linea-temporal-de-la-ia">Línea temporal de la IA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-se-necesita-para-hacer-ia">¿Qué se necesita para hacer IA?</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-2-inteligencia-artificial-tradicional">Módulo 2 — Inteligencia Artificial Tradicional</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flujo-de-un-sistema-con-ia">Flujo de un sistema con IA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#de-observaciones-a-predicciones-mediante-modelos">De observaciones a predicciones mediante modelos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proceso-de-construccion-de-un-modelo">Proceso de construcción de un modelo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-de-entrenamiento-vs-datos-de-validacion">Datos de entrenamiento vs. datos de validación</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ml-tecnicas-y-oportunidades">ML: Técnicas y Oportunidades</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aprendizaje-supervisado">Aprendizaje supervisado</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aprendizaje-no-supervisado">Aprendizaje no supervisado</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aprendizaje-semi-supervisado">Aprendizaje semi-supervisado</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-3-deep-learning">Módulo 3 — Deep Learning</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-y-cuando-usar-deep-learning">¿Por qué y cuándo usar Deep Learning?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tareas-resueltas-con-deep-learning">Tareas resueltas con Deep Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contexto-biologico-la-neurona-artificial">Contexto biológico: la neurona artificial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-perceptron">El Perceptrón</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perceptron-multicapa-mlp">Perceptrón Multicapa (MLP)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ventajas-y-desventajas-de-las-redes-neuronales">Ventajas y desventajas de las redes neuronales</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ventajas">Ventajas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desventajas">Desventajas</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#progreso-historico-del-deep-learning">Progreso histórico del Deep Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proyeccion-hype-cycle-de-gartner">Proyección: Hype Cycle de Gartner</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-4-machine-y-deep-learning-en-la-practica">Módulo 4 — Machine y Deep Learning en la Práctica</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas-de-evaluacion">Métricas de evaluación</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definiciones">Definiciones</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-deteccion-de-plomo-en-casas">Ejemplo: Detección de plomo en casas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-comparativo-plomo-vs-covid">Ejemplo comparativo: plomo vs. COVID</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practica-de-ml-notebook-1">Práctica de ML — Notebook 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practica-de-ml-notebook-2">Práctica de ML — Notebook 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practica-de-dl">Práctica de DL</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-5-inteligencia-artificial-generativa">Módulo 5 — Inteligencia Artificial Generativa</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-significa-ia-generativa">¿Qué significa «IA Generativa»?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-en-tiempo-real-omni">Modelos en tiempo real — Omni</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitecturas-para-ia-generativa">Arquitecturas para IA Generativa</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gans-redes-generativas-adversariales">GANs — Redes Generativas Adversariales</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformers-pre-entrenados">Transformers pre-entrenados</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencoders">Autoencoders</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ia-para-crear-imagenes">IA para crear imágenes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ia-para-audio-y-video">IA para audio y video</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inteligencia-artificial-general-agi">Inteligencia Artificial General (AGI)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-lenguaje-relevantes-20252026">Modelos de lenguaje relevantes (2025–2026)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-6-modelos-grandes-del-lenguaje-llms">Módulo 6 — Modelos Grandes del Lenguaje (LLMs)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-un-llm">¿Qué es un LLM?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#los-llms-son-el-autocompletar-del-celular-pero-a-escala">Los LLMs son el «autocompletar» del celular… pero a escala</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-funcionan-los-llms">¿Cómo funcionan los LLMs?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmarks-y-razonamiento">Benchmarks y razonamiento</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moe-mixture-of-experts">MoE: Mixture of Experts</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-7-herramientas-de-ia-generativa">Módulo 7 — Herramientas de IA Generativa</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pro-tips-al-usar-llms-en-proveedores">Pro-tips al usar LLMs en proveedores</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ia-en-manos-de-todos">IA en manos de todos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-research-ia-para-investigacion-profunda">Deep Research: IA para investigación profunda</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-de-prompt-para-deep-research">Ejemplo de prompt para Deep Research</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#herramientas-para-investigacion-academica">Herramientas para investigación académica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#herramientas-para-productividad-y-creacion">Herramientas para productividad y creación</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-8-contextualizacion-de-modelos">Módulo 8 — Contextualización de Modelos</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-evito-que-un-llm-alucine-y-sepa-de-mi-negocio">¿Cómo evito que un LLM alucine y sepa de mi negocio?</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-9-tecnicas-de-prompting">Módulo 9 — Técnicas de Prompting</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-sacarle-provecho-a-los-modelos-de-lenguaje">¿Cómo sacarle provecho a los modelos de lenguaje?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anatomia-de-un-buen-prompt">Anatomía de un buen prompt</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-explicame-la-pgu">Ejemplo: «Explícame la PGU»</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anatomia-de-un-prompt-para-modelos-razonadores">Anatomía de un prompt para modelos razonadores</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tecnica-1-zero-shot-prompting">Técnica 1: Zero-Shot Prompting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tecnica-2-one-shot-prompting">Técnica 2: One-Shot Prompting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tecnica-3-few-shot-prompting">Técnica 3: Few-Shot Prompting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tecnica-4-salidas-en-formato-especifico">Técnica 4: Salidas en formato específico</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tecnica-5-chain-of-thought-cot-cadenas-de-pensamiento">Técnica 5: Chain-of-Thought (CoT) — Cadenas de Pensamiento</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frases-clave-para-activar-cot">Frases clave para activar CoT</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notebooks-de-practica">Notebooks de práctica</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-10-retrieval-augmented-generation-rag">Módulo 10 — Retrieval Augmented Generation (RAG)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-rag">¿Qué es RAG?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flujo-general-de-rag">Flujo general de RAG</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fase-1-indexacion">Fase 1: Indexación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fase-2-retrieval-recuperacion">Fase 2: Retrieval (Recuperación)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fase-3-augmentation-generation">Fase 3: Augmentation &amp; Generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variaciones-de-rag">Variaciones de RAG</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-11-fine-tuning-para-ajuste-de-modelos">Módulo 11 — Fine-Tuning para Ajuste de Modelos</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tamano-de-los-modelos-de-lenguaje">Tamaño de los modelos de lenguaje</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-de-los-parametros">Precisión de los parámetros</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantization-cuantizacion-de-modelos">Quantization — Cuantización de modelos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-necesitamos-para-hacer-fine-tuning">¿Qué necesitamos para hacer Fine-Tuning?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lora-low-rank-adaptation">LoRA: Low-Rank Adaptation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qlora-quantized-lora">QLoRA: Quantized LoRA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pasos-para-hacer-fine-tuning">Pasos para hacer Fine-Tuning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-evaluamos-que-el-modelo-esta-bien">¿Cómo evaluamos que el modelo está bien?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fine-tuning-vs-rag-cuando-usar-cada-uno">Fine-Tuning vs. RAG: ¿cuándo usar cada uno?</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-12-agentes-de-ia-y-automatizacion-low-code">Módulo 12 — Agentes de IA y Automatización Low-Code</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-vs-workflow-vs-agente">Prompt vs. Workflow vs. Agente</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agentes-de-ia">Agentes de IA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frameworks-para-construir-agentes">Frameworks para construir agentes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crewai-agentes-colaborativos">CrewAI — Agentes colaborativos</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#human-in-the-loop">Human in the Loop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcp-model-context-protocol">MCP: Model Context Protocol</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#como-funciona">¿Cómo funciona?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#beneficios">Beneficios</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vibe-coding-prototipado-y-desarrollo-de-apps">Vibe Coding: prototipado y desarrollo de apps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agentes-de-codigo-en-tu-pc">Agentes de código en tu PC</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="topicos-emergentes-de-la-ia-2026">
+<h1>1.1 Tópicos Emergentes de la IA — 2026<a class="headerlink" href="#topicos-emergentes-de-la-ia-2026" title="Link to this heading">#</a></h1>
+<section id="contenidos">
+<h2>Contenidos<a class="headerlink" href="#contenidos" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#m%C3%B3dulo-1-introducci%C3%B3n-a-la-inteligencia-artificial"><span class="xref myst">Módulo 1 — Introducción a la Inteligencia Artificial</span></a></p></li>
+<li><p><a class="reference internal" href="#m%C3%B3dulo-2-inteligencia-artificial-tradicional"><span class="xref myst">Módulo 2 — Inteligencia Artificial Tradicional</span></a></p></li>
+<li><p><a class="reference internal" href="#m%C3%B3dulo-3-deep-learning"><span class="xref myst">Módulo 3 — Deep Learning</span></a></p></li>
+<li><p><a class="reference internal" href="#m%C3%B3dulo-4-machine-y-deep-learning-en-la-pr%C3%A1ctica"><span class="xref myst">Módulo 4 — Machine y Deep Learning en la Práctica</span></a></p></li>
+<li><p><a class="reference internal" href="#m%C3%B3dulo-5-inteligencia-artificial-generativa"><span class="xref myst">Módulo 5 — Inteligencia Artificial Generativa</span></a></p></li>
+<li><p><a class="reference internal" href="#m%C3%B3dulo-6-modelos-grandes-del-lenguaje-llms"><span class="xref myst">Módulo 6 — Modelos Grandes del Lenguaje (LLMs)</span></a></p></li>
+<li><p><a class="reference internal" href="#m%C3%B3dulo-7-herramientas-de-ia-generativa"><span class="xref myst">Módulo 7 — Herramientas de IA Generativa</span></a></p></li>
+<li><p><a class="reference internal" href="#m%C3%B3dulo-8-contextualizaci%C3%B3n-de-modelos"><span class="xref myst">Módulo 8 — Contextualización de Modelos</span></a></p></li>
+<li><p><a class="reference internal" href="#m%C3%B3dulo-9-t%C3%A9cnicas-de-prompting"><span class="xref myst">Módulo 9 — Técnicas de Prompting</span></a></p></li>
+<li><p><a class="reference internal" href="#m%C3%B3dulo-10-retrieval-augmented-generation-rag"><span class="xref myst">Módulo 10 — Retrieval Augmented Generation (RAG)</span></a></p></li>
+<li><p><a class="reference internal" href="#m%C3%B3dulo-11-fine-tuning-para-ajuste-de-modelos"><span class="xref myst">Módulo 11 — Fine-Tuning para Ajuste de Modelos</span></a></p></li>
+<li><p><a class="reference internal" href="#m%C3%B3dulo-12-agentes-de-ia-y-automatizaci%C3%B3n-low-code"><span class="xref myst">Módulo 12 — Agentes de IA y Automatización Low-Code</span></a></p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="modulo-1-introduccion-a-la-inteligencia-artificial">
+<h1>Módulo 1 — Introducción a la Inteligencia Artificial<a class="headerlink" href="#modulo-1-introduccion-a-la-inteligencia-artificial" title="Link to this heading">#</a></h1>
+<section id="que-es-la-inteligencia-artificial">
+<h2>¿Qué es la Inteligencia Artificial?<a class="headerlink" href="#que-es-la-inteligencia-artificial" title="Link to this heading">#</a></h2>
+<p>La IA es cualquier técnica que permite a los ordenadores <strong>imitar el comportamiento humano</strong>.</p>
+<!-- IMAGEN: diagrama de círculos concéntricos AI > ML > DL -->
+</section>
+<hr class="docutils" />
+<section id="linea-temporal-de-la-ia">
+<h2>Línea temporal de la IA<a class="headerlink" href="#linea-temporal-de-la-ia" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Época</p></th>
+<th class="head"><p>Paradigma</p></th>
+<th class="head"><p>Descripción</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1950’s</p></td>
+<td><p><strong>Inteligencia Artificial</strong></p></td>
+<td><p>Cualquier técnica que permite a los ordenadores imitar el comportamiento humano.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1980’s</p></td>
+<td><p><strong>Machine Learning</strong></p></td>
+<td><p>Técnicas de IA que otorgan a los ordenadores la habilidad de aprender sin ser explícitamente programados para hacerlo.</p></td>
+</tr>
+<tr class="row-even"><td><p>2010’s</p></td>
+<td><p><strong>Deep Learning</strong></p></td>
+<td><p>Un subconjunto del ML que hace viable el cálculo de redes neuronales multicapa.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2020’s</p></td>
+<td><p><strong>IA Generativa / Modelos Fundacionales</strong></p></td>
+<td><p>Modelos altamente adaptables que proporcionan una estructura base para múltiples aplicaciones.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="que-se-necesita-para-hacer-ia">
+<h2>¿Qué se necesita para hacer IA?<a class="headerlink" href="#que-se-necesita-para-hacer-ia" title="Link to this heading">#</a></h2>
+<p>Los tres pilares fundamentales son:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>        Algoritmos
+           / \
+          /   \
+      Datos — Poder de cómputo
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Datos</strong>: materia prima del aprendizaje automático.</p></li>
+<li><p><strong>Algoritmos</strong>: las instrucciones que transforman datos en modelos.</p></li>
+<li><p><strong>Poder de cómputo</strong>: la capacidad de hardware para entrenar y ejecutar modelos.</p></li>
+</ul>
+<!-- IMAGEN: triángulo con los tres pilares -->
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="modulo-2-inteligencia-artificial-tradicional">
+<h1>Módulo 2 — Inteligencia Artificial Tradicional<a class="headerlink" href="#modulo-2-inteligencia-artificial-tradicional" title="Link to this heading">#</a></h1>
+<section id="flujo-de-un-sistema-con-ia">
+<h2>Flujo de un sistema con IA<a class="headerlink" href="#flujo-de-un-sistema-con-ia" title="Link to this heading">#</a></h2>
+<p>Un proyecto de IA sigue un ciclo estructurado:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Problema a resolver + Datos
+         |
+   PREPROCESAMIENTO
+         |
+   PROCESAMIENTO  ←→  Algoritmos / Inteligencia Artificial
+         |
+    DESARROLLO   →   Aplicación
+         |
+ POST-PROCESAMIENTO  →  Soporte
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Durante el desarrollo</strong>: preprocesamiento, procesamiento, desarrollo.<br />
+<strong>Después del desarrollo</strong>: despliegue, monitoreo y soporte.</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="de-observaciones-a-predicciones-mediante-modelos">
+<h2>De observaciones a predicciones mediante modelos<a class="headerlink" href="#de-observaciones-a-predicciones-mediante-modelos" title="Link to this heading">#</a></h2>
+<p>El objetivo del ML tradicional es aprender una función que mapee observaciones a predicciones:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Observación (X)</p></th>
+<th class="head"><p>Predicción (Y)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Imagen del paciente</p></td>
+<td><p>¿Tiene patología?</p></td>
+</tr>
+<tr class="row-odd"><td><p>Fragmento de texto</p></td>
+<td><p>Sentimiento</p></td>
+</tr>
+<tr class="row-even"><td><p>Series temporales de finanzas</p></td>
+<td><p>Tendencia del valor</p></td>
+</tr>
+<tr class="row-odd"><td><p>Descripción de la casa</p></td>
+<td><p>Valor de mercado</p></td>
+</tr>
+<tr class="row-even"><td><p>Perfil del cliente</p></td>
+<td><p>Producto a comprar</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>La terminología equivalente:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>X</p></th>
+<th class="head"><p>Y</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Variables predictoras</p></td>
+<td><p>Variables objetivo</p></td>
+</tr>
+<tr class="row-odd"><td><p>Variable independiente</p></td>
+<td><p>Variable dependiente</p></td>
+</tr>
+<tr class="row-even"><td><p>Características (<em>features</em>)</p></td>
+<td><p>Etiquetas (<em>labels</em>)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="proceso-de-construccion-de-un-modelo">
+<h2>Proceso de construcción de un modelo<a class="headerlink" href="#proceso-de-construccion-de-un-modelo" title="Link to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Datos de ejemplo (X → y)
+        |
+  [Modelo plantilla]
+        |
+  Calibración del modelo
+        |
+   MODELO entrenado
+        |
+   X nuevos → y predicciones
+</pre></div>
+</div>
+<section id="datos-de-entrenamiento-vs-datos-de-validacion">
+<h3>Datos de entrenamiento vs. datos de validación<a class="headerlink" href="#datos-de-entrenamiento-vs-datos-de-validacion" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Datos de entrenamiento</strong>: se usan para calibrar (ajustar) el modelo.</p></li>
+<li><p><strong>Datos de validación</strong>: X, y <strong>no vistos</strong> durante el entrenamiento → miden la capacidad de generalización.</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Rend. entrenamiento</p></th>
+<th class="head"><p>Rend. validación</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Escenario ideal</p></td>
+<td><p>BIEN</p></td>
+<td><p>BIEN</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sobreajuste (<em>overfitting</em>)</p></td>
+<td><p>BIEN</p></td>
+<td><p>MAL</p></td>
+</tr>
+<tr class="row-even"><td><p>Subajuste (<em>underfitting</em>)</p></td>
+<td><p>MAL</p></td>
+<td><p>MAL</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p><strong>Objetivo</strong>: crear modelos que generalicen bien a datos nunca vistos.<br />
+El modelado debe enfrentarse a <strong>problemas mal definidos</strong> del mundo real.</p>
+</div></blockquote>
+</section>
+</section>
+<hr class="docutils" />
+<section id="ml-tecnicas-y-oportunidades">
+<h2>ML: Técnicas y Oportunidades<a class="headerlink" href="#ml-tecnicas-y-oportunidades" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: mapa mental de algoritmos ML -->
+<section id="aprendizaje-supervisado">
+<h3>Aprendizaje supervisado<a class="headerlink" href="#aprendizaje-supervisado" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Clasificación</strong>: predice una categoría discreta.</p></li>
+<li><p><strong>Regresión</strong>: predice un valor continuo.</p></li>
+</ul>
+</section>
+<section id="aprendizaje-no-supervisado">
+<h3>Aprendizaje no supervisado<a class="headerlink" href="#aprendizaje-no-supervisado" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Clustering</strong>: agrupa observaciones sin etiquetas.</p></li>
+<li><p><strong>Reducción de dimensionalidad</strong>: comprime el espacio de características.</p></li>
+</ul>
+</section>
+<section id="aprendizaje-semi-supervisado">
+<h3>Aprendizaje semi-supervisado<a class="headerlink" href="#aprendizaje-semi-supervisado" title="Link to this heading">#</a></h3>
+<p>Combina datos etiquetados (pocos) y no etiquetados (muchos) para entrenar modelos más robustos.</p>
+<!-- IMAGEN: comparación supervisado vs semi-supervisado vs no supervisado -->
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="modulo-3-deep-learning">
+<h1>Módulo 3 — Deep Learning<a class="headerlink" href="#modulo-3-deep-learning" title="Link to this heading">#</a></h1>
+<section id="por-que-y-cuando-usar-deep-learning">
+<h2>¿Por qué y cuándo usar Deep Learning?<a class="headerlink" href="#por-que-y-cuando-usar-deep-learning" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: curva de rendimiento DL vs ML clásico en función del volumen de datos -->
+<p>El Deep Learning supera al ML clásico cuando:</p>
+<ul class="simple">
+<li><p>El <strong>volumen de datos es grande</strong>.</p></li>
+<li><p>Las relaciones entre variables son <strong>altamente no lineales</strong>.</p></li>
+<li><p>El dominio involucra señales complejas: imágenes, audio, texto, video.</p></li>
+</ul>
+<blockquote>
+<div><p>Referencia: <a class="reference external" href="https://www.coursera.org/specializations/deep-learning">Deep Learning Specialization – Coursera</a></p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="tareas-resueltas-con-deep-learning">
+<h2>Tareas resueltas con Deep Learning<a class="headerlink" href="#tareas-resueltas-con-deep-learning" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Clasificación de imágenes</strong> a nivel casi humano (ej. esteganálisis).</p></li>
+<li><p><strong>Traducción automática</strong> mejorada (ej. DeepL).</p></li>
+<li><p><strong>Conversión de texto a voz</strong> de alta calidad.</p></li>
+<li><p><strong>Asistentes digitales</strong> (ej. Alexa de Amazon).</p></li>
+<li><p><strong>Conducción autónoma</strong> a nivel humano.</p></li>
+<li><p><strong>Segmentación de anuncios</strong> (Google, Bing).</p></li>
+<li><p><strong>Respuesta a preguntas</strong> en lenguaje natural.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="contexto-biologico-la-neurona-artificial">
+<h2>Contexto biológico: la neurona artificial<a class="headerlink" href="#contexto-biologico-la-neurona-artificial" title="Link to this heading">#</a></h2>
+<p>El DL modela la relación entre señales inspirándose en el funcionamiento del cerebro:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Especie</p></th>
+<th class="head"><p>Neuronas aprox.</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Humano</p></td>
+<td><p>85 000 millones</p></td>
+</tr>
+<tr class="row-odd"><td><p>Gato</p></td>
+<td><p>1 000 millones</p></td>
+</tr>
+<tr class="row-even"><td><p>Ratón</p></td>
+<td><p>75 millones</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="el-perceptron">
+<h2>El Perceptrón<a class="headerlink" href="#el-perceptron" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: diagrama de perceptrón simple (entradas → pesos → suma → activación → salida) -->
+<p>Una neurona artificial (perceptrón) modela una neurona biológica:</p>
+<ol class="arabic simple">
+<li><p>Recibe un conjunto de <strong>entradas</strong>.</p></li>
+<li><p>Asigna un <strong>peso</strong> a cada entrada.</p></li>
+<li><p>Calcula una función sobre las entradas ponderadas.</p></li>
+<li><p>Produce una <strong>salida</strong>.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="perceptron-multicapa-mlp">
+<h2>Perceptrón Multicapa (MLP)<a class="headerlink" href="#perceptron-multicapa-mlp" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: red con capa de entrada, capas ocultas y capa de salida -->
+<p>Sistema bio-inspirado que apila múltiples perceptrones en capas:</p>
+<ul class="simple">
+<li><p><strong>Capa de entrada</strong>: recibe las características.</p></li>
+<li><p><strong>Capas ocultas</strong>: aprenden representaciones intermedias.</p></li>
+<li><p><strong>Capa de salida</strong>: produce la predicción.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="ventajas-y-desventajas-de-las-redes-neuronales">
+<h2>Ventajas y desventajas de las redes neuronales<a class="headerlink" href="#ventajas-y-desventajas-de-las-redes-neuronales" title="Link to this heading">#</a></h2>
+<section id="ventajas">
+<h3>Ventajas<a class="headerlink" href="#ventajas" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Sirven tanto para <strong>clasificación</strong> como para <strong>regresión</strong>.</p></li>
+<li><p>Modelan patrones más complejos que casi cualquier otro algoritmo.</p></li>
+<li><p><strong>No asumen</strong> nada sobre las relaciones subyacentes del dominio.</p></li>
+</ul>
+</section>
+<section id="desventajas">
+<h3>Desventajas<a class="headerlink" href="#desventajas" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>El entrenamiento es <strong>extremadamente intensivo en cómputo</strong>.</p></li>
+<li><p>Es necesario monitorear el <strong>sobreajuste</strong> (<em>overfitting</em>).</p></li>
+<li><p>Resultan en una <strong>caja negra</strong> difícil de interpretar.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="progreso-historico-del-deep-learning">
+<h2>Progreso histórico del Deep Learning<a class="headerlink" href="#progreso-historico-del-deep-learning" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Año</p></th>
+<th class="head"><p>Hito</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1957</p></td>
+<td><p><strong>Perceptrón</strong> – Frank Rosenblatt</p></td>
+</tr>
+<tr class="row-odd"><td><p>1986</p></td>
+<td><p><strong>Retropropagación</strong> – Rumelhart, Hinton &amp; Williams</p></td>
+</tr>
+<tr class="row-even"><td><p>1998</p></td>
+<td><p><strong>CNN / LeNet-5</strong> – Yann LeCun et al.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2012</p></td>
+<td><p><strong>AlexNet</strong> – Krizhevsky, Sutskever, Hinton → <em>boom</em> de las CNNs</p></td>
+</tr>
+<tr class="row-even"><td><p>2014</p></td>
+<td><p><strong>GANs</strong> – Ian Goodfellow et al.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2015</p></td>
+<td><p><strong>ResNet</strong> – Kaiming He et al.</p></td>
+</tr>
+<tr class="row-even"><td><p>2017</p></td>
+<td><p><strong>Transformers</strong> – Vaswani et al.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2022</p></td>
+<td><p><strong>ChatGPT</strong> (GPT-3.5) – OpenAI</p></td>
+</tr>
+<tr class="row-even"><td><p>2023</p></td>
+<td><p>Gemini (multimodal), Mixtral (local/open), SAM, SORA, LLaMA 3, GPT-4o…</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="proyeccion-hype-cycle-de-gartner">
+<h2>Proyección: Hype Cycle de Gartner<a class="headerlink" href="#proyeccion-hype-cycle-de-gartner" title="Link to this heading">#</a></h2>
+<p>El <strong>Hype Cycle</strong> de Gartner describe las etapas típicas de adopción tecnológica:</p>
+<ol class="arabic simple">
+<li><p><strong>Lanzamiento</strong>: un avance potencial pone en marcha las expectativas.</p></li>
+<li><p><strong>Pico de expectativas sobredimensionadas</strong>: historias de éxito y muchos fracasos.</p></li>
+<li><p><strong>Abismo de desilusión</strong>: el interés se desvanece ante implementaciones fallidas.</p></li>
+<li><p><strong>Rampa de consolidación</strong>: casos de uso reales comienzan a materializarse.</p></li>
+<li><p><strong>Meseta de productividad</strong>: adopción generalizada y criterios de evaluación claros.</p></li>
+</ol>
+<!-- IMAGEN: Hype Cycle for Artificial Intelligence 2025 (Gartner) -->
+<!-- IMAGEN: Hype Cycle for Emerging Technologies 2025 (Gartner) -->
+<blockquote>
+<div><p>Fuente: <a class="reference external" href="https://www.gartner.com/en/articles/hype-cycle-for-artificial-intelligence">Gartner – Hype Cycle for Artificial Intelligence</a></p>
+</div></blockquote>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="modulo-4-machine-y-deep-learning-en-la-practica">
+<h1>Módulo 4 — Machine y Deep Learning en la Práctica<a class="headerlink" href="#modulo-4-machine-y-deep-learning-en-la-practica" title="Link to this heading">#</a></h1>
+<section id="metricas-de-evaluacion">
+<h2>Métricas de evaluación<a class="headerlink" href="#metricas-de-evaluacion" title="Link to this heading">#</a></h2>
+<p>La <strong>matriz de confusión</strong> es la base para calcular las métricas de clasificación:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Predicho: Positivo</p></th>
+<th class="head"><p>Predicho: Negativo</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Real: Positivo</strong></p></td>
+<td><p>Verdadero Positivo (VP / TP)</p></td>
+<td><p>Falso Negativo (FN)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Real: Negativo</strong></p></td>
+<td><p>Falso Positivo (FP)</p></td>
+<td><p>Verdadero Negativo (VN / TN)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="definiciones">
+<h3>Definiciones<a class="headerlink" href="#definiciones" title="Link to this heading">#</a></h3>
+<ul>
+<li><p><strong>Accuracy</strong>: fracción de predicciones correctas sobre el total.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Accuracy</span> <span class="o">=</span> <span class="p">(</span><span class="n">VP</span> <span class="o">+</span> <span class="n">VN</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">VP</span> <span class="o">+</span> <span class="n">VN</span> <span class="o">+</span> <span class="n">FP</span> <span class="o">+</span> <span class="n">FN</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Precision</strong>: de todos los casos que predije como positivos, ¿cuántos realmente lo eran?<br />
+<em>(calidad de la respuesta)</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Precision</span> <span class="o">=</span> <span class="n">VP</span> <span class="o">/</span> <span class="p">(</span><span class="n">VP</span> <span class="o">+</span> <span class="n">FP</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Recall (Tasa de Verdaderos Positivos)</strong>: de todos los casos positivos reales, ¿cuántos detecté?<br />
+<em>(cantidad de las respuestas)</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Recall</span> <span class="o">=</span> <span class="n">VP</span> <span class="o">/</span> <span class="p">(</span><span class="n">VP</span> <span class="o">+</span> <span class="n">FN</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>F1-Score</strong>: media armónica de Precision y Recall — útil cuando ambas métricas son igual de importantes.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>F1 = 2 × (Precision × Recall) / (Precision + Recall)
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="ejemplo-deteccion-de-plomo-en-casas">
+<h2>Ejemplo: Detección de plomo en casas<a class="headerlink" href="#ejemplo-deteccion-de-plomo-en-casas" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Predicho: Tiene plomo</p></th>
+<th class="head"><p>Predicho: No tiene plomo</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Real: Tiene plomo</strong></p></td>
+<td><p>2 (TP)</p></td>
+<td><p>0 (FN)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Real: No tiene plomo</strong></p></td>
+<td><p>1 (FP)</p></td>
+<td><p>1 (TN)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Precision</span> <span class="o">=</span> <span class="mi">2</span><span class="o">/</span><span class="mi">3</span>  <span class="o">=</span> <span class="mf">66.6</span> <span class="o">%</span>
+<span class="n">Recall</span>    <span class="o">=</span> <span class="mi">2</span><span class="o">/</span><span class="mi">2</span>  <span class="o">=</span> <span class="mi">100</span> <span class="o">%</span>
+<span class="n">Accuracy</span>  <span class="o">=</span> <span class="mi">3</span><span class="o">/</span><span class="mi">4</span>  <span class="o">=</span> <span class="mi">75</span> <span class="o">%</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="ejemplo-comparativo-plomo-vs-covid">
+<h2>Ejemplo comparativo: plomo vs. COVID<a class="headerlink" href="#ejemplo-comparativo-plomo-vs-covid" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Métrica</p></th>
+<th class="head"><p>Plomo (n=12 000)</p></th>
+<th class="head"><p>COVID (n=4 510)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>TP</p></td>
+<td><p>500</p></td>
+<td><p>2 000</p></td>
+</tr>
+<tr class="row-odd"><td><p>FN</p></td>
+<td><p>1 000</p></td>
+<td><p>10</p></td>
+</tr>
+<tr class="row-even"><td><p>FP</p></td>
+<td><p>500</p></td>
+<td><p>500</p></td>
+</tr>
+<tr class="row-odd"><td><p>TN</p></td>
+<td><p>10 000</p></td>
+<td><p>2 000</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Precision</strong></p></td>
+<td><p>50 %</p></td>
+<td><p>80 %</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Recall</strong></p></td>
+<td><p>33.3 %</p></td>
+<td><p>99.5 %</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Accuracy</strong></p></td>
+<td><p>87.5 %</p></td>
+<td><p>88.7 %</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p>La <strong>accuracy puede ser engañosa</strong> con clases desbalanceadas. Siempre analiza precision y recall por separado.</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="practica-de-ml-notebook-1">
+<h2>Práctica de ML — Notebook 1<a class="headerlink" href="#practica-de-ml-notebook-1" title="Link to this heading">#</a></h2>
+<p><strong>Contenido:</strong></p>
+<ul class="simple">
+<li><p>Carga de la base de datos.</p></li>
+<li><p>Eliminación de características por conocimiento experto.</p></li>
+<li><p>Análisis exploratorio de datos (EDA).</p></li>
+<li><p>División de datos en entrenamiento y testing.</p></li>
+<li><p>Método K-Nearest Neighbors (KNN).</p></li>
+<li><p>Métricas y métricas gráficas.</p></li>
+<li><p>KNN con preprocesamiento de <em>features</em>.</p></li>
+<li><p>Balance de clases.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="practica-de-ml-notebook-2">
+<h2>Práctica de ML — Notebook 2<a class="headerlink" href="#practica-de-ml-notebook-2" title="Link to this heading">#</a></h2>
+<p><strong>Contenido:</strong></p>
+<ul class="simple">
+<li><p>Carga de la base de datos.</p></li>
+<li><p>División en entrenamiento y testing.</p></li>
+<li><p>Aprendizaje supervisado: Clasificación.</p></li>
+<li><p>Aprendizaje supervisado: Regresión.</p></li>
+<li><p>Importancia de características.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="practica-de-dl">
+<h2>Práctica de DL<a class="headerlink" href="#practica-de-dl" title="Link to this heading">#</a></h2>
+<p><strong>Contenido:</strong></p>
+<ul class="simple">
+<li><p>Librerías necesarias.</p></li>
+<li><p>Carga de la base de datos.</p></li>
+<li><p>Red Neuronal Convolucional (CNN 2D).</p></li>
+<li><p>Red Neuronal Artificial (ANN).</p></li>
+<li><p>Transfer Learning.</p></li>
+<li><p>Despliegue de modelos de DL.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="modulo-5-inteligencia-artificial-generativa">
+<h1>Módulo 5 — Inteligencia Artificial Generativa<a class="headerlink" href="#modulo-5-inteligencia-artificial-generativa" title="Link to this heading">#</a></h1>
+<section id="que-significa-ia-generativa">
+<h2>¿Qué significa «IA Generativa»?<a class="headerlink" href="#que-significa-ia-generativa" title="Link to this heading">#</a></h2>
+<p>La <strong>Inteligencia Artificial Generativa</strong> (IA Generativa) crea <strong>nuevo contenido</strong> —texto, imágenes, música, código— a partir de datos existentes, a diferencia de la IA discriminativa que solo clasifica o predice.</p>
+<p>Tipos de contenido que puede generar:</p>
+<ul class="simple">
+<li><p>Texto</p></li>
+<li><p>Imágenes</p></li>
+<li><p>Música y audio</p></li>
+<li><p>Video</p></li>
+<li><p>Código</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="modelos-en-tiempo-real-omni">
+<h2>Modelos en tiempo real — Omni<a class="headerlink" href="#modelos-en-tiempo-real-omni" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: captura o diagrama de modelos multimodales omni (audio + video + texto en tiempo real) -->
+<blockquote>
+<div><p>Demo interactiva: <a class="reference external" href="https://aistudio.google.com">AI Studio de Google</a></p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="arquitecturas-para-ia-generativa">
+<h2>Arquitecturas para IA Generativa<a class="headerlink" href="#arquitecturas-para-ia-generativa" title="Link to this heading">#</a></h2>
+<section id="gans-redes-generativas-adversariales">
+<h3>GANs — Redes Generativas Adversariales<a class="headerlink" href="#gans-redes-generativas-adversariales" title="Link to this heading">#</a></h3>
+<!-- IMAGEN: diagrama generador vs. discriminador -->
+<p>Dos redes compiten:</p>
+<ul class="simple">
+<li><p><strong>Generador</strong>: crea muestras falsas.</p></li>
+<li><p><strong>Discriminador</strong>: intenta distinguir lo real de lo falso.</p></li>
+</ul>
+</section>
+<section id="transformers-pre-entrenados">
+<h3>Transformers pre-entrenados<a class="headerlink" href="#transformers-pre-entrenados" title="Link to this heading">#</a></h3>
+<!-- IMAGEN: diagrama de arquitectura Transformer con atención -->
+<p>Base de los LLMs modernos (GPT, BERT, Claude, Gemini…).</p>
+<blockquote>
+<div><p>Visualizador interactivo: <a class="reference external" href="https://poloclub.github.io/transformer-explainer/">Transformer Explainer</a></p>
+</div></blockquote>
+</section>
+<section id="autoencoders">
+<h3>Autoencoders<a class="headerlink" href="#autoencoders" title="Link to this heading">#</a></h3>
+<!-- IMAGEN: diagrama encoder → espacio latente → decoder -->
+<p>Aprenden representaciones comprimidas para luego reconstruir o generar variaciones.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="ia-para-crear-imagenes">
+<h2>IA para crear imágenes<a class="headerlink" href="#ia-para-crear-imagenes" title="Link to this heading">#</a></h2>
+<p>Herramientas destacadas:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Herramienta</p></th>
+<th class="head"><p>Descripción</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Midjourney</strong></p></td>
+<td><p>Generación artística de alta calidad por prompts.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>DALL-E</strong></p></td>
+<td><p>Modelo de OpenAI integrado en ChatGPT.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Gemini</strong></p></td>
+<td><p>Modelo multimodal de Google.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong><a class="reference external" href="http://Leonardo.ai">Leonardo.ai</a></strong></p></td>
+<td><p>Plataforma enfocada en contenido visual para creativos.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="ia-para-audio-y-video">
+<h2>IA para audio y video<a class="headerlink" href="#ia-para-audio-y-video" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Herramienta</p></th>
+<th class="head"><p>Tipo</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>ElevenLabs</strong></p></td>
+<td><p>Síntesis y clonación de voz.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>SORA</strong></p></td>
+<td><p>Generación de video por texto (OpenAI).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Veo 3</strong></p></td>
+<td><p>Generación de video (Google DeepMind).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="inteligencia-artificial-general-agi">
+<h2>Inteligencia Artificial General (AGI)<a class="headerlink" href="#inteligencia-artificial-general-agi" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><em>«Creemos que nuestra investigación eventualmente conducirá a la inteligencia artificial general, un sistema que puede resolver problemas a nivel humano. Construir AGI segura y beneficiosa es nuestra misión.»</em></p>
+</div></blockquote>
+<!-- IMAGEN: diagrama de la escala IA Estrecha → AGI → ASI -->
+<section id="modelos-de-lenguaje-relevantes-20252026">
+<h3>Modelos de lenguaje relevantes (2025–2026)<a class="headerlink" href="#modelos-de-lenguaje-relevantes-20252026" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo</p></th>
+<th class="head"><p>Organización</p></th>
+<th class="head"><p>Características</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>GPT-5.3-codex</p></td>
+<td><p>OpenAI</p></td>
+<td><p>Razonamiento y generación cercana a nivel experto humano.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Claude 4 (Opus / Sonnet / Haiku)</p></td>
+<td><p>Anthropic</p></td>
+<td><p>Destacado en tareas de codificación.</p></td>
+</tr>
+<tr class="row-even"><td><p>Gemini 3.0 Pro / Flash</p></td>
+<td><p>Google</p></td>
+<td><p>Multimodal, mejoras significativas de rendimiento.</p></td>
+</tr>
+<tr class="row-odd"><td><p>LLaMA 4</p></td>
+<td><p>Meta</p></td>
+<td><p>Código abierto, hasta 405 B de parámetros.</p></td>
+</tr>
+<tr class="row-even"><td><p>gpt-oss (120B / 20B)</p></td>
+<td><p>OpenAI</p></td>
+<td><p>Modelos de código abierto lanzados en agosto 2025.</p></td>
+</tr>
+<tr class="row-odd"><td><p>DeepSeek-Coder V2</p></td>
+<td><p>DeepSeek</p></td>
+<td><p>Especializado en programación, código abierto.</p></td>
+</tr>
+<tr class="row-even"><td><p>Grok 4 / Grok 4 Fast</p></td>
+<td><p>xAI</p></td>
+<td><p>Acceso a información en tiempo real.</p></td>
+</tr>
+<tr class="row-odd"><td><p>o3-mini</p></td>
+<td><p>OpenAI</p></td>
+<td><p>Enfocado en razonamiento profundo y lógico.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="modulo-6-modelos-grandes-del-lenguaje-llms">
+<h1>Módulo 6 — Modelos Grandes del Lenguaje (LLMs)<a class="headerlink" href="#modulo-6-modelos-grandes-del-lenguaje-llms" title="Link to this heading">#</a></h1>
+<section id="que-es-un-llm">
+<h2>¿Qué es un LLM?<a class="headerlink" href="#que-es-un-llm" title="Link to this heading">#</a></h2>
+<p>Un <strong>Large Language Model (LLM)</strong> es un modelo de IA entrenado sobre enormes cantidades de texto con el objetivo de <strong>predecir el siguiente token</strong> en una secuencia.</p>
+<!-- IMAGEN: diagrama conceptual de un LLM (corpus → preentrenamiento → modelo → inferencia) -->
+</section>
+<hr class="docutils" />
+<section id="los-llms-son-el-autocompletar-del-celular-pero-a-escala">
+<h2>Los LLMs son el «autocompletar» del celular… pero a escala<a class="headerlink" href="#los-llms-son-el-autocompletar-del-celular-pero-a-escala" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: analogía teclado de celular sugiriendo palabras vs. LLM completando párrafos -->
+<p>La diferencia está en la <strong>escala</strong>: miles de millones de parámetros, entrenados sobre prácticamente todo el texto de internet.</p>
+</section>
+<hr class="docutils" />
+<section id="como-funcionan-los-llms">
+<h2>¿Cómo funcionan los LLMs?<a class="headerlink" href="#como-funcionan-los-llms" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: flujo de tokenización → embeddings → atención → decodificación → token de salida -->
+<p>El proceso simplificado:</p>
+<ol class="arabic simple">
+<li><p><strong>Tokenización</strong>: el texto se descompone en <em>tokens</em> (palabras, subpalabras).</p></li>
+<li><p><strong>Embeddings</strong>: cada token se convierte en un vector numérico.</p></li>
+<li><p><strong>Atención (<em>Attention</em>)</strong>: el modelo pondera las relaciones entre todos los tokens del contexto.</p></li>
+<li><p><strong>Decodificación</strong>: se genera el token siguiente con mayor probabilidad.</p></li>
+<li><p>El proceso se repite hasta completar la respuesta.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="benchmarks-y-razonamiento">
+<h2>Benchmarks y razonamiento<a class="headerlink" href="#benchmarks-y-razonamiento" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: tabla o gráfica de benchmarks comparativos entre modelos (MMLU, HumanEval, etc.) -->
+<p>Los modelos modernos incorporan <strong>cómputo en tiempo de inferencia</strong> (<em>test-time compute</em>) para mejorar el razonamiento:</p>
+<ul class="simple">
+<li><p>El modelo «piensa» más antes de responder.</p></li>
+<li><p>Permite resolver problemas que requieren múltiples pasos lógicos.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="moe-mixture-of-experts">
+<h2>MoE: Mixture of Experts<a class="headerlink" href="#moe-mixture-of-experts" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: diagrama de MoE con router → expertos → suma ponderada -->
+<p>La arquitectura <strong>Mixture of Experts</strong> permite escalar modelos de forma eficiente:</p>
+<ul class="simple">
+<li><p>El modelo contiene múltiples sub-redes («expertos»).</p></li>
+<li><p>Un <strong>router</strong> decide qué expertos activar para cada token.</p></li>
+<li><p>Solo se activa una fracción del total de parámetros por inferencia → <strong>menor costo computacional</strong>.</p></li>
+</ul>
+<blockquote>
+<div><p>Referencia: <a class="reference external" href="https://llamaimodel.com/requirements/">Requisitos de hardware para LLMs</a></p>
+</div></blockquote>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="modulo-7-herramientas-de-ia-generativa">
+<h1>Módulo 7 — Herramientas de IA Generativa<a class="headerlink" href="#modulo-7-herramientas-de-ia-generativa" title="Link to this heading">#</a></h1>
+<section id="pro-tips-al-usar-llms-en-proveedores">
+<h2>Pro-tips al usar LLMs en proveedores<a class="headerlink" href="#pro-tips-al-usar-llms-en-proveedores" title="Link to this heading">#</a></h2>
+<p>Las plataformas de LLMs (ChatGPT, Claude, Gemini, etc.) ofrecen funcionalidades más allá del chat:</p>
+<ul class="simple">
+<li><p>🖼️ <strong>Crear imágenes</strong>: generación visual integrada.</p></li>
+<li><p>🎙️ <strong>Generación de audio en tiempo real</strong>: voz sintética y conversación oral.</p></li>
+<li><p>💻 <strong>Ejecución de código</strong>: intérpretes Python integrados (<em>Code Interpreter</em>).</p></li>
+<li><p>📚 <strong>Carga de «bases de conocimiento»</strong>: subir documentos propios como contexto.</p></li>
+<li><p>🌐 <strong>Búsqueda en internet</strong>: acceso a información actualizada.</p></li>
+<li><p>🔒 <strong>Privacidad de la información</strong>: revisar siempre las políticas de datos antes de subir información sensible.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="ia-en-manos-de-todos">
+<h2>IA en manos de todos<a class="headerlink" href="#ia-en-manos-de-todos" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: collage de interfaces de ChatGPT, Claude, Gemini, Copilot en móvil y escritorio -->
+<p>El acceso a modelos de lenguaje potentes se ha democratizado. Hoy cualquier persona puede usar IA de forma gratuita o con bajo costo desde un navegador o una app.</p>
+</section>
+<hr class="docutils" />
+<section id="deep-research-ia-para-investigacion-profunda">
+<h2>Deep Research: IA para investigación profunda<a class="headerlink" href="#deep-research-ia-para-investigacion-profunda" title="Link to this heading">#</a></h2>
+<p>La función <strong>Deep Research</strong> permite a los modelos realizar búsquedas multi-paso, sintetizar fuentes y elaborar informes extendidos de forma autónoma.</p>
+<p>Plataformas con esta funcionalidad:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Plataforma</p></th>
+<th class="head"><p>Notas</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>ChatGPT</strong></p></td>
+<td><p>Disponible en versión Pro.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Gemini</strong></p></td>
+<td><p>Integrado con búsqueda de Google.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Perplexity</strong></p></td>
+<td><p>Especializado en búsqueda con fuentes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Grok</strong></p></td>
+<td><p>Acceso a Twitter/X en tiempo real.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="ejemplo-de-prompt-para-deep-research">
+<h3>Ejemplo de prompt para Deep Research<a class="headerlink" href="#ejemplo-de-prompt-para-deep-research" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Prompt</span><span class="p">:</span> <span class="n">Dame</span> <span class="n">los</span> <span class="n">avances</span> <span class="n">de</span> <span class="n">los</span> <span class="n">últimos</span> <span class="mi">6</span> <span class="n">meses</span> <span class="n">en</span> <span class="n">IA</span> <span class="n">generativa</span>
+</pre></div>
+</div>
+<!-- IMAGEN: capturas comparativas de respuestas de ChatGPT, Gemini, Perplexity y Grok al mismo prompt -->
+</section>
+</section>
+<hr class="docutils" />
+<section id="herramientas-para-investigacion-academica">
+<h2>Herramientas para investigación académica<a class="headerlink" href="#herramientas-para-investigacion-academica" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Herramienta</p></th>
+<th class="head"><p>Uso principal</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Elicit</strong></p></td>
+<td><p>Búsqueda y síntesis de papers científicos con IA.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Consensus</strong></p></td>
+<td><p>Respuestas basadas en evidencia académica.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="herramientas-para-productividad-y-creacion">
+<h2>Herramientas para productividad y creación<a class="headerlink" href="#herramientas-para-productividad-y-creacion" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Herramienta</p></th>
+<th class="head"><p>Uso principal</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Napkin</strong></p></td>
+<td><p>Convierte texto en diagramas y visualizaciones.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>NotebookLM</strong></p></td>
+<td><p>Analiza documentos propios y genera podcasts/resúmenes.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Lovable</strong></p></td>
+<td><p>Crea aplicaciones web desde una descripción en lenguaje natural.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>LMArena</strong> (LMSYS)</p></td>
+<td><p>Compara modelos de lenguaje de forma anónima (<em>chatbot arena</em>).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="modulo-8-contextualizacion-de-modelos">
+<h1>Módulo 8 — Contextualización de Modelos<a class="headerlink" href="#modulo-8-contextualizacion-de-modelos" title="Link to this heading">#</a></h1>
+<section id="como-evito-que-un-llm-alucine-y-sepa-de-mi-negocio">
+<h2>¿Cómo evito que un LLM alucine y sepa de mi negocio?<a class="headerlink" href="#como-evito-que-un-llm-alucine-y-sepa-de-mi-negocio" title="Link to this heading">#</a></h2>
+<p>Los LLMs generales no conocen información privada ni actualizada de tu organización. Existen tres estrategias para solucionarlo:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                ┌─────────────┐
+                │  Prompting  │
+                └──────┬──────┘
+                       │ (sin datos nuevos)
+          ┌────────────┼────────────┐
+          ▼                         ▼
+    ┌───────────┐           ┌──────────────┐
+    │    RAG    │           │ Fine-Tuning  │
+    └───────────┘           └──────────────┘
+  (recupera contexto         (adapta los pesos
+   en tiempo real)            del modelo)
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Técnica</p></th>
+<th class="head"><p>Cuándo usarla</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Prompting</strong></p></td>
+<td><p>Información breve que cabe en el contexto.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>RAG</strong></p></td>
+<td><p>Documentos extensos o bases de conocimiento dinámicas.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Fine-Tuning</strong></p></td>
+<td><p>Estilo, formato o dominio muy específico que no cambia frecuentemente.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="modulo-9-tecnicas-de-prompting">
+<h1>Módulo 9 — Técnicas de Prompting<a class="headerlink" href="#modulo-9-tecnicas-de-prompting" title="Link to this heading">#</a></h1>
+<section id="como-sacarle-provecho-a-los-modelos-de-lenguaje">
+<h2>¿Cómo sacarle provecho a los modelos de lenguaje?<a class="headerlink" href="#como-sacarle-provecho-a-los-modelos-de-lenguaje" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: diagrama de un prompt bien estructurado vs. uno genérico y sus resultados -->
+<p>Un buen prompt no es solo una pregunta — es una <strong>instrucción estructurada</strong> que guía al modelo hacia la respuesta que necesitas.</p>
+</section>
+<hr class="docutils" />
+<section id="anatomia-de-un-buen-prompt">
+<h2>Anatomía de un buen prompt<a class="headerlink" href="#anatomia-de-un-buen-prompt" title="Link to this heading">#</a></h2>
+<p><strong>Componentes</strong>: Rol · Objetivo · Audiencia · Contexto · Límites · Salida (opcional)</p>
+<section id="ejemplo-explicame-la-pgu">
+<h3>Ejemplo: «Explícame la PGU»<a class="headerlink" href="#ejemplo-explicame-la-pgu" title="Link to this heading">#</a></h3>
+<p>❌ <strong>Prompt vago</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Explícame</span> <span class="n">la</span> <span class="n">PGU</span>
+</pre></div>
+</div>
+<p>✅ <strong>Prompt estructurado</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Rol</span><span class="p">:</span> <span class="n">Actúa</span> <span class="n">como</span> <span class="n">un</span> <span class="n">experto</span> <span class="n">en</span> <span class="n">comunicación</span> <span class="k">del</span> <span class="n">IPS</span> <span class="n">en</span> <span class="n">Chile</span><span class="p">,</span>
+     <span class="n">especializado</span> <span class="n">en</span> <span class="n">lenguaje</span> <span class="n">ciudadano</span><span class="o">.</span>
+
+<span class="n">Objetivo</span><span class="p">:</span> <span class="n">Redacta</span> <span class="n">el</span> <span class="n">borrador</span> <span class="n">de</span> <span class="n">un</span> <span class="n">correo</span> <span class="n">electrónico</span> <span class="n">para</span>
+          <span class="n">explicar</span> <span class="n">de</span> <span class="n">forma</span> <span class="n">sencilla</span> <span class="n">por</span> <span class="n">qué</span> <span class="n">se</span> <span class="n">rechazó</span> <span class="n">una</span>
+          <span class="n">solicitud</span> <span class="n">de</span> <span class="n">PGU</span><span class="o">.</span>
+
+<span class="n">Audiencia</span><span class="p">:</span> <span class="n">Un</span> <span class="n">adulto</span> <span class="n">mayor</span> <span class="n">de</span> <span class="mi">70</span> <span class="n">años</span> <span class="n">que</span> <span class="n">no</span> <span class="n">está</span> <span class="n">familiarizado</span>
+           <span class="n">con</span> <span class="n">términos</span> <span class="n">técnicos</span><span class="o">.</span>
+
+<span class="n">Contexto</span><span class="p">:</span> <span class="n">El</span> <span class="n">motivo</span> <span class="k">del</span> <span class="n">rechazo</span> <span class="n">es</span> <span class="n">que</span> <span class="n">el</span> <span class="n">postulante</span> <span class="n">no</span> <span class="n">pertenece</span>
+          <span class="n">al</span> <span class="mi">90</span><span class="o">%</span> <span class="n">más</span> <span class="n">vulnerable</span> <span class="n">de</span> <span class="n">la</span> <span class="n">población</span> <span class="n">de</span> <span class="mi">65</span> <span class="n">años</span> <span class="n">o</span> <span class="n">más</span><span class="p">,</span>
+          <span class="n">según</span> <span class="n">el</span> <span class="n">Registro</span> <span class="n">Social</span> <span class="n">de</span> <span class="n">Hogares</span><span class="o">.</span>
+
+<span class="n">Límites</span><span class="p">:</span> <span class="n">Máximo</span> <span class="mi">150</span> <span class="n">palabras</span><span class="p">,</span> <span class="n">tono</span> <span class="n">empático</span> <span class="n">y</span> <span class="n">no</span> <span class="n">técnico</span><span class="o">.</span>
+         <span class="n">Terminar</span> <span class="n">sugiriendo</span> <span class="n">que</span> <span class="n">puede</span> <span class="n">actualizar</span> <span class="n">su</span> <span class="n">RSH</span> <span class="n">si</span> <span class="n">su</span>
+         <span class="n">situación</span> <span class="n">ha</span> <span class="n">cambiado</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="anatomia-de-un-prompt-para-modelos-razonadores">
+<h2>Anatomía de un prompt para modelos razonadores<a class="headerlink" href="#anatomia-de-un-prompt-para-modelos-razonadores" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: diagrama de prompt para modelos o1/o3/DeepSeek-R1 con énfasis en problema + restricciones -->
+<p>Los modelos razonadores (o1, o3, DeepSeek-R1) responden mejor cuando el prompt:</p>
+<ul class="simple">
+<li><p>Define el <strong>problema</strong> con precisión.</p></li>
+<li><p>Lista <strong>restricciones</strong> y criterios de éxito.</p></li>
+<li><p>Evita sobre-guiar el razonamiento intermedio (el modelo lo construye solo).</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="tecnica-1-zero-shot-prompting">
+<h2>Técnica 1: Zero-Shot Prompting<a class="headerlink" href="#tecnica-1-zero-shot-prompting" title="Link to this heading">#</a></h2>
+<p>La técnica más común: pedir a la IA que realice una tarea <strong>sin ejemplos previos</strong>.</p>
+<blockquote>
+<div><p>Útil para tareas directas: resumir, traducir, redactar.</p>
+</div></blockquote>
+<p>❌ <strong>Sin estructura</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Resume</span> <span class="n">el</span> <span class="n">último</span> <span class="n">cambio</span> <span class="n">a</span> <span class="n">la</span> <span class="n">ley</span> <span class="k">del</span> <span class="n">Subsidio</span> <span class="n">Único</span> <span class="n">Familiar</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>✅ <strong>Zero-shot bien estructurado</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Actúa</span> <span class="n">como</span> <span class="n">un</span> <span class="n">analista</span> <span class="n">legal</span> <span class="k">del</span> <span class="n">IPS</span> <span class="n">en</span> <span class="n">Chile</span><span class="o">.</span> <span class="n">Resume</span> <span class="n">en</span> <span class="mi">3</span> <span class="n">puntos</span>
+<span class="n">clave</span> <span class="p">(</span><span class="n">usando</span> <span class="n">viñetas</span><span class="p">)</span> <span class="n">los</span> <span class="n">cambios</span> <span class="n">más</span> <span class="n">recientes</span> <span class="n">a</span> <span class="n">la</span> <span class="n">Ley</span> <span class="mf">18.020</span>
+<span class="n">sobre</span> <span class="n">el</span> <span class="n">Subsidio</span> <span class="n">Familiar</span><span class="o">.</span> <span class="n">El</span> <span class="n">resumen</span> <span class="n">es</span> <span class="n">para</span> <span class="n">una</span> <span class="n">circular</span> <span class="n">interna</span>
+<span class="n">dirigida</span> <span class="n">a</span> <span class="n">los</span> <span class="n">jefes</span> <span class="n">de</span> <span class="n">sucursal</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="tecnica-2-one-shot-prompting">
+<h2>Técnica 2: One-Shot Prompting<a class="headerlink" href="#tecnica-2-one-shot-prompting" title="Link to this heading">#</a></h2>
+<p>Proporcionar <strong>un único ejemplo</strong> para que el modelo entienda el patrón esperado.</p>
+<blockquote>
+<div><p>Ideal para clasificación simple o formatos difíciles de describir solo con palabras.</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Tu tarea es clasificar correos de ciudadanos en una de las
+siguientes categorías: &#39;Consulta de Beneficios&#39;, &#39;Problema de Pago&#39;,
+&#39;Actualización de Datos&#39;.
+
+Ejemplo:
+Correo: &#39;Quería saber si me corresponde el Bono de Invierno.&#39;
+→ Categoría: &#39;Consulta de Beneficios&#39;.
+
+Ahora, clasifica este:
+Correo: &#39;Hola, mi nombre es Juan Soto y no he recibido el pago del
+Aporte Familiar Permanente de este año.&#39;
+→ Categoría:
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="tecnica-3-few-shot-prompting">
+<h2>Técnica 3: Few-Shot Prompting<a class="headerlink" href="#tecnica-3-few-shot-prompting" title="Link to this heading">#</a></h2>
+<p>Proporcionar <strong>varios ejemplos</strong> para patrones más complejos o con matices sutiles.</p>
+<blockquote>
+<div><p>Útil para extracción de datos de texto no estructurado o lógica de clasificación compleja.</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Extrae el RUT y el Beneficio consultado, con el formato:
+&#39;RUT: [número], Beneficio: [nombre]&#39;.
+
+Ejemplo 1:
+Texto: &#39;Hola, soy Ana del 15.111.222-3, quería saber del Aporte
+Familiar.&#39;
+→ RUT: 15.111.222-3, Beneficio: Aporte Familiar Permanente.
+
+Ejemplo 2:
+Texto: &#39;Llamo por mi abuela, RUT 5.888.999-K, para ver si le toca el
+Bono de Invierno.&#39;
+→ RUT: 5.888.999-K, Beneficio: Bono de Invierno.
+
+Ejemplo 3:
+Texto: &#39;Mi consulta es por el Subsidio de Cesantía, mi cédula es
+18.777.666-1.&#39;
+→ RUT: 18.777.666-1, Beneficio: Subsidio de Cesantía.
+
+Ahora extrae los datos de:
+Texto: &#39;Buenas tardes, mi RUT es 12.345.678-9 y mi consulta es sobre
+la PGU de mi madre.&#39;
+→
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="tecnica-4-salidas-en-formato-especifico">
+<h2>Técnica 4: Salidas en formato específico<a class="headerlink" href="#tecnica-4-salidas-en-formato-especifico" title="Link to this heading">#</a></h2>
+<p>Instruir al modelo sobre <strong>cómo estructurar</strong> su respuesta.</p>
+<p>Formatos comunes: tabla, lista, JSON, viñetas, HTML, Markdown.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Actúa</span> <span class="n">como</span> <span class="n">un</span> <span class="n">analista</span> <span class="n">de</span> <span class="n">políticas</span> <span class="n">públicas</span> <span class="k">del</span> <span class="n">IPS</span><span class="o">.</span>
+<span class="n">Crea</span> <span class="n">una</span> <span class="n">tabla</span> <span class="n">en</span> <span class="n">formato</span> <span class="n">Markdown</span> <span class="n">que</span> <span class="n">compare</span> <span class="n">los</span> <span class="n">requisitos</span>
+<span class="n">principales</span> <span class="n">de</span> <span class="n">la</span> <span class="n">PGU</span> <span class="n">y</span> <span class="n">el</span> <span class="n">Aporte</span> <span class="n">Familiar</span> <span class="n">Permanente</span><span class="o">.</span>
+
+<span class="n">Columnas</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">Beneficio</span>
+<span class="o">-</span> <span class="n">Requisito</span> <span class="n">de</span> <span class="n">Edad</span>
+<span class="o">-</span> <span class="n">Requisito</span> <span class="n">de</span> <span class="n">Focalización</span> <span class="p">(</span><span class="n">RSH</span><span class="p">)</span>
+<span class="o">-</span> <span class="n">Forma</span> <span class="n">de</span> <span class="n">Pago</span>
+
+<span class="n">Asegúrate</span> <span class="n">de</span> <span class="n">que</span> <span class="n">la</span> <span class="n">información</span> <span class="n">esté</span> <span class="n">actualizada</span> <span class="n">a</span> <span class="n">la</span> <span class="n">normativa</span>
+<span class="n">vigente</span> <span class="n">en</span> <span class="n">Chile</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="tecnica-5-chain-of-thought-cot-cadenas-de-pensamiento">
+<h2>Técnica 5: Chain-of-Thought (CoT) — Cadenas de Pensamiento<a class="headerlink" href="#tecnica-5-chain-of-thought-cot-cadenas-de-pensamiento" title="Link to this heading">#</a></h2>
+<p>Instruir al modelo para que <strong>desglose el razonamiento paso a paso</strong> antes de concluir.</p>
+<blockquote>
+<div><p>Precursor de los modelos razonadores. Mejora drásticamente la precisión en problemas complejos.</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Actúa</span> <span class="n">como</span> <span class="n">un</span> <span class="n">experto</span> <span class="n">previsional</span> <span class="k">del</span> <span class="n">IPS</span><span class="o">.</span> <span class="n">Analiza</span> <span class="n">paso</span> <span class="n">a</span> <span class="n">paso</span> <span class="n">si</span> <span class="n">a</span>
+<span class="n">la</span> <span class="n">siguiente</span> <span class="n">usuaria</span> <span class="n">le</span> <span class="n">corresponde</span> <span class="n">el</span> <span class="n">Bono</span> <span class="n">por</span> <span class="n">Hijo</span><span class="o">.</span> <span class="n">Evalúa</span> <span class="n">cada</span>
+<span class="n">requisito</span> <span class="n">principal</span> <span class="n">y</span> <span class="n">al</span> <span class="n">final</span> <span class="n">concluye</span> <span class="n">si</span> <span class="n">es</span> <span class="n">elegible</span> <span class="n">o</span> <span class="n">no</span><span class="o">.</span>
+
+<span class="n">Datos</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">Edad</span><span class="p">:</span> <span class="mi">66</span> <span class="n">años</span>
+<span class="o">-</span> <span class="n">Nacionalidad</span><span class="p">:</span> <span class="n">Chilena</span><span class="p">,</span> <span class="n">con</span> <span class="n">residencia</span> <span class="n">en</span> <span class="n">Chile</span>
+<span class="o">-</span> <span class="n">Hijos</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="n">ambos</span> <span class="n">nacidos</span> <span class="n">vivos</span>
+<span class="o">-</span> <span class="n">Situación</span> <span class="n">previsional</span><span class="p">:</span> <span class="n">Pensionada</span> <span class="n">a</span> <span class="n">los</span> <span class="mi">65</span> <span class="n">años</span><span class="p">,</span> <span class="n">afiliada</span> <span class="n">a</span> <span class="n">AFP</span>
+</pre></div>
+</div>
+<section id="frases-clave-para-activar-cot">
+<h3>Frases clave para activar CoT<a class="headerlink" href="#frases-clave-para-activar-cot" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Frase</p></th>
+<th class="head"><p>Efecto</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;Piensa</span> <span class="pre">paso</span> <span class="pre">a</span> <span class="pre">paso...&quot;</span></code></p></td>
+<td><p>Razonamiento secuencial.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;Desglosa</span> <span class="pre">tu</span> <span class="pre">razonamiento...&quot;</span></code></p></td>
+<td><p>Transparencia del proceso.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;Analiza</span> <span class="pre">evaluando</span> <span class="pre">primero</span> <span class="pre">[A],</span> <span class="pre">luego</span> <span class="pre">[B],</span> <span class="pre">finalmente</span> <span class="pre">[C].&quot;</span></code></p></td>
+<td><p>Razonamiento estructurado.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;Antes</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">respuesta</span> <span class="pre">final,</span> <span class="pre">explica</span> <span class="pre">la</span> <span class="pre">lógica.&quot;</span></code></p></td>
+<td><p>Justificación explícita.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;Genera</span> <span class="pre">un</span> <span class="pre">plan</span> <span class="pre">detallado</span> <span class="pre">en</span> <span class="pre">orden</span> <span class="pre">cronológico...&quot;</span></code></p></td>
+<td><p>Planificación paso a paso.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="notebooks-de-practica">
+<h2>Notebooks de práctica<a class="headerlink" href="#notebooks-de-practica" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Ejemplos con OpenAI API</p></li>
+<li><p>Ejemplos con Gemini API</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="modulo-10-retrieval-augmented-generation-rag">
+<h1>Módulo 10 — Retrieval Augmented Generation (RAG)<a class="headerlink" href="#modulo-10-retrieval-augmented-generation-rag" title="Link to this heading">#</a></h1>
+<section id="que-es-rag">
+<h2>¿Qué es RAG?<a class="headerlink" href="#que-es-rag" title="Link to this heading">#</a></h2>
+<p><strong>RAG</strong> combina la capacidad generativa de un LLM con la recuperación de información relevante desde una base de conocimiento externa, reduciendo alucinaciones y permitiendo responder con datos actualizados o privados.</p>
+<!-- IMAGEN: diagrama general RAG (pregunta → retriever → documentos relevantes → LLM → respuesta) -->
+</section>
+<hr class="docutils" />
+<section id="flujo-general-de-rag">
+<h2>Flujo general de RAG<a class="headerlink" href="#flujo-general-de-rag" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: diagrama de flujo RAG con las fases: indexación → retrieval → augmentation → generation -->
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Usuario hace una pregunta
+         │
+         ▼
+   [RETRIEVAL]
+   Buscar documentos relevantes
+   en la base de conocimiento
+         │
+         ▼
+   [AUGMENTATION]
+   Añadir los documentos al
+   contexto del prompt
+         │
+         ▼
+   [GENERATION]
+   El LLM genera una respuesta
+   fundamentada en los documentos
+         │
+         ▼
+   Respuesta al usuario
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="fase-1-indexacion">
+<h2>Fase 1: Indexación<a class="headerlink" href="#fase-1-indexacion" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: diagrama de indexación (documentos → chunking → embeddings → vector store) -->
+<p>Pasos:</p>
+<ol class="arabic simple">
+<li><p><strong>Carga de documentos</strong>: PDF, Word, páginas web, bases de datos…</p></li>
+<li><p><strong>División en fragmentos (<em>chunking</em>)</strong>: segmentar en trozos de tamaño manejable.</p></li>
+<li><p><strong>Generación de embeddings</strong>: convertir cada fragmento en un vector numérico.</p></li>
+<li><p><strong>Almacenamiento en vector store</strong>: guardar los vectores en una base de datos vectorial (FAISS, Chroma, Pinecone, etc.).</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="fase-2-retrieval-recuperacion">
+<h2>Fase 2: Retrieval (Recuperación)<a class="headerlink" href="#fase-2-retrieval-recuperacion" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: diagrama de búsqueda semántica (query → embedding → similitud coseno → top-k fragmentos) -->
+<p>Cuando el usuario hace una pregunta:</p>
+<ol class="arabic simple">
+<li><p>La pregunta se convierte en un <strong>embedding</strong>.</p></li>
+<li><p>Se buscan los fragmentos más <strong>similares semánticamente</strong> en el vector store.</p></li>
+<li><p>Se recuperan los <strong>top-k fragmentos</strong> más relevantes.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="fase-3-augmentation-generation">
+<h2>Fase 3: Augmentation &amp; Generation<a class="headerlink" href="#fase-3-augmentation-generation" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: diagrama de construcción del prompt aumentado y generación de respuesta -->
+<p>Los fragmentos recuperados se <strong>inyectan en el prompt</strong> como contexto adicional:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">SYSTEM</span><span class="p">]</span>
+<span class="n">Eres</span> <span class="n">un</span> <span class="n">asistente</span> <span class="n">experto</span><span class="o">.</span> <span class="n">Usa</span> <span class="n">únicamente</span> <span class="n">la</span> <span class="n">siguiente</span> <span class="n">información</span>
+<span class="n">para</span> <span class="n">responder</span><span class="o">.</span>
+
+<span class="p">[</span><span class="n">CONTEXTO</span> <span class="n">RECUPERADO</span><span class="p">]</span>
+<span class="o">...</span> <span class="n">fragmentos</span> <span class="k">del</span> <span class="n">vector</span> <span class="n">store</span> <span class="o">...</span>
+
+<span class="p">[</span><span class="n">PREGUNTA</span> <span class="n">DEL</span> <span class="n">USUARIO</span><span class="p">]</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>El LLM genera su respuesta <strong>basándose en el contexto provisto</strong>, no solo en su entrenamiento.</p>
+</section>
+<hr class="docutils" />
+<section id="variaciones-de-rag">
+<h2>Variaciones de RAG<a class="headerlink" href="#variaciones-de-rag" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: diagrama comparativo de variantes (Naive RAG → Advanced RAG → Modular RAG) -->
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variante</p></th>
+<th class="head"><p>Características</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Naive RAG</strong></p></td>
+<td><p>Flujo básico: chunk → embed → retrieve → generate.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Advanced RAG</strong></p></td>
+<td><p>Reranking, query expansion, recuperación híbrida.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Modular RAG</strong></p></td>
+<td><p>Componentes intercambiables, agentes de recuperación.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Self-RAG</strong></p></td>
+<td><p>El modelo decide cuándo recuperar y evalúa la relevancia.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Graph RAG</strong></p></td>
+<td><p>Recuperación sobre grafos de conocimiento.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p>Notebook de práctica con ejemplos de variaciones de RAG disponible en el repositorio del curso.</p>
+</div></blockquote>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="modulo-11-fine-tuning-para-ajuste-de-modelos">
+<h1>Módulo 11 — Fine-Tuning para Ajuste de Modelos<a class="headerlink" href="#modulo-11-fine-tuning-para-ajuste-de-modelos" title="Link to this heading">#</a></h1>
+<section id="tamano-de-los-modelos-de-lenguaje">
+<h2>Tamaño de los modelos de lenguaje<a class="headerlink" href="#tamano-de-los-modelos-de-lenguaje" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: comparativa de tamaño (número de parámetros) de los principales LLMs -->
+<p>Los LLMs varían enormemente en tamaño:</p>
+<ul class="simple">
+<li><p>Modelos pequeños: ~1–7 B parámetros (ejecutables en CPU o GPU de consumo).</p></li>
+<li><p>Modelos medianos: ~13–70 B parámetros (requieren GPU de gama alta).</p></li>
+<li><p>Modelos grandes: ~405 B+ parámetros (requieren clústeres de GPUs).</p></li>
+</ul>
+<blockquote>
+<div><p>Referencia de hardware: <a class="reference external" href="https://llamaimodel.com/requirements/">llamaimodel.com/requirements</a></p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="precision-de-los-parametros">
+<h2>Precisión de los parámetros<a class="headerlink" href="#precision-de-los-parametros" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: comparativa de precisiones numéricas (FP32 → FP16 → INT8 → INT4) con su impacto en memoria -->
+<p>Los parámetros de un modelo se almacenan con distinta precisión numérica:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Precisión</p></th>
+<th class="head"><p>Bits por parámetro</p></th>
+<th class="head"><p>Memoria para 7B params</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>FP32</p></td>
+<td><p>32 bits</p></td>
+<td><p>~28 GB</p></td>
+</tr>
+<tr class="row-odd"><td><p>FP16 / BF16</p></td>
+<td><p>16 bits</p></td>
+<td><p>~14 GB</p></td>
+</tr>
+<tr class="row-even"><td><p>INT8</p></td>
+<td><p>8 bits</p></td>
+<td><p>~7 GB</p></td>
+</tr>
+<tr class="row-odd"><td><p>INT4</p></td>
+<td><p>4 bits</p></td>
+<td><p>~3.5 GB</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="quantization-cuantizacion-de-modelos">
+<h2>Quantization — Cuantización de modelos<a class="headerlink" href="#quantization-cuantizacion-de-modelos" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: diagrama de cuantización (reducción de precisión de pesos con mínima pérdida de calidad) -->
+<p>La <strong>cuantización</strong> reduce la precisión de los parámetros para disminuir el uso de memoria y aumentar la velocidad de inferencia, con una pérdida de calidad aceptable.</p>
+<ul class="simple">
+<li><p>Permite ejecutar modelos grandes en hardware de consumo.</p></li>
+<li><p>Es la base de formatos como <strong>GGUF</strong> (llama.cpp) y <strong>GPTQ</strong>.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="que-necesitamos-para-hacer-fine-tuning">
+<h2>¿Qué necesitamos para hacer Fine-Tuning?<a class="headerlink" href="#que-necesitamos-para-hacer-fine-tuning" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: diagrama de requisitos (modelo base + dataset etiquetado + GPU + framework) -->
+<p>Componentes necesarios:</p>
+<ol class="arabic simple">
+<li><p><strong>Modelo base pre-entrenado</strong>: el punto de partida (LLaMA, Mistral, Gemma…).</p></li>
+<li><p><strong>Dataset de ajuste</strong>: pares (instrucción → respuesta) específicos del dominio.</p></li>
+<li><p><strong>Cómputo</strong>: GPU con suficiente VRAM (o servicios en la nube).</p></li>
+<li><p><strong>Framework</strong>: Hugging Face Transformers, Unsloth, Axolotl, LLaMA-Factory…</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="lora-low-rank-adaptation">
+<h2>LoRA: Low-Rank Adaptation<a class="headerlink" href="#lora-low-rank-adaptation" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: diagrama LoRA mostrando matrices A y B de bajo rango inyectadas en la capa de atención -->
+<p><strong>LoRA</strong> adapta el modelo <strong>sin modificar sus pesos originales</strong>:</p>
+<ul class="simple">
+<li><p>Se añaden matrices de bajo rango (A, B) a las capas de atención.</p></li>
+<li><p>Solo se entrenan esas matrices adicionales (~1–2% de los parámetros totales).</p></li>
+<li><p>El modelo base se congela → <strong>mucho menos cómputo y memoria</strong>.</p></li>
+</ul>
+<blockquote>
+<div><p>Visualizador de arquitectura Transformer: <a class="reference external" href="https://poloclub.github.io/transformer-explainer/">Transformer Explainer</a></p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="qlora-quantized-lora">
+<h2>QLoRA: Quantized LoRA<a class="headerlink" href="#qlora-quantized-lora" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: diagrama QLoRA = modelo base en 4 bits + adaptadores LoRA en 16 bits -->
+<p><strong>QLoRA</strong> combina cuantización + LoRA:</p>
+<ol class="arabic simple">
+<li><p>El modelo base se carga en <strong>4 bits</strong> (usando NF4).</p></li>
+<li><p>Los adaptadores LoRA se entrenan en <strong>16 bits</strong>.</p></li>
+<li><p>Resultado: fine-tuning de modelos de 70B+ en una sola GPU de 24 GB.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="pasos-para-hacer-fine-tuning">
+<h2>Pasos para hacer Fine-Tuning<a class="headerlink" href="#pasos-para-hacer-fine-tuning" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: diagrama de flujo del proceso de fine-tuning -->
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.</span> <span class="n">Seleccionar</span> <span class="n">modelo</span> <span class="n">base</span>
+<span class="mf">2.</span> <span class="n">Preparar</span> <span class="n">y</span> <span class="n">formatear</span> <span class="n">el</span> <span class="n">dataset</span>
+<span class="mf">3.</span> <span class="n">Configurar</span> <span class="n">LoRA</span> <span class="o">/</span> <span class="n">QLoRA</span>
+<span class="mf">4.</span> <span class="n">Entrenamiento</span>
+<span class="mf">5.</span> <span class="n">Evaluación</span> <span class="n">en</span> <span class="n">conjunto</span> <span class="n">de</span> <span class="n">validación</span>
+<span class="mf">6.</span> <span class="n">Fusión</span> <span class="n">de</span> <span class="n">pesos</span> <span class="p">(</span><span class="n">merge</span><span class="p">)</span> <span class="n">o</span> <span class="n">uso</span> <span class="n">con</span> <span class="n">adaptadores</span>
+<span class="mf">7.</span> <span class="n">Despliegue</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="como-evaluamos-que-el-modelo-esta-bien">
+<h2>¿Cómo evaluamos que el modelo está bien?<a class="headerlink" href="#como-evaluamos-que-el-modelo-esta-bien" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: gráfica de curvas de pérdida train vs. validation durante el entrenamiento -->
+<p>Métricas de evaluación para modelos ajustados:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Métrica</p></th>
+<th class="head"><p>Uso</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Perplexity</strong></p></td>
+<td><p>Mide qué tan bien predice el modelo el texto de validación.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>ROUGE / BLEU</strong></p></td>
+<td><p>Comparación con respuestas de referencia (resumen, traducción).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Evaluación humana</strong></p></td>
+<td><p>Juicio cualitativo sobre coherencia, precisión, tono.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>LLM-as-judge</strong></p></td>
+<td><p>Usar otro LLM para puntuar las respuestas generadas.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="fine-tuning-vs-rag-cuando-usar-cada-uno">
+<h2>Fine-Tuning vs. RAG: ¿cuándo usar cada uno?<a class="headerlink" href="#fine-tuning-vs-rag-cuando-usar-cada-uno" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: diagrama comparativo Fine-Tuning vs. RAG -->
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Criterio</p></th>
+<th class="head"><p>RAG</p></th>
+<th class="head"><p>Fine-Tuning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Conocimiento actualizable</p></td>
+<td><p>✅ Fácil</p></td>
+<td><p>❌ Requiere re-entrenamiento</p></td>
+</tr>
+<tr class="row-odd"><td><p>Información privada / extensa</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-even"><td><p>Adaptar estilo o formato</p></td>
+<td><p>❌</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-odd"><td><p>Costo computacional</p></td>
+<td><p>Bajo (inferencia)</p></td>
+<td><p>Alto (entrenamiento)</p></td>
+</tr>
+<tr class="row-even"><td><p>Citas y trazabilidad</p></td>
+<td><p>✅ Fuentes recuperables</p></td>
+<td><p>❌</p></td>
+</tr>
+<tr class="row-odd"><td><p>Latencia en producción</p></td>
+<td><p>Mayor (búsqueda + LLM)</p></td>
+<td><p>Menor</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p>En muchos casos, <strong>RAG + Fine-Tuning</strong> se combinan para obtener lo mejor de ambos enfoques.</p>
+</div></blockquote>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="modulo-12-agentes-de-ia-y-automatizacion-low-code">
+<h1>Módulo 12 — Agentes de IA y Automatización Low-Code<a class="headerlink" href="#modulo-12-agentes-de-ia-y-automatizacion-low-code" title="Link to this heading">#</a></h1>
+<section id="prompt-vs-workflow-vs-agente">
+<h2>Prompt vs. Workflow vs. Agente<a class="headerlink" href="#prompt-vs-workflow-vs-agente" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: diagrama comparativo de las tres capas (prompt simple → workflow encadenado → agente autónomo) -->
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Nivel</p></th>
+<th class="head"><p>Descripción</p></th>
+<th class="head"><p>Ejemplo</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Prompt</strong></p></td>
+<td><p>Una sola instrucción al LLM, respuesta directa.</p></td>
+<td><p>«Resume este documento.»</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Workflow</strong></p></td>
+<td><p>Secuencia predefinida de pasos con LLMs y herramientas.</p></td>
+<td><p>Cadena: resumir → traducir → enviar por email.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Agente</strong></p></td>
+<td><p>El LLM decide qué acciones tomar de forma autónoma, en bucle.</p></td>
+<td><p>Investigar un tema, navegar webs, redactar un informe.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p><strong>La IA generativa entrega valor real cuando se combina con buenos datos y casos de negocio claros.</strong></p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="agentes-de-ia">
+<h2>Agentes de IA<a class="headerlink" href="#agentes-de-ia" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: diagrama de arquitectura de un agente (LLM + memoria + herramientas + planeación + acción) -->
+<p>Un <strong>agente de IA</strong> es un sistema donde el LLM actúa como el «cerebro» que:</p>
+<ol class="arabic simple">
+<li><p><strong>Percibe</strong> el entorno (contexto, herramientas disponibles).</p></li>
+<li><p><strong>Planifica</strong> una secuencia de acciones para alcanzar el objetivo.</p></li>
+<li><p><strong>Actúa</strong> ejecutando herramientas (búsqueda web, código, APIs…).</p></li>
+<li><p><strong>Observa</strong> el resultado y ajusta el plan.</p></li>
+</ol>
+<!-- IMAGEN: bucle percepción → planificación → acción → observación -->
+</section>
+<hr class="docutils" />
+<section id="frameworks-para-construir-agentes">
+<h2>Frameworks para construir agentes<a class="headerlink" href="#frameworks-para-construir-agentes" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: logos/comparativa de frameworks (LangChain, CrewAI, AutoGen, n8n, LangGraph) -->
+<section id="crewai-agentes-colaborativos">
+<h3>CrewAI — Agentes colaborativos<a class="headerlink" href="#crewai-agentes-colaborativos" title="Link to this heading">#</a></h3>
+<!-- IMAGEN: diagrama CrewAI con roles (Investigador, Escritor, Revisor) colaborando en una tarea -->
+<p>CrewAI permite definir <strong>equipos de agentes</strong> con roles especializados:</p>
+<ul class="simple">
+<li><p>Cada agente tiene un rol, un objetivo y herramientas asignadas.</p></li>
+<li><p>Los agentes se coordinan para completar tareas complejas.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="human-in-the-loop">
+<h2>Human in the Loop<a class="headerlink" href="#human-in-the-loop" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: diagrama de ciclo agente con punto de intervención humana antes de ejecutar acción crítica -->
+<p>No todos los agentes deben actuar de forma completamente autónoma. El patrón <strong>Human in the Loop</strong> inserta puntos de aprobación humana:</p>
+<ul class="simple">
+<li><p>Antes de acciones irreversibles (enviar email, borrar datos…).</p></li>
+<li><p>Cuando la confianza del modelo es baja.</p></li>
+<li><p>En decisiones que requieren juicio ético o de negocio.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="mcp-model-context-protocol">
+<h2>MCP: Model Context Protocol<a class="headerlink" href="#mcp-model-context-protocol" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: diagrama de arquitectura MCP (host → cliente MCP → servidor MCP → herramientas/recursos) -->
+<p>El <strong>Model Context Protocol (MCP)</strong> es un estándar abierto (Anthropic, 2024) que define cómo los LLMs se conectan a herramientas y fuentes de datos externas de forma uniforme.</p>
+<section id="como-funciona">
+<h3>¿Cómo funciona?<a class="headerlink" href="#como-funciona" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>┌──────────────┐      MCP       ┌─────────────────────┐
+│  LLM / Host  │ ←────────────→ │  Servidor MCP        │
+│  (Claude,    │                │  (acceso a archivos, │
+│   GPT, etc.) │                │   APIs, BD, código…) │
+└──────────────┘                └─────────────────────┘
+</pre></div>
+</div>
+</section>
+<section id="beneficios">
+<h3>Beneficios<a class="headerlink" href="#beneficios" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Un solo protocolo para conectar cualquier LLM con cualquier herramienta.</p></li>
+<li><p>Servidores MCP reutilizables entre distintos clientes.</p></li>
+<li><p>Ecosistema creciente de servidores MCP (GitHub, Notion, bases de datos…).</p></li>
+</ul>
+<!-- IMAGEN: ecosistema de servidores MCP disponibles -->
+</section>
+</section>
+<hr class="docutils" />
+<section id="vibe-coding-prototipado-y-desarrollo-de-apps">
+<h2>Vibe Coding: prototipado y desarrollo de apps<a class="headerlink" href="#vibe-coding-prototipado-y-desarrollo-de-apps" title="Link to this heading">#</a></h2>
+<p><strong>Vibe coding</strong> es el flujo de trabajo donde describes en lenguaje natural lo que quieres y un agente de IA genera la aplicación completa.</p>
+<blockquote>
+<div><p>Herramienta destacada: <strong>Lovable</strong> — genera aplicaciones web funcionales desde una descripción.</p>
+</div></blockquote>
+<!-- IMAGEN: captura de pantalla de Lovable generando una app desde un prompt -->
+<p>Casos de uso:</p>
+<ul class="simple">
+<li><p>MVPs y prototipos rápidos.</p></li>
+<li><p>Automatización de procesos internos sin equipo de desarrollo.</p></li>
+<li><p>Dashboards y formularios a medida.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="agentes-de-codigo-en-tu-pc">
+<h2>Agentes de código en tu PC<a class="headerlink" href="#agentes-de-codigo-en-tu-pc" title="Link to this heading">#</a></h2>
+<!-- IMAGEN: diagrama de agentes de código locales (Claude Code, Cursor, Copilot Workspace) orquestando archivos y procesos -->
+<p>Los agentes de código permiten <strong>orquestar procesos completos</strong> directamente desde el entorno de desarrollo:</p>
+<ul class="simple">
+<li><p>Leer, escribir y ejecutar archivos.</p></li>
+<li><p>Correr tests y corregir errores en bucle.</p></li>
+<li><p>Interactuar con APIs y servicios locales.</p></li>
+</ul>
+<p>Herramientas destacadas: <strong>Claude Code</strong>, Cursor Agent, GitHub Copilot Workspace.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Unidad 1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Unidad1.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Deep Learning Avanzado</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="02_Autoencoders.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">1.2 Autoencoders</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1.1 Tópicos Emergentes de la IA — 2026</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenidos">Contenidos</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-1-introduccion-a-la-inteligencia-artificial">Módulo 1 — Introducción a la Inteligencia Artificial</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-la-inteligencia-artificial">¿Qué es la Inteligencia Artificial?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linea-temporal-de-la-ia">Línea temporal de la IA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-se-necesita-para-hacer-ia">¿Qué se necesita para hacer IA?</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-2-inteligencia-artificial-tradicional">Módulo 2 — Inteligencia Artificial Tradicional</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flujo-de-un-sistema-con-ia">Flujo de un sistema con IA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#de-observaciones-a-predicciones-mediante-modelos">De observaciones a predicciones mediante modelos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proceso-de-construccion-de-un-modelo">Proceso de construcción de un modelo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-de-entrenamiento-vs-datos-de-validacion">Datos de entrenamiento vs. datos de validación</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ml-tecnicas-y-oportunidades">ML: Técnicas y Oportunidades</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aprendizaje-supervisado">Aprendizaje supervisado</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aprendizaje-no-supervisado">Aprendizaje no supervisado</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aprendizaje-semi-supervisado">Aprendizaje semi-supervisado</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-3-deep-learning">Módulo 3 — Deep Learning</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-y-cuando-usar-deep-learning">¿Por qué y cuándo usar Deep Learning?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tareas-resueltas-con-deep-learning">Tareas resueltas con Deep Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contexto-biologico-la-neurona-artificial">Contexto biológico: la neurona artificial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-perceptron">El Perceptrón</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perceptron-multicapa-mlp">Perceptrón Multicapa (MLP)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ventajas-y-desventajas-de-las-redes-neuronales">Ventajas y desventajas de las redes neuronales</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ventajas">Ventajas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desventajas">Desventajas</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#progreso-historico-del-deep-learning">Progreso histórico del Deep Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proyeccion-hype-cycle-de-gartner">Proyección: Hype Cycle de Gartner</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-4-machine-y-deep-learning-en-la-practica">Módulo 4 — Machine y Deep Learning en la Práctica</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas-de-evaluacion">Métricas de evaluación</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definiciones">Definiciones</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-deteccion-de-plomo-en-casas">Ejemplo: Detección de plomo en casas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-comparativo-plomo-vs-covid">Ejemplo comparativo: plomo vs. COVID</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practica-de-ml-notebook-1">Práctica de ML — Notebook 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practica-de-ml-notebook-2">Práctica de ML — Notebook 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practica-de-dl">Práctica de DL</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-5-inteligencia-artificial-generativa">Módulo 5 — Inteligencia Artificial Generativa</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-significa-ia-generativa">¿Qué significa «IA Generativa»?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-en-tiempo-real-omni">Modelos en tiempo real — Omni</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitecturas-para-ia-generativa">Arquitecturas para IA Generativa</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gans-redes-generativas-adversariales">GANs — Redes Generativas Adversariales</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformers-pre-entrenados">Transformers pre-entrenados</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencoders">Autoencoders</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ia-para-crear-imagenes">IA para crear imágenes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ia-para-audio-y-video">IA para audio y video</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inteligencia-artificial-general-agi">Inteligencia Artificial General (AGI)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-lenguaje-relevantes-20252026">Modelos de lenguaje relevantes (2025–2026)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-6-modelos-grandes-del-lenguaje-llms">Módulo 6 — Modelos Grandes del Lenguaje (LLMs)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-un-llm">¿Qué es un LLM?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#los-llms-son-el-autocompletar-del-celular-pero-a-escala">Los LLMs son el «autocompletar» del celular… pero a escala</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-funcionan-los-llms">¿Cómo funcionan los LLMs?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmarks-y-razonamiento">Benchmarks y razonamiento</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#moe-mixture-of-experts">MoE: Mixture of Experts</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-7-herramientas-de-ia-generativa">Módulo 7 — Herramientas de IA Generativa</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pro-tips-al-usar-llms-en-proveedores">Pro-tips al usar LLMs en proveedores</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ia-en-manos-de-todos">IA en manos de todos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-research-ia-para-investigacion-profunda">Deep Research: IA para investigación profunda</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-de-prompt-para-deep-research">Ejemplo de prompt para Deep Research</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#herramientas-para-investigacion-academica">Herramientas para investigación académica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#herramientas-para-productividad-y-creacion">Herramientas para productividad y creación</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-8-contextualizacion-de-modelos">Módulo 8 — Contextualización de Modelos</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-evito-que-un-llm-alucine-y-sepa-de-mi-negocio">¿Cómo evito que un LLM alucine y sepa de mi negocio?</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-9-tecnicas-de-prompting">Módulo 9 — Técnicas de Prompting</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-sacarle-provecho-a-los-modelos-de-lenguaje">¿Cómo sacarle provecho a los modelos de lenguaje?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anatomia-de-un-buen-prompt">Anatomía de un buen prompt</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-explicame-la-pgu">Ejemplo: «Explícame la PGU»</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anatomia-de-un-prompt-para-modelos-razonadores">Anatomía de un prompt para modelos razonadores</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tecnica-1-zero-shot-prompting">Técnica 1: Zero-Shot Prompting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tecnica-2-one-shot-prompting">Técnica 2: One-Shot Prompting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tecnica-3-few-shot-prompting">Técnica 3: Few-Shot Prompting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tecnica-4-salidas-en-formato-especifico">Técnica 4: Salidas en formato específico</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tecnica-5-chain-of-thought-cot-cadenas-de-pensamiento">Técnica 5: Chain-of-Thought (CoT) — Cadenas de Pensamiento</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frases-clave-para-activar-cot">Frases clave para activar CoT</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notebooks-de-practica">Notebooks de práctica</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-10-retrieval-augmented-generation-rag">Módulo 10 — Retrieval Augmented Generation (RAG)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-rag">¿Qué es RAG?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flujo-general-de-rag">Flujo general de RAG</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fase-1-indexacion">Fase 1: Indexación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fase-2-retrieval-recuperacion">Fase 2: Retrieval (Recuperación)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fase-3-augmentation-generation">Fase 3: Augmentation &amp; Generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variaciones-de-rag">Variaciones de RAG</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-11-fine-tuning-para-ajuste-de-modelos">Módulo 11 — Fine-Tuning para Ajuste de Modelos</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tamano-de-los-modelos-de-lenguaje">Tamaño de los modelos de lenguaje</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-de-los-parametros">Precisión de los parámetros</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantization-cuantizacion-de-modelos">Quantization — Cuantización de modelos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-necesitamos-para-hacer-fine-tuning">¿Qué necesitamos para hacer Fine-Tuning?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lora-low-rank-adaptation">LoRA: Low-Rank Adaptation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qlora-quantized-lora">QLoRA: Quantized LoRA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pasos-para-hacer-fine-tuning">Pasos para hacer Fine-Tuning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-evaluamos-que-el-modelo-esta-bien">¿Cómo evaluamos que el modelo está bien?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fine-tuning-vs-rag-cuando-usar-cada-uno">Fine-Tuning vs. RAG: ¿cuándo usar cada uno?</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modulo-12-agentes-de-ia-y-automatizacion-low-code">Módulo 12 — Agentes de IA y Automatización Low-Code</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-vs-workflow-vs-agente">Prompt vs. Workflow vs. Agente</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agentes-de-ia">Agentes de IA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frameworks-para-construir-agentes">Frameworks para construir agentes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crewai-agentes-colaborativos">CrewAI — Agentes colaborativos</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#human-in-the-loop">Human in the Loop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mcp-model-context-protocol">MCP: Model Context Protocol</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#como-funciona">¿Cómo funciona?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#beneficios">Beneficios</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vibe-coding-prototipado-y-desarrollo-de-apps">Vibe Coding: prototipado y desarrollo de apps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agentes-de-codigo-en-tu-pc">Agentes de código en tu PC</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Sergio Alejandro Holguin García
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

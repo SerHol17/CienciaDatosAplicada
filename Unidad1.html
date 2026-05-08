@@ -1,0 +1,683 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Deep Learning Avanzado &#8212; Ciencia de Datos Aplicada- 01 Ucaldas</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unidad1';</script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="1.1 Tópicos Emergentes de la IA — 2026" href="Unidad%201/01_introduccion_ia.html" />
+    <link rel="prev" title="Ciencia de datos aplicada" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Ciencia de Datos Aplicada- 01 Ucaldas - Home"/>
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark pst-js-only" alt="Ciencia de Datos Aplicada- 01 Ucaldas - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Ciencia de datos aplicada
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Deep Learning Avanzado</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Unidad%201/01_introduccion_ia.html">1.1 Tópicos Emergentes de la IA — 2026</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="Unidad%201/02_Autoencoders.html">1.2 Autoencoders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Unidad%201/autoencoders.html">1.3 Autoencoders: teoria, implementacion y aplicaciones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Unidad%201/Gans_teoria.html">1.4 Redes Generativas Adversariales (GANs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Unidad%201/gans.html">1.5 Redes Generativas Adversariales (GANs)</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/CienciaDatosAplicada" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/CienciaDatosAplicada/issues/new?title=Issue%20on%20page%20%2FUnidad1.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Unidad1.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Deep Learning Avanzado</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introduccion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-learning-fundamentos-y-evolucion">Deep Learning: fundamentos y evolucion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-el-deep-learning-funciona-ahora">Por que el Deep Learning funciona ahora</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#redes-neuronales-convolucionales-cnns">Redes Neuronales Convolucionales (CNNs)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multimodalidad">Multimodalidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencoders">Autoencoders</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#redes-generativas-adversariales-gans">Redes Generativas Adversariales (GANs)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentacion-con-ia">Segmentacion con IA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deteccion-de-objetos-yolo">Deteccion de Objetos: YOLO</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nlp-y-transformers">NLP y Transformers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estructura-de-la-unidad">Estructura de la unidad</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="deep-learning-avanzado">
+<h1>Deep Learning Avanzado<a class="headerlink" href="#deep-learning-avanzado" title="Link to this heading">#</a></h1>
+<section id="introduccion">
+<h2>Introduccion<a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h2>
+<p>El Deep Learning es la disciplina que ha redefinido los limites de lo que las maquinas pueden aprender. A diferencia del machine learning clasico, donde un ingeniero debia disenar manualmente las caracteristicas relevantes de los datos, las redes neuronales profundas aprenden esas representaciones directamente desde los datos crudos, capa por capa, con una profundidad que permite capturar estructuras de creciente complejidad y abstraccion.</p>
+<p>Esta unidad presenta los bloques fundamentales del Deep Learning moderno: desde las redes convolucionales que revolucionaron la vision artificial, hasta los modelos multimodales que integran texto, imagen y audio en un mismo espacio de representacion. Se recorren ademas las principales familias de arquitecturas generativas, los modelos de segmentacion, los detectores de objetos en tiempo real y los modelos de lenguaje basados en Transformers.</p>
+</section>
+<hr class="docutils" />
+<section id="deep-learning-fundamentos-y-evolucion">
+<h2>Deep Learning: fundamentos y evolucion<a class="headerlink" href="#deep-learning-fundamentos-y-evolucion" title="Link to this heading">#</a></h2>
+<p>Una red neuronal profunda es una funcion parametrizada <span class="math notranslate nohighlight">\(f_\theta\)</span> compuesta por multiples capas de transformaciones no lineales:</p>
+<div class="math notranslate nohighlight">
+\[f_\theta(x) = f_L \circ f_{L-1} \circ \cdots \circ f_1(x)\]</div>
+<p>Cada capa <span class="math notranslate nohighlight">\(f_l\)</span> aprende a transformar su entrada en una representacion mas util para la tarea objetivo. El entrenamiento ajusta los parametros <span class="math notranslate nohighlight">\(\theta\)</span> mediante <strong>retropropagacion del gradiente</strong> y <strong>descenso por gradiente estocastico (SGD)</strong>, minimizando una funcion de perdida <span class="math notranslate nohighlight">\(\mathcal{L}\)</span>.</p>
+<p>La profundidad es la clave: las primeras capas detectan patrones simples (bordes, frecuencias), las capas intermedias combinan esos patrones en estructuras (formas, texturas) y las capas finales construyen conceptos de alto nivel (objetos, semantica). Esta jerarquia de representaciones emerge del entrenamiento, sin ser programada explicitamente.</p>
+<img src="_static/images/intro1.png" width="600" />
+<section id="por-que-el-deep-learning-funciona-ahora">
+<h3>Por que el Deep Learning funciona ahora<a class="headerlink" href="#por-que-el-deep-learning-funciona-ahora" title="Link to this heading">#</a></h3>
+<p>Tres factores convergieron para hacer viable el Deep Learning a gran escala:</p>
+<ul class="simple">
+<li><p><strong>Datos</strong>: la disponibilidad de datasets masivos (ImageNet, Common Crawl, LAION) proporciona el volumen necesario para entrenar modelos con miles de millones de parametros.</p></li>
+<li><p><strong>Computo</strong>: las GPUs y TPUs permiten paralelizar las operaciones matriciales que dominan el entrenamiento y la inferencia.</p></li>
+<li><p><strong>Algoritmos</strong>: avances en funciones de activacion (ReLU), normalizacion (Batch Normalization), regularizacion (Dropout) y arquitecturas (residual connections) resolvieron problemas que bloqueaban el entrenamiento profundo.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="redes-neuronales-convolucionales-cnns">
+<h2>Redes Neuronales Convolucionales (CNNs)<a class="headerlink" href="#redes-neuronales-convolucionales-cnns" title="Link to this heading">#</a></h2>
+<p>Las <strong>Redes Neuronales Convolucionales</strong> son la arquitectura dominante en vision artificial. Su principio es la <strong>convolucion</strong>: en lugar de conectar cada neurona con todos los pixeles de la imagen (ineficiente y sobreajustado), cada filtro se desplaza por la imagen compartiendo pesos, lo que produce un <strong>mapa de activacion</strong> que registra donde aparece el patron que el filtro detecta.</p>
+<div class="math notranslate nohighlight">
+\[\text{Salida}[i,j] = \sum_{u,v} W[u,v] \cdot X[i+u, j+v] + b\]</div>
+<p>Las propiedades que hacen a las CNNs poderosas para imagenes son:</p>
+<ul class="simple">
+<li><p><strong>Comparticion de pesos</strong>: el mismo filtro detecta un borde horizontal en cualquier posicion de la imagen.</p></li>
+<li><p><strong>Invarianza a la traslacion</strong>: gracias al pooling, la red reconoce un objeto independientemente de donde aparezca.</p></li>
+<li><p><strong>Jerarquia local</strong>: las capas sucesivas combinan patrones locales en estructuras globales.</p></li>
+</ul>
+<img src="_static/images/intro2.png" width="600" />
+<p>Los hitos arquitectonicos que marcaron el campo incluyen LeNet (1998), AlexNet (2012, que inicio el boom del Deep Learning moderno), VGGNet (uniformidad y profundidad), ResNet (2015, conexiones residuales que permiten entrenar redes de cientos de capas), y EfficientNet (escalado sistematico de anchura, profundidad y resolucion).</p>
+<p>Las CNNs son la base sobre la que se construyen la mayoria de las arquitecturas de esta unidad.</p>
+</section>
+<hr class="docutils" />
+<section id="multimodalidad">
+<h2>Multimodalidad<a class="headerlink" href="#multimodalidad" title="Link to this heading">#</a></h2>
+<p>Los modelos multimodales procesan y relacionan informacion de <strong>multiples tipos de datos simultaneamente</strong>: texto, imagen, audio, video, profundidad, codigo. La hipotesis central es que las distintas modalidades son proyecciones de una misma realidad, y que alinearlas en un espacio de representacion compartido permite una comprension mas rica que la de cada modalidad por separado.</p>
+<p>El modelo <strong>CLIP</strong> (Contrastive Language-Image Pretraining, OpenAI 2021) demostro que es posible alinear texto e imagen entrenando con pares de la forma (imagen, descripcion) extraidos de internet. La imagen y su descripcion se acercan en el espacio latente; la imagen y una descripcion incorrecta se alejan. Este entrenamiento contrastivo produjo representaciones visuales transferibles a decenas de tareas sin fine-tuning especifico.</p>
+<img src="_static/images/intro3.png" width="600" />
+<p>Los modelos fundacionales actuales como GPT-4o, Gemini y Claude son inherentemente multimodales: reciben texto, imagenes, audio y documentos, y producen respuestas que integran el contenido de todas las modalidades. Esta convergencia multimodal es una de las tendencias mas significativas del Deep Learning contemporaneo.</p>
+</section>
+<hr class="docutils" />
+<section id="autoencoders">
+<h2>Autoencoders<a class="headerlink" href="#autoencoders" title="Link to this heading">#</a></h2>
+<p>Un <strong>autoencoder</strong> es una red neuronal que aprende a comprimir una entrada en una representacion de menor dimension (el <strong>espacio latente</strong>) y a reconstruirla desde esa representacion comprimida. No requiere etiquetas: la propia entrada es el objetivo de aprendizaje.</p>
+<div class="math notranslate nohighlight">
+\[z = f_\theta(x) \qquad \hat{x} = g_\phi(z) \qquad \mathcal{L} = \|x - \hat{x}\|^2\]</div>
+<p>El cuello de botella fuerza a la red a descartar redundancia y retener solo la informacion estructuralmente relevante. Lo que emerge en el espacio latente es una representacion compacta que captura los factores de variacion principales de los datos.</p>
+<img src="_static/images/autoencoder1.png" width="600" />
+<p>Las variantes mas importantes son el <strong>Variational Autoencoder (VAE)</strong>, que aprende una distribucion de probabilidad sobre el espacio latente permitiendo generar muestras nuevas, y el <strong>Denoising Autoencoder</strong>, que entrena la red para recuperar imagenes limpias a partir de entradas corrompidas con ruido, produciendo representaciones mas robustas.</p>
+<p>Las aplicaciones de los autoencoders van desde la reduccion de dimensionalidad y la deteccion de anomalias (un dato que no se reconstruye bien es probablemente una anomalia) hasta la sintesis de datos y el preentrenamiento de representaciones para tareas supervisadas.</p>
+</section>
+<hr class="docutils" />
+<section id="redes-generativas-adversariales-gans">
+<h2>Redes Generativas Adversariales (GANs)<a class="headerlink" href="#redes-generativas-adversariales-gans" title="Link to this heading">#</a></h2>
+<p>Las <strong>GANs</strong> (Goodfellow et al., 2014) formulan la generacion como un juego competitivo entre dos redes:</p>
+<ul class="simple">
+<li><p>El <strong>Generador</strong> <span class="math notranslate nohighlight">\(G\)</span> recibe un vector de ruido <span class="math notranslate nohighlight">\(z\)</span> y produce una muestra sintetica <span class="math notranslate nohighlight">\(G(z)\)</span>.</p></li>
+<li><p>El <strong>Discriminador</strong> <span class="math notranslate nohighlight">\(D\)</span> recibe una muestra (real o sintetica) y estima la probabilidad de que sea real.</p></li>
+</ul>
+<p>Ambas redes se entrenan simultaneamente: <span class="math notranslate nohighlight">\(G\)</span> aprende a engañar a <span class="math notranslate nohighlight">\(D\)</span>, y <span class="math notranslate nohighlight">\(D\)</span> aprende a no ser engañado. La presion mutua impulsa a <span class="math notranslate nohighlight">\(G\)</span> a producir muestras de calidad creciente.</p>
+<div class="math notranslate nohighlight">
+\[\min_G \max_D \; \mathbb{E}[\log D(x)] + \mathbb{E}[\log(1 - D(G(z)))]\]</div>
+<img src="_static/images/gans1.png" width="600" />
+<p>La familia de GANs se ha expandido considerablemente. <strong>DCGAN</strong> introdujo arquitecturas convolucionales estables. <strong>Pix2Pix</strong> aplico el principio adversarial a la traduccion imagen a imagen. <strong>CycleGAN</strong> extendio esa idea a dominios sin pares de entrenamiento. <strong>StyleGAN</strong> llevo la generacion de imagenes de alta resolucion al nivel fotorrealista. <strong>WGAN-GP</strong> resolvio los problemas de inestabilidad y mode collapse mediante la distancia de Wasserstein.</p>
+<p>Aunque los modelos de difusion han superado a las GANs en calidad de generacion de imagenes, las GANs siguen siendo relevantes en aplicaciones donde la velocidad de inferencia es critica.</p>
+</section>
+<hr class="docutils" />
+<section id="segmentacion-con-ia">
+<h2>Segmentacion con IA<a class="headerlink" href="#segmentacion-con-ia" title="Link to this heading">#</a></h2>
+<p>La <strong>segmentacion semantica</strong> asigna una etiqueta de clase a cada pixel de una imagen, produciendo una comprension densa de la escena a nivel de pixel. Es la tarea de percepcion visual mas exigente: requiere que la red comprenda tanto el contenido global de la imagen como la localizacion exacta de cada elemento.</p>
+<p>La arquitectura <strong>U-Net</strong> (Ronneberger et al., 2015) se convirtio en el estandar del campo mediante una innovacion estructural: las <strong>skip connections</strong> que conectan directamente cada nivel del encoder con el nivel simetrico del decoder.</p>
+<!-- IMAGEN: arquitectura U-Net con las skip connections entre encoder y decoder resaltadas -->
+<p>Sin estas conexiones, el decoder debe reconstruir los detalles espaciales finos (bordes, contornos exactos) solo desde el bottleneck comprimido, lo que produce mascaras borrosas. Con ellas, los detalles de alta resolucion del encoder se combinan con el contexto semantico del decoder, produciendo mascaras precisas incluso con datasets pequeños.</p>
+<p>Arquitecturas posteriores como <strong>DeepLab v3+</strong> (convolucion dilatada para capturar multiples escalas), <strong>SegFormer</strong> (Transformers para segmentacion eficiente) y <strong>SAM</strong> (Segment Anything Model, Meta 2023, segmentacion zero-shot guiada por prompts de lenguaje natural) han extendido las capacidades del campo a dominios y condiciones cada vez mas generales.</p>
+</section>
+<hr class="docutils" />
+<section id="deteccion-de-objetos-yolo">
+<h2>Deteccion de Objetos: YOLO<a class="headerlink" href="#deteccion-de-objetos-yolo" title="Link to this heading">#</a></h2>
+<p>La <strong>deteccion de objetos</strong> localiza y clasifica simultaneamente multiples objetos en una imagen, produciendo cajas delimitadoras (<em>bounding boxes</em>) con clase y puntuacion de confianza para cada objeto detectado.</p>
+<p><strong>YOLO</strong> (You Only Look Once, Redmon et al., 2016) redefinio el campo introduciendo la deteccion en una sola pasada por la red: la imagen se divide en una cuadricula <span class="math notranslate nohighlight">\(S \times S\)</span> y cada celda predice directamente las cajas y clases de los objetos que contiene, sin etapas separadas de propuesta de regiones.</p>
+<!-- IMAGEN: diagrama de la cuadricula YOLO sobre una imagen con cajas predichas y clases por celda -->
+<p>Esta formulacion hace a YOLO extremadamente rapida: puede procesar video en tiempo real a 30 o mas fotogramas por segundo, lo que lo convierte en la arquitectura de referencia para aplicaciones de produccion. La familia YOLO ha evolucionado continuamente (v3, v5, v8, v11) mejorando la precision y añadiendo capacidades de segmentacion y estimacion de pose sobre la misma arquitectura base.</p>
+<p>Los detectores de dos etapas como <strong>Faster R-CNN</strong> ofrecen mayor precision a costa de velocidad, mientras que <strong>DETR</strong> (Detection Transformer) elimino los componentes de diseño manual (anclas, NMS) mediante atención.</p>
+</section>
+<hr class="docutils" />
+<section id="nlp-y-transformers">
+<h2>NLP y Transformers<a class="headerlink" href="#nlp-y-transformers" title="Link to this heading">#</a></h2>
+<p>El procesamiento del lenguaje natural experimento una transformacion radical con la introduccion de la arquitectura <strong>Transformer</strong> (Vaswani et al., 2017). Su mecanismo central, la <strong>atencion multi-cabeza</strong>, permite a cada elemento de una secuencia relacionarse directamente con cualquier otro elemento, independientemente de la distancia entre ellos:</p>
+<div class="math notranslate nohighlight">
+\[\text{Attention}(Q, K, V) = \text{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right)V\]</div>
+<!-- IMAGEN: diagrama del mecanismo de atencion con matrices Q, K, V y el mapa de atencion resultante -->
+<p>Esta propiedad resolvio el problema de las redes recurrentes (LSTM, GRU) con dependencias de largo alcance, donde la informacion al principio de una secuencia se degradaba antes de influir en el final. Los Transformers procesan toda la secuencia en paralelo, lo que ademas los hace altamente eficientes en hardware moderno.</p>
+<p>El preentrenamiento a gran escala sobre texto no etiquetado produjo modelos de proposito general de capacidad creciente. <strong>BERT</strong> (2018) aprendio representaciones bidireccionales optimizadas para comprension. <strong>GPT</strong> (2018 en adelante) aprendio a predecir el siguiente token, emergiendo capacidades de generacion, razonamiento y seguimiento de instrucciones a medida que el modelo escala. Los modelos actuales como GPT-4, Claude y Gemini tienen cientos de miles de millones de parametros y muestran capacidades que antes se consideraban exclusivas de la inteligencia humana.</p>
+<p>Los Transformers son hoy la arquitectura dominante no solo en NLP sino en vision (Vision Transformer, ViT), audio, codigo y modelos multimodales, unificando el Deep Learning bajo un mismo paradigma arquitectonico.</p>
+</section>
+<hr class="docutils" />
+<section id="estructura-de-la-unidad">
+<h2>Estructura de la unidad<a class="headerlink" href="#estructura-de-la-unidad" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modulo</p></th>
+<th class="head"><p>Contenido</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Autoencoders</strong></p></td>
+<td><p>Arquitecturas, espacio latente, VAE, aplicaciones</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>GANs</strong></p></td>
+<td><p>GAN vanilla, DCGAN, cGAN, WGAN-GP, evaluacion</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Segmentacion</strong></p></td>
+<td><p>FCN, U-Net, funciones de perdida, metricas, augmentacion</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Deteccion de objetos</strong></p></td>
+<td><p>YOLO, Faster R-CNN, DETR, metricas de deteccion</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>NLP y Transformers</strong></p></td>
+<td><p>Atencion, BERT, GPT, LLMs, fine-tuning, RAG</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Cada modulo incluye fundamentos teoricos, implementaciones en PyTorch y experimentos practicos sobre datasets reproducibles.</p>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Ciencia de datos aplicada</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Unidad%201/01_introduccion_ia.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">1.1 Tópicos Emergentes de la IA — 2026</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introduccion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-learning-fundamentos-y-evolucion">Deep Learning: fundamentos y evolucion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-el-deep-learning-funciona-ahora">Por que el Deep Learning funciona ahora</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#redes-neuronales-convolucionales-cnns">Redes Neuronales Convolucionales (CNNs)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multimodalidad">Multimodalidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencoders">Autoencoders</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#redes-generativas-adversariales-gans">Redes Generativas Adversariales (GANs)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentacion-con-ia">Segmentacion con IA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deteccion-de-objetos-yolo">Deteccion de Objetos: YOLO</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nlp-y-transformers">NLP y Transformers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estructura-de-la-unidad">Estructura de la unidad</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Sergio Alejandro Holguin García
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
