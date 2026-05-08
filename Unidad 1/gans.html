@@ -191,7 +191,7 @@
 <li class="toctree-l2"><a class="reference internal" href="Gans_teoria.html">1.4 Redes Generativas Adversariales (GANs)</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">1.5 Redes Generativas Adversariales (GANs)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="segmentacion_teoria.html">1.6 Segmentación con Inteligencia Artificial</a></li>
-<li class="toctree-l2"><a class="reference internal" href="segmentacion.html">1.7 Segmentacion con Inteligencia Artificial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="segmentacion.html">Segmentacion con Inteligencia Artificial</a></li>
 </ul>
 </details></li>
 </ul>
@@ -538,6 +538,12 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dispositivo : cuda
+PyTorch     : 2.10.0+cu128
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -562,6 +568,24 @@
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Forma de una imagen       : </span><span class="si">{</span><span class="n">train_dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Nota: los pixeles estan normalizados en [-1, 1] para coincidir con la salida Tanh del generador.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 9.91M/9.91M [00:00&lt;00:00, 17.6MB/s]
+100%|██████████| 28.9k/28.9k [00:00&lt;00:00, 483kB/s]
+100%|██████████| 1.65M/1.65M [00:00&lt;00:00, 4.44MB/s]
+100%|██████████| 4.54k/4.54k [00:00&lt;00:00, 11.9MB/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ejemplos de entrenamiento : 60,000
+Batches por epoca         : 468
+Forma de una imagen       : torch.Size([1, 28, 28])
+
+Nota: los pixeles estan normalizados en [-1, 1] para coincidir con la salida Tanh del generador.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -592,6 +616,9 @@
 <span class="n">show_grid</span><span class="p">(</span><span class="n">reales</span><span class="p">[:</span><span class="mi">16</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Imagenes reales de MNIST (normalizadas a [-1, 1])&#39;</span><span class="p">,</span> <span class="n">nrow</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6c005255891e75fa846f47996805f5cd3807fa5d71178890773e6c55ba0f93f6.png" src="../_images/6c005255891e75fa846f47996805f5cd3807fa5d71178890773e6c55ba0f93f6.png" />
 </div>
 </div>
 </section>
@@ -672,6 +699,12 @@
 <span class="n">params_D</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">numel</span><span class="p">()</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">D_vanilla</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Parametros del Generador     : </span><span class="si">{</span><span class="n">params_G</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Parametros del Discriminador : </span><span class="si">{</span><span class="n">params_D</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Parametros del Generador     : 1,486,352
+Parametros del Discriminador : 1,460,225
 </pre></div>
 </div>
 </div>
@@ -759,6 +792,25 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Entrenando GAN vanilla...
+Epoca   1/30  |  Loss D: 0.4549  |  Loss G: 2.0860
+</pre></div>
+</div>
+<img alt="../_images/00ee9324878e348c930424c02cf3e72bd0ec9dbe7de29738f51314f134453bbc.png" src="../_images/00ee9324878e348c930424c02cf3e72bd0ec9dbe7de29738f51314f134453bbc.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoca  10/30  |  Loss D: 0.4555  |  Loss G: 1.8374
+</pre></div>
+</div>
+<img alt="../_images/0c0e4e17952ec03caba5e7e50e4a23f8fe634f75947fb7ae4613b665d47b4ace.png" src="../_images/0c0e4e17952ec03caba5e7e50e4a23f8fe634f75947fb7ae4613b665d47b4ace.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoca  20/30  |  Loss D: 0.5455  |  Loss G: 1.3463
+</pre></div>
+</div>
+<img alt="../_images/3823a09cdf2ff1c03facfad9398c609e43155e64861dece50a7e5ce52d37de15.png" src="../_images/3823a09cdf2ff1c03facfad9398c609e43155e64861dece50a7e5ce52d37de15.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoca  30/30  |  Loss D: 0.5465  |  Loss G: 1.3097
+</pre></div>
+</div>
+<img alt="../_images/948a3f0bb52a9c46a36a6efb1a0617f0ffe8a4aebc6d251237ca1370521f125f.png" src="../_images/948a3f0bb52a9c46a36a6efb1a0617f0ffe8a4aebc6d251237ca1370521f125f.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -787,6 +839,9 @@
 <span class="n">plot_gan_losses</span><span class="p">(</span><span class="n">history_vanilla</span><span class="p">,</span> <span class="s1">&#39;Curvas de entrenamiento - GAN vanilla&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e09fd6bea274de7c777f1b32f368b109cbe38379e0182635e8ad29d7779c60b9.png" src="../_images/e09fd6bea274de7c777f1b32f368b109cbe38379e0182635e8ad29d7779c60b9.png" />
 </div>
 </div>
 <section id="interpretacion-de-las-curvas">
@@ -934,6 +989,14 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Parametros del Generador     : 1,923,264
+Parametros del Discriminador : 138,625
+Salida del Generador     : torch.Size([2, 1, 28, 28])
+Salida del Discriminador : torch.Size([2, 1])
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -945,6 +1008,26 @@
 <span class="n">plot_gan_losses</span><span class="p">(</span><span class="n">history_dc</span><span class="p">,</span> <span class="s1">&#39;Curvas de entrenamiento - DCGAN&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Entrenando DCGAN...
+Epoca   1/30  |  Loss D: 0.4614  |  Loss G: 1.3947
+</pre></div>
+</div>
+<img alt="../_images/cf1f9ca3e4022ebb74f367bc0f8578af7a8a08f0d0fb09843547a41051158dea.png" src="../_images/cf1f9ca3e4022ebb74f367bc0f8578af7a8a08f0d0fb09843547a41051158dea.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoca  10/30  |  Loss D: 0.5582  |  Loss G: 1.2064
+</pre></div>
+</div>
+<img alt="../_images/33aabf5250d5fbc76b0de969831e912f2b18fe13ee5e3862397b1327db49f11b.png" src="../_images/33aabf5250d5fbc76b0de969831e912f2b18fe13ee5e3862397b1327db49f11b.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoca  20/30  |  Loss D: 0.5732  |  Loss G: 1.1551
+</pre></div>
+</div>
+<img alt="../_images/9a91c34fdad12a17036b2c270f275db201b8b2cfe621c50fe36c11a5b96e3234.png" src="../_images/9a91c34fdad12a17036b2c270f275db201b8b2cfe621c50fe36c11a5b96e3234.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoca  30/30  |  Loss D: 0.5939  |  Loss G: 1.0970
+</pre></div>
+</div>
+<img alt="../_images/fdd67ad27941266eaca88ad91f8542084acdc0993753fc108012df16b514097a.png" src="../_images/fdd67ad27941266eaca88ad91f8542084acdc0993753fc108012df16b514097a.png" />
+<img alt="../_images/40598e956c300a31bc0a9237fb8b5d45756014d5d67041e442467f564734d085.png" src="../_images/40598e956c300a31bc0a9237fb8b5d45756014d5d67041e442467f564734d085.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -959,6 +1042,10 @@
     <span class="n">show_grid</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Muestras generadas - </span><span class="si">{</span><span class="n">nombre</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">nrow</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/8c5ae6f056b50d28fcc7ebc6204d9a597b7cf06f89b83e88b8c6a77a7c322c45.png" src="../_images/8c5ae6f056b50d28fcc7ebc6204d9a597b7cf06f89b83e88b8c6a77a7c322c45.png" />
+<img alt="../_images/0cd39ba0850683d60034d134b9bc4056f528253b01fc89ae5ddf1ac74e61a480.png" src="../_images/0cd39ba0850683d60034d134b9bc4056f528253b01fc89ae5ddf1ac74e61a480.png" />
 </div>
 </div>
 </section>
@@ -1051,6 +1138,12 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Parametros del Generador condicional     : 1,503,236
+Parametros del Discriminador condicional : 1,511,925
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1133,6 +1226,26 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Entrenando cGAN...
+Epoca   1/30  |  Loss D: 0.2118  |  Loss G: 5.4623
+</pre></div>
+</div>
+<img alt="../_images/4df3cc5aa24042c6cac165c91946963561f8c177101369b46b1d33181bb7c946.png" src="../_images/4df3cc5aa24042c6cac165c91946963561f8c177101369b46b1d33181bb7c946.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoca  10/30  |  Loss D: 0.3816  |  Loss G: 8.0952
+</pre></div>
+</div>
+<img alt="../_images/dea1ed42d71fe8afc5a0855b76f2fa7d73821d4fc67a7dc51c1525640b27cf74.png" src="../_images/dea1ed42d71fe8afc5a0855b76f2fa7d73821d4fc67a7dc51c1525640b27cf74.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoca  20/30  |  Loss D: 0.5799  |  Loss G: 3.4963
+</pre></div>
+</div>
+<img alt="../_images/e03ca23cb54fe6c6ccee00016f2bd4c0711e49b8b75982a788e16b03b114ef90.png" src="../_images/e03ca23cb54fe6c6ccee00016f2bd4c0711e49b8b75982a788e16b03b114ef90.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoca  30/30  |  Loss D: 0.6565  |  Loss G: 0.8957
+</pre></div>
+</div>
+<img alt="../_images/cbfc18963eea41986365b810afdbb22ac4fdab32a192e06f6afa09ac1a4a69e4.png" src="../_images/cbfc18963eea41986365b810afdbb22ac4fdab32a192e06f6afa09ac1a4a69e4.png" />
+<img alt="../_images/d23ee6d9da6f09a9deb3e5f3c788a0a1e52147548bd114eb5006d6963c31645b.png" src="../_images/d23ee6d9da6f09a9deb3e5f3c788a0a1e52147548bd114eb5006d6963c31645b.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1160,6 +1273,9 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/fc2d67a78632a46f103dc47ea8a744dd0b06078a2bc0aef1162e2c921ce066e2.png" src="../_images/fc2d67a78632a46f103dc47ea8a744dd0b06078a2bc0aef1162e2c921ce066e2.png" />
 </div>
 </div>
 </section>
@@ -1251,6 +1367,12 @@
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Parametros del Generador : </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">numel</span><span class="p">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">G_wgan</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Parametros del Critico   : </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">numel</span><span class="p">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">C_wgan</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Parametros del Generador : 1,923,265
+Parametros del Critico   : 138,625
 </pre></div>
 </div>
 </div>
@@ -1382,6 +1504,25 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Entrenando WGAN-GP...
+Epoca   1/30  |  Loss C: -6.3612  |  Loss G: -8.5182  |  W-dist aprox: 6.3612
+</pre></div>
+</div>
+<img alt="../_images/fda2a16ba6bc71e922a4471481504d2df03ed8ac0f21d6de1865748ff9fb55af.png" src="../_images/fda2a16ba6bc71e922a4471481504d2df03ed8ac0f21d6de1865748ff9fb55af.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoca  10/30  |  Loss C: -2.6777  |  Loss G: -20.1471  |  W-dist aprox: 2.6777
+</pre></div>
+</div>
+<img alt="../_images/4d4329a144d7484746edac9b2e3b8a083521d933bf6ef2d2743cf81d52ad8252.png" src="../_images/4d4329a144d7484746edac9b2e3b8a083521d933bf6ef2d2743cf81d52ad8252.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoca  20/30  |  Loss C: -2.0882  |  Loss G: -20.9197  |  W-dist aprox: 2.0882
+</pre></div>
+</div>
+<img alt="../_images/96e75ad7e5b82e0ab64886f00797264f4cc7917e6db5f96b506e17385418d7ac.png" src="../_images/96e75ad7e5b82e0ab64886f00797264f4cc7917e6db5f96b506e17385418d7ac.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoca  30/30  |  Loss C: -1.7973  |  Loss G: -21.0795  |  W-dist aprox: 1.7973
+</pre></div>
+</div>
+<img alt="../_images/22a4c3e2ae8be5f5efaa1999cf52ca8a4f63419ba2e2df6ed16fd7a2846ef9ec.png" src="../_images/22a4c3e2ae8be5f5efaa1999cf52ca8a4f63419ba2e2df6ed16fd7a2846ef9ec.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1405,6 +1546,14 @@
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Nota: en WGAN-GP, la perdida del critico es significativa.&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Si disminuye (se hace mas negativa), indica que la distancia Wasserstein&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;entre real y generado esta disminuyendo: G mejora.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/9dc97cec30de1b68e2f654cfa035065f6ca175aee8573b6f07fab4799bf31ad6.png" src="../_images/9dc97cec30de1b68e2f654cfa035065f6ca175aee8573b6f07fab4799bf31ad6.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nota: en WGAN-GP, la perdida del critico es significativa.
+Si disminuye (se hace mas negativa), indica que la distancia Wasserstein
+entre real y generado esta disminuyendo: G mejora.
 </pre></div>
 </div>
 </div>
@@ -1452,6 +1601,16 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Diversidad de muestras generadas (std promedio por pixel):
+(Valores mas altos indican mayor diversidad, valores cercanos a 0 indican mode collapse)
+
+  GAN Vanilla          : 0.1832
+  DCGAN                : 0.1892
+  WGAN-GP              : 0.1964
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1492,6 +1651,20 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Normas de gradiente en las capas del generador DCGAN:
+  fc.0.weight                                   1.670333  **********************************************************************************************************************************************************************************************************************************************************************************************************************************************
+  fc.0.bias                                     0.185220  *************************************
+  conv_blocks.0.weight                          1.703416  ****************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+  conv_blocks.1.weight                          0.237310  ***********************************************
+  conv_blocks.1.bias                            0.284620  ********************************************************
+  conv_blocks.3.weight                          2.485266  *****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+  conv_blocks.4.weight                          0.260169  ****************************************************
+  conv_blocks.4.bias                            0.238605  ***********************************************
+  conv_blocks.6.weight                          2.594529  **************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1518,6 +1691,17 @@
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">120</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">prob</span><span class="p">,</span> <span class="n">sint</span><span class="p">,</span> <span class="n">sol</span> <span class="ow">in</span> <span class="n">diagnostico</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prob</span><span class="si">:</span><span class="s1">&lt;25</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">sint</span><span class="si">:</span><span class="s1">&lt;50</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">sol</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Problema                  Sintoma                                            Soluciones
+------------------------------------------------------------------------------------------------------------------------
+Mode Collapse             G produce siempre el mismo output o pocas variaciones WGAN-GP, Minibatch Discrimination, mayor z_dim
+Vanishing Gradients       D demasiado bueno, gradientes de G cercanos a cero WGAN-GP, Feature Matching, reducir capacidad de D
+Inestabilidad en training Perdidas oscilan fuertemente, muestras degeneran   Label smoothing, beta1=0.5 en Adam, BN, lr mas bajo
+G no mejora               Las muestras no cambian a lo largo de las epocas   Verificar gradientes, reducir actualizaciones de D, aumentar lr de G
+D colapsa a 0             D aprende demasiado rapido, loss_D -&gt; 0 desde el inicio Reducir capacidad de D, Dropout, actualizar D menos veces
 </pre></div>
 </div>
 </div>
@@ -1613,6 +1797,23 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calculando FID simplificado (usando features del discriminador DCGAN)...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6916/4058660612.py:44: DeprecationWarning: The `disp` argument is deprecated and will be removed in SciPy 1.18.0.
+  covmean, _  = linalg.sqrtm(sigma_r @ sigma_g, disp=False)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  GAN Vanilla          FID: 942.78
+  DCGAN                FID: 494.80
+  WGAN-GP              FID: 480.60
+
+Nota: valores mas bajos indican mejor calidad y diversidad.
+Este FID es simplificado (no usa Inception); sirve para comparacion relativa.
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -1653,6 +1854,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/993c790ff5bdaa81e10d3005fd484d3718035122c3f447a2aa487e473f9d2f36.png" src="../_images/993c790ff5bdaa81e10d3005fd484d3718035122c3f447a2aa487e473f9d2f36.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1676,6 +1880,22 @@
 
 <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">tabla</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">&lt;18</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s1">&lt;22</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s1">&lt;20</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">:</span><span class="s1">&lt;10</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">:</span><span class="s1">&lt;14</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resumen comparativo de variantes de GAN
+=========================================================================================================
+Variante           Arquitectura           Perdida              Control    Estabilidad    Uso principal
+---------------------------------------------------------------------------------------------------------
+GAN Vanilla        MLP                    BCE (minimax)        No         Baja           Prototipado, demostracion
+DCGAN              Conv/ConvTranspose     BCE (no sat.)        No         Media          Generacion de imagenes
+cGAN               MLP + Embedding        BCE condicional      Si         Media          Generacion controlada por clase
+WGAN-GP            Conv + GP              Wasserstein + GP     No         Alta           Cuando estabilidad es critica
+Pix2Pix            U-Net + PatchGAN       BCE + L1             Si         Media          Traduccion imagen a imagen
+CycleGAN           ResNet + 2 D           BCE + ciclo          Si         Media          Traduccion sin pares anotados
+StyleGAN2/3        Mapping + Synt.        No-sat + R1 reg.     Si         Alta           Imagenes de alta resolucion
+BigGAN             Conv + Class BN        Hinge loss           Si         Alta           Datasets grandes, alta calidad
 </pre></div>
 </div>
 </div>
@@ -1715,6 +1935,9 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/eef702fcaa0b5dd68f65060d03e7ff8d010f5057f12bee187fdc7d4d793f760d.png" src="../_images/eef702fcaa0b5dd68f65060d03e7ff8d010f5057f12bee187fdc7d4d793f760d.png" />
 </div>
 </div>
 </section>
