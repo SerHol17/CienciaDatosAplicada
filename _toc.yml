@@ -7,6 +7,6 @@ chapters:
   - file: Unidad 1/01_introduccion_ia.md
   - file: Unidad 1/02_Autoencoders.md
   - file: Unidad 1/autoencoders.ipynb
-  - file: Unidad 1/Gans.md
+  - file: Unidad 1/Gans_teoria.md
   - file: Unidad 1/gans.ipynb
 

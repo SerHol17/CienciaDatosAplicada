@@ -1,4 +1,4 @@
-# Redes Generativas Adversariales (GANs)
+# 1.4 Redes Generativas Adversariales (GANs)
 
 ## ¿Qué es una GAN?
 

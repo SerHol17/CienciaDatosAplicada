@@ -1,4 +1,4 @@
-# Autoencoders
+# 1.2 Autoencoders
 
 ## ¿Qué es un Autoencoder?
 
