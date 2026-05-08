@@ -179,11 +179,6 @@ Capacitar al estudiante en el diseño, desarrollo e implementación de solucione
 - La **dedicación** de tiempo es la base para completar con éxito el curso
 
 
-<div style="text-align: center;">
-  <img src="_static/images/recomendaciones.png" />
-</div>
-
-
 
 ## Bibliografía
 Estas son algunas de las referencias usadas para este curso.

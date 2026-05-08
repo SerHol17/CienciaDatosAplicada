@@ -1,0 +1,1270 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1.6 Segmentación con Inteligencia Artificial &#8212; Ciencia de Datos Aplicada- 01 Ucaldas</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unidad 1/segmentacion_teoria';</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="1.7 Segmentacion con Inteligencia Artificial" href="segmentacion.html" />
+    <link rel="prev" title="1.5 Redes Generativas Adversariales (GANs)" href="gans.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Ciencia de Datos Aplicada- 01 Ucaldas - Home"/>
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark pst-js-only" alt="Ciencia de Datos Aplicada- 01 Ucaldas - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Ciencia de datos aplicada
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Unidad1.html">1. Deep Learning Avanzado</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_introduccion_ia.html">1.1 Tópicos Emergentes de la IA — 2026</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02_Autoencoders.html">1.2 Autoencoders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoencoders.html">1.3 Autoencoders: teoria, implementacion y aplicaciones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Gans_teoria.html">1.4 Redes Generativas Adversariales (GANs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gans.html">1.5 Redes Generativas Adversariales (GANs)</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.6 Segmentación con Inteligencia Artificial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="segmentacion.html">1.7 Segmentacion con Inteligencia Artificial</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/CienciaDatosAplicada" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/CienciaDatosAplicada/issues/new?title=Issue%20on%20page%20%2FUnidad 1/segmentacion_teoria.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Unidad 1/segmentacion_teoria.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>1.6 Segmentación con Inteligencia Artificial</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-la-segmentacion">¿Qué es la segmentación?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-segmentacion">Tipos de segmentación</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentacion-semantica">Segmentación Semántica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentacion-de-instancias">Segmentación de Instancias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentacion-panoptica">Segmentación Panóptica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentacion-de-partes-part-segmentation">Segmentación de Partes (<em>Part Segmentation</em>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentacion-interactiva">Segmentación Interactiva</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentacion-de-video">Segmentación de Video</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evolucion-historica">Evolución histórica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitecturas-fundamentales">Arquitecturas fundamentales</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fcn-fully-convolutional-network">FCN — Fully Convolutional Network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#u-net">U-Net</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segnet">SegNet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deeplab-v3-v3">DeepLab v3 / v3+</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pspnet-pyramid-scene-parsing-network">PSPNet — Pyramid Scene Parsing Network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mask-r-cnn-segmentacion-de-instancias">Mask R-CNN — Segmentación de instancias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segformer">SegFormer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sam-segment-anything-model">SAM — Segment Anything Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grounded-sam">Grounded SAM</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dilated-convolutions-en-profundidad">Dilated Convolutions en profundidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-pyramid-networks-fpn">Feature Pyramid Networks (FPN)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-de-perdida-para-segmentacion">Funciones de pérdida para segmentación</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-entropy-por-pixel">Cross-Entropy por píxel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weighted-cross-entropy">Weighted Cross-Entropy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dice-loss">Dice Loss</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iou-loss-jaccard-loss">IoU Loss (Jaccard Loss)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#focal-loss">Focal Loss</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tversky-loss">Tversky Loss</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perdida-combinada-practica-habitual">Pérdida combinada (práctica habitual)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas-de-evaluacion">Métricas de evaluación</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pixel-accuracy">Pixel Accuracy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-pixel-accuracy-mpa">Mean Pixel Accuracy (MPA)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iou-intersection-over-union-por-clase">IoU (Intersection over Union) por clase</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-iou-miou">Mean IoU (mIoU)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dice-coefficient-f1-por-region">Dice Coefficient / F1 por región</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-f1-score-bf">Boundary F1 Score (BF)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#panoptic-quality-pq">Panoptic Quality (PQ)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-augmentation-para-segmentacion">Data Augmentation para segmentación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-learning-en-segmentacion">Transfer Learning en segmentación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentacion-en-dominio-medico">Segmentación en dominio médico</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desafios">Desafíos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitecturas-mas-usadas">Arquitecturas más usadas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tecnicas-especiales">Técnicas especiales</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentacion-en-teledeteccion-y-satelite">Segmentación en teledetección y satélite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentacion-en-conduccion-autonoma">Segmentación en conducción autónoma</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmarks-y-datasets-de-referencia">Benchmarks y datasets de referencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flujo-completo-de-un-proyecto-de-segmentacion">Flujo completo de un proyecto de segmentación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frameworks-y-herramientas">Frameworks y herramientas</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="segmentacion-con-inteligencia-artificial">
+<h1>1.6 Segmentación con Inteligencia Artificial<a class="headerlink" href="#segmentacion-con-inteligencia-artificial" title="Link to this heading">#</a></h1>
+<section id="que-es-la-segmentacion">
+<h2>¿Qué es la segmentación?<a class="headerlink" href="#que-es-la-segmentacion" title="Link to this heading">#</a></h2>
+<p>La <strong>segmentación</strong> es la tarea de asignar una etiqueta a <strong>cada píxel</strong> de una imagen, dividiendo la escena en regiones con significado semántico. A diferencia de la clasificación (una etiqueta por imagen) o la detección (una caja por objeto), la segmentación produce una <strong>máscara densa</strong> del mismo tamaño que la entrada.</p>
+<img src="../_static/images/segmentacion1.png" width="600" />
+</section>
+<hr class="docutils" />
+<section id="tipos-de-segmentacion">
+<h2>Tipos de segmentación<a class="headerlink" href="#tipos-de-segmentacion" title="Link to this heading">#</a></h2>
+<section id="segmentacion-semantica">
+<h3>Segmentación Semántica<a class="headerlink" href="#segmentacion-semantica" title="Link to this heading">#</a></h3>
+<p>Asigna una clase a cada píxel <strong>sin distinguir instancias individuales</strong>. Todos los objetos de la misma clase reciben la misma etiqueta.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Imagen → Máscara por píxel → clase(píxel) ∈ {fondo, persona, coche, árbol, …}
+</pre></div>
+</div>
+<img src="../_static/images/segmentacion2.png" width="600" />
+<p><strong>Problema</strong>: dos personas adyacentes se funden en una sola región.</p>
+</section>
+<hr class="docutils" />
+<section id="segmentacion-de-instancias">
+<h3>Segmentación de Instancias<a class="headerlink" href="#segmentacion-de-instancias" title="Link to this heading">#</a></h3>
+<p>Detecta y segmenta <strong>cada objeto individualmente</strong>, incluso si son de la misma clase y se solapan.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Imagen → {instancia_1: máscara_1, instancia_2: máscara_2, …}
+</pre></div>
+</div>
+<img src="../_static/images/segmentacion3.png" width="600" />
+</section>
+<hr class="docutils" />
+<section id="segmentacion-panoptica">
+<h3>Segmentación Panóptica<a class="headerlink" href="#segmentacion-panoptica" title="Link to this heading">#</a></h3>
+<p>Combina segmentación semántica e instancias en una sola salida coherente:</p>
+<ul class="simple">
+<li><p><strong>Things</strong> (objetos contables): personas, coches → instancias individuales.</p></li>
+<li><p><strong>Stuff</strong> (regiones no contables): cielo, carretera, césped → semántica.</p></li>
+</ul>
+<img src="../_static/images/segmentacion4.png" width="600" />
+</section>
+<hr class="docutils" />
+<section id="segmentacion-de-partes-part-segmentation">
+<h3>Segmentación de Partes (<em>Part Segmentation</em>)<a class="headerlink" href="#segmentacion-de-partes-part-segmentation" title="Link to this heading">#</a></h3>
+<p>Segmenta las partes internas de un objeto: en una persona → cabeza, torso, brazos, piernas.</p>
+<img src="../_static/images/segmentacion5.png" width="600" />
+</section>
+<hr class="docutils" />
+<section id="segmentacion-interactiva">
+<h3>Segmentación Interactiva<a class="headerlink" href="#segmentacion-interactiva" title="Link to this heading">#</a></h3>
+<p>El usuario guía la segmentación con prompts (clics, cajas, trazos):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Imagen + {clic en objeto} → Máscara del objeto seleccionado
+</pre></div>
+</div>
+<p>Base de SAM (Segment Anything Model).</p>
+</section>
+<hr class="docutils" />
+<section id="segmentacion-de-video">
+<h3>Segmentación de Video<a class="headerlink" href="#segmentacion-de-video" title="Link to this heading">#</a></h3>
+<p>Propaga máscaras de segmentación a lo largo de los frames de un video, manteniendo la identidad de cada objeto.</p>
+<img src="../_static/images/segmentacion6.png" width="600" />
+</section>
+</section>
+<hr class="docutils" />
+<section id="evolucion-historica">
+<h2>Evolución histórica<a class="headerlink" href="#evolucion-historica" title="Link to this heading">#</a></h2>
+<img src="../_static/images/segmentacion7.png" width="600" />
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Año</p></th>
+<th class="head"><p>Modelo</p></th>
+<th class="head"><p>Aporte</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>2014</p></td>
+<td><p><strong>FCN</strong> (Fully Convolutional Network)</p></td>
+<td><p>Primera red totalmente convolucional para segmentación densa.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2015</p></td>
+<td><p><strong>U-Net</strong></p></td>
+<td><p>Skip connections para preservar detalles espaciales finos.</p></td>
+</tr>
+<tr class="row-even"><td><p>2016</p></td>
+<td><p><strong>SegNet</strong></p></td>
+<td><p>Encoder-decoder con índices de pooling para upsampling.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2017</p></td>
+<td><p><strong>DeepLab v3</strong></p></td>
+<td><p>Dilated convolutions + ASPP para múltiples escalas.</p></td>
+</tr>
+<tr class="row-even"><td><p>2017</p></td>
+<td><p><strong>Mask R-CNN</strong></p></td>
+<td><p>Segmentación de instancias sobre Faster R-CNN.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2018</p></td>
+<td><p><strong>Panoptic FPN</strong></p></td>
+<td><p>Segmentación panóptica unificada.</p></td>
+</tr>
+<tr class="row-even"><td><p>2020</p></td>
+<td><p><strong>SETR</strong></p></td>
+<td><p>Primeros Transformers aplicados a segmentación.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2021</p></td>
+<td><p><strong>SegFormer</strong></p></td>
+<td><p>Transformer eficiente para segmentación semántica.</p></td>
+</tr>
+<tr class="row-even"><td><p>2021</p></td>
+<td><p><strong>Swin Transformer</strong></p></td>
+<td><p>Backbone jerárquico con atención por ventanas.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2023</p></td>
+<td><p><strong>SAM</strong></p></td>
+<td><p>Segmentación zero-shot guiada por prompts.</p></td>
+</tr>
+<tr class="row-even"><td><p>2024</p></td>
+<td><p><strong>SAM 2</strong></p></td>
+<td><p>SAM extendido a video en tiempo real.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="arquitecturas-fundamentales">
+<h2>Arquitecturas fundamentales<a class="headerlink" href="#arquitecturas-fundamentales" title="Link to this heading">#</a></h2>
+<section id="fcn-fully-convolutional-network">
+<h3>FCN — Fully Convolutional Network<a class="headerlink" href="#fcn-fully-convolutional-network" title="Link to this heading">#</a></h3>
+<p>Primera arquitectura en sustituir las capas densas finales de una CNN por capas convolucionales, permitiendo entrada de cualquier tamaño y salida densa.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Imagen → [VGG/AlexNet backbone] → mapas de características → Conv 1×1 → Upsample → Máscara
+</pre></div>
+</div>
+<p><strong>Problema</strong>: el upsampling directo produce máscaras borrosas sin detalles finos.</p>
+</section>
+<hr class="docutils" />
+<section id="u-net">
+<h3>U-Net<a class="headerlink" href="#u-net" title="Link to this heading">#</a></h3>
+<p>Arquitectura encoder-decoder con <strong>conexiones de salto (skip connections)</strong> que concatenan mapas del encoder directamente al decoder en el mismo nivel de resolución.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Encoder (contracción):           Decoder (expansión):
+  x     → Conv → Pool             UpSample → Conv + [skip] → Conv
+  x/2   → Conv → Pool             UpSample → Conv + [skip] → Conv
+  x/4   → Conv → Pool             UpSample → Conv + [skip] → Conv
+  x/8   → Conv (bottleneck)
+</pre></div>
+</div>
+<img src="../_static/images/segmentacion8.png" width="600" />
+<p><strong>Por qué funciona</strong>: el bottleneck captura contexto global; las skip connections recuperan los detalles espaciales perdidos en el pooling.</p>
+<p><strong>Variantes modernas</strong>:</p>
+<ul class="simple">
+<li><p><strong>U-Net++</strong>: skip connections anidadas y densas.</p></li>
+<li><p><strong>Attention U-Net</strong>: mecanismo de atención en las skip connections.</p></li>
+<li><p><strong>TransUNet</strong>: encoder con ViT + decoder CNN.</p></li>
+<li><p><strong>Swin-UNet</strong>: U-Net completamente basado en Swin Transformer.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="segnet">
+<h3>SegNet<a class="headerlink" href="#segnet" title="Link to this heading">#</a></h3>
+<p>Encoder-decoder donde el decoder usa los <strong>índices de MaxPooling</strong> del encoder para hacer upsampling, evitando parámetros adicionales.</p>
+</section>
+<hr class="docutils" />
+<section id="deeplab-v3-v3">
+<h3>DeepLab v3 / v3+<a class="headerlink" href="#deeplab-v3-v3" title="Link to this heading">#</a></h3>
+<p>Introduce dos innovaciones clave para capturar <strong>múltiples escalas</strong> sin perder resolución:</p>
+<p><strong>Dilated (Atrous) Convolutions</strong>: convolucionan con «agujeros» para aumentar el campo receptivo sin reducir la resolución espacial.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Dilatación 1: campo receptivo normal
+Dilatación 2: campo receptivo 2× mayor, misma cantidad de parámetros
+Dilatación 4: campo receptivo 4× mayor
+</pre></div>
+</div>
+<p><strong>ASPP (Atrous Spatial Pyramid Pooling)</strong>: aplica varias convoluciones dilatadas en paralelo con distintas tasas + pooling global.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Mapa de características → [ASPP: d=6, d=12, d=18, AvgPool] → Concat → Conv 1×1 → Máscara
+</pre></div>
+</div>
+<p><strong>DeepLab v3+</strong> añade un decoder ligero (similar a U-Net) para refinar los bordes.</p>
+</section>
+<hr class="docutils" />
+<section id="pspnet-pyramid-scene-parsing-network">
+<h3>PSPNet — Pyramid Scene Parsing Network<a class="headerlink" href="#pspnet-pyramid-scene-parsing-network" title="Link to this heading">#</a></h3>
+<p>Usa un <strong>Pyramid Pooling Module (PPM)</strong> para capturar contexto global a múltiples escalas:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Mapa de características → [Pool 1×1, 2×2, 3×3, 6×6] → Upsample → Concat → Conv → Máscara
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="mask-r-cnn-segmentacion-de-instancias">
+<h3>Mask R-CNN — Segmentación de instancias<a class="headerlink" href="#mask-r-cnn-segmentacion-de-instancias" title="Link to this heading">#</a></h3>
+<p>Extiende Faster R-CNN con una <strong>tercera cabeza paralela</strong> que predice una máscara binaria por región de interés (ROI):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Imagen → Backbone + FPN → RPN → ROI Align → [Clasificación + BBox + Máscara]
+</pre></div>
+</div>
+<p><strong>ROI Align</strong> (vs. ROI Pooling): interpolación bilineal para preservar la alineación espacial → máscaras más precisas.</p>
+</section>
+<hr class="docutils" />
+<section id="segformer">
+<h3>SegFormer<a class="headerlink" href="#segformer" title="Link to this heading">#</a></h3>
+<p>Arquitectura totalmente basada en Transformers, eficiente y sin necesidad de positional encoding fijo:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Imagen → [Mix Transformer Encoder (MiT)] → representaciones multi-escala
+       → [Decoder MLP ligero] → Máscara semántica
+</pre></div>
+</div>
+<img src="../_static/images/segmentacion9.png" width="600" />
+<p><strong>Ventajas</strong>: supera a DeepLab en mIoU con menor costo computacional.</p>
+</section>
+<hr class="docutils" />
+<section id="sam-segment-anything-model">
+<h3>SAM — Segment Anything Model<a class="headerlink" href="#sam-segment-anything-model" title="Link to this heading">#</a></h3>
+<p>Meta AI (2023). Modelo de segmentación interactiva <strong>zero-shot</strong> entrenado en más de 1 000 millones de máscaras.</p>
+<p><strong>Arquitectura</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Imagen → [Image Encoder (ViT-H)] → Image Embedding
+Prompt → [Prompt Encoder] → Prompt Embedding
+        → [Mask Decoder (Transformer)] → Máscaras + scores de calidad
+</pre></div>
+</div>
+<p><strong>Tipos de prompt soportados</strong>:</p>
+<ul class="simple">
+<li><p><strong>Punto</strong>: clic en un píxel de interés.</p></li>
+<li><p><strong>Caja</strong>: bounding box que delimita el objeto.</p></li>
+<li><p><strong>Máscara</strong>: máscara gruesa como guía.</p></li>
+<li><p><strong>Texto</strong>: descripción en lenguaje natural (SAM 2 + Grounding DINO).</p></li>
+</ul>
+<p><strong>SAM 2</strong> (2024): extiende SAM a <strong>video</strong>, propagando máscaras frame a frame con un memory bank que mantiene la identidad de los objetos.</p>
+</section>
+<hr class="docutils" />
+<section id="grounded-sam">
+<h3>Grounded SAM<a class="headerlink" href="#grounded-sam" title="Link to this heading">#</a></h3>
+<p>Combina <strong>Grounding DINO</strong> (detección open-vocabulary) + <strong>SAM</strong> (segmentación):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&quot;Todas las personas con casco&quot;
+        ↓
+[Grounding DINO] → Bounding boxes
+        ↓
+[SAM] → Máscaras precisas por instancia
+</pre></div>
+</div>
+<p>Permite segmentación <strong>completamente guiada por lenguaje natural</strong> sin fine-tuning.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="dilated-convolutions-en-profundidad">
+<h2>Dilated Convolutions en profundidad<a class="headerlink" href="#dilated-convolutions-en-profundidad" title="Link to this heading">#</a></h2>
+<p>Las convoluciones dilatadas son fundamentales en segmentación para mantener la resolución espacial:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Convolucion normal (d=1):        Convolucion dilatada (d=2):
+  ■ ■ ■                             ■ · ■ · ■
+  ■ ■ ■                             · · · · ·
+  ■ ■ ■                             ■ · ■ · ■
+                                     · · · · ·
+                                     ■ · ■ · ■
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Misma cantidad de parámetros, mayor campo receptivo.</p></li>
+<li><p>No reduce la resolución espacial (sin stride ni pooling).</p></li>
+<li><p>Permiten al modelo ver contexto amplio sin perder detalles de borde.
+<img src="../_static/images/segmentacion10.png" width="600" /></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="feature-pyramid-networks-fpn">
+<h2>Feature Pyramid Networks (FPN)<a class="headerlink" href="#feature-pyramid-networks-fpn" title="Link to this heading">#</a></h2>
+<p>Las FPN permiten detectar y segmentar objetos de <strong>múltiples escalas</strong> en una sola pasada:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Backbone (bottom-up):          FPN (top-down + lateral connections):
+  C2 (1/4)   ←──────────────── P2 (alta resolución, semántica media)
+  C3 (1/8)   ←──────────────── P3
+  C4 (1/16)  ←──────────────── P4
+  C5 (1/32)  ←──────────────── P5 (baja resolución, alta semántica)
+</pre></div>
+</div>
+<p>Cada nivel P_i combina la semántica de los niveles superiores con los detalles espaciales del nivel correspondiente del backbone.</p>
+</section>
+<hr class="docutils" />
+<section id="funciones-de-perdida-para-segmentacion">
+<h2>Funciones de pérdida para segmentación<a class="headerlink" href="#funciones-de-perdida-para-segmentacion" title="Link to this heading">#</a></h2>
+<section id="cross-entropy-por-pixel">
+<h3>Cross-Entropy por píxel<a class="headerlink" href="#cross-entropy-por-pixel" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>L_CE = -(1/N) Σ_i Σ_c y_{i,c} · log(ŷ_{i,c})
+</pre></div>
+</div>
+<p>Estándar para clases balanceadas. Cada píxel contribuye igual.</p>
+</section>
+<section id="weighted-cross-entropy">
+<h3>Weighted Cross-Entropy<a class="headerlink" href="#weighted-cross-entropy" title="Link to this heading">#</a></h3>
+<p>Asigna pesos inversamente proporcionales a la frecuencia de cada clase:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>L_WCE = -(1/N) Σ_i Σ_c w_c · y_{i,c} · log(ŷ_{i,c})
+</pre></div>
+</div>
+<p>Útil cuando el fondo domina (ej. 95% fondo, 5% objeto de interés).</p>
+</section>
+<section id="dice-loss">
+<h3>Dice Loss<a class="headerlink" href="#dice-loss" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>L_Dice = 1 - (2 · |A ∩ B|) / (|A| + |B|)
+</pre></div>
+</div>
+<p>Optimiza directamente la superposición entre predicción y ground truth. Ideal para regiones pequeñas y datasets desbalanceados.</p>
+</section>
+<section id="iou-loss-jaccard-loss">
+<h3>IoU Loss (Jaccard Loss)<a class="headerlink" href="#iou-loss-jaccard-loss" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>L_IoU = 1 - |A ∩ B| / |A ∪ B|
+</pre></div>
+</div>
+<p>Similar a Dice, optimiza directamente la métrica de evaluación estándar.</p>
+</section>
+<section id="focal-loss">
+<h3>Focal Loss<a class="headerlink" href="#focal-loss" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>L_FL = -(1 - ŷ)^γ · log(ŷ)
+</pre></div>
+</div>
+<p>Reduce el peso de los píxeles fáciles (bien clasificados) y enfoca el entrenamiento en los difíciles. Parámetro γ controla el enfoque (típicamente γ=2).</p>
+</section>
+<section id="tversky-loss">
+<h3>Tversky Loss<a class="headerlink" href="#tversky-loss" title="Link to this heading">#</a></h3>
+<p>Generalización de Dice que pondera diferente FP y FN:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">L_Tversky</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">TP</span> <span class="o">/</span> <span class="p">(</span><span class="n">TP</span> <span class="o">+</span> <span class="n">α·FP</span> <span class="o">+</span> <span class="n">β·FN</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Con α &lt; β se penaliza más los Falsos Negativos → útil cuando perder un objeto es más costoso que una falsa alarma.</p>
+</section>
+<section id="perdida-combinada-practica-habitual">
+<h3>Pérdida combinada (práctica habitual)<a class="headerlink" href="#perdida-combinada-practica-habitual" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>L_total = L_CE + λ · L_Dice
+</pre></div>
+</div>
+<p>Combina estabilidad de CE con optimización directa de la métrica.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="metricas-de-evaluacion">
+<h2>Métricas de evaluación<a class="headerlink" href="#metricas-de-evaluacion" title="Link to this heading">#</a></h2>
+<section id="pixel-accuracy">
+<h3>Pixel Accuracy<a class="headerlink" href="#pixel-accuracy" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PA</span> <span class="o">=</span> <span class="n">Σ_c</span> <span class="n">TP_c</span> <span class="o">/</span> <span class="n">N_total</span>
+</pre></div>
+</div>
+<p>Porcentaje de píxeles correctamente clasificados. <strong>Engañosa con clases desbalanceadas</strong>.</p>
+</section>
+<section id="mean-pixel-accuracy-mpa">
+<h3>Mean Pixel Accuracy (MPA)<a class="headerlink" href="#mean-pixel-accuracy-mpa" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MPA</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">C</span><span class="p">)</span> <span class="n">Σ_c</span> <span class="n">TP_c</span> <span class="o">/</span> <span class="n">N_c</span>
+</pre></div>
+</div>
+<p>Promedia la accuracy por clase, corrigiendo el desbalance.</p>
+</section>
+<section id="iou-intersection-over-union-por-clase">
+<h3>IoU (Intersection over Union) por clase<a class="headerlink" href="#iou-intersection-over-union-por-clase" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IoU_c</span> <span class="o">=</span> <span class="n">TP_c</span> <span class="o">/</span> <span class="p">(</span><span class="n">TP_c</span> <span class="o">+</span> <span class="n">FP_c</span> <span class="o">+</span> <span class="n">FN_c</span><span class="p">)</span>
+</pre></div>
+</div>
+<!-- IMAGEN: visualización geométrica de la intersección y unión entre máscara predicha y ground truth -->
+</section>
+<section id="mean-iou-miou">
+<h3>Mean IoU (mIoU)<a class="headerlink" href="#mean-iou-miou" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mIoU</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">C</span><span class="p">)</span> <span class="n">Σ_c</span> <span class="n">IoU_c</span>
+</pre></div>
+</div>
+<p><strong>Estándar en benchmarks</strong> de segmentación. Mide el rendimiento promedio sobre todas las clases.
+<img src="../_static/images/segmentacion11.png" width="600" /></p>
+</section>
+<section id="dice-coefficient-f1-por-region">
+<h3>Dice Coefficient / F1 por región<a class="headerlink" href="#dice-coefficient-f1-por-region" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Dice_c = 2·TP_c / (2·TP_c + FP_c + FN_c)
+</pre></div>
+</div>
+<p>Equivalente al F1-score aplicado a regiones. Muy usado en imágenes médicas.</p>
+</section>
+<section id="boundary-f1-score-bf">
+<h3>Boundary F1 Score (BF)<a class="headerlink" href="#boundary-f1-score-bf" title="Link to this heading">#</a></h3>
+<p>Mide la precisión específicamente en los <strong>bordes</strong> de los segmentos, capturando fineza de los contornos.</p>
+</section>
+<section id="panoptic-quality-pq">
+<h3>Panoptic Quality (PQ)<a class="headerlink" href="#panoptic-quality-pq" title="Link to this heading">#</a></h3>
+<p>Para segmentación panóptica:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>PQ = SQ · RQ
+
+SQ (Segmentation Quality) = IoU promedio de instancias emparejadas
+RQ (Recognition Quality)  = F1 de emparejamiento instancia-ground truth
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="data-augmentation-para-segmentacion">
+<h2>Data Augmentation para segmentación<a class="headerlink" href="#data-augmentation-para-segmentacion" title="Link to this heading">#</a></h2>
+<p>La augmentación debe aplicarse <strong>sincrónicamente</strong> a la imagen y su máscara:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Transformación</p></th>
+<th class="head"><p>Imagen</p></th>
+<th class="head"><p>Máscara</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Flip horizontal</p></td>
+<td><p>✅</p></td>
+<td><p>✅ (misma dirección)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Rotación</p></td>
+<td><p>✅</p></td>
+<td><p>✅ (misma rotación)</p></td>
+</tr>
+<tr class="row-even"><td><p>Crop aleatorio</p></td>
+<td><p>✅</p></td>
+<td><p>✅ (mismo crop)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Escala</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-even"><td><p>Cambio de brillo/contraste</p></td>
+<td><p>✅</p></td>
+<td><p>❌ (no afecta etiquetas)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ruido gaussiano</p></td>
+<td><p>✅</p></td>
+<td><p>❌</p></td>
+</tr>
+<tr class="row-even"><td><p>Mezcla de colores</p></td>
+<td><p>✅</p></td>
+<td><p>❌</p></td>
+</tr>
+<tr class="row-odd"><td><p>Elastic deformation</p></td>
+<td><p>✅</p></td>
+<td><p>✅ (misma deformación)</p></td>
+</tr>
+<tr class="row-even"><td><p>MixUp / CutMix</p></td>
+<td><p>✅</p></td>
+<td><p>✅ (mezcla ponderada)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Librería recomendada</strong>: <code class="docutils literal notranslate"><span class="pre">albumentations</span></code> — aplica transformaciones geométricas de forma sincronizada.</p>
+</section>
+<hr class="docutils" />
+<section id="transfer-learning-en-segmentacion">
+<h2>Transfer Learning en segmentación<a class="headerlink" href="#transfer-learning-en-segmentacion" title="Link to this heading">#</a></h2>
+<p>Aprovechar backbones preentrenados en ImageNet o COCO acelera drásticamente el entrenamiento:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Backbone preentrenado (ResNet, EfficientNet, ViT…)
+        +
+Decoder / cabeza de segmentación (inicializada aleatoriamente)
+        ↓
+Fine-tuning con datos de segmentación propios
+</pre></div>
+</div>
+<p><strong>Estrategias de fine-tuning</strong>:</p>
+<ul class="simple">
+<li><p><strong>Congelar backbone</strong>: entrenar solo el decoder (pocos datos).</p></li>
+<li><p><strong>Fine-tuning parcial</strong>: descongelar últimas capas del backbone.</p></li>
+<li><p><strong>Fine-tuning completo</strong>: descongelar todo (muchos datos).</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="segmentacion-en-dominio-medico">
+<h2>Segmentación en dominio médico<a class="headerlink" href="#segmentacion-en-dominio-medico" title="Link to this heading">#</a></h2>
+<p>Dominio con características especiales que requieren consideraciones específicas:</p>
+<section id="desafios">
+<h3>Desafíos<a class="headerlink" href="#desafios" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Datos escasos y costosos de anotar (requieren expertos).</p></li>
+<li><p>Clases muy desbalanceadas (lesión pequeña en fondo grande).</p></li>
+<li><p>Variabilidad inter-anotador.</p></li>
+<li><p>Modalidades diversas: MRI, CT, ultrasonido, histología, endoscopía.</p></li>
+</ul>
+</section>
+<section id="arquitecturas-mas-usadas">
+<h3>Arquitecturas más usadas<a class="headerlink" href="#arquitecturas-mas-usadas" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>U-Net y variantes</strong>: estándar de facto en imágenes médicas.</p></li>
+<li><p><strong>nnU-Net</strong>: framework auto-configurado que adapta U-Net a cualquier dataset médico.</p></li>
+<li><p><strong>TransUNet / Swin-UNet</strong>: Transformers para capturar dependencias de largo alcance.</p></li>
+</ul>
+</section>
+<section id="tecnicas-especiales">
+<h3>Técnicas especiales<a class="headerlink" href="#tecnicas-especiales" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Anotación débil</strong>: usar cajas o puntos en lugar de máscaras densas.</p></li>
+<li><p><strong>Semi-supervisión</strong>: pocas imágenes anotadas + muchas sin anotar.</p></li>
+<li><p><strong>Self-supervised pretraining</strong>: preentrenar en datos no etiquetados.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="segmentacion-en-teledeteccion-y-satelite">
+<h2>Segmentación en teledetección y satélite<a class="headerlink" href="#segmentacion-en-teledeteccion-y-satelite" title="Link to this heading">#</a></h2>
+<p>Desafíos específicos:</p>
+<ul class="simple">
+<li><p>Imágenes de muy alta resolución (gigapíxeles).</p></li>
+<li><p>Múltiples bandas espectrales (RGB + NIR + SWIR…).</p></li>
+<li><p>Objetos de escalas muy distintas (edificios, campos de cultivo, ríos).</p></li>
+</ul>
+<p>Arquitecturas comunes: U-Net adaptado, SegFormer, DeepLab v3+.</p>
+</section>
+<hr class="docutils" />
+<section id="segmentacion-en-conduccion-autonoma">
+<h2>Segmentación en conducción autónoma<a class="headerlink" href="#segmentacion-en-conduccion-autonoma" title="Link to this heading">#</a></h2>
+<p>Requiere:</p>
+<ul class="simple">
+<li><p><strong>Tiempo real</strong>: inferencia a 30+ FPS.</p></li>
+<li><p><strong>Alta precisión en bordes</strong>: fundamental para seguridad.</p></li>
+<li><p><strong>Robustez</strong>: distintas condiciones de luz, lluvia, noche.</p></li>
+</ul>
+<p>Datasets: <strong>Cityscapes</strong>, <strong>ADE20K</strong>, <strong>BDD100K</strong>.</p>
+</section>
+<hr class="docutils" />
+<section id="benchmarks-y-datasets-de-referencia">
+<h2>Benchmarks y datasets de referencia<a class="headerlink" href="#benchmarks-y-datasets-de-referencia" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Dataset</p></th>
+<th class="head"><p>Clases</p></th>
+<th class="head"><p>Imágenes</p></th>
+<th class="head"><p>Dominio</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>PASCAL VOC 2012</strong></p></td>
+<td><p>21</p></td>
+<td><p>11K</p></td>
+<td><p>Objetos cotidianos</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>MS COCO</strong></p></td>
+<td><p>80</p></td>
+<td><p>330K</p></td>
+<td><p>Instancias y panóptica</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Cityscapes</strong></p></td>
+<td><p>19</p></td>
+<td><p>5K (densamente anotadas)</p></td>
+<td><p>Conducción urbana</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>ADE20K</strong></p></td>
+<td><p>150</p></td>
+<td><p>25K</p></td>
+<td><p>Escenas interiores/exteriores</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>BDD100K</strong></p></td>
+<td><p>40</p></td>
+<td><p>100K</p></td>
+<td><p>Conducción diversa</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Medical Segmentation Decathlon</strong></p></td>
+<td><p>10 tareas</p></td>
+<td><p>Variable</p></td>
+<td><p>Imágenes médicas</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>ISIC</strong></p></td>
+<td><p>2</p></td>
+<td><p>25K+</p></td>
+<td><p>Dermatología (melanoma)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="flujo-completo-de-un-proyecto-de-segmentacion">
+<h2>Flujo completo de un proyecto de segmentación<a class="headerlink" href="#flujo-completo-de-un-proyecto-de-segmentacion" title="Link to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>1. Definir el problema
+   └── ¿Semántica, instancias o panóptica?
+   └── ¿Cuántas clases? ¿Están balanceadas?
+
+2. Recopilar y anotar datos
+   └── Herramientas: LabelMe, CVAT, Roboflow, Scale AI
+   └── Formato: COCO JSON, Pascal VOC XML, máscaras PNG
+
+3. Preprocesamiento y augmentación
+   └── Normalización, resize, albumentations
+
+4. Seleccionar arquitectura
+   └── Pocos datos + dominio médico → U-Net / nnU-Net
+   └── Tiempo real → SegFormer pequeño, DeepLab MobileNet
+   └── Alta precisión → Mask R-CNN, SegFormer-B5
+   └── Zero-shot → SAM + Grounding DINO
+
+5. Transfer Learning
+   └── Backbone preentrenado en ImageNet / COCO
+
+6. Definir función de pérdida
+   └── Balanceado → CE + Dice
+   └── Muy desbalanceado → Focal + Tversky
+
+7. Entrenamiento y monitoreo
+   └── Métricas: mIoU en validación por época
+
+8. Evaluación final
+   └── mIoU, Dice, Boundary F1 en test set
+
+9. Optimización para despliegue
+   └── ONNX, TensorRT, quantización INT8
+
+10. Despliegue e inferencia
+    └── API REST, edge device, tiempo real
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="frameworks-y-herramientas">
+<h2>Frameworks y herramientas<a class="headerlink" href="#frameworks-y-herramientas" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Herramienta</p></th>
+<th class="head"><p>Uso</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">segmentation-models-pytorch</span></code></p></td>
+<td><p>U-Net, FPN, PSPNet, DeepLab con backbones preentrenados.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MMSegmentation</span></code></p></td>
+<td><p>Colección completa de modelos de segmentación en PyTorch.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Detectron2</span></code> (Meta)</p></td>
+<td><p>Mask R-CNN, Panoptic FPN, PointRend.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">nnU-Net</span></code></p></td>
+<td><p>U-Net auto-configurado para imágenes médicas.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Hugging</span> <span class="pre">Face</span> <span class="pre">Transformers</span></code></p></td>
+<td><p>SegFormer, SAM, Mask2Former, OneFormer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">albumentations</span></code></p></td>
+<td><p>Augmentación sincronizada imagen + máscara.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MONAI</span></code></p></td>
+<td><p>Framework médico completo (segmentación 2D y 3D).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Roboflow</span></code></p></td>
+<td><p>Anotación, augmentación y despliegue en la nube.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">LabelMe</span> <span class="pre">/</span> <span class="pre">CVAT</span></code></p></td>
+<td><p>Herramientas de anotación de máscaras.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">TensorRT</span> <span class="pre">/</span> <span class="pre">ONNX</span></code></p></td>
+<td><p>Optimización para inferencia en producción.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Unidad 1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="gans.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">1.5 Redes Generativas Adversariales (GANs)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="segmentacion.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">1.7 Segmentacion con Inteligencia Artificial</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-la-segmentacion">¿Qué es la segmentación?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-segmentacion">Tipos de segmentación</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentacion-semantica">Segmentación Semántica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentacion-de-instancias">Segmentación de Instancias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentacion-panoptica">Segmentación Panóptica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentacion-de-partes-part-segmentation">Segmentación de Partes (<em>Part Segmentation</em>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentacion-interactiva">Segmentación Interactiva</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentacion-de-video">Segmentación de Video</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evolucion-historica">Evolución histórica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitecturas-fundamentales">Arquitecturas fundamentales</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fcn-fully-convolutional-network">FCN — Fully Convolutional Network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#u-net">U-Net</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segnet">SegNet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deeplab-v3-v3">DeepLab v3 / v3+</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pspnet-pyramid-scene-parsing-network">PSPNet — Pyramid Scene Parsing Network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mask-r-cnn-segmentacion-de-instancias">Mask R-CNN — Segmentación de instancias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segformer">SegFormer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sam-segment-anything-model">SAM — Segment Anything Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grounded-sam">Grounded SAM</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dilated-convolutions-en-profundidad">Dilated Convolutions en profundidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-pyramid-networks-fpn">Feature Pyramid Networks (FPN)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-de-perdida-para-segmentacion">Funciones de pérdida para segmentación</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-entropy-por-pixel">Cross-Entropy por píxel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weighted-cross-entropy">Weighted Cross-Entropy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dice-loss">Dice Loss</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iou-loss-jaccard-loss">IoU Loss (Jaccard Loss)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#focal-loss">Focal Loss</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tversky-loss">Tversky Loss</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perdida-combinada-practica-habitual">Pérdida combinada (práctica habitual)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas-de-evaluacion">Métricas de evaluación</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pixel-accuracy">Pixel Accuracy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-pixel-accuracy-mpa">Mean Pixel Accuracy (MPA)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iou-intersection-over-union-por-clase">IoU (Intersection over Union) por clase</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-iou-miou">Mean IoU (mIoU)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dice-coefficient-f1-por-region">Dice Coefficient / F1 por región</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-f1-score-bf">Boundary F1 Score (BF)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#panoptic-quality-pq">Panoptic Quality (PQ)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-augmentation-para-segmentacion">Data Augmentation para segmentación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-learning-en-segmentacion">Transfer Learning en segmentación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentacion-en-dominio-medico">Segmentación en dominio médico</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desafios">Desafíos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitecturas-mas-usadas">Arquitecturas más usadas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tecnicas-especiales">Técnicas especiales</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentacion-en-teledeteccion-y-satelite">Segmentación en teledetección y satélite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentacion-en-conduccion-autonoma">Segmentación en conducción autónoma</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmarks-y-datasets-de-referencia">Benchmarks y datasets de referencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flujo-completo-de-un-proyecto-de-segmentacion">Flujo completo de un proyecto de segmentación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frameworks-y-herramientas">Frameworks y herramientas</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Sergio Alejandro Holguin García
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
