@@ -2,7 +2,11 @@ format: jb-book
 root: intro
 
 chapters:
-- file: Unidad 1/01_introduccion_ia.md
-- file: Unidad 1/02_autoencoders.md
-- file: Unidad 1/autoencoders.ipynb
+- file: Unidad1.md
+  sections:
+  - file: Unidad 1/01_introduccion_ia.md
+  - file: Unidad 1/02_Autoencoders.md
+  - file: Unidad 1/autoencoders.ipynb
+  - file: Unidad 1/Gans.md
+  - file: Unidad 1/gans.ipynb
 
