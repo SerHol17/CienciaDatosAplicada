@@ -11,6 +11,13 @@ chapters:
   - file: Unidad 1/gans_tf.ipynb
   - file: Unidad 1/segmentacion_teoria.md
   - file: Unidad 1/segmentacion_tf.ipynb
+  - file: Unidad 1/16_nlp_transformers.md
+  - file: Unidad 1/nlp_tensorflow.ipynb
+  - file: Unidad 1/17_llms.md
+  - file: Unidad 1/llms_colab.ipynb
+  - file: Unidad 1/18_agentes.md
+  - file: Unidad 1/agentes_colab.ipynb
+  - file: Unidad 1/frameworks_agentes.ipynb
 
 
 
