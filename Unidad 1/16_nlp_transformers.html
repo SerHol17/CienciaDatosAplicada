@@ -1,0 +1,1524 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1.8 Procesamiento de Lenguaje Natural y Transformers &#8212; Ciencia de Datos Aplicada- 01 Ucaldas</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unidad 1/16_nlp_transformers';</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="1.9 Procesamiento de Lenguaje Natural con TensorFlow / Keras" href="nlp_tensorflow.html" />
+    <link rel="prev" title="1.7 Segmentacion con Inteligencia Artificial — TensorFlow / Keras" href="segmentacion_tf.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Ciencia de Datos Aplicada- 01 Ucaldas - Home"/>
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark pst-js-only" alt="Ciencia de Datos Aplicada- 01 Ucaldas - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Ciencia de datos aplicada
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Unidad1.html">1. Deep Learning Avanzado</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_introduccion_ia.html">1.1 Tópicos Emergentes de la IA — 2026</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02_Autoencoders.html">1.2 Autoencoders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoencoders_tf.html">1.3 Autoencoders en TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Gans_teoria.html">1.4 Redes Generativas Adversariales (GANs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gans_tf.html">1.5 Redes Generativas Adversariales (GANs) en TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="segmentacion_teoria.html">1.6 Segmentación con Inteligencia Artificial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="segmentacion_tf.html">1.7 Segmentacion con Inteligencia Artificial — TensorFlow / Keras</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.8 Procesamiento de Lenguaje Natural y Transformers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlp_tensorflow.html">1.9 Procesamiento de Lenguaje Natural con TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="17_llms.html">1.10 Modelos de Lenguaje de Gran Escala (LLMs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llms_colab.html">1.11 LLMs en la Practica: OpenAI GPT y Ollama</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="18_agentes.html">1.12 Agentes de Inteligencia Artificial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agentes_colab.html">1.13 Agentes de Inteligencia Artificial</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="frameworks_agentes.html">1.14 LangChain · LangGraph · CrewAI</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/CienciaDatosAplicada" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/CienciaDatosAplicada/issues/new?title=Issue%20on%20page%20%2FUnidad 1/16_nlp_transformers.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Unidad 1/16_nlp_transformers.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>1.8 Procesamiento de Lenguaje Natural y Transformers</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indice">Indice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentos-matematicos-del-lenguaje">1. Fundamentos Matematicos del Lenguaje</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-formal-de-un-texto">1.1 Definicion formal de un texto</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-lenguaje-como-distribucion-de-probabilidad">1.2 Modelo de lenguaje como distribucion de probabilidad</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropia-y-perplejidad">1.3 Entropia y perplejidad</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#divergencia-kl-e-informacion-mutua">1.4 Divergencia KL e informacion mutua</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representaciones-de-texto">2. Representaciones de Texto</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenizacion">2.1 Tokenizacion</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#byte-pair-encoding-bpe">Byte-Pair Encoding (BPE)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representacion-one-hot">2.2 Representacion one-hot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bolsa-de-palabras-bag-of-words">2.3 Bolsa de palabras (Bag of Words)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-lenguaje-estadisticos">3. Modelos de Lenguaje Estadisticos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-n-grama">3.1 Modelo n-grama</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#word-embeddings">4. Word Embeddings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#motivacion-geometrica">4.1 Motivacion geometrica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#word2vec-mikolov-et-al-2013">4.2 Word2Vec (Mikolov et al., 2013)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#skip-gram">4.2.1 Skip-gram</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#negative-sampling">4.2.2 Negative Sampling</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cbow-continuous-bag-of-words">4.2.3 CBOW (Continuous Bag of Words)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#glove-pennington-et-al-2014">4.3 GloVe (Pennington et al., 2014)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#propiedades-algebraicas">4.4 Propiedades algebraicas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fasttext-bojanowski-et-al-2017">4.5 FastText (Bojanowski et al., 2017)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#redes-recurrentes">5. Redes Recurrentes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rnn-recurrent-neural-network">5.1 RNN (Recurrent Neural Network)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#backpropagation-through-time-bptt">5.1.1 Backpropagation Through Time (BPTT)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lstm-long-short-term-memory">5.2 LSTM (Long Short-Term Memory)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gru-gated-recurrent-unit">5.3 GRU (Gated Recurrent Unit)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitectura-encoder-decoder-con-rnn">5.4 Arquitectura encoder-decoder con RNN</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mecanismo-de-atencion">6. Mecanismo de Atencion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atencion-de-bahdanau-bahdanau-et-al-2015">6.1 Atencion de Bahdanau (Bahdanau et al., 2015)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atencion-de-luong-luong-et-al-2015">6.2 Atencion de Luong (Luong et al., 2015)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complejidad-computacional-de-la-atencion">6.3 Complejidad computacional de la atencion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atencion-multi-cabeza-multi-head-attention">7.1 Atencion Multi-Cabeza (Multi-Head Attention)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atencion-scaled-dot-product">7.1.1 Atencion Scaled Dot-Product</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-head-attention">7.1.2 Multi-Head Attention</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#red-feed-forward-posicional-ffn">7.2 Red Feed-Forward Posicional (FFN)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#codificacion-posicional-positional-encoding">7.3 Codificacion Posicional (Positional Encoding)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizacion-de-capa-layer-normalization">7.4 Normalizacion de capa (Layer Normalization)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conexiones-residuales">7.5 Conexiones residuales</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-transformer-completo">7.6 Bloque Transformer completo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parametros-totales-del-transformer">7.7 Parametros totales del Transformer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complejidad-computacional-del-transformer">7.8 Complejidad computacional del Transformer</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-preentrenados">8. Modelos Preentrenados</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paradigma-preentrenamiento-ajuste-fino">8.1 Paradigma preentrenamiento - ajuste fino</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bert-devlin-et-al-2018">8.2 BERT (Devlin et al., 2018)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#instruccion-tuning-y-rlhf">8.4 Instruccion-tuning y RLHF</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#supervised-fine-tuning-sft">8.4.1 Supervised Fine-Tuning (SFT)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reinforcement-learning-from-human-feedback-rlhf">8.4.2 Reinforcement Learning from Human Feedback (RLHF)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dpo-direct-preference-optimization">8.4.3 DPO (Direct Preference Optimization)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-efficient-fine-tuning-peft">8.5 Parameter-Efficient Fine-Tuning (PEFT)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#lora-low-rank-adaptation-hu-et-al-2021">8.5.1 LoRA (Low-Rank Adaptation, Hu et al., 2021)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tareas-de-nlp">9. Tareas de NLP</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-texto">9.1 Clasificacion de texto</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reconocimiento-de-entidades-nombradas-ner">9.2 Reconocimiento de entidades nombradas (NER)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-answering-extractivo">9.3 Question Answering extractivo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#traduccion-automatica">9.4 Traduccion automatica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generacion-de-texto">9.5 Generacion de texto</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas-de-evaluacion">10. Metricas de Evaluacion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bleu-bilingual-evaluation-understudy">10.1 BLEU (Bilingual Evaluation Understudy)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rouge">10.2 ROUGE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bertscore">10.3 BERTScore</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perplejidad-revision">10.4 Perplejidad (revision)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencias">11. Referencias</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="procesamiento-de-lenguaje-natural-y-transformers">
+<h1>1.8 Procesamiento de Lenguaje Natural y Transformers<a class="headerlink" href="#procesamiento-de-lenguaje-natural-y-transformers" title="Link to this heading">#</a></h1>
+<section id="indice">
+<h2>Indice<a class="headerlink" href="#indice" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#1-fundamentos-matem%C3%A1ticos-del-lenguaje"><span class="xref myst">Fundamentos matematicos del lenguaje</span></a></p></li>
+<li><p><a class="reference internal" href="#2-representaciones-de-texto"><span class="xref myst">Representaciones de texto</span></a></p></li>
+<li><p><a class="reference internal" href="#3-modelos-de-lenguaje-estad%C3%ADsticos"><span class="xref myst">Modelos de lenguaje estadisticos</span></a></p></li>
+<li><p><a class="reference internal" href="#4-word-embeddings"><span class="xref myst">Word Embeddings</span></a></p></li>
+<li><p><a class="reference internal" href="#5-redes-recurrentes"><span class="xref myst">Redes Recurrentes (RNN, LSTM, GRU)</span></a></p></li>
+<li><p><a class="reference internal" href="#6-mecanismo-de-atenci%C3%B3n"><span class="xref myst">Mecanismo de Atencion</span></a></p></li>
+<li><p><a class="reference internal" href="#7-arquitectura-transformer"><span class="xref myst">Arquitectura Transformer</span></a></p></li>
+<li><p><a class="reference internal" href="#8-modelos-preentrenados"><span class="xref myst">Modelos preentrenados: BERT y GPT</span></a></p></li>
+<li><p><a class="reference internal" href="#9-tareas-de-nlp"><span class="xref myst">Tareas de NLP</span></a></p></li>
+<li><p><a class="reference internal" href="#10-m%C3%A9tricas-de-evaluaci%C3%B3n"><span class="xref myst">Metricas de evaluacion</span></a></p></li>
+<li><p><a class="reference internal" href="#11-referencias"><span class="xref myst">Referencias</span></a></p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="fundamentos-matematicos-del-lenguaje">
+<h2>1. Fundamentos Matematicos del Lenguaje<a class="headerlink" href="#fundamentos-matematicos-del-lenguaje" title="Link to this heading">#</a></h2>
+<section id="definicion-formal-de-un-texto">
+<h3>1.1 Definicion formal de un texto<a class="headerlink" href="#definicion-formal-de-un-texto" title="Link to this heading">#</a></h3>
+<p>Un <strong>vocabulario</strong> es un conjunto finito de tokens:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{V} = \{w_1, w_2, \ldots, w_{|\mathcal{V}|}\}\]</div>
+<p>Un <strong>texto</strong> (o secuencia) de longitud <span class="math notranslate nohighlight">\(T\)</span> es una tupla ordenada:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{x} = (x_1, x_2, \ldots, x_T), \quad x_t \in \mathcal{V}\]</div>
+<p>El espacio de todas las posibles secuencias de longitud variable es:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{V}^* = \bigcup_{T=0}^{\infty} \mathcal{V}^T\]</div>
+</section>
+<section id="modelo-de-lenguaje-como-distribucion-de-probabilidad">
+<h3>1.2 Modelo de lenguaje como distribucion de probabilidad<a class="headerlink" href="#modelo-de-lenguaje-como-distribucion-de-probabilidad" title="Link to this heading">#</a></h3>
+<p>Un <strong>modelo de lenguaje</strong> define una distribucion de probabilidad sobre secuencias:</p>
+<div class="math notranslate nohighlight">
+\[p(\mathbf{x}) = p(x_1, x_2, \ldots, x_T)\]</div>
+<p>Aplicando la regla de la cadena de la probabilidad:</p>
+<div class="math notranslate nohighlight">
+\[p(x_1, \ldots, x_T) = \prod_{t=1}^{T} p(x_t \mid x_1, x_2, \ldots, x_{t-1}) = \prod_{t=1}^{T} p(x_t \mid x_{&lt;t})\]</div>
+<p>El objetivo del aprendizaje es maximizar la log-verosimilitud del corpus <span class="math notranslate nohighlight">\(\mathcal{D} = \{\mathbf{x}^{(i)}\}_{i=1}^{N}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}(\theta) = \sum_{i=1}^{N} \sum_{t=1}^{T_i} \log p_\theta(x_t^{(i)} \mid x_{&lt;t}^{(i)})\]</div>
+</section>
+<section id="entropia-y-perplejidad">
+<h3>1.3 Entropia y perplejidad<a class="headerlink" href="#entropia-y-perplejidad" title="Link to this heading">#</a></h3>
+<p>La <strong>entropia</strong> de un modelo de lenguaje mide la incertidumbre promedio por token:</p>
+<div class="math notranslate nohighlight">
+\[H = -\frac{1}{T} \sum_{t=1}^{T} \log_2 p(x_t \mid x_{&lt;t}) \quad \text{[bits por token]}\]</div>
+<p>La <strong>perplejidad</strong> (Perplexity) es la exponencial de la entropia y la metrica estandar de evaluacion:</p>
+<div class="math notranslate nohighlight">
+\[\text{PPL} = 2^{H} = 2^{-\frac{1}{T}\sum_{t=1}^{T} \log_2 p(x_t \mid x_{&lt;t})} = \left(\prod_{t=1}^{T} \frac{1}{p(x_t \mid x_{&lt;t})}\right)^{1/T}\]</div>
+<p><strong>Interpretacion:</strong> una perplejidad de <span class="math notranslate nohighlight">\(k\)</span> significa que el modelo tiene la misma incertidumbre que si eligiera uniformemente entre <span class="math notranslate nohighlight">\(k\)</span> opciones en cada paso. Menor PPL = mejor modelo.</p>
+</section>
+<section id="divergencia-kl-e-informacion-mutua">
+<h3>1.4 Divergencia KL e informacion mutua<a class="headerlink" href="#divergencia-kl-e-informacion-mutua" title="Link to this heading">#</a></h3>
+<p>La <strong>divergencia Kullback-Leibler</strong> mide cuanto difiere la distribucion <span class="math notranslate nohighlight">\(q\)</span> del modelo de la distribucion real <span class="math notranslate nohighlight">\(p\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[D_{KL}(p \| q) = \sum_x p(x) \log \frac{p(x)}{q(x)} \geq 0\]</div>
+<p>La igualdad se cumple si y solo si <span class="math notranslate nohighlight">\(p = q\)</span> (desigualdad de Gibbs). En NLP es util para medir cuanto el modelo de lenguaje se aleja de la distribucion real del texto.</p>
+<p>La <strong>informacion mutua</strong> entre dos variables <span class="math notranslate nohighlight">\(X, Y\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[I(X; Y) = \sum_{x,y} p(x,y) \log \frac{p(x,y)}{p(x)p(y)} = H(X) - H(X \mid Y)\]</div>
+<p>Se usa, por ejemplo, para seleccion de caracteristicas y analisis de dependencias entre palabras.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="representaciones-de-texto">
+<h2>2. Representaciones de Texto<a class="headerlink" href="#representaciones-de-texto" title="Link to this heading">#</a></h2>
+<section id="tokenizacion">
+<h3>2.1 Tokenizacion<a class="headerlink" href="#tokenizacion" title="Link to this heading">#</a></h3>
+<p>Antes de cualquier procesamiento, el texto crudo se convierte en una secuencia de <strong>tokens</strong>. Existen tres estrategias principales:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Estrategia</p></th>
+<th class="head"><p>Unidad</p></th>
+<th class="head"><p>Vocabulario</p></th>
+<th class="head"><p>Ejemplo</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Word-level</p></td>
+<td><p>Palabras</p></td>
+<td><p>~50k–100k</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[&quot;el&quot;,</span> <span class="pre">&quot;gato&quot;,</span> <span class="pre">&quot;duerme&quot;]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Character-level</p></td>
+<td><p>Caracteres</p></td>
+<td><p>~100–1000</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">['e','l','</span> <span class="pre">','g','a','t','o']</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Subword (BPE/WordPiece)</p></td>
+<td><p>Subpalabras</p></td>
+<td><p>~30k–50k</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[&quot;el&quot;,</span> <span class="pre">&quot;ga&quot;,</span> <span class="pre">&quot;##to&quot;,</span> <span class="pre">&quot;duer&quot;,</span> <span class="pre">&quot;##me&quot;]</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="byte-pair-encoding-bpe">
+<h4>Byte-Pair Encoding (BPE)<a class="headerlink" href="#byte-pair-encoding-bpe" title="Link to this heading">#</a></h4>
+<p>BPE (Sennrich et al., 2016) construye el vocabulario de forma iterativa:</p>
+<ol class="arabic simple">
+<li><p>Inicializar <span class="math notranslate nohighlight">\(\mathcal{V}\)</span> con todos los caracteres.</p></li>
+<li><p>Contar la frecuencia de todos los pares de simbolos consecutivos en el corpus.</p></li>
+<li><p>Fusionar el par mas frecuente <span class="math notranslate nohighlight">\((a, b) \to ab\)</span> y agregar <span class="math notranslate nohighlight">\(ab\)</span> a <span class="math notranslate nohighlight">\(\mathcal{V}\)</span>.</p></li>
+<li><p>Repetir <span class="math notranslate nohighlight">\(K\)</span> veces (donde <span class="math notranslate nohighlight">\(K\)</span> es el tamaño de vocabulario deseado).</p></li>
+</ol>
+<p><strong>Propiedad clave:</strong> las palabras frecuentes quedan como tokens completos; las raras se segmentan en subpalabras conocidas, eliminando el problema de palabras fuera de vocabulario (OOV).</p>
+</section>
+</section>
+<section id="representacion-one-hot">
+<h3>2.2 Representacion one-hot<a class="headerlink" href="#representacion-one-hot" title="Link to this heading">#</a></h3>
+<p>La representacion mas simple. Cada token <span class="math notranslate nohighlight">\(w_i\)</span> se codifica como un vector de dimension <span class="math notranslate nohighlight">\(|\mathcal{V}|\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{e}_{w_i} = \mathbf{e}_i \in \{0,1\}^{|\mathcal{V}|}, \quad [\mathbf{e}_i]_j = \begin{cases} 1 &amp; \text{si } j = i \\ 0 &amp; \text{si } j \neq i \end{cases}\end{split}\]</div>
+<p><strong>Limitaciones:</strong></p>
+<ul class="simple">
+<li><p>Alta dimensionalidad: <span class="math notranslate nohighlight">\(|\mathcal{V}|\)</span> puede ser <span class="math notranslate nohighlight">\(10^5\)</span>.</p></li>
+<li><p>Ortogonalidad: <span class="math notranslate nohighlight">\(\mathbf{e}_i \cdot \mathbf{e}_j = 0\)</span> para todo <span class="math notranslate nohighlight">\(i \neq j\)</span>. No captura similitud semantica.</p></li>
+<li><p>Sin informacion de contexto.</p></li>
+</ul>
+</section>
+<section id="bolsa-de-palabras-bag-of-words">
+<h3>2.3 Bolsa de palabras (Bag of Words)<a class="headerlink" href="#bolsa-de-palabras-bag-of-words" title="Link to this heading">#</a></h3>
+<p>Un documento se representa como el vector de frecuencias de sus tokens:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{d} = \sum_{t=1}^{T} \mathbf{e}_{x_t} \in \mathbb{Z}_{\geq 0}^{|\mathcal{V}|}\]</div>
+<p><strong>TF-IDF</strong> (Term Frequency - Inverse Document Frequency) pondera la frecuencia por la rareza global del termino:</p>
+<div class="math notranslate nohighlight">
+\[\text{TF-IDF}(w, d) = \underbrace{\frac{f_{w,d}}{\sum_{w'} f_{w',d}}}_{\text{TF}} \cdot \underbrace{\log \frac{N}{|\{d' : w \in d'\}|}}_{\text{IDF}}\]</div>
+<p>donde <span class="math notranslate nohighlight">\(f_{w,d}\)</span> es la frecuencia de <span class="math notranslate nohighlight">\(w\)</span> en el documento <span class="math notranslate nohighlight">\(d\)</span> y <span class="math notranslate nohighlight">\(N\)</span> es el numero total de documentos.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="modelos-de-lenguaje-estadisticos">
+<h2>3. Modelos de Lenguaje Estadisticos<a class="headerlink" href="#modelos-de-lenguaje-estadisticos" title="Link to this heading">#</a></h2>
+<section id="modelo-n-grama">
+<h3>3.1 Modelo n-grama<a class="headerlink" href="#modelo-n-grama" title="Link to this heading">#</a></h3>
+<p>El modelo <strong>n-grama</strong> aproxima el contexto con los ultimos <span class="math notranslate nohighlight">\(n-1\)</span> tokens:</p>
+<div class="math notranslate nohighlight">
+\[p(x_t \mid x_{&lt;t}) \approx p(x_t \mid x_{t-n+1}, \ldots, x_{t-1})\]</div>
+<p>La <strong>hipotesis de Markov de orden</strong> <span class="math notranslate nohighlight">\(n-1\)</span>.</p>
+<p><strong>Estimacion por maxima verosimilitud:</strong></p>
+<div class="math notranslate nohighlight">
+\[\hat{p}(x_t \mid x_{t-n+1:t-1}) = \frac{C(x_{t-n+1}, \ldots, x_t)}{C(x_{t-n+1}, \ldots, x_{t-1})}\]</div>
+<p>donde <span class="math notranslate nohighlight">\(C(\cdot)\)</span> es el conteo de ocurrencias en el corpus.</p>
+<p><strong>Problema:</strong> si <span class="math notranslate nohighlight">\(C(x_{t-n+1}, \ldots, x_t) = 0\)</span>, la probabilidad es cero y la perplejidad infinita. Se resuelve con <strong>suavizado de Laplace</strong> (add-<span class="math notranslate nohighlight">\(\alpha\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[\hat{p}_{\text{Laplace}}(x_t \mid x_{t-n+1:t-1}) = \frac{C(x_{t-n+1}, \ldots, x_t) + \alpha}{C(x_{t-n+1}, \ldots, x_{t-1}) + \alpha \cdot |\mathcal{V}|}\]</div>
+<p><strong>Interpolacion (Jelinek-Mercer):</strong> combina modelos de distintos ordenes:</p>
+<div class="math notranslate nohighlight">
+\[p_{\text{interp}}(x_t \mid x_{t-2:t-1}) = \lambda_3 \hat{p}_3 + \lambda_2 \hat{p}_2 + \lambda_1 \hat{p}_1, \quad \sum_i \lambda_i = 1\]</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="word-embeddings">
+<h2>4. Word Embeddings<a class="headerlink" href="#word-embeddings" title="Link to this heading">#</a></h2>
+<section id="motivacion-geometrica">
+<h3>4.1 Motivacion geometrica<a class="headerlink" href="#motivacion-geometrica" title="Link to this heading">#</a></h3>
+<p>En lugar de vectores one-hot ortogonales, se buscan vectores densos <span class="math notranslate nohighlight">\(\mathbf{v}_w \in \mathbb{R}^d\)</span> (con <span class="math notranslate nohighlight">\(d \ll |\mathcal{V}|\)</span>, tipicamente <span class="math notranslate nohighlight">\(d \in \{50, 100, 200, 300\}\)</span>) tales que la <strong>similitud del coseno</strong> refleje similitud semantica:</p>
+<div class="math notranslate nohighlight">
+\[\text{sim}(\mathbf{v}_w, \mathbf{v}_{w'}) = \frac{\mathbf{v}_w \cdot \mathbf{v}_{w'}}{\|\mathbf{v}_w\| \|\mathbf{v}_{w'}\|} \in [-1, 1]\]</div>
+<p><strong>Hipotesis distribucional</strong> (Harris, 1954): palabras que aparecen en contextos similares tienen significados similares.</p>
+</section>
+<section id="word2vec-mikolov-et-al-2013">
+<h3>4.2 Word2Vec (Mikolov et al., 2013)<a class="headerlink" href="#word2vec-mikolov-et-al-2013" title="Link to this heading">#</a></h3>
+<p>Dos arquitecturas simétricas:</p>
+<section id="skip-gram">
+<h4>4.2.1 Skip-gram<a class="headerlink" href="#skip-gram" title="Link to this heading">#</a></h4>
+<p>Dado el token central <span class="math notranslate nohighlight">\(x_t\)</span>, predecir los tokens de contexto en la ventana <span class="math notranslate nohighlight">\([-C, +C]\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathcal{L}_{\text{SG}} = \sum_{t=1}^{T} \sum_{\substack{-C \leq j \leq C \\ j \neq 0}} \log p(x_{t+j} \mid x_t)\end{split}\]</div>
+<p>La probabilidad de contexto con <strong>softmax completo</strong>:</p>
+<div class="math notranslate nohighlight">
+\[p(x_{t+j} \mid x_t) = \frac{\exp(\mathbf{u}_{x_{t+j}}^\top \mathbf{v}_{x_t})}{\sum_{w \in \mathcal{V}} \exp(\mathbf{u}_w^\top \mathbf{v}_{x_t})}\]</div>
+<p>donde <span class="math notranslate nohighlight">\(\mathbf{v}_w\)</span> es el embedding del token central y <span class="math notranslate nohighlight">\(\mathbf{u}_w\)</span> el del contexto.</p>
+<p><strong>Complejidad:</strong> <span class="math notranslate nohighlight">\(O(|\mathcal{V}|)\)</span> por token — prohibitivo para vocabularios grandes.</p>
+</section>
+<section id="negative-sampling">
+<h4>4.2.2 Negative Sampling<a class="headerlink" href="#negative-sampling" title="Link to this heading">#</a></h4>
+<p>Aproxima el softmax muestreando <span class="math notranslate nohighlight">\(K\)</span> «palabras negativas» de la distribucion de ruido <span class="math notranslate nohighlight">\(p_n(w) \propto f(w)^{3/4}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}_{\text{NS}} = \sum_{t} \sum_{j} \left[ \log \sigma(\mathbf{u}_{x_{t+j}}^\top \mathbf{v}_{x_t}) + \sum_{k=1}^{K} \mathbb{E}_{w_k \sim p_n} \log \sigma(-\mathbf{u}_{w_k}^\top \mathbf{v}_{x_t}) \right]\]</div>
+<p>donde <span class="math notranslate nohighlight">\(\sigma(z) = \frac{1}{1+e^{-z}}\)</span>. Complejidad reducida a <span class="math notranslate nohighlight">\(O(K)\)</span> por muestra, con <span class="math notranslate nohighlight">\(K \in [5, 20]\)</span> tipicamente.</p>
+</section>
+<section id="cbow-continuous-bag-of-words">
+<h4>4.2.3 CBOW (Continuous Bag of Words)<a class="headerlink" href="#cbow-continuous-bag-of-words" title="Link to this heading">#</a></h4>
+<p>Inverso del skip-gram: predecir el token central dado el contexto promediado:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\hat{\mathbf{c}} = \frac{1}{2C} \sum_{\substack{-C \leq j \leq C \\ j \neq 0}} \mathbf{v}_{x_{t+j}}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[p(x_t \mid \text{contexto}) = \frac{\exp(\mathbf{u}_{x_t}^\top \hat{\mathbf{c}})}{\sum_{w} \exp(\mathbf{u}_w^\top \hat{\mathbf{c}})}\]</div>
+<p>CBOW es mas rapido; skip-gram produce mejores embeddings para palabras raras.</p>
+</section>
+</section>
+<section id="glove-pennington-et-al-2014">
+<h3>4.3 GloVe (Pennington et al., 2014)<a class="headerlink" href="#glove-pennington-et-al-2014" title="Link to this heading">#</a></h3>
+<p>GloVe (Global Vectors) explota directamente la matriz de co-ocurrencia global.</p>
+<p>Sea <span class="math notranslate nohighlight">\(X_{ij}\)</span> el numero de veces que la palabra <span class="math notranslate nohighlight">\(j\)</span> aparece en el contexto de <span class="math notranslate nohighlight">\(i\)</span>. Se define:</p>
+<div class="math notranslate nohighlight">
+\[P_{ij} = P(j \mid i) = \frac{X_{ij}}{X_i}, \quad X_i = \sum_k X_{ik}\]</div>
+<p>La clave de GloVe es que la <strong>razon</strong> <span class="math notranslate nohighlight">\(P_{ik}/P_{jk}\)</span> encode la relacion semantica entre <span class="math notranslate nohighlight">\(i\)</span>, <span class="math notranslate nohighlight">\(j\)</span> en terminos del contexto <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<p>Esto motiva que los embeddings satisfagan:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{w}_i^\top \tilde{\mathbf{w}}_k + b_i + \tilde{b}_k = \log X_{ik}\]</div>
+<p><strong>Funcion de perdida</strong> ponderada por frecuencia de co-ocurrencia:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}_{\text{GloVe}} = \sum_{i,j=1}^{|\mathcal{V}|} f(X_{ij}) \left( \mathbf{w}_i^\top \tilde{\mathbf{w}}_j + b_i + \tilde{b}_j - \log X_{ij} \right)^2\]</div>
+<p>donde la funcion de ponderacion:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f(x) = \begin{cases} (x/x_{\max})^\alpha &amp; \text{si } x &lt; x_{\max} \\ 1 &amp; \text{si } x \geq x_{\max} \end{cases}\end{split}\]</div>
+<p>con <span class="math notranslate nohighlight">\(x_{\max} = 100\)</span> y <span class="math notranslate nohighlight">\(\alpha = 0.75\)</span> tipicamente. Reduce el peso de las co-ocurrencias muy frecuentes.</p>
+</section>
+<section id="propiedades-algebraicas">
+<h3>4.4 Propiedades algebraicas<a class="headerlink" href="#propiedades-algebraicas" title="Link to this heading">#</a></h3>
+<p>Los embeddings entrenados exhiben aritmetica vectorial:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{v}_{\text{rey}} - \mathbf{v}_{\text{hombre}} + \mathbf{v}_{\text{mujer}} \approx \mathbf{v}_{\text{reina}}\]</div>
+<p>Esto se debe a que el modelo aprende a separar dimensiones que codifican distintos ejes semanticos (genero, royalty, etc.).</p>
+</section>
+<section id="fasttext-bojanowski-et-al-2017">
+<h3>4.5 FastText (Bojanowski et al., 2017)<a class="headerlink" href="#fasttext-bojanowski-et-al-2017" title="Link to this heading">#</a></h3>
+<p>Extiende Word2Vec representando cada palabra como la <strong>suma de embeddings de sus n-gramas de caracteres</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{v}_w = \sum_{g \in \mathcal{G}_w} \mathbf{z}_g\]</div>
+<p>donde <span class="math notranslate nohighlight">\(\mathcal{G}_w\)</span> es el conjunto de n-gramas de caracteres de <span class="math notranslate nohighlight">\(w\)</span>.</p>
+<p><strong>Ventaja</strong>: maneja palabras OOV y captura morfologia (prefijos, sufijos, raices). Especialmente util para lenguas morfologicamente ricas (espanol, aleman, arabe).</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="redes-recurrentes">
+<h2>5. Redes Recurrentes<a class="headerlink" href="#redes-recurrentes" title="Link to this heading">#</a></h2>
+<section id="rnn-recurrent-neural-network">
+<h3>5.1 RNN (Recurrent Neural Network)<a class="headerlink" href="#rnn-recurrent-neural-network" title="Link to this heading">#</a></h3>
+<p>La RNN procesa la secuencia token por token manteniendo un <strong>estado oculto</strong> <span class="math notranslate nohighlight">\(\mathbf{h}_t \in \mathbb{R}^d\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{h}_t = f_\theta(\mathbf{h}_{t-1}, \mathbf{x}_t) = \tanh(\mathbf{W}_h \mathbf{h}_{t-1} + \mathbf{W}_x \mathbf{x}_t + \mathbf{b})\]</div>
+<div class="math notranslate nohighlight">
+\[\mathbf{y}_t = g(\mathbf{W}_y \mathbf{h}_t + \mathbf{b}_y)\]</div>
+<p>con <span class="math notranslate nohighlight">\(\mathbf{h}_0 = \mathbf{0}\)</span> o aprendible.</p>
+<p><strong>Parametros:</strong> <span class="math notranslate nohighlight">\(\mathbf{W}_h \in \mathbb{R}^{d \times d}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{W}_x \in \mathbb{R}^{d \times n}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{W}_y \in \mathbb{R}^{k \times d}\)</span>.</p>
+<section id="backpropagation-through-time-bptt">
+<h4>5.1.1 Backpropagation Through Time (BPTT)<a class="headerlink" href="#backpropagation-through-time-bptt" title="Link to this heading">#</a></h4>
+<p>El gradiente de la perdida respecto al estado inicial <span class="math notranslate nohighlight">\(\mathbf{h}_0\)</span> requiere multiplicar Jacobianos a lo largo de <span class="math notranslate nohighlight">\(T\)</span> pasos:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial \mathcal{L}}{\partial \mathbf{h}_0} = \sum_{t=1}^{T} \frac{\partial \mathcal{L}_t}{\partial \mathbf{h}_t} \prod_{k=1}^{t} \frac{\partial \mathbf{h}_k}{\partial \mathbf{h}_{k-1}}\]</div>
+<p>Cada factor es:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial \mathbf{h}_k}{\partial \mathbf{h}_{k-1}} = \text{diag}(1 - \mathbf{h}_k^2) \cdot \mathbf{W}_h\]</div>
+<p>(para activacion <span class="math notranslate nohighlight">\(\tanh\)</span>, donde <span class="math notranslate nohighlight">\(\tanh'(z) = 1 - \tanh^2(z)\)</span>.)</p>
+<p><strong>Problema del gradiente que desaparece/explota:</strong></p>
+<ul class="simple">
+<li><p>Si <span class="math notranslate nohighlight">\(\|\mathbf{W}_h\|_2 &lt; 1\)</span>: el producto <span class="math notranslate nohighlight">\(\prod_{k=1}^t \mathbf{W}_h^k \to \mathbf{0}\)</span> exponencialmente. Los gradientes se anulan y la red no puede aprender dependencias largas.</p></li>
+<li><p>Si <span class="math notranslate nohighlight">\(\|\mathbf{W}_h\|_2 &gt; 1\)</span>: el producto diverge exponencialmente. Se mitiga con <strong>gradient clipping</strong>: si <span class="math notranslate nohighlight">\(\|\mathbf{g}\| &gt; \tau\)</span>, escalar <span class="math notranslate nohighlight">\(\mathbf{g} \leftarrow \tau \mathbf{g}/\|\mathbf{g}\|\)</span>.</p></li>
+</ul>
+</section>
+</section>
+<section id="lstm-long-short-term-memory">
+<h3>5.2 LSTM (Long Short-Term Memory)<a class="headerlink" href="#lstm-long-short-term-memory" title="Link to this heading">#</a></h3>
+<p>Hochreiter &amp; Schmidhuber (1997) diseñaron la LSTM para resolver el problema de gradientes mediante una <strong>celda de memoria</strong> <span class="math notranslate nohighlight">\(\mathbf{c}_t\)</span> con flujo de gradiente no obstruido.</p>
+<p><strong>Cuatro compuertas</strong> (gates) aprenden que informacion retener, olvidar y emitir:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{f}_t = \sigma(\mathbf{W}_f [\mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_f) \quad \text{(forget gate)}\]</div>
+<div class="math notranslate nohighlight">
+\[\mathbf{i}_t = \sigma(\mathbf{W}_i [\mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_i) \quad \text{(input gate)}\]</div>
+<div class="math notranslate nohighlight">
+\[\tilde{\mathbf{c}}_t = \tanh(\mathbf{W}_c [\mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_c) \quad \text{(celda candidata)}\]</div>
+<div class="math notranslate nohighlight">
+\[\mathbf{o}_t = \sigma(\mathbf{W}_o [\mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_o) \quad \text{(output gate)}\]</div>
+<p><strong>Actualizacion de la celda</strong> (mecanismo clave):</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{c}_t = \underbrace{\mathbf{f}_t \odot \mathbf{c}_{t-1}}_{\text{olvidar}} + \underbrace{\mathbf{i}_t \odot \tilde{\mathbf{c}}_t}_{\text{escribir nuevo}}\]</div>
+<p><strong>Estado oculto:</strong></p>
+<div class="math notranslate nohighlight">
+\[\mathbf{h}_t = \mathbf{o}_t \odot \tanh(\mathbf{c}_t)\]</div>
+<p>donde <span class="math notranslate nohighlight">\(\odot\)</span> es el producto element-wise (Hadamard) y <span class="math notranslate nohighlight">\(\sigma\)</span> es la sigmoide.</p>
+<p><strong>Por que funciona:</strong> la celda <span class="math notranslate nohighlight">\(\mathbf{c}_t\)</span> se actualiza de forma <strong>aditiva</strong>. El gradiente fluye sin atenuacion por la ruta <span class="math notranslate nohighlight">\(\mathbf{c}_{t-1} \to \mathbf{c}_t\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial \mathbf{c}_t}{\partial \mathbf{c}_{t-1}} = \text{diag}(\mathbf{f}_t)\]</div>
+<p>Si <span class="math notranslate nohighlight">\(\mathbf{f}_t \approx \mathbf{1}\)</span> (forget gate abierta), el gradiente se propaga sin cambios, permitiendo capturar dependencias de larga distancia.</p>
+<p><strong>Total de parametros:</strong> <span class="math notranslate nohighlight">\(4 \cdot (d^2 + d \cdot n + d)\)</span> para un estado oculto de dimension <span class="math notranslate nohighlight">\(d\)</span> y entrada de dimension <span class="math notranslate nohighlight">\(n\)</span>.</p>
+</section>
+<section id="gru-gated-recurrent-unit">
+<h3>5.3 GRU (Gated Recurrent Unit)<a class="headerlink" href="#gru-gated-recurrent-unit" title="Link to this heading">#</a></h3>
+<p>Cho et al. (2014) propusieron la GRU como simplificacion de la LSTM con dos compuertas:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{z}_t = \sigma(\mathbf{W}_z [\mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_z) \quad \text{(update gate)}\]</div>
+<div class="math notranslate nohighlight">
+\[\mathbf{r}_t = \sigma(\mathbf{W}_r [\mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_r) \quad \text{(reset gate)}\]</div>
+<div class="math notranslate nohighlight">
+\[\tilde{\mathbf{h}}_t = \tanh(\mathbf{W}_h [\mathbf{r}_t \odot \mathbf{h}_{t-1}; \mathbf{x}_t] + \mathbf{b}_h)\]</div>
+<div class="math notranslate nohighlight">
+\[\mathbf{h}_t = (1 - \mathbf{z}_t) \odot \mathbf{h}_{t-1} + \mathbf{z}_t \odot \tilde{\mathbf{h}}_t\]</div>
+<p>La GRU fusiona celda y estado oculto. Menos parametros que LSTM (<span class="math notranslate nohighlight">\(3 \cdot (d^2 + d \cdot n + d)\)</span>), rendimiento comparable en la mayoria de tareas.</p>
+</section>
+<section id="arquitectura-encoder-decoder-con-rnn">
+<h3>5.4 Arquitectura encoder-decoder con RNN<a class="headerlink" href="#arquitectura-encoder-decoder-con-rnn" title="Link to this heading">#</a></h3>
+<p>Para traduccion automatica (seq2seq, Sutskever et al., 2014):</p>
+<p><strong>Encoder:</strong> comprime la secuencia fuente en un vector de contexto <span class="math notranslate nohighlight">\(\mathbf{c}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{h}_t^{enc} = f_{enc}(\mathbf{h}_{t-1}^{enc}, \mathbf{x}_t), \quad \mathbf{c} = \mathbf{h}_{T_x}^{enc}\]</div>
+<p><strong>Decoder:</strong> genera la secuencia destino condicionada en <span class="math notranslate nohighlight">\(\mathbf{c}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{h}_t^{dec} = f_{dec}(\mathbf{h}_{t-1}^{dec}, \mathbf{y}_{t-1}, \mathbf{c})\]</div>
+<div class="math notranslate nohighlight">
+\[p(y_t \mid y_{&lt;t}, \mathbf{x}) = \text{softmax}(\mathbf{W}_o \mathbf{h}_t^{dec} + \mathbf{b}_o)\]</div>
+<p><strong>Cuello de botella:</strong> comprimir toda la secuencia fuente en un solo vector <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> causa perdida de informacion para secuencias largas. Lo resuelve el mecanismo de atencion.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="mecanismo-de-atencion">
+<h2>6. Mecanismo de Atencion<a class="headerlink" href="#mecanismo-de-atencion" title="Link to this heading">#</a></h2>
+<section id="atencion-de-bahdanau-bahdanau-et-al-2015">
+<h3>6.1 Atencion de Bahdanau (Bahdanau et al., 2015)<a class="headerlink" href="#atencion-de-bahdanau-bahdanau-et-al-2015" title="Link to this heading">#</a></h3>
+<p>El decoder no depende de un unico <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> fijo sino que computa un <strong>contexto dinamico</strong> <span class="math notranslate nohighlight">\(\mathbf{c}_t\)</span> en cada paso:</p>
+<p><strong>Score de alineamiento</strong> (red feedforward):</p>
+<div class="math notranslate nohighlight">
+\[e_{t,s} = \mathbf{v}_a^\top \tanh(\mathbf{W}_1 \mathbf{h}_s^{enc} + \mathbf{W}_2 \mathbf{h}_{t-1}^{dec})\]</div>
+<p><strong>Pesos de atencion</strong> (distribucion sobre posiciones fuente):</p>
+<div class="math notranslate nohighlight">
+\[\alpha_{t,s} = \frac{\exp(e_{t,s})}{\sum_{s'=1}^{T_x} \exp(e_{t,s'})}\]</div>
+<p><strong>Vector de contexto</strong> como suma ponderada:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{c}_t = \sum_{s=1}^{T_x} \alpha_{t,s} \mathbf{h}_s^{enc}\]</div>
+<p>La actualizacion del decoder incorpora el contexto:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{h}_t^{dec} = f_{dec}(\mathbf{h}_{t-1}^{dec}, [\mathbf{y}_{t-1}; \mathbf{c}_t])\]</div>
+<p>Los pesos <span class="math notranslate nohighlight">\(\alpha_{t,s}\)</span> forman una <strong>matriz de alineamiento</strong> interpretable que muestra que palabras fuente atiende el decoder al generar cada token destino.</p>
+<img src="../_static/images/nlp1.png" width="600" />
+</section>
+<section id="atencion-de-luong-luong-et-al-2015">
+<h3>6.2 Atencion de Luong (Luong et al., 2015)<a class="headerlink" href="#atencion-de-luong-luong-et-al-2015" title="Link to this heading">#</a></h3>
+<p>Tres variantes de la funcion de score:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}e_{t,s} = \begin{cases}
+\mathbf{h}_t^{dec\top} \mathbf{h}_s^{enc} &amp; \text{(dot)} \\
+\mathbf{h}_t^{dec\top} \mathbf{W}_a \mathbf{h}_s^{enc} &amp; \text{(general)} \\
+\mathbf{v}_a^\top \tanh(\mathbf{W}_a [\mathbf{h}_t^{dec}; \mathbf{h}_s^{enc}]) &amp; \text{(concat)}
+\end{cases}\end{split}\]</div>
+<p>La variante <strong>dot</strong> es <span class="math notranslate nohighlight">\(O(1)\)</span> en parametros pero requiere que encoder y decoder tengan la misma dimension.</p>
+<img src="../_static/images/nlp2.png" width="600" />
+</section>
+<section id="complejidad-computacional-de-la-atencion">
+<h3>6.3 Complejidad computacional de la atencion<a class="headerlink" href="#complejidad-computacional-de-la-atencion" title="Link to this heading">#</a></h3>
+<p>Para una secuencia de longitud <span class="math notranslate nohighlight">\(T\)</span> y dimension <span class="math notranslate nohighlight">\(d\)</span>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operacion</p></th>
+<th class="head"><p>Complejidad temporal</p></th>
+<th class="head"><p>Complejidad espacial</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Calculo de scores <span class="math notranslate nohighlight">\(T \times T\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(T^2 \cdot d)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(T^2)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Softmax</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(T^2)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(T^2)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Suma ponderada</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(T^2 \cdot d)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(T \cdot d)\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>La atencion es cuadratica en la longitud de secuencia <span class="math notranslate nohighlight">\(T\)</span>. Esto motiva variantes eficientes para secuencias largas (Longformer, BigBird, Flash Attention).</p>
+<hr class="docutils" />
+<img src="../_static/images/nlp3.png" width="600" />
+## 7. Arquitectura Transformer
+<p>Vaswani et al. (2017) eliminaron las recurrencias por completo, basando el procesamiento exclusivamente en atencion.</p>
+</section>
+<section id="atencion-multi-cabeza-multi-head-attention">
+<h3>7.1 Atencion Multi-Cabeza (Multi-Head Attention)<a class="headerlink" href="#atencion-multi-cabeza-multi-head-attention" title="Link to this heading">#</a></h3>
+<section id="atencion-scaled-dot-product">
+<h4>7.1.1 Atencion Scaled Dot-Product<a class="headerlink" href="#atencion-scaled-dot-product" title="Link to this heading">#</a></h4>
+<p>Dadas matrices de <strong>Query</strong> <span class="math notranslate nohighlight">\(\mathbf{Q} \in \mathbb{R}^{T_q \times d_k}\)</span>, <strong>Key</strong> <span class="math notranslate nohighlight">\(\mathbf{K} \in \mathbb{R}^{T_k \times d_k}\)</span> y <strong>Value</strong> <span class="math notranslate nohighlight">\(\mathbf{V} \in \mathbb{R}^{T_k \times d_v}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\text{Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{softmax}\left(\frac{\mathbf{Q}\mathbf{K}^\top}{\sqrt{d_k}}\right) \mathbf{V}\]</div>
+<p><strong>Por que dividir por <span class="math notranslate nohighlight">\(\sqrt{d_k}\)</span>:</strong></p>
+<p>El producto interno <span class="math notranslate nohighlight">\(\mathbf{q}^\top \mathbf{k}\)</span> tiene varianza <span class="math notranslate nohighlight">\(d_k\)</span> (si los componentes son i.i.d. con media 0 y varianza 1):</p>
+<div class="math notranslate nohighlight">
+\[\text{Var}\left[\sum_{i=1}^{d_k} q_i k_i\right] = \sum_{i=1}^{d_k} \text{Var}[q_i k_i] = d_k\]</div>
+<p>Sin escalar, para <span class="math notranslate nohighlight">\(d_k\)</span> grande los scores son grandes en magnitud, la softmax se satura en regiones de gradiente casi cero. Dividir por <span class="math notranslate nohighlight">\(\sqrt{d_k}\)</span> normaliza la varianza a 1.</p>
+<p><strong>Mascara (Causal Masking):</strong> en el decoder autoregresivo se aplica una mascara causal para evitar que la posicion <span class="math notranslate nohighlight">\(t\)</span> atienda posiciones <span class="math notranslate nohighlight">\(s &gt; t\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}M_{ts} = \begin{cases} 0 &amp; \text{si } s \leq t \\ -\infty &amp; \text{si } s &gt; t \end{cases}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\text{Masked-Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{softmax}\left(\frac{\mathbf{Q}\mathbf{K}^\top}{\sqrt{d_k}} + \mathbf{M}\right) \mathbf{V}\]</div>
+</section>
+<section id="multi-head-attention">
+<h4>7.1.2 Multi-Head Attention<a class="headerlink" href="#multi-head-attention" title="Link to this heading">#</a></h4>
+<p>En lugar de una sola atencion en dimension <span class="math notranslate nohighlight">\(d_{model}\)</span>, se proyectan las entradas en <span class="math notranslate nohighlight">\(h\)</span> subespacios de dimension <span class="math notranslate nohighlight">\(d_k = d_v = d_{model}/h\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\text{head}_i = \text{Attention}(\mathbf{Q}\mathbf{W}_i^Q, \mathbf{K}\mathbf{W}_i^K, \mathbf{V}\mathbf{W}_i^V)\]</div>
+<div class="math notranslate nohighlight">
+\[\text{MultiHead}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{Concat}(\text{head}_1, \ldots, \text{head}_h) \mathbf{W}^O\]</div>
+<p>donde <span class="math notranslate nohighlight">\(\mathbf{W}_i^Q \in \mathbb{R}^{d_{model} \times d_k}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{W}_i^K \in \mathbb{R}^{d_{model} \times d_k}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{W}_i^V \in \mathbb{R}^{d_{model} \times d_v}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{W}^O \in \mathbb{R}^{hd_v \times d_{model}}\)</span>.</p>
+<p><strong>Intuicion:</strong> cada cabeza puede atender a diferentes tipos de relaciones (sintacticas, semanticas, posicionales) de forma simultanea e independiente. La concatenacion y la proyeccion final integran la informacion de todas las cabezas.</p>
+<p><strong>Parametros de la capa MHA:</strong> <span class="math notranslate nohighlight">\(4 \cdot d_{model}^2\)</span> (tres proyecciones de entrada + proyeccion de salida, cada una de <span class="math notranslate nohighlight">\(d_{model} \times d_{model}\)</span>).</p>
+</section>
+</section>
+<section id="red-feed-forward-posicional-ffn">
+<h3>7.2 Red Feed-Forward Posicional (FFN)<a class="headerlink" href="#red-feed-forward-posicional-ffn" title="Link to this heading">#</a></h3>
+<p>Despues de cada capa de atencion se aplica una red FFN identica e independientemente a cada posicion:</p>
+<div class="math notranslate nohighlight">
+\[\text{FFN}(\mathbf{x}) = \max(0, \mathbf{x}\mathbf{W}_1 + \mathbf{b}_1)\mathbf{W}_2 + \mathbf{b}_2\]</div>
+<p>con <span class="math notranslate nohighlight">\(\mathbf{W}_1 \in \mathbb{R}^{d_{model} \times d_{ff}}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{W}_2 \in \mathbb{R}^{d_{ff} \times d_{model}}\)</span> y tipicamente <span class="math notranslate nohighlight">\(d_{ff} = 4 \cdot d_{model}\)</span>.</p>
+<p>Tambien se usan variantes con <strong>GeLU</strong> (Gaussian Error Linear Unit):</p>
+<div class="math notranslate nohighlight">
+\[\text{GeLU}(x) = x \cdot \Phi(x) = x \cdot \frac{1}{2}\left[1 + \text{erf}\left(\frac{x}{\sqrt{2}}\right)\right]\]</div>
+<p>donde <span class="math notranslate nohighlight">\(\Phi\)</span> es la CDF de la normal estandar. GeLU es diferenciable en todo punto, a diferencia de ReLU.</p>
+<p><strong>Parametros de la FFN:</strong> <span class="math notranslate nohighlight">\(2 \cdot d_{model} \cdot d_{ff}\)</span>.</p>
+</section>
+<section id="codificacion-posicional-positional-encoding">
+<h3>7.3 Codificacion Posicional (Positional Encoding)<a class="headerlink" href="#codificacion-posicional-positional-encoding" title="Link to this heading">#</a></h3>
+<p>La atencion es invariante a la permutacion de posiciones: <span class="math notranslate nohighlight">\(\text{Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V})\)</span> no cambia si se permutan filas de <span class="math notranslate nohighlight">\(\mathbf{K}\)</span> y <span class="math notranslate nohighlight">\(\mathbf{V}\)</span> (y correspondientemente de <span class="math notranslate nohighlight">\(\mathbf{Q}\)</span>). Para que el modelo «sepa» la posicion de cada token, se suma un <strong>encoding posicional</strong> a cada embedding.</p>
+<p><strong>Encoding sinusoidal (Vaswani et al., 2017):</strong></p>
+<div class="math notranslate nohighlight">
+\[\text{PE}_{(pos, 2i)} = \sin\left(\frac{pos}{10000^{2i/d_{model}}}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[\text{PE}_{(pos, 2i+1)} = \cos\left(\frac{pos}{10000^{2i/d_{model}}}\right)\]</div>
+<p>para <span class="math notranslate nohighlight">\(pos \in \{0, 1, \ldots, T-1\}\)</span> e <span class="math notranslate nohighlight">\(i \in \{0, 1, \ldots, d_{model}/2 - 1\}\)</span>.</p>
+<p><strong>Propiedades:</strong></p>
+<ul class="simple">
+<li><p>Cada posicion tiene un vector unico de dimension <span class="math notranslate nohighlight">\(d_{model}\)</span>.</p></li>
+<li><p>Para cualquier offset fijo <span class="math notranslate nohighlight">\(k\)</span>, <span class="math notranslate nohighlight">\(\text{PE}_{pos+k}\)</span> es una transformacion lineal de <span class="math notranslate nohighlight">\(\text{PE}_{pos}\)</span>.</p></li>
+<li><p>Las funciones sinusoidales permiten <strong>extrapolacion</strong> a longitudes de secuencia mayores que las vistas en entrenamiento.</p></li>
+</ul>
+<p><strong>Encoding posicional aprendible:</strong> en BERT y GPT se aprenden embeddings posicionales como parametros del modelo. Mas flexible pero no extrapola a longitudes no vistas.</p>
+<p><strong>RoPE (Rotary Positional Encoding, Su et al., 2021):</strong> codifica la posicion relativa rotando los vectores Q y K en el espacio complejo. Usado en LLaMA, Mistral, etc.</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{q}_m = \mathbf{R}_{\Theta,m}^d \mathbf{W}^Q \mathbf{x}_m\]</div>
+<p>donde <span class="math notranslate nohighlight">\(\mathbf{R}_{\Theta,m}^d\)</span> es una matriz de rotacion que depende de la posicion <span class="math notranslate nohighlight">\(m\)</span> y el angulo <span class="math notranslate nohighlight">\(\Theta\)</span>.</p>
+</section>
+<section id="normalizacion-de-capa-layer-normalization">
+<h3>7.4 Normalizacion de capa (Layer Normalization)<a class="headerlink" href="#normalizacion-de-capa-layer-normalization" title="Link to this heading">#</a></h3>
+<p><strong>Batch Normalization</strong> (BN) normaliza sobre el batch, problematico para secuencias de longitud variable. <strong>Layer Normalization</strong> (Ba et al., 2016) normaliza sobre las caracteristicas de un ejemplo individual:</p>
+<div class="math notranslate nohighlight">
+\[\text{LayerNorm}(\mathbf{x}) = \frac{\mathbf{x} - \mu}{\sqrt{\sigma^2 + \epsilon}} \cdot \boldsymbol{\gamma} + \boldsymbol{\beta}\]</div>
+<p>donde:</p>
+<div class="math notranslate nohighlight">
+\[\mu = \frac{1}{d} \sum_{i=1}^{d} x_i, \quad \sigma^2 = \frac{1}{d} \sum_{i=1}^{d} (x_i - \mu)^2\]</div>
+<p><span class="math notranslate nohighlight">\(\boldsymbol{\gamma}, \boldsymbol{\beta} \in \mathbb{R}^d\)</span> son parametros aprendibles (escala y desplazamiento). <span class="math notranslate nohighlight">\(\epsilon \approx 10^{-5}\)</span> evita division por cero.</p>
+</section>
+<section id="conexiones-residuales">
+<h3>7.5 Conexiones residuales<a class="headerlink" href="#conexiones-residuales" title="Link to this heading">#</a></h3>
+<p>Cada sub-capa (MHA y FFN) usa una conexion residual seguida de LayerNorm:</p>
+<p><strong>Post-LN (Transformer original):</strong></p>
+<div class="math notranslate nohighlight">
+\[\mathbf{x}_{l+1} = \text{LayerNorm}(\mathbf{x}_l + \text{SubLayer}(\mathbf{x}_l))\]</div>
+<p><strong>Pre-LN (usado en GPT-2, T5, LLaMA):</strong></p>
+<div class="math notranslate nohighlight">
+\[\mathbf{x}_{l+1} = \mathbf{x}_l + \text{SubLayer}(\text{LayerNorm}(\mathbf{x}_l))\]</div>
+<p>Pre-LN da gradientes mas estables durante el entrenamiento y permite entrenar sin warmup. Las conexiones residuales permiten el flujo directo del gradiente desde la salida hasta las primeras capas:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial \mathcal{L}}{\partial \mathbf{x}_0} = \frac{\partial \mathcal{L}}{\partial \mathbf{x}_L} + \text{terminos de capas intermedias}\]</div>
+<p>El primer termino permite que el gradiente llegue sin atenuacion.</p>
+</section>
+<section id="bloque-transformer-completo">
+<h3>7.6 Bloque Transformer completo<a class="headerlink" href="#bloque-transformer-completo" title="Link to this heading">#</a></h3>
+<p>Un bloque Transformer (encoder) aplica en orden:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{z}_l = \text{LayerNorm}(\mathbf{x}_l + \text{MHA}(\mathbf{x}_l, \mathbf{x}_l, \mathbf{x}_l)) \quad \text{[self-attention]}\]</div>
+<div class="math notranslate nohighlight">
+\[\mathbf{x}_{l+1} = \text{LayerNorm}(\mathbf{z}_l + \text{FFN}(\mathbf{z}_l))\]</div>
+<p>(notacion Pre-LN: LayerNorm va antes, dentro del residuo.)</p>
+<p>El <strong>encoder</strong> Transformer apila <span class="math notranslate nohighlight">\(L\)</span> de estos bloques. El <strong>decoder</strong> tiene adicionalmente una capa de <strong>cross-attention</strong> donde Q proviene del decoder y K, V del encoder:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{z}_l = \text{LayerNorm}(\mathbf{x}_l + \text{MHA}(\mathbf{x}_l, \mathbf{x}_l, \mathbf{x}_l)) \quad \text{[self-attention con causal mask]}\]</div>
+<div class="math notranslate nohighlight">
+\[\mathbf{m}_l = \text{LayerNorm}(\mathbf{z}_l + \text{MHA}(\mathbf{z}_l, \mathbf{h}^{enc}, \mathbf{h}^{enc})) \quad \text{[cross-attention]}\]</div>
+<div class="math notranslate nohighlight">
+\[\mathbf{x}_{l+1} = \text{LayerNorm}(\mathbf{m}_l + \text{FFN}(\mathbf{m}_l))\]</div>
+</section>
+<section id="parametros-totales-del-transformer">
+<h3>7.7 Parametros totales del Transformer<a class="headerlink" href="#parametros-totales-del-transformer" title="Link to this heading">#</a></h3>
+<p>Para un Transformer con <span class="math notranslate nohighlight">\(L\)</span> capas, modelo de dimension <span class="math notranslate nohighlight">\(d_{model}\)</span>, <span class="math notranslate nohighlight">\(h\)</span> cabezas, FFN de dimension <span class="math notranslate nohighlight">\(d_{ff}\)</span> y vocabulario <span class="math notranslate nohighlight">\(|\mathcal{V}|\)</span>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Componente</p></th>
+<th class="head"><p>Parametros</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Embedding tabla</p></td>
+<td><p>$</p></td>
+</tr>
+<tr class="row-odd"><td><p>MHA por capa</p></td>
+<td><p><span class="math notranslate nohighlight">\(4 d_{model}^2\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>FFN por capa</p></td>
+<td><p><span class="math notranslate nohighlight">\(2 d_{model} d_{ff}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>LayerNorm por capa (x2)</p></td>
+<td><p><span class="math notranslate nohighlight">\(4 d_{model}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Total (sin embedding)</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(L(4d_{model}^2 + 2d_{model}d_{ff} + 4d_{model})\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Para GPT-3 (<span class="math notranslate nohighlight">\(L=96\)</span>, <span class="math notranslate nohighlight">\(d_{model}=12288\)</span>, <span class="math notranslate nohighlight">\(d_{ff}=49152\)</span>, <span class="math notranslate nohighlight">\(|\mathcal{V}|=50257\)</span>): <strong>175 mil millones de parametros</strong>.</p>
+</section>
+<section id="complejidad-computacional-del-transformer">
+<h3>7.8 Complejidad computacional del Transformer<a class="headerlink" href="#complejidad-computacional-del-transformer" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operacion</p></th>
+<th class="head"><p>Complejidad por capa</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Self-Attention</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(T^2 d)\)</span> tiempo, <span class="math notranslate nohighlight">\(O(T^2)\)</span> memoria</p></td>
+</tr>
+<tr class="row-odd"><td><p>FFN</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(T d^2)\)</span> tiempo, <span class="math notranslate nohighlight">\(O(Td)\)</span> memoria</p></td>
+</tr>
+<tr class="row-even"><td><p>Total por capa</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(T^2 d + T d^2)\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Para <span class="math notranslate nohighlight">\(T \ll d\)</span> (secuencias cortas, modelos grandes): domina la FFN <span class="math notranslate nohighlight">\(O(Td^2)\)</span>.
+Para <span class="math notranslate nohighlight">\(T \gg d\)</span> (secuencias largas, modelos pequeños): domina la atencion <span class="math notranslate nohighlight">\(O(T^2d)\)</span>.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="modelos-preentrenados">
+<h2>8. Modelos Preentrenados<a class="headerlink" href="#modelos-preentrenados" title="Link to this heading">#</a></h2>
+<section id="paradigma-preentrenamiento-ajuste-fino">
+<h3>8.1 Paradigma preentrenamiento - ajuste fino<a class="headerlink" href="#paradigma-preentrenamiento-ajuste-fino" title="Link to this heading">#</a></h3>
+<p>En lugar de entrenar desde cero en cada tarea, se sigue el paradigma de dos fases:</p>
+<ol class="arabic simple">
+<li><p><strong>Preentrenamiento:</strong> entrenar un modelo grande en grandes corpus de texto sin etiquetas con un objetivo autosupervisado. <span class="math notranslate nohighlight">\(\theta^* \leftarrow \arg\max_\theta \mathcal{L}_{\text{pre}}(\theta; \mathcal{D}_{pre})\)</span>.</p></li>
+<li><p><strong>Ajuste fino (Fine-tuning):</strong> inicializar desde <span class="math notranslate nohighlight">\(\theta^*\)</span> y continuar entrenando en el dataset de la tarea especifica con una cabeza de tarea adicional. <span class="math notranslate nohighlight">\(\hat{\theta} \leftarrow \arg\max_{\theta, \phi} \mathcal{L}_{\text{task}}(\theta, \phi; \mathcal{D}_{task})\)</span>.</p></li>
+</ol>
+<p><strong>Ventaja:</strong> los parametros del preentrenamiento codifican conocimiento linguistico y del mundo que se transfiere a tareas con pocos datos etiquetados.</p>
+</section>
+<section id="bert-devlin-et-al-2018">
+<h3>8.2 BERT (Devlin et al., 2018)<a class="headerlink" href="#bert-devlin-et-al-2018" title="Link to this heading">#</a></h3>
+<p><strong>Arquitectura:</strong> Transformer encoder bidireccional. Lee el contexto completo en ambas direcciones.</p>
+<p><strong>Objetivo 1: Masked Language Model (MLM)</strong></p>
+<p>En cada secuencia de entrenamiento se enmascara el 15% de los tokens:</p>
+<ul class="simple">
+<li><p>80% se reemplaza por <code class="docutils literal notranslate"><span class="pre">[MASK]</span></code></p></li>
+<li><p>10% se reemplaza por un token aleatorio</p></li>
+<li><p>10% se mantiene igual (pero se predice)</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}_{MLM} = -\sum_{t \in \mathcal{M}} \log p_\theta(x_t \mid x_{\backslash \mathcal{M}})\]</div>
+<p>donde <span class="math notranslate nohighlight">\(\mathcal{M}\)</span> es el conjunto de posiciones enmascaradas y <span class="math notranslate nohighlight">\(x_{\backslash \mathcal{M}}\)</span> es la secuencia con las mascaras.</p>
+<p>La prediccion de cada token enmascarado utiliza su representacion contextual completa (bidireccional):</p>
+<div class="math notranslate nohighlight">
+\[p(x_t \mid x_{\backslash \mathcal{M}}) = \text{softmax}(\mathbf{W}_V \mathbf{h}_t^L + \mathbf{b}_V)\]</div>
+<p><strong>Objetivo 2: Next Sentence Prediction (NSP)</strong></p>
+<p>Dado un par de oraciones <span class="math notranslate nohighlight">\((A, B)\)</span>, predecir si <span class="math notranslate nohighlight">\(B\)</span> es la continuacion real de <span class="math notranslate nohighlight">\(A\)</span>. (Criticamente cuestionado en RoBERTa, que lo elimino.)</p>
+<p><strong>Token especial [CLS]:</strong> el primer token es siempre <code class="docutils literal notranslate"><span class="pre">[CLS]</span></code>. Su representacion en la ultima capa <span class="math notranslate nohighlight">\(\mathbf{h}_{[CLS]}^L\)</span> se usa como representacion de toda la secuencia para tareas de clasificacion.</p>
+<p><strong>Separadores:</strong> <code class="docutils literal notranslate"><span class="pre">[SEP]</span></code> separa oraciones. El formato de entrada es:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">CLS</span><span class="p">]</span> <span class="n">Oracion</span> <span class="n">A</span> <span class="p">[</span><span class="n">SEP</span><span class="p">]</span> <span class="n">Oracion</span> <span class="n">B</span> <span class="p">[</span><span class="n">SEP</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>Embeddings de BERT:</strong> suma de tres tipos:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{E}_{input} = \mathbf{E}_{token} + \mathbf{E}_{segment} + \mathbf{E}_{position}\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{E}_{token}\)</span>: embedding del token.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{E}_{segment}\)</span>: indica si el token pertenece a la oracion A o B.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{E}_{position}\)</span>: posicion (aprendible, no sinusoidal).</p></li>
+</ul>
+<p><strong>Variantes:</strong></p>
+<ul class="simple">
+<li><p><strong>BERT-base:</strong> <span class="math notranslate nohighlight">\(L=12\)</span>, <span class="math notranslate nohighlight">\(d=768\)</span>, <span class="math notranslate nohighlight">\(h=12\)</span>, 110M params.</p></li>
+<li><p><strong>BERT-large:</strong> <span class="math notranslate nohighlight">\(L=24\)</span>, <span class="math notranslate nohighlight">\(d=1024\)</span>, <span class="math notranslate nohighlight">\(h=16\)</span>, 340M params.</p></li>
+<li><p><strong>RoBERTa:</strong> BERT reentrenado mas tiempo, sin NSP, con BPE y batches mas grandes.</p></li>
+<li><p><strong>ALBERT:</strong> embeddings factorizados, capas compartidas. Reduce parametros drasticamente.</p></li>
+</ul>
+<img src="../_static/images/nlp4.png" width="600" />
+### 8.3 GPT (Generative Pre-trained Transformer)
+<p><strong>Arquitectura:</strong> Transformer decoder solo (sin cross-attention). Lee el contexto en una sola direccion (izquierda a derecha) gracias a la mascara causal.</p>
+<p><strong>Objetivo: Language Modeling (LM)</strong></p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}_{LM} = -\sum_{t=1}^{T} \log p_\theta(x_t \mid x_1, \ldots, x_{t-1})\]</div>
+<p>Es el objetivo autoregressivo estandar: predecir el siguiente token dado el contexto anterior.</p>
+<p><strong>GPT-2:</strong> escala el modelo (~1.5B params) y demuestra capacidades emergentes de <strong>zero-shot</strong> sin ajuste fino.</p>
+<p><strong>GPT-3 (Brown et al., 2020):</strong> 175B params. Introduce el concepto de <strong>in-context learning</strong>: el modelo puede adaptarse a una tarea nueva viendo solo unos pocos ejemplos en el prompt, sin actualizar pesos:</p>
+<div class="math notranslate nohighlight">
+\[p_\theta(y \mid x, C) = p_\theta(y \mid \text{&quot;Ejemplo 1: ... Ejemplo 2: ... Pregunta: } x\text{&quot;})\]</div>
+<p>donde <span class="math notranslate nohighlight">\(C\)</span> es el conjunto de demostraciones en el contexto.</p>
+</section>
+<section id="instruccion-tuning-y-rlhf">
+<h3>8.4 Instruccion-tuning y RLHF<a class="headerlink" href="#instruccion-tuning-y-rlhf" title="Link to this heading">#</a></h3>
+<p>Para modelos conversacionales (ChatGPT, InstructGPT), el preentrenamiento se complementa con:</p>
+<section id="supervised-fine-tuning-sft">
+<h4>8.4.1 Supervised Fine-Tuning (SFT)<a class="headerlink" href="#supervised-fine-tuning-sft" title="Link to this heading">#</a></h4>
+<p>Ajuste fino sobre pares (instruccion, respuesta) escritos por humanos:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}_{SFT} = -\sum_{t} \log p_\theta(y_t \mid y_{&lt;t}, x)\]</div>
+</section>
+<section id="reinforcement-learning-from-human-feedback-rlhf">
+<h4>8.4.2 Reinforcement Learning from Human Feedback (RLHF)<a class="headerlink" href="#reinforcement-learning-from-human-feedback-rlhf" title="Link to this heading">#</a></h4>
+<p><strong>Paso 1:</strong> Entrenar un <strong>modelo de recompensa</strong> <span class="math notranslate nohighlight">\(r_\phi(x, y)\)</span> que predice la preferencia humana a partir de comparaciones entre respuestas:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}_{RM} = -\mathbb{E}_{(x, y_w, y_l)}[\log \sigma(r_\phi(x, y_w) - r_\phi(x, y_l))]\]</div>
+<p>donde <span class="math notranslate nohighlight">\(y_w\)</span> es la respuesta preferida y <span class="math notranslate nohighlight">\(y_l\)</span> la no preferida (Bradley-Terry model).</p>
+<p><strong>Paso 2:</strong> Optimizar la politica del LLM con PPO (Proximal Policy Optimization) maximizando la recompensa con un termino de regularizacion KL:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}_{PPO} = \mathbb{E}_{x \sim \mathcal{D}, y \sim \pi_\theta(y|x)}\left[r_\phi(x, y) - \beta \cdot D_{KL}(\pi_\theta(y|x) \| \pi_{ref}(y|x))\right]\]</div>
+<p>donde <span class="math notranslate nohighlight">\(\pi_{ref}\)</span> es la politica del modelo SFT (punto de referencia). El termino KL evita que la politica se aleje demasiado del modelo base.</p>
+</section>
+<section id="dpo-direct-preference-optimization">
+<h4>8.4.3 DPO (Direct Preference Optimization)<a class="headerlink" href="#dpo-direct-preference-optimization" title="Link to this heading">#</a></h4>
+<p>Rafailov et al. (2023) mostraron que RLHF con el termino KL tiene solucion analitica. Se puede optimizar la preferencia directamente sin un modelo de recompensa separado:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}_{DPO} = -\mathbb{E}_{(x,y_w,y_l)}\left[\log \sigma\left(\beta \log \frac{\pi_\theta(y_w|x)}{\pi_{ref}(y_w|x)} - \beta \log \frac{\pi_\theta(y_l|x)}{\pi_{ref}(y_l|x)}\right)\right]\]</div>
+</section>
+</section>
+<section id="parameter-efficient-fine-tuning-peft">
+<h3>8.5 Parameter-Efficient Fine-Tuning (PEFT)<a class="headerlink" href="#parameter-efficient-fine-tuning-peft" title="Link to this heading">#</a></h3>
+<p>Para modelos grandes (&gt;1B params), el ajuste fino completo es costoso. Las tecnicas PEFT actualizan solo un subconjunto pequeño de parametros.</p>
+<section id="lora-low-rank-adaptation-hu-et-al-2021">
+<h4>8.5.1 LoRA (Low-Rank Adaptation, Hu et al., 2021)<a class="headerlink" href="#lora-low-rank-adaptation-hu-et-al-2021" title="Link to this heading">#</a></h4>
+<p>Las actualizaciones de pesos durante el ajuste fino tienen <strong>rango intrisecamente bajo</strong>. LoRA descompone la actualizacion <span class="math notranslate nohighlight">\(\Delta \mathbf{W}\)</span> como producto de dos matrices de bajo rango:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{W}' = \mathbf{W}_0 + \Delta \mathbf{W} = \mathbf{W}_0 + \mathbf{B}\mathbf{A}\]</div>
+<p>donde <span class="math notranslate nohighlight">\(\mathbf{W}_0 \in \mathbb{R}^{d \times k}\)</span> se congela, <span class="math notranslate nohighlight">\(\mathbf{B} \in \mathbb{R}^{d \times r}\)</span> y <span class="math notranslate nohighlight">\(\mathbf{A} \in \mathbb{R}^{r \times k}\)</span> con <span class="math notranslate nohighlight">\(r \ll \min(d,k)\)</span> son los unicos parametros entrenables.</p>
+<p>La inicializacion es <span class="math notranslate nohighlight">\(\mathbf{B} = \mathbf{0}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{A} \sim \mathcal{N}(0, \sigma^2)\)</span> para que <span class="math notranslate nohighlight">\(\Delta \mathbf{W} = \mathbf{0}\)</span> al inicio.</p>
+<p><strong>Reduccion de parametros:</strong> para <span class="math notranslate nohighlight">\(d = k = 4096\)</span> y <span class="math notranslate nohighlight">\(r = 8\)</span>: <span class="math notranslate nohighlight">\(4096^2 \approx 16.7M\)</span> vs <span class="math notranslate nohighlight">\(2 \times 4096 \times 8 = 65536 \approx 65K\)</span> (reduccion de 256x).</p>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="tareas-de-nlp">
+<h2>9. Tareas de NLP<a class="headerlink" href="#tareas-de-nlp" title="Link to this heading">#</a></h2>
+<section id="clasificacion-de-texto">
+<h3>9.1 Clasificacion de texto<a class="headerlink" href="#clasificacion-de-texto" title="Link to this heading">#</a></h3>
+<p><strong>Entrada:</strong> secuencia <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. <strong>Salida:</strong> etiqueta <span class="math notranslate nohighlight">\(y \in \{1, \ldots, C\}\)</span>.</p>
+<p>Con BERT: tomar <span class="math notranslate nohighlight">\(\mathbf{h}_{[CLS]}^L\)</span> y aplicar una capa de clasificacion:</p>
+<div class="math notranslate nohighlight">
+\[p(y \mid \mathbf{x}) = \text{softmax}(\mathbf{W}_c \mathbf{h}_{[CLS]}^L + \mathbf{b}_c)\]</div>
+<p>Entrenada con <strong>Cross-Entropy</strong> (negative log-likelihood):</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}_{CE} = -\sum_{i=1}^{N} \log p(y^{(i)} \mid \mathbf{x}^{(i)}) = -\sum_{i=1}^{N} \sum_{c=1}^{C} \mathbb{1}[y^{(i)} = c] \log \hat{p}_c^{(i)}\]</div>
+</section>
+<section id="reconocimiento-de-entidades-nombradas-ner">
+<h3>9.2 Reconocimiento de entidades nombradas (NER)<a class="headerlink" href="#reconocimiento-de-entidades-nombradas-ner" title="Link to this heading">#</a></h3>
+<p>Tarea de etiquetado de secuencias. Para cada token se predice su etiqueta:</p>
+<div class="math notranslate nohighlight">
+\[p(y_t \mid \mathbf{x}) = \text{softmax}(\mathbf{W}_{NER} \mathbf{h}_t^L + \mathbf{b}_{NER})\]</div>
+<p>Esquema de etiquetado <strong>BIO</strong>: <code class="docutils literal notranslate"><span class="pre">B-PER</span></code>, <code class="docutils literal notranslate"><span class="pre">I-PER</span></code>, <code class="docutils literal notranslate"><span class="pre">O</span></code> para separar entidades adyacentes.</p>
+<p><strong>CRF</strong> (Conditional Random Field) sobre las salidas del Transformer captura dependencias entre etiquetas consecutivas:</p>
+<div class="math notranslate nohighlight">
+\[p(\mathbf{y} \mid \mathbf{x}) = \frac{1}{Z(\mathbf{x})} \exp\left(\sum_{t=1}^{T} \phi(y_t, \mathbf{h}_t) + \sum_{t=1}^{T-1} \psi(y_t, y_{t+1})\right)\]</div>
+<p>donde <span class="math notranslate nohighlight">\(\phi\)</span> son los scores unarios y <span class="math notranslate nohighlight">\(\psi\)</span> los scores de transicion.</p>
+<img src="../_static/images/nlp5.png" width="600" />
+</section>
+<section id="question-answering-extractivo">
+<h3>9.3 Question Answering extractivo<a class="headerlink" href="#question-answering-extractivo" title="Link to this heading">#</a></h3>
+<p>Dado un contexto <span class="math notranslate nohighlight">\(C\)</span> y una pregunta <span class="math notranslate nohighlight">\(Q\)</span>, predecir el span <span class="math notranslate nohighlight">\([s, e]\)</span> del contexto que contiene la respuesta.</p>
+<p>Con BERT se predicen dos distribuciones sobre posiciones:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{p}^{start} = \text{softmax}(\mathbf{w}_{start}^\top \mathbf{H}^L), \quad \mathbf{p}^{end} = \text{softmax}(\mathbf{w}_{end}^\top \mathbf{H}^L)\]</div>
+<p>La respuesta es el span <span class="math notranslate nohighlight">\([s, e]\)</span> que maximiza <span class="math notranslate nohighlight">\(p_s^{start} \cdot p_e^{end}\)</span> sujeto a <span class="math notranslate nohighlight">\(s \leq e\)</span>.</p>
+<p><strong>Perdida:</strong> suma de las cross-entropies para inicio y fin:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}_{QA} = -\frac{1}{N}\sum_{i=1}^{N}\left(\log p_{s_i}^{start} + \log p_{e_i}^{end}\right)\]</div>
+</section>
+<section id="traduccion-automatica">
+<h3>9.4 Traduccion automatica<a class="headerlink" href="#traduccion-automatica" title="Link to this heading">#</a></h3>
+<p><strong>Modelo seq2seq con Transformer encoder-decoder.</strong></p>
+<p>En entrenamiento se usa <strong>teacher forcing</strong>: el decoder recibe los tokens objetivo reales como entrada, no sus propias predicciones anteriores.</p>
+<p>En inferencia se usa <strong>beam search</strong> con amplitud <span class="math notranslate nohighlight">\(B\)</span>:</p>
+<p>En cada paso se mantienen las <span class="math notranslate nohighlight">\(B\)</span> hipotesis parciales con mayor log-probabilidad acumulada:</p>
+<div class="math notranslate nohighlight">
+\[\text{score}(y_1, \ldots, y_t) = \frac{1}{t^\alpha} \sum_{k=1}^{t} \log p(y_k \mid y_{&lt;k}, \mathbf{x})\]</div>
+<p>donde el exponente <span class="math notranslate nohighlight">\(\alpha \in [0.6, 0.7]\)</span> es el <strong>length penalty</strong> que evita favorecer sistematicamente secuencias cortas.</p>
+</section>
+<section id="generacion-de-texto">
+<h3>9.5 Generacion de texto<a class="headerlink" href="#generacion-de-texto" title="Link to this heading">#</a></h3>
+<p>Para modelos autorregresivos (GPT), la generacion se controla con varias estrategias de decodificacion:</p>
+<p><strong>Temperatura:</strong> escala los logits antes del softmax, controlando la concentracion de la distribucion:</p>
+<div class="math notranslate nohighlight">
+\[p_\tau(x_t = w \mid x_{&lt;t}) = \frac{\exp(z_w / \tau)}{\sum_{w'} \exp(z_{w'} / \tau)}\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\tau \to 0\)</span>: argmax (greedy, determinista).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\tau = 1\)</span>: distribucion original del modelo.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\tau &gt; 1\)</span>: distribucion mas uniforme (mas diversidad, mas errores).</p></li>
+</ul>
+<p><strong>Top-k sampling:</strong> muestrear solo de los <span class="math notranslate nohighlight">\(k\)</span> tokens mas probables:</p>
+<div class="math notranslate nohighlight">
+\[\hat{p}(x_t = w) \propto p(x_t = w) \cdot \mathbb{1}[w \in \text{Top-}k]\]</div>
+<p><strong>Nucleus sampling (top-p):</strong> muestrear del nucleo de tokens cuya probabilidad acumulada supera un umbral <span class="math notranslate nohighlight">\(p\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[V^{(p)} = \arg\min_V \sum_{w \in V} p(w) \geq p\]</div>
+<p>Adaptativo: para distribuciones concentradas el nucleo es pequeño; para distribuciones planas es grande.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="metricas-de-evaluacion">
+<h2>10. Metricas de Evaluacion<a class="headerlink" href="#metricas-de-evaluacion" title="Link to this heading">#</a></h2>
+<section id="bleu-bilingual-evaluation-understudy">
+<h3>10.1 BLEU (Bilingual Evaluation Understudy)<a class="headerlink" href="#bleu-bilingual-evaluation-understudy" title="Link to this heading">#</a></h3>
+<p>BLEU (Papineni et al., 2002) mide la precision de n-gramas de la hipotesis respecto a las referencias.</p>
+<p><strong>Precision de n-gramas modificada:</strong></p>
+<div class="math notranslate nohighlight">
+\[p_n = \frac{\sum_{\text{s} \in \text{Hypothesis}} \sum_{\text{n-gram} \in \text{s}} \min(C(\text{n-gram}, \text{s}), \max_{r \in R} C(\text{n-gram}, r))}{\sum_{\text{s} \in \text{Hypothesis}} \sum_{\text{n-gram} \in \text{s}} C(\text{n-gram}, \text{s})}\]</div>
+<p>El termino «clip» <span class="math notranslate nohighlight">\(\min(\cdot, \max(\cdot))\)</span> evita que repetir tokens inflados la precision.</p>
+<p><strong>Brevity Penalty</strong> penaliza hipotesis mas cortas que la referencia:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}BP = \begin{cases} 1 &amp; \text{si } c &gt; r \\ e^{1 - r/c} &amp; \text{si } c \leq r \end{cases}\end{split}\]</div>
+<p>donde <span class="math notranslate nohighlight">\(c\)</span> es la longitud de la hipotesis y <span class="math notranslate nohighlight">\(r\)</span> la longitud de referencia efectiva.</p>
+<p><strong>BLEU final:</strong></p>
+<div class="math notranslate nohighlight">
+\[\text{BLEU} = BP \cdot \exp\left(\sum_{n=1}^{N} w_n \log p_n\right)\]</div>
+<p>con <span class="math notranslate nohighlight">\(N = 4\)</span> y <span class="math notranslate nohighlight">\(w_n = 1/N\)</span> tipicamente (media geometrica de las precisiones 1 a 4-grama).</p>
+<p><strong>Limitaciones:</strong> no captura semantica, penaliza sinonimos, sensible a segmentacion. Se complementa con METEOR, ROUGE y BERTScore.</p>
+</section>
+<section id="rouge">
+<h3>10.2 ROUGE<a class="headerlink" href="#rouge" title="Link to this heading">#</a></h3>
+<p>ROUGE (Lin, 2004) se usa principalmente para evaluacion de resumenes, midiendo <strong>recall</strong> de n-gramas:</p>
+<div class="math notranslate nohighlight">
+\[\text{ROUGE-N} = \frac{\sum_{r \in R} \sum_{\text{n-gram} \in r} \min(C(\text{n-gram}, \text{hip}), C(\text{n-gram}, r))}{\sum_{r \in R} \sum_{\text{n-gram} \in r} C(\text{n-gram}, r)}\]</div>
+<p><strong>ROUGE-L</strong> usa la <strong>longest common subsequence</strong> (LCS):</p>
+<div class="math notranslate nohighlight">
+\[P_{LCS} = \frac{|\text{LCS}(\text{hip}, r)|}{|\text{hip}|}, \quad R_{LCS} = \frac{|\text{LCS}(\text{hip}, r)|}{|r|}\]</div>
+<div class="math notranslate nohighlight">
+\[F_{LCS} = \frac{(1 + \beta^2) P_{LCS} R_{LCS}}{P_{LCS} + \beta^2 R_{LCS}}\]</div>
+</section>
+<section id="bertscore">
+<h3>10.3 BERTScore<a class="headerlink" href="#bertscore" title="Link to this heading">#</a></h3>
+<p>BERTScore (Zhang et al., 2019) usa embeddings de BERT para medir similitud semantica a nivel de token:</p>
+<div class="math notranslate nohighlight">
+\[P_{BERT} = \frac{1}{|\hat{y}|} \sum_{\hat{y}_i \in \hat{y}} \max_{y_j \in y} \mathbf{x}_i^\top \mathbf{x}_j\]</div>
+<div class="math notranslate nohighlight">
+\[R_{BERT} = \frac{1}{|y|} \sum_{y_j \in y} \max_{\hat{y}_i \in \hat{y}} \mathbf{x}_i^\top \mathbf{x}_j\]</div>
+<div class="math notranslate nohighlight">
+\[F_{BERT} = 2 \cdot \frac{P_{BERT} \cdot R_{BERT}}{P_{BERT} + R_{BERT}}\]</div>
+<p>donde <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> son los embeddings contextuales normalizados del token <span class="math notranslate nohighlight">\(i\)</span>. Captura similitud semantica que BLEU ignora.</p>
+</section>
+<section id="perplejidad-revision">
+<h3>10.4 Perplejidad (revision)<a class="headerlink" href="#perplejidad-revision" title="Link to this heading">#</a></h3>
+<p>Para un modelo de lenguaje neuronal sobre un corpus de evaluacion con <span class="math notranslate nohighlight">\(N\)</span> tokens:</p>
+<div class="math notranslate nohighlight">
+\[\text{PPL} = \exp\left(-\frac{1}{N} \sum_{t=1}^{N} \log p_\theta(x_t \mid x_{&lt;t})\right)\]</div>
+<p>Es la metrica intrinseca estandar para comparar modelos de lenguaje independientemente de la tarea.</p>
+<img src="../_static/images/nlp6.png" width="600" />
+---
+</section>
+</section>
+<section id="referencias">
+<h2>11. Referencias<a class="headerlink" href="#referencias" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Bengio, Y., Ducharme, R., Vincent, P., &amp; Jauvin, C. (2003). A neural probabilistic language model. <em>JMLR</em>, 3, 1137–1155.</p></li>
+<li><p>Mikolov, T., et al. (2013). Distributed representations of words and phrases and their compositionality. <em>NeurIPS 2013</em>.</p></li>
+<li><p>Pennington, J., Socher, R., &amp; Manning, C. (2014). GloVe: Global vectors for word representation. <em>EMNLP 2014</em>.</p></li>
+<li><p>Bahdanau, D., Cho, K., &amp; Bengio, Y. (2015). Neural machine translation by jointly learning to align and translate. <em>ICLR 2015</em>.</p></li>
+<li><p>Hochreiter, S., &amp; Schmidhuber, J. (1997). Long short-term memory. <em>Neural Computation</em>, 9(8), 1735–1780.</p></li>
+<li><p>Cho, K., et al. (2014). Learning phrase representations using RNN encoder-decoder for statistical machine translation. <em>EMNLP 2014</em>.</p></li>
+<li><p>Vaswani, A., et al. (2017). Attention is all you need. <em>NeurIPS 2017</em>.</p></li>
+<li><p>Devlin, J., et al. (2018). BERT: Pre-training of deep bidirectional transformers for language understanding. <em>NAACL 2019</em>.</p></li>
+<li><p>Brown, T., et al. (2020). Language models are few-shot learners. <em>NeurIPS 2020</em>.</p></li>
+<li><p>Rafailov, R., et al. (2023). Direct preference optimization. <em>NeurIPS 2023</em>.</p></li>
+<li><p>Hu, E., et al. (2021). LoRA: Low-rank adaptation of large language models. <em>ICLR 2022</em>.</p></li>
+<li><p>Su, J., et al. (2021). RoFormer: Enhanced transformer with rotary position embedding. <em>arXiv:2104.09864</em>.</p></li>
+<li><p>Zhang, T., et al. (2019). BERTScore: Evaluating text generation with BERT. <em>ICLR 2020</em>.</p></li>
+<li><p>Papineni, K., et al. (2002). BLEU: A method for automatic evaluation of machine translation. <em>ACL 2002</em>.</p></li>
+<li><p>Sennrich, R., Haddow, B., &amp; Birch, A. (2016). Neural machine translation of rare words with subword units. <em>ACL 2016</em>.</p></li>
+</ul>
+<hr class="docutils" />
+<!-- IMAGEN: Diagrama completo de la arquitectura Transformer (encoder izquierda, decoder derecha) con MHA, FFN, LayerNorm, conexiones residuales y embeddings posicionales etiquetados -->
+<!-- IMAGEN: Visualizacion de matrices de atencion multi-cabeza mostrando distintos patrones de alineamiento por cabeza (sintactico, semantico, posicional) -->
+<!-- IMAGEN: Comparativa de arquitecturas BERT (encoder bidireccional), GPT (decoder causal) y T5 (encoder-decoder completo) con sus objetivos de preentrenamiento -->
+<!-- IMAGEN: Geometria de Word2Vec: analogo rey-reina-hombre-mujer en espacio 2D via PCA, mostrando paralelismo de vectores -->
+<!-- IMAGEN: Diagrama del mecanismo de atencion de Bahdanau con la matriz de alineamiento α para una oracion de traduccion ingles-frances -->
+<!-- IMAGEN: Curvas de perplejidad vs. tamaño de modelo para n-gramas, RNN y Transformers en el mismo corpus -->
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Unidad 1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="segmentacion_tf.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">1.7 Segmentacion con Inteligencia Artificial — TensorFlow / Keras</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="nlp_tensorflow.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">1.9 Procesamiento de Lenguaje Natural con TensorFlow / Keras</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indice">Indice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentos-matematicos-del-lenguaje">1. Fundamentos Matematicos del Lenguaje</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-formal-de-un-texto">1.1 Definicion formal de un texto</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-lenguaje-como-distribucion-de-probabilidad">1.2 Modelo de lenguaje como distribucion de probabilidad</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropia-y-perplejidad">1.3 Entropia y perplejidad</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#divergencia-kl-e-informacion-mutua">1.4 Divergencia KL e informacion mutua</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representaciones-de-texto">2. Representaciones de Texto</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenizacion">2.1 Tokenizacion</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#byte-pair-encoding-bpe">Byte-Pair Encoding (BPE)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representacion-one-hot">2.2 Representacion one-hot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bolsa-de-palabras-bag-of-words">2.3 Bolsa de palabras (Bag of Words)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-lenguaje-estadisticos">3. Modelos de Lenguaje Estadisticos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-n-grama">3.1 Modelo n-grama</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#word-embeddings">4. Word Embeddings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#motivacion-geometrica">4.1 Motivacion geometrica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#word2vec-mikolov-et-al-2013">4.2 Word2Vec (Mikolov et al., 2013)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#skip-gram">4.2.1 Skip-gram</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#negative-sampling">4.2.2 Negative Sampling</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cbow-continuous-bag-of-words">4.2.3 CBOW (Continuous Bag of Words)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#glove-pennington-et-al-2014">4.3 GloVe (Pennington et al., 2014)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#propiedades-algebraicas">4.4 Propiedades algebraicas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fasttext-bojanowski-et-al-2017">4.5 FastText (Bojanowski et al., 2017)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#redes-recurrentes">5. Redes Recurrentes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rnn-recurrent-neural-network">5.1 RNN (Recurrent Neural Network)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#backpropagation-through-time-bptt">5.1.1 Backpropagation Through Time (BPTT)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lstm-long-short-term-memory">5.2 LSTM (Long Short-Term Memory)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gru-gated-recurrent-unit">5.3 GRU (Gated Recurrent Unit)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitectura-encoder-decoder-con-rnn">5.4 Arquitectura encoder-decoder con RNN</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mecanismo-de-atencion">6. Mecanismo de Atencion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atencion-de-bahdanau-bahdanau-et-al-2015">6.1 Atencion de Bahdanau (Bahdanau et al., 2015)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atencion-de-luong-luong-et-al-2015">6.2 Atencion de Luong (Luong et al., 2015)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complejidad-computacional-de-la-atencion">6.3 Complejidad computacional de la atencion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atencion-multi-cabeza-multi-head-attention">7.1 Atencion Multi-Cabeza (Multi-Head Attention)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atencion-scaled-dot-product">7.1.1 Atencion Scaled Dot-Product</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-head-attention">7.1.2 Multi-Head Attention</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#red-feed-forward-posicional-ffn">7.2 Red Feed-Forward Posicional (FFN)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#codificacion-posicional-positional-encoding">7.3 Codificacion Posicional (Positional Encoding)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizacion-de-capa-layer-normalization">7.4 Normalizacion de capa (Layer Normalization)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conexiones-residuales">7.5 Conexiones residuales</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-transformer-completo">7.6 Bloque Transformer completo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parametros-totales-del-transformer">7.7 Parametros totales del Transformer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complejidad-computacional-del-transformer">7.8 Complejidad computacional del Transformer</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-preentrenados">8. Modelos Preentrenados</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paradigma-preentrenamiento-ajuste-fino">8.1 Paradigma preentrenamiento - ajuste fino</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bert-devlin-et-al-2018">8.2 BERT (Devlin et al., 2018)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#instruccion-tuning-y-rlhf">8.4 Instruccion-tuning y RLHF</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#supervised-fine-tuning-sft">8.4.1 Supervised Fine-Tuning (SFT)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reinforcement-learning-from-human-feedback-rlhf">8.4.2 Reinforcement Learning from Human Feedback (RLHF)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dpo-direct-preference-optimization">8.4.3 DPO (Direct Preference Optimization)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-efficient-fine-tuning-peft">8.5 Parameter-Efficient Fine-Tuning (PEFT)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#lora-low-rank-adaptation-hu-et-al-2021">8.5.1 LoRA (Low-Rank Adaptation, Hu et al., 2021)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tareas-de-nlp">9. Tareas de NLP</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-texto">9.1 Clasificacion de texto</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reconocimiento-de-entidades-nombradas-ner">9.2 Reconocimiento de entidades nombradas (NER)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-answering-extractivo">9.3 Question Answering extractivo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#traduccion-automatica">9.4 Traduccion automatica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generacion-de-texto">9.5 Generacion de texto</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas-de-evaluacion">10. Metricas de Evaluacion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bleu-bilingual-evaluation-understudy">10.1 BLEU (Bilingual Evaluation Understudy)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rouge">10.2 ROUGE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bertscore">10.3 BERTScore</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perplejidad-revision">10.4 Perplejidad (revision)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencias">11. Referencias</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Sergio Alejandro Holguin García
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1409 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1.10 Modelos de Lenguaje de Gran Escala (LLMs) &#8212; Ciencia de Datos Aplicada- 01 Ucaldas</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unidad 1/17_llms';</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="1.11 LLMs en la Practica: OpenAI GPT y Ollama" href="llms_colab.html" />
+    <link rel="prev" title="1.9 Procesamiento de Lenguaje Natural con TensorFlow / Keras" href="nlp_tensorflow.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Ciencia de Datos Aplicada- 01 Ucaldas - Home"/>
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark pst-js-only" alt="Ciencia de Datos Aplicada- 01 Ucaldas - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Ciencia de datos aplicada
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Unidad1.html">1. Deep Learning Avanzado</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_introduccion_ia.html">1.1 Tópicos Emergentes de la IA — 2026</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02_Autoencoders.html">1.2 Autoencoders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoencoders_tf.html">1.3 Autoencoders en TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Gans_teoria.html">1.4 Redes Generativas Adversariales (GANs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gans_tf.html">1.5 Redes Generativas Adversariales (GANs) en TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="segmentacion_teoria.html">1.6 Segmentación con Inteligencia Artificial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="segmentacion_tf.html">1.7 Segmentacion con Inteligencia Artificial — TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="16_nlp_transformers.html">1.8 Procesamiento de Lenguaje Natural y Transformers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlp_tensorflow.html">1.9 Procesamiento de Lenguaje Natural con TensorFlow / Keras</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.10 Modelos de Lenguaje de Gran Escala (LLMs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llms_colab.html">1.11 LLMs en la Practica: OpenAI GPT y Ollama</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="18_agentes.html">1.12 Agentes de Inteligencia Artificial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agentes_colab.html">1.13 Agentes de Inteligencia Artificial</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="frameworks_agentes.html">1.14 LangChain · LangGraph · CrewAI</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/CienciaDatosAplicada" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/CienciaDatosAplicada/issues/new?title=Issue%20on%20page%20%2FUnidad 1/17_llms.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Unidad 1/17_llms.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>1.10 Modelos de Lenguaje de Gran Escala (LLMs)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indice">Indice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitectura-base-transformer-decoder">1. Arquitectura Base: Transformer Decoder</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#formulacion-del-modelo-de-lenguaje-autorregresivo">1.1 Formulacion del modelo de lenguaje autorregresivo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformer-decoder-con-pre-layernorm">1.2 Transformer decoder con Pre-LayerNorm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scaled-dot-product-attention-con-mascara-causal">1.3 Scaled Dot-Product Attention con mascara causal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-head-attention">1.4 Multi-Head Attention</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feed-forward-network">1.5 Feed-Forward Network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#layer-normalization">1.6 Layer Normalization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weight-tying">1.7 Weight Tying</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conteo-de-parametros">1.8 Conteo de parametros</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preentrenamiento-a-escala">2. Preentrenamiento a Escala</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo-de-modelado-de-lenguaje">2.1 Objetivo de modelado de lenguaje</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizacion-adamw">2.2 Optimizacion: AdamW</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-rate-scheduling">2.3 Learning rate scheduling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-clipping">2.4 Gradient Clipping</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#procesamiento-del-corpus">2.5 Procesamiento del corpus</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#leyes-de-escala">3. Leyes de Escala</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ley-de-potencias-de-kaplan-et-al-2020">3.1 Ley de potencias de Kaplan et al. (2020)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ley-de-chinchilla-hoffmann-et-al-2022">3.2 Ley de Chinchilla (Hoffmann et al., 2022)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perdida-conjunta">3.3 Perdida conjunta</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenizacion-avanzada">4. Tokenizacion Avanzada</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#byte-pair-encoding-bpe">4.1 Byte-Pair Encoding (BPE)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wordpiece-bert">4.2 WordPiece (BERT)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sentencepiece">4.3 SentencePiece</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fertilidad">4.4 Fertilidad</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mejoras-arquitectonicas-modernas">5. Mejoras Arquitectonicas Modernas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rotary-positional-embedding-rope">5.1 Rotary Positional Embedding (RoPE)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grouped-query-attention-gqa">5.2 Grouped Query Attention (GQA)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kv-cache">5.3 KV-Cache</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flash-attention">5.4 Flash Attention</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extended-context-ventanas-de-atencion-y-alibi">5.5 Extended Context: Ventanas de Atencion y ALiBi</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ajuste-fino-supervisado">6. Ajuste Fino Supervisado</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#instruction-tuning-sft">6.1 Instruction Tuning (SFT)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#catastrophic-forgetting">6.2 Catastrophic Forgetting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rlhf-y-alineacion">7. RLHF y Alineacion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reward-modeling">7.1 Reward Modeling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppo-para-llms">7.2 PPO para LLMs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dpo-direct-preference-optimization">7.3 DPO (Direct Preference Optimization)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constitutional-ai-cai">7.4 Constitutional AI (CAI)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inferencia-eficiente">8. Inferencia Eficiente</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cuantizacion">8.1 Cuantizacion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#especulative-decoding">8.2 Especulative Decoding</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-batching">8.3 Continuous Batching</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adaptacion-eficiente-en-parametros-peft">9. Adaptacion Eficiente en Parametros (PEFT)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lora-low-rank-adaptation">9.1 LoRA (Low-Rank Adaptation)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qlora">9.2 QLoRA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-tuning-y-prefix-tuning">9.3 Prompt Tuning y Prefix Tuning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#capacidades-emergentes">10. Capacidades Emergentes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-context-learning">10.1 In-Context Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chain-of-thought-cot">10.2 Chain-of-Thought (CoT)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#emergencia-y-cambios-de-fase">10.3 Emergencia y Cambios de Fase</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieval-augmented-generation-rag">10.4 Retrieval-Augmented Generation (RAG)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-de-llms">11. Evaluacion de LLMs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perplejidad">11.1 Perplejidad</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmarks-estandar">11.2 Benchmarks Estandar</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pass-k-para-codigo">11.3 pass@k para codigo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#llm-as-judge">11.4 LLM-as-Judge</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rlhf-reward-model-como-proxy-de-alineacion">11.5 RLHF Reward Model como proxy de alineacion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencias">12. Referencias</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="modelos-de-lenguaje-de-gran-escala-llms">
+<h1>1.10 Modelos de Lenguaje de Gran Escala (LLMs)<a class="headerlink" href="#modelos-de-lenguaje-de-gran-escala-llms" title="Link to this heading">#</a></h1>
+<section id="indice">
+<h2>Indice<a class="headerlink" href="#indice" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#1-arquitectura-base-transformer-decoder"><span class="xref myst">Arquitectura base: Transformer decoder</span></a></p></li>
+<li><p><a class="reference internal" href="#2-preentrenamiento-a-escala"><span class="xref myst">Preentrenamiento a escala</span></a></p></li>
+<li><p><a class="reference internal" href="#3-leyes-de-escala"><span class="xref myst">Leyes de escala (Scaling Laws)</span></a></p></li>
+<li><p><a class="reference internal" href="#4-tokenizacion-avanzada"><span class="xref myst">Tokenizacion avanzada</span></a></p></li>
+<li><p><a class="reference internal" href="#5-mejoras-arquitectonicas-modernas"><span class="xref myst">Mejoras arquitectonicas modernas</span></a></p></li>
+<li><p><a class="reference internal" href="#6-ajuste-fino-supervisado"><span class="xref myst">Ajuste fino supervisado (SFT)</span></a></p></li>
+<li><p><a class="reference internal" href="#7-rlhf-y-alineacion"><span class="xref myst">RLHF y alineacion</span></a></p></li>
+<li><p><a class="reference internal" href="#8-inferencia-eficiente"><span class="xref myst">Inferencia eficiente</span></a></p></li>
+<li><p><a class="reference internal" href="#9-adaptacion-eficiente-en-parametros"><span class="xref myst">Adaptacion eficiente en parametros (PEFT)</span></a></p></li>
+<li><p><a class="reference internal" href="#10-capacidades-emergentes"><span class="xref myst">Capacidades emergentes</span></a></p></li>
+<li><p><a class="reference internal" href="#11-evaluacion-de-llms"><span class="xref myst">Evaluacion de LLMs</span></a></p></li>
+<li><p><a class="reference internal" href="#12-referencias"><span class="xref myst">Referencias</span></a></p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="arquitectura-base-transformer-decoder">
+<h2>1. Arquitectura Base: Transformer Decoder<a class="headerlink" href="#arquitectura-base-transformer-decoder" title="Link to this heading">#</a></h2>
+<section id="formulacion-del-modelo-de-lenguaje-autorregresivo">
+<h3>1.1 Formulacion del modelo de lenguaje autorregresivo<a class="headerlink" href="#formulacion-del-modelo-de-lenguaje-autorregresivo" title="Link to this heading">#</a></h3>
+<p>Un LLM define una distribucion sobre secuencias de tokens mediante la regla de la cadena:</p>
+<div class="math notranslate nohighlight">
+\[p_\theta(\mathbf{x}) = \prod_{t=1}^{T} p_\theta(x_t \mid x_1, \ldots, x_{t-1}) = \prod_{t=1}^{T} p_\theta(x_t \mid x_{&lt;t})\]</div>
+<p>El objetivo de entrenamiento es maximizar la log-verosimilitud del corpus <span class="math notranslate nohighlight">\(\mathcal{D}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}(\theta) = \mathbb{E}_{\mathbf{x} \sim \mathcal{D}} \left[ \frac{1}{T} \sum_{t=1}^{T} \log p_\theta(x_t \mid x_{&lt;t}) \right]\]</div>
+<p>Equivalentemente, minimizar la <strong>cross-entropy</strong> media por token:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}_{CE} = -\frac{1}{|\mathcal{D}|} \sum_{\mathbf{x} \in \mathcal{D}} \sum_{t=1}^{T} \log p_\theta(x_t \mid x_{&lt;t})\]</div>
+</section>
+<section id="transformer-decoder-con-pre-layernorm">
+<h3>1.2 Transformer decoder con Pre-LayerNorm<a class="headerlink" href="#transformer-decoder-con-pre-layernorm" title="Link to this heading">#</a></h3>
+<p>La arquitectura GPT usa <strong>Pre-LN</strong>: LayerNorm se aplica antes de cada sub-capa, no despues:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{x}_l' = \mathbf{x}_l + \text{MHA}(\text{LN}(\mathbf{x}_l))\]</div>
+<div class="math notranslate nohighlight">
+\[\mathbf{x}_{l+1} = \mathbf{x}_l' + \text{FFN}(\text{LN}(\mathbf{x}_l'))\]</div>
+<p>donde <span class="math notranslate nohighlight">\(l \in \{1, \ldots, L\}\)</span> es el indice de capa.</p>
+<p><strong>Ventajas de Pre-LN sobre Post-LN:</strong></p>
+<ul class="simple">
+<li><p>Gradientes mas estables en capas profundas.</p></li>
+<li><p>Permite entrenar sin calentamiento del learning rate (warmup).</p></li>
+<li><p>La norma del gradiente no explota al inicio.</p></li>
+</ul>
+<p><strong>Post-LN</strong> (Transformer original):</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{x}_l' = \text{LN}(\mathbf{x}_l + \text{MHA}(\mathbf{x}_l))\]</div>
+<div class="math notranslate nohighlight">
+\[\mathbf{x}_{l+1} = \text{LN}(\mathbf{x}_l' + \text{FFN}(\mathbf{x}_l'))\]</div>
+</section>
+<section id="scaled-dot-product-attention-con-mascara-causal">
+<h3>1.3 Scaled Dot-Product Attention con mascara causal<a class="headerlink" href="#scaled-dot-product-attention-con-mascara-causal" title="Link to this heading">#</a></h3>
+<p>Dadas las proyecciones <span class="math notranslate nohighlight">\(\mathbf{Q} = \mathbf{X}\mathbf{W}^Q\)</span>, <span class="math notranslate nohighlight">\(\mathbf{K} = \mathbf{X}\mathbf{W}^K\)</span>, <span class="math notranslate nohighlight">\(\mathbf{V} = \mathbf{X}\mathbf{W}^V\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\text{Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{softmax}\!\left(\frac{\mathbf{Q}\mathbf{K}^\top}{\sqrt{d_k}} + \mathbf{M}\right)\mathbf{V}\]</div>
+<p>La <strong>mascara causal</strong> <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> es triangular superior:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}M_{ij} = \begin{cases} 0 &amp; \text{si } i \geq j \\ -\infty &amp; \text{si } i &lt; j \end{cases}\end{split}\]</div>
+<p>Al sumar <span class="math notranslate nohighlight">\(-\infty\)</span> antes del softmax, los scores de posiciones futuras (<span class="math notranslate nohighlight">\(j &gt; i\)</span>) se anulan exactamente: <span class="math notranslate nohighlight">\(\exp(-\infty) = 0\)</span>. Esto garantiza que la prediccion en la posicion <span class="math notranslate nohighlight">\(i\)</span> solo use tokens anteriores.</p>
+<p><strong>Motivo del escalado por <span class="math notranslate nohighlight">\(\sqrt{d_k}\)</span>:</strong> si <span class="math notranslate nohighlight">\(q_i, k_i \overset{iid}{\sim} \mathcal{N}(0, 1)\)</span>, entonces:</p>
+<div class="math notranslate nohighlight">
+\[\text{Var}\left[\mathbf{q}^\top \mathbf{k}\right] = \text{Var}\left[\sum_{i=1}^{d_k} q_i k_i\right] = \sum_{i=1}^{d_k} \mathbb{E}[q_i^2]\mathbb{E}[k_i^2] = d_k\]</div>
+<p>Sin escalar, la varianza crece con <span class="math notranslate nohighlight">\(d_k\)</span>, llevando a la saturacion del softmax y gradientes nulos. Al dividir por <span class="math notranslate nohighlight">\(\sqrt{d_k}\)</span>, la varianza se normaliza a 1.</p>
+</section>
+<section id="multi-head-attention">
+<h3>1.4 Multi-Head Attention<a class="headerlink" href="#multi-head-attention" title="Link to this heading">#</a></h3>
+<p>Con <span class="math notranslate nohighlight">\(h\)</span> cabezas, dimension por cabeza <span class="math notranslate nohighlight">\(d_k = d_v = d_{model}/h\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\text{head}_i = \text{Attention}(\mathbf{X}\mathbf{W}_i^Q, \mathbf{X}\mathbf{W}_i^K, \mathbf{X}\mathbf{W}_i^V)\]</div>
+<div class="math notranslate nohighlight">
+\[\text{MHA}(\mathbf{X}) = \text{Concat}(\text{head}_1, \ldots, \text{head}_h)\mathbf{W}^O\]</div>
+<p>con <span class="math notranslate nohighlight">\(\mathbf{W}_i^Q, \mathbf{W}_i^K \in \mathbb{R}^{d_{model} \times d_k}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{W}_i^V \in \mathbb{R}^{d_{model} \times d_v}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{W}^O \in \mathbb{R}^{h \cdot d_v \times d_{model}}\)</span>.</p>
+<p><strong>Parametros totales de MHA:</strong> <span class="math notranslate nohighlight">\(4d_{model}^2\)</span> (tres proyecciones de entrada + proyeccion de salida, cada una <span class="math notranslate nohighlight">\(d_{model} \times d_{model}\)</span>).</p>
+</section>
+<section id="feed-forward-network">
+<h3>1.5 Feed-Forward Network<a class="headerlink" href="#feed-forward-network" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\text{FFN}(\mathbf{x}) = f(\mathbf{x}\mathbf{W}_1 + \mathbf{b}_1)\mathbf{W}_2 + \mathbf{b}_2\]</div>
+<p>con <span class="math notranslate nohighlight">\(\mathbf{W}_1 \in \mathbb{R}^{d_{model} \times d_{ff}}\)</span>, <span class="math notranslate nohighlight">\(d_{ff} = 4 d_{model}\)</span> tipicamente.</p>
+<p><strong>Activacion GeLU</strong> (usada en GPT-2/3, BERT):</p>
+<div class="math notranslate nohighlight">
+\[\text{GeLU}(x) = x \cdot \Phi(x) \approx 0.5x\left(1 + \tanh\!\left[\sqrt{\frac{2}{\pi}}\left(x + 0.044715x^3\right)\right]\right)\]</div>
+<p><strong>Activacion SwiGLU</strong> (LLaMA, PaLM):</p>
+<div class="math notranslate nohighlight">
+\[\text{SwiGLU}(\mathbf{x}, \mathbf{W}, \mathbf{V}) = \text{Swish}_1(\mathbf{x}\mathbf{W}) \odot (\mathbf{x}\mathbf{V})\]</div>
+<div class="math notranslate nohighlight">
+\[\text{Swish}_\beta(x) = x \cdot \sigma(\beta x)\]</div>
+<p>SwiGLU usa tres matrices (<span class="math notranslate nohighlight">\(\mathbf{W}_1, \mathbf{W}_2, \mathbf{W}_3\)</span>) con <span class="math notranslate nohighlight">\(d_{ff} = \frac{2}{3} \cdot 4 d_{model}\)</span> para mantener el conteo de parametros.</p>
+</section>
+<section id="layer-normalization">
+<h3>1.6 Layer Normalization<a class="headerlink" href="#layer-normalization" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\text{LN}(\mathbf{x}) = \frac{\mathbf{x} - \mu}{\sqrt{\sigma^2 + \epsilon}} \odot \boldsymbol{\gamma} + \boldsymbol{\beta}\]</div>
+<div class="math notranslate nohighlight">
+\[\mu = \frac{1}{d}\sum_{i=1}^d x_i, \quad \sigma^2 = \frac{1}{d}\sum_{i=1}^d (x_i - \mu)^2\]</div>
+<p><strong>RMSNorm</strong> (T5, LLaMA): elimina el centrado, solo escala:</p>
+<div class="math notranslate nohighlight">
+\[\text{RMSNorm}(\mathbf{x}) = \frac{\mathbf{x}}{\text{RMS}(\mathbf{x})} \odot \boldsymbol{\gamma}, \quad \text{RMS}(\mathbf{x}) = \sqrt{\frac{1}{d}\sum_{i=1}^d x_i^2 + \epsilon}\]</div>
+<p>Mas eficiente computacionalmente y empiricamente equivalente a LN en LLMs.</p>
+</section>
+<section id="weight-tying">
+<h3>1.7 Weight Tying<a class="headerlink" href="#weight-tying" title="Link to this heading">#</a></h3>
+<p>La matriz de la cabeza de prediccion <span class="math notranslate nohighlight">\(\mathbf{W}_{out} \in \mathbb{R}^{|\mathcal{V}| \times d_{model}}\)</span> comparte pesos con la tabla de embeddings <span class="math notranslate nohighlight">\(\mathbf{E} \in \mathbb{R}^{|\mathcal{V}| \times d_{model}}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{W}_{out} = \mathbf{E}\]</div>
+<p>Esto reduce el numero de parametros en <span class="math notranslate nohighlight">\(|\mathcal{V}| \cdot d_{model}\)</span> (tipicamente 50K × 4096 ≈ 200M params para modelos grandes) y mejora la generalizacion al forzar consistencia entre la representacion de entrada y salida de cada token.</p>
+</section>
+<section id="conteo-de-parametros">
+<h3>1.8 Conteo de parametros<a class="headerlink" href="#conteo-de-parametros" title="Link to this heading">#</a></h3>
+<p>Para un Transformer decoder con <span class="math notranslate nohighlight">\(L\)</span> capas, <span class="math notranslate nohighlight">\(d_{model}\)</span>, <span class="math notranslate nohighlight">\(h\)</span> cabezas, <span class="math notranslate nohighlight">\(d_{ff} = 4d_{model}\)</span>, vocabulario <span class="math notranslate nohighlight">\(|\mathcal{V}|\)</span>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Componente</p></th>
+<th class="head"><p>Parametros</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Tabla de embeddings</p></td>
+<td><p>$</p></td>
+</tr>
+<tr class="row-odd"><td><p>MHA por capa (<span class="math notranslate nohighlight">\(\times L\)</span>)</p></td>
+<td><p><span class="math notranslate nohighlight">\(4 d_{model}^2\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>FFN por capa (<span class="math notranslate nohighlight">\(\times L\)</span>)</p></td>
+<td><p><span class="math notranslate nohighlight">\(2 d_{model} \cdot d_{ff} = 8 d_{model}^2\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>LN por capa (<span class="math notranslate nohighlight">\(\times 2L\)</span>)</p></td>
+<td><p><span class="math notranslate nohighlight">\(2 d_{model}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>LN final</p></td>
+<td><p><span class="math notranslate nohighlight">\(d_{model}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Total aprox.</strong></p></td>
+<td><p>$</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Para GPT-3 (<span class="math notranslate nohighlight">\(L=96\)</span>, <span class="math notranslate nohighlight">\(d_{model}=12288\)</span>, <span class="math notranslate nohighlight">\(|\mathcal{V}|=50257\)</span>): <span class="math notranslate nohighlight">\(\approx 175 \times 10^9\)</span> parametros.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="preentrenamiento-a-escala">
+<h2>2. Preentrenamiento a Escala<a class="headerlink" href="#preentrenamiento-a-escala" title="Link to this heading">#</a></h2>
+<section id="objetivo-de-modelado-de-lenguaje">
+<h3>2.1 Objetivo de modelado de lenguaje<a class="headerlink" href="#objetivo-de-modelado-de-lenguaje" title="Link to this heading">#</a></h3>
+<p>El objetivo autorregresivo (next-token prediction) maximiza:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}_{LM} = \frac{1}{|\mathcal{D}|} \sum_{\mathbf{x} \in \mathcal{D}} \sum_{t=1}^{T} \log p_\theta(x_t \mid x_{&lt;t})\]</div>
+<p>La prediccion del token <span class="math notranslate nohighlight">\(x_t\)</span> usa la representacion de la ultima capa en la posicion <span class="math notranslate nohighlight">\(t-1\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[p_\theta(x_t \mid x_{&lt;t}) = \text{softmax}(\mathbf{h}_{t-1}^L \mathbf{W}_{out}^\top)_{x_t}\]</div>
+</section>
+<section id="optimizacion-adamw">
+<h3>2.2 Optimizacion: AdamW<a class="headerlink" href="#optimizacion-adamw" title="Link to this heading">#</a></h3>
+<p>AdamW (Adam con weight decay desacoplado) es el optimizador estandar para LLMs:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{m}_t = \beta_1 \mathbf{m}_{t-1} + (1 - \beta_1) \mathbf{g}_t\]</div>
+<div class="math notranslate nohighlight">
+\[\mathbf{v}_t = \beta_2 \mathbf{v}_{t-1} + (1 - \beta_2) \mathbf{g}_t^2\]</div>
+<div class="math notranslate nohighlight">
+\[\hat{\mathbf{m}}_t = \frac{\mathbf{m}_t}{1 - \beta_1^t}, \quad \hat{\mathbf{v}}_t = \frac{\mathbf{v}_t}{1 - \beta_2^t}\]</div>
+<div class="math notranslate nohighlight">
+\[\theta_{t+1} = \theta_t - \alpha \frac{\hat{\mathbf{m}}_t}{\sqrt{\hat{\mathbf{v}}_t} + \epsilon} - \alpha \lambda \theta_t\]</div>
+<p>donde el ultimo termino es el weight decay <strong>desacoplado</strong> del gradiente (a diferencia de L2 regularization clasica que lo acopla). Valores tipicos: <span class="math notranslate nohighlight">\(\beta_1=0.9\)</span>, <span class="math notranslate nohighlight">\(\beta_2=0.95\)</span>, <span class="math notranslate nohighlight">\(\epsilon=10^{-8}\)</span>, <span class="math notranslate nohighlight">\(\lambda \in [0.1, 0.01]\)</span>.</p>
+</section>
+<section id="learning-rate-scheduling">
+<h3>2.3 Learning rate scheduling<a class="headerlink" href="#learning-rate-scheduling" title="Link to this heading">#</a></h3>
+<p><strong>Warmup + Cosine Decay</strong> (estandar en LLMs):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\alpha(t) = \begin{cases}
+\alpha_{max} \cdot \dfrac{t}{t_{warmup}} &amp; \text{si } t \leq t_{warmup} \\[8pt]
+\alpha_{min} + \dfrac{1}{2}(\alpha_{max} - \alpha_{min})\left(1 + \cos\!\left(\pi \cdot \dfrac{t - t_{warmup}}{T_{total} - t_{warmup}}\right)\right) &amp; \text{si } t &gt; t_{warmup}
+\end{cases}\end{split}\]</div>
+<p>El warmup evita que los primeros pasos, donde los momentos de Adam no estan calibrados, destruyan la inicializacion.</p>
+</section>
+<section id="gradient-clipping">
+<h3>2.4 Gradient Clipping<a class="headerlink" href="#gradient-clipping" title="Link to this heading">#</a></h3>
+<p>Para evitar la explosion del gradiente:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{g} \leftarrow \begin{cases}
+\mathbf{g} &amp; \text{si } \|\mathbf{g}\|_2 \leq \tau \\
+\dfrac{\tau}{\|\mathbf{g}\|_2} \mathbf{g} &amp; \text{si } \|\mathbf{g}\|_2 &gt; \tau
+\end{cases}\end{split}\]</div>
+<p>con <span class="math notranslate nohighlight">\(\tau = 1.0\)</span> tipicamente. Preserva la direccion del gradiente, solo controla su magnitud.</p>
+</section>
+<section id="procesamiento-del-corpus">
+<h3>2.5 Procesamiento del corpus<a class="headerlink" href="#procesamiento-del-corpus" title="Link to this heading">#</a></h3>
+<p><strong>Concatenacion y segmentacion:</strong> el corpus se concatena en una unica secuencia con tokens de separacion de documentos (<code class="docutils literal notranslate"><span class="pre">&lt;|endoftext|&gt;</span></code>) y se divide en chunks de longitud fija <span class="math notranslate nohighlight">\(T_{max}\)</span> (contexto del modelo):</p>
+<div class="math notranslate nohighlight">
+\[\text{chunks} = \text{split}(\text{concat}(d_1, \langle\text{eos}\rangle, d_2, \langle\text{eos}\rangle, \ldots), T_{max})\]</div>
+<p><strong>Data mixing:</strong> multiples fuentes de datos se mezclan con pesos asignados. Ejemplo aproximado de Llama-3:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Fuente</p></th>
+<th class="head"><p>Proporcion</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Common Crawl (web)</p></td>
+<td><p>~80%</p></td>
+</tr>
+<tr class="row-odd"><td><p>Wikipedia / Wikidata</p></td>
+<td><p>~5%</p></td>
+</tr>
+<tr class="row-even"><td><p>Libros / dominio especifico</p></td>
+<td><p>~10%</p></td>
+</tr>
+<tr class="row-odd"><td><p>Codigo (GitHub)</p></td>
+<td><p>~5%</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="leyes-de-escala">
+<h2>3. Leyes de Escala<a class="headerlink" href="#leyes-de-escala" title="Link to this heading">#</a></h2>
+<section id="ley-de-potencias-de-kaplan-et-al-2020">
+<h3>3.1 Ley de potencias de Kaplan et al. (2020)<a class="headerlink" href="#ley-de-potencias-de-kaplan-et-al-2020" title="Link to this heading">#</a></h3>
+<p>La perdida de test en un LLM sigue una ley de potencias respecto al numero de parametros <span class="math notranslate nohighlight">\(N\)</span>, tokens de entrenamiento <span class="math notranslate nohighlight">\(D\)</span>, y compute <span class="math notranslate nohighlight">\(C\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[L(N) = \left(\frac{N_c}{N}\right)^{\alpha_N}, \quad \alpha_N \approx 0.076\]</div>
+<div class="math notranslate nohighlight">
+\[L(D) = \left(\frac{D_c}{D}\right)^{\alpha_D}, \quad \alpha_D \approx 0.095\]</div>
+<div class="math notranslate nohighlight">
+\[L(C) = \left(\frac{C_c}{C}\right)^{\alpha_C}, \quad \alpha_C \approx 0.050\]</div>
+<p>donde <span class="math notranslate nohighlight">\(N_c\)</span>, <span class="math notranslate nohighlight">\(D_c\)</span>, <span class="math notranslate nohighlight">\(C_c\)</span> son constantes de normalizacion. La relacion entre compute, parametros y tokens es:</p>
+<div class="math notranslate nohighlight">
+\[C \approx 6ND \quad \text{[FLOPs]}\]</div>
+<p>El factor 6 proviene de: <span class="math notranslate nohighlight">\(\approx 2ND\)</span> en forward pass (multiplicacion y suma) y <span class="math notranslate nohighlight">\(\approx 4ND\)</span> en backward pass.</p>
+</section>
+<section id="ley-de-chinchilla-hoffmann-et-al-2022">
+<h3>3.2 Ley de Chinchilla (Hoffmann et al., 2022)<a class="headerlink" href="#ley-de-chinchilla-hoffmann-et-al-2022" title="Link to this heading">#</a></h3>
+<p>Kaplan et al. recomendaban escalar <span class="math notranslate nohighlight">\(N\)</span> mas agresivamente que <span class="math notranslate nohighlight">\(D\)</span> con compute fijo. Hoffmann et al. demostraron que el optimo <strong>computa-fijo</strong> se alcanza cuando:</p>
+<div class="math notranslate nohighlight">
+\[N_{opt} \propto C^{0.5}, \quad D_{opt} \propto C^{0.5}\]</div>
+<p>Es decir, parametros y tokens deben escalar <strong>proporcionalmente</strong>. La regla empirica de Chinchilla:</p>
+<div class="math notranslate nohighlight">
+\[D_{opt} \approx 20 \cdot N\]</div>
+<p>Ejemplo: un modelo de 70B parametros se entrena de forma optima con <span class="math notranslate nohighlight">\(\approx 1.4T\)</span> tokens.</p>
+</section>
+<section id="perdida-conjunta">
+<h3>3.3 Perdida conjunta<a class="headerlink" href="#perdida-conjunta" title="Link to this heading">#</a></h3>
+<p>La perdida como funcion de <span class="math notranslate nohighlight">\(N\)</span> y <span class="math notranslate nohighlight">\(D\)</span> simultaneamente:</p>
+<div class="math notranslate nohighlight">
+\[L(N, D) = E + \frac{A}{N^\alpha} + \frac{B}{D^\beta}\]</div>
+<p>donde:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(E \approx 1.69\)</span>: entropia irreducible del lenguaje natural.</p></li>
+<li><p><span class="math notranslate nohighlight">\(A, B, \alpha, \beta\)</span>: constantes ajustadas empiricamente.</p></li>
+<li><p><span class="math notranslate nohighlight">\(A/N^\alpha\)</span>: sesgo por capacidad finita del modelo.</p></li>
+<li><p><span class="math notranslate nohighlight">\(B/D^\beta\)</span>: sesgo por datos de entrenamiento insuficientes.</p></li>
+</ul>
+<p>Con compute <span class="math notranslate nohighlight">\(C = 6ND\)</span> fijo, la asignacion optima se obtiene minimizando <span class="math notranslate nohighlight">\(L(N, D)\)</span> sujeto a <span class="math notranslate nohighlight">\(C = 6ND\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial L}{\partial N}\bigg|_{D=C/6N} = 0 \implies \frac{\alpha A}{N^{\alpha+1}} = \frac{\beta B}{D^{\beta+1}}\]</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="tokenizacion-avanzada">
+<h2>4. Tokenizacion Avanzada<a class="headerlink" href="#tokenizacion-avanzada" title="Link to this heading">#</a></h2>
+<section id="byte-pair-encoding-bpe">
+<h3>4.1 Byte-Pair Encoding (BPE)<a class="headerlink" href="#byte-pair-encoding-bpe" title="Link to this heading">#</a></h3>
+<p>Algoritmo iterativo de construccion del vocabulario:</p>
+<ol class="arabic simple">
+<li><p>Inicializar con todos los caracteres UTF-8 como simbolos base.</p></li>
+<li><p>Calcular la frecuencia de todos los pares de simbolos consecutivos.</p></li>
+<li><p>Fusionar el par mas frecuente <span class="math notranslate nohighlight">\((a, b) \to ab\)</span> y agregar <span class="math notranslate nohighlight">\(ab\)</span> al vocabulario.</p></li>
+<li><p>Repetir hasta alcanzar el tamaño de vocabulario objetivo <span class="math notranslate nohighlight">\(|\mathcal{V}|\)</span>.</p></li>
+</ol>
+<p><strong>Propiedad clave:</strong> las palabras frecuentes quedan como tokens completos; las raras se segmentan en subpalabras conocidas, eliminando el problema de tokens fuera de vocabulario (OOV).</p>
+</section>
+<section id="wordpiece-bert">
+<h3>4.2 WordPiece (BERT)<a class="headerlink" href="#wordpiece-bert" title="Link to this heading">#</a></h3>
+<p>Similar a BPE pero el criterio de fusion maximiza la verosimilitud del corpus en lugar de la frecuencia del par:</p>
+<div class="math notranslate nohighlight">
+\[\text{score}(a, b) = \frac{f(ab)}{f(a) \cdot f(b)}\]</div>
+<p>Fusiona el par cuya ocurrencia conjunta es mas sorprendente dado el producto de sus frecuencias individuales.</p>
+</section>
+<section id="sentencepiece">
+<h3>4.3 SentencePiece<a class="headerlink" href="#sentencepiece" title="Link to this heading">#</a></h3>
+<p>Tokeniza directamente sobre texto crudo sin presegmentacion por espacios (necesario para lenguas como chino, japones, tailandes). Modela el espacio como un caracter especial <code class="docutils literal notranslate"><span class="pre">▁</span></code>. Usa BPE o modelos de lenguaje de unigrama como algoritmo subyacente.</p>
+<p><strong>Modelo de unigrama:</strong> asigna a cada segmentacion posible <span class="math notranslate nohighlight">\(\mathbf{x} = (x_1, \ldots, x_n)\)</span> la probabilidad:</p>
+<div class="math notranslate nohighlight">
+\[p(\mathbf{x}) = \prod_{i=1}^{n} p(x_i)\]</div>
+<p>y selecciona la segmentacion de mayor probabilidad (Viterbi).</p>
+</section>
+<section id="fertilidad">
+<h3>4.4 Fertilidad<a class="headerlink" href="#fertilidad" title="Link to this heading">#</a></h3>
+<p>La <strong>fertilidad</strong> de un tokenizador mide cuantos tokens genera por palabra:</p>
+<div class="math notranslate nohighlight">
+\[\text{fertility}(\mathcal{V}, \mathcal{D}) = \frac{\text{n tokens}(\mathcal{D})}{\text{n palabras}(\mathcal{D})}\]</div>
+<p>Vocabularios mas grandes tienen menor fertilidad (mas palabras completas como tokens) pero mayor tamaño de la tabla de embeddings.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="mejoras-arquitectonicas-modernas">
+<h2>5. Mejoras Arquitectonicas Modernas<a class="headerlink" href="#mejoras-arquitectonicas-modernas" title="Link to this heading">#</a></h2>
+<section id="rotary-positional-embedding-rope">
+<h3>5.1 Rotary Positional Embedding (RoPE)<a class="headerlink" href="#rotary-positional-embedding-rope" title="Link to this heading">#</a></h3>
+<p>RoPE (Su et al., 2021) codifica la posicion rotando los vectores Q y K antes del producto interno. Para un par de dimensiones <span class="math notranslate nohighlight">\((2i, 2i+1)\)</span>, la rotacion de un vector en la posicion <span class="math notranslate nohighlight">\(m\)</span> es:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{R}_m^{(i)} = \begin{pmatrix} \cos(m\theta_i) &amp; -\sin(m\theta_i) \\ \sin(m\theta_i) &amp; \cos(m\theta_i) \end{pmatrix}, \quad \theta_i = 10000^{-2i/d_k}\end{split}\]</div>
+<p>El producto interno entre query en posicion <span class="math notranslate nohighlight">\(m\)</span> y key en posicion <span class="math notranslate nohighlight">\(n\)</span> resulta:</p>
+<div class="math notranslate nohighlight">
+\[(\mathbf{R}_m \mathbf{q})^\top (\mathbf{R}_n \mathbf{k}) = \mathbf{q}^\top \mathbf{R}_{n-m} \mathbf{k}\]</div>
+<p>Es decir, el score de atencion solo depende de la <strong>posicion relativa</strong> <span class="math notranslate nohighlight">\(n - m\)</span>, no de las posiciones absolutas. Esto da al modelo conciencia de distancias relativas y permite extrapolacion a longitudes no vistas en entrenamiento.</p>
+</section>
+<section id="grouped-query-attention-gqa">
+<h3>5.2 Grouped Query Attention (GQA)<a class="headerlink" href="#grouped-query-attention-gqa" title="Link to this heading">#</a></h3>
+<p>En la atencion estandar, cada cabeza tiene sus propias matrices <span class="math notranslate nohighlight">\(\mathbf{W}^K\)</span> y <span class="math notranslate nohighlight">\(\mathbf{W}^V\)</span>.</p>
+<p><strong>Multi-Query Attention (MQA):</strong> una sola cabeza de K y V compartida por todas las cabezas de Q. Reduce la memoria del KV-Cache en un factor <span class="math notranslate nohighlight">\(h\)</span> pero puede degradar la calidad.</p>
+<p><strong>Grouped Query Attention:</strong> <span class="math notranslate nohighlight">\(G\)</span> grupos de cabezas Q, cada grupo comparte una cabeza de K y V. Es un compromiso entre MHA y MQA:</p>
+<div class="math notranslate nohighlight">
+\[\text{head}_{i,g} = \text{Attention}(\mathbf{Q}_i, \mathbf{K}_g, \mathbf{V}_g), \quad g = \lceil ih/G \rceil\]</div>
+<p>Llama-3 70B usa <span class="math notranslate nohighlight">\(h=64\)</span> cabezas Q y <span class="math notranslate nohighlight">\(G=8\)</span> cabezas KV.</p>
+<p><strong>Reduccion de memoria:</strong> el KV-Cache se reduce de <span class="math notranslate nohighlight">\(O(h \cdot d_k \cdot T)\)</span> a <span class="math notranslate nohighlight">\(O(G \cdot d_k \cdot T)\)</span>.</p>
+</section>
+<section id="kv-cache">
+<h3>5.3 KV-Cache<a class="headerlink" href="#kv-cache" title="Link to this heading">#</a></h3>
+<p>Durante la inferencia autorregresiva, en cada paso <span class="math notranslate nohighlight">\(t\)</span> se computan nuevas proyecciones K y V solo para el token nuevo <span class="math notranslate nohighlight">\(x_t\)</span>. Los K y V de posiciones anteriores se almacenan en cache:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{K}^{(t)} = [\mathbf{K}^{(t-1)}; \mathbf{k}_t], \quad \mathbf{V}^{(t)} = [\mathbf{V}^{(t-1)}; \mathbf{v}_t]\]</div>
+<p><strong>Reduccion de computo:</strong> sin cache, generar <span class="math notranslate nohighlight">\(T\)</span> tokens requiere <span class="math notranslate nohighlight">\(O(T^2)\)</span> multiplicaciones; con cache, <span class="math notranslate nohighlight">\(O(T)\)</span>. La memoria aumenta linealmente en <span class="math notranslate nohighlight">\(T\)</span>.</p>
+<p><strong>Tamaño del KV-Cache</strong> para un batch de tamaño <span class="math notranslate nohighlight">\(B\)</span>, longitud de contexto <span class="math notranslate nohighlight">\(T\)</span>, <span class="math notranslate nohighlight">\(L\)</span> capas, <span class="math notranslate nohighlight">\(G\)</span> cabezas KV:</p>
+<div class="math notranslate nohighlight">
+\[\text{KV-Cache} = 2 \cdot B \cdot T \cdot L \cdot G \cdot d_k \cdot \text{bytes\_por\_elemento}\]</div>
+<p>En float16 (2 bytes), Llama-3 70B con <span class="math notranslate nohighlight">\(T=8192\)</span>: <span class="math notranslate nohighlight">\(\approx 8\)</span> GB solo de KV-Cache.</p>
+</section>
+<section id="flash-attention">
+<h3>5.4 Flash Attention<a class="headerlink" href="#flash-attention" title="Link to this heading">#</a></h3>
+<p>Rossen et al. (2022) reordenan los computos para evitar materializar la matriz de atencion completa <span class="math notranslate nohighlight">\(\mathbf{S} = \mathbf{Q}\mathbf{K}^\top / \sqrt{d_k} \in \mathbb{R}^{T \times T}\)</span> en memoria HBM (High Bandwidth Memory):</p>
+<div class="math notranslate nohighlight">
+\[\text{Complejidad estandar: } O(T^2) \text{ en HBM}\]</div>
+<div class="math notranslate nohighlight">
+\[\text{Flash Attention: } O(T^2/M) \text{ accesos HBM}, \quad M = \text{SRAM size}\]</div>
+<p>Usa <strong>tiling</strong> (bloques de la matriz) y el <strong>log-sum-exp trick</strong> para calcular el softmax de forma numericamente estable en bloques:</p>
+<div class="math notranslate nohighlight">
+\[\text{LSE}(x_1, \ldots, x_n) = \log \sum_{i=1}^n e^{x_i} = c + \log \sum_{i=1}^n e^{x_i - c}, \quad c = \max_i x_i\]</div>
+<p>Flash Attention 2/3 es 2-3x mas rapido que la implementacion naive y reduce el uso de memoria de <span class="math notranslate nohighlight">\(O(T^2)\)</span> a <span class="math notranslate nohighlight">\(O(T)\)</span> (excluyendo Q, K, V).</p>
+</section>
+<section id="extended-context-ventanas-de-atencion-y-alibi">
+<h3>5.5 Extended Context: Ventanas de Atencion y ALiBi<a class="headerlink" href="#extended-context-ventanas-de-atencion-y-alibi" title="Link to this heading">#</a></h3>
+<p><strong>Sparse Attention:</strong> en lugar de atender a todos los <span class="math notranslate nohighlight">\(T\)</span> tokens, cada token atiende solo a un subconjunto estructurado (ventana local + atencion global selectiva). Longformer usa una ventana de tamano <span class="math notranslate nohighlight">\(w\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\text{atencion local: } O(T \cdot w) \text{ en lugar de } O(T^2)\]</div>
+<p><strong>ALiBi (Press et al., 2021):</strong> en lugar de sumar embeddings posicionales, se resta un bias lineal proporcional a la distancia:</p>
+<div class="math notranslate nohighlight">
+\[\text{score}_{ij} = \frac{\mathbf{q}_i^\top \mathbf{k}_j}{\sqrt{d_k}} - m_h \cdot |i - j|\]</div>
+<p>donde <span class="math notranslate nohighlight">\(m_h\)</span> es una pendiente especifica por cabeza. El modelo aprende a penalizar atenciones a larga distancia. Permite extrapolacion a longitudes mayores que las de entrenamiento sin degradacion severa.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="ajuste-fino-supervisado">
+<h2>6. Ajuste Fino Supervisado<a class="headerlink" href="#ajuste-fino-supervisado" title="Link to this heading">#</a></h2>
+<section id="instruction-tuning-sft">
+<h3>6.1 Instruction Tuning (SFT)<a class="headerlink" href="#instruction-tuning-sft" title="Link to this heading">#</a></h3>
+<p>Dado un dataset de pares (instruccion, respuesta) <span class="math notranslate nohighlight">\(\{(x^{(i)}, y^{(i)})\}\)</span>, el ajuste fino minimiza:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}_{SFT}(\theta) = -\frac{1}{N} \sum_{i=1}^{N} \sum_{t=1}^{|y^{(i)}|} \log p_\theta(y_t^{(i)} \mid x^{(i)}, y_{&lt;t}^{(i)})\]</div>
+<p><strong>Punto clave:</strong> la perdida se calcula solo sobre los tokens de la respuesta <span class="math notranslate nohighlight">\(y\)</span>, no sobre los tokens de la instruccion <span class="math notranslate nohighlight">\(x\)</span>. Los tokens de instruccion se enmascaran (loss mask = 0).</p>
+<p>El formato de prompt sigue una plantilla estandar, por ejemplo para Llama:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;|</span><span class="n">begin_of_text</span><span class="o">|&gt;&lt;|</span><span class="n">start_header_id</span><span class="o">|&gt;</span><span class="n">system</span><span class="o">&lt;|</span><span class="n">end_header_id</span><span class="o">|&gt;</span>
+<span class="p">{</span><span class="n">system_prompt</span><span class="p">}</span><span class="o">&lt;|</span><span class="n">eot_id</span><span class="o">|&gt;</span>
+<span class="o">&lt;|</span><span class="n">start_header_id</span><span class="o">|&gt;</span><span class="n">user</span><span class="o">&lt;|</span><span class="n">end_header_id</span><span class="o">|&gt;</span>
+<span class="p">{</span><span class="n">user_message</span><span class="p">}</span><span class="o">&lt;|</span><span class="n">eot_id</span><span class="o">|&gt;</span>
+<span class="o">&lt;|</span><span class="n">start_header_id</span><span class="o">|&gt;</span><span class="n">assistant</span><span class="o">&lt;|</span><span class="n">end_header_id</span><span class="o">|&gt;</span>
+<span class="p">{</span><span class="n">assistant_response</span><span class="p">}</span><span class="o">&lt;|</span><span class="n">eot_id</span><span class="o">|&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="catastrophic-forgetting">
+<h3>6.2 Catastrophic Forgetting<a class="headerlink" href="#catastrophic-forgetting" title="Link to this heading">#</a></h3>
+<p>El ajuste fino en un dataset pequeno puede degradar las capacidades generales adquiridas en el preentrenamiento. Estrategias de mitigacion:</p>
+<p><strong>Elastic Weight Consolidation (EWC):</strong></p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}_{EWC}(\theta) = \mathcal{L}_{SFT}(\theta) + \frac{\lambda}{2} \sum_i F_i (\theta_i - \theta_i^*)^2\]</div>
+<p>donde <span class="math notranslate nohighlight">\(F_i\)</span> es la diagonal de la <strong>matriz de informacion de Fisher</strong>:</p>
+<div class="math notranslate nohighlight">
+\[F_i = \mathbb{E}_{\mathbf{x} \sim \mathcal{D}_{pre}}\left[\left(\frac{\partial \log p_\theta(x)}{\partial \theta_i}\right)^2\right]\]</div>
+<p>Penaliza cambios en parametros importantes para el preentrenamiento, ponderados por su relevancia (estimada por la curvatura del loss).</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="rlhf-y-alineacion">
+<h2>7. RLHF y Alineacion<a class="headerlink" href="#rlhf-y-alineacion" title="Link to this heading">#</a></h2>
+<section id="reward-modeling">
+<h3>7.1 Reward Modeling<a class="headerlink" href="#reward-modeling" title="Link to this heading">#</a></h3>
+<p>Dado un conjunto de comparaciones humanas <span class="math notranslate nohighlight">\(\{(x, y_w, y_l)\}\)</span> donde <span class="math notranslate nohighlight">\(y_w\)</span> es la respuesta preferida y <span class="math notranslate nohighlight">\(y_l\)</span> la rechazada, se entrena el modelo de recompensa <span class="math notranslate nohighlight">\(r_\phi(x, y)\)</span> con el modelo de <strong>Bradley-Terry</strong>:</p>
+<div class="math notranslate nohighlight">
+\[p(y_w \succ y_l \mid x) = \sigma(r_\phi(x, y_w) - r_\phi(x, y_l)) = \frac{\exp(r_\phi(x, y_w))}{\exp(r_\phi(x, y_w)) + \exp(r_\phi(x, y_l))}\]</div>
+<p>La perdida de entrenamiento es la log-verosimilitud negativa de las preferencias:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}_{RM}(\phi) = -\mathbb{E}_{(x, y_w, y_l) \sim \mathcal{D}_{pref}} \left[\log \sigma(r_\phi(x, y_w) - r_\phi(x, y_l))\right]\]</div>
+</section>
+<section id="ppo-para-llms">
+<h3>7.2 PPO para LLMs<a class="headerlink" href="#ppo-para-llms" title="Link to this heading">#</a></h3>
+<p>Proximal Policy Optimization (Schulman et al., 2017) optimiza la politica <span class="math notranslate nohighlight">\(\pi_\theta\)</span> maximizando la recompensa con restriccion KL:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{J}_{RLHF}(\theta) = \mathbb{E}_{x \sim \mathcal{D}, y \sim \pi_\theta(y|x)}\left[r_\phi(x, y) - \beta \cdot D_{KL}(\pi_\theta(y \mid x) \| \pi_{ref}(y \mid x))\right]\]</div>
+<p>El termino KL desacoplado se estima token por token:</p>
+<div class="math notranslate nohighlight">
+\[D_{KL}(\pi_\theta \| \pi_{ref}) = \sum_{t=1}^{T} \log \frac{\pi_\theta(y_t \mid x, y_{&lt;t})}{\pi_{ref}(y_t \mid x, y_{&lt;t})}\]</div>
+<p>La funcion objetivo de PPO con clipping:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}_{PPO}(\theta) = \mathbb{E}_t\left[\min\left(r_t(\theta) \hat{A}_t, \; \text{clip}(r_t(\theta), 1-\epsilon, 1+\epsilon)\hat{A}_t\right)\right]\]</div>
+<p>donde <span class="math notranslate nohighlight">\(r_t(\theta) = \pi_\theta(a_t \mid s_t) / \pi_{\theta_{old}}(a_t \mid s_t)\)</span> es el ratio de probabilidades y <span class="math notranslate nohighlight">\(\hat{A}_t\)</span> es la funcion de ventaja estimada.</p>
+<p><strong>Ventaja generalizada (GAE):</strong></p>
+<div class="math notranslate nohighlight">
+\[\hat{A}_t = \sum_{k=0}^{\infty} (\gamma \lambda)^k \delta_{t+k}, \quad \delta_t = r_t + \gamma V(s_{t+1}) - V(s_t)\]</div>
+</section>
+<section id="dpo-direct-preference-optimization">
+<h3>7.3 DPO (Direct Preference Optimization)<a class="headerlink" href="#dpo-direct-preference-optimization" title="Link to this heading">#</a></h3>
+<p>Rafailov et al. (2023) derivaron que la solucion optima del problema de RL con restriccion KL tiene forma cerrada:</p>
+<div class="math notranslate nohighlight">
+\[\pi^*(y \mid x) = \frac{1}{Z(x)} \pi_{ref}(y \mid x) \exp\left(\frac{1}{\beta} r^*(x, y)\right)\]</div>
+<p>donde <span class="math notranslate nohighlight">\(Z(x) = \sum_y \pi_{ref}(y \mid x) \exp(r^*(x, y)/\beta)\)</span> es la funcion de particion.</p>
+<p>Invirtiendo esta relacion, la recompensa optima expresada en terminos de las politicas es:</p>
+<div class="math notranslate nohighlight">
+\[r^*(x, y) = \beta \log \frac{\pi^*(y \mid x)}{\pi_{ref}(y \mid x)} + \beta \log Z(x)\]</div>
+<p>Sustituyendo en el modelo de Bradley-Terry (donde <span class="math notranslate nohighlight">\(Z(x)\)</span> se cancela):</p>
+<div class="math notranslate nohighlight">
+\[p^*(y_w \succ y_l \mid x) = \sigma\!\left(\beta \log \frac{\pi^*(y_w \mid x)}{\pi_{ref}(y_w \mid x)} - \beta \log \frac{\pi^*(y_l \mid x)}{\pi_{ref}(y_l \mid x)}\right)\]</div>
+<p>La perdida DPO entrena directamente <span class="math notranslate nohighlight">\(\pi_\theta\)</span> sin necesidad de un modelo de recompensa separado:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}_{DPO}(\theta) = -\mathbb{E}_{(x, y_w, y_l) \sim \mathcal{D}_{pref}}\left[\log \sigma\!\left(\beta \log \frac{\pi_\theta(y_w \mid x)}{\pi_{ref}(y_w \mid x)} - \beta \log \frac{\pi_\theta(y_l \mid x)}{\pi_{ref}(y_l \mid x)}\right)\right]\]</div>
+<p><strong>Gradiente de DPO:</strong> la actualizacion aumenta la probabilidad de las respuestas preferidas y reduce la de las rechazadas, ponderado por cuanto el modelo actual ya las distingue:</p>
+<div class="math notranslate nohighlight">
+\[\nabla_\theta \mathcal{L}_{DPO} \propto -\sigma(\hat{r}_\theta(x, y_l) - \hat{r}_\theta(x, y_w))\left[\nabla_\theta \log \pi_\theta(y_w \mid x) - \nabla_\theta \log \pi_\theta(y_l \mid x)\right]\]</div>
+<p>donde <span class="math notranslate nohighlight">\(\hat{r}_\theta(x, y) = \beta \log \pi_\theta(y|x)/\pi_{ref}(y|x)\)</span> es la recompensa implicita.</p>
+</section>
+<section id="constitutional-ai-cai">
+<h3>7.4 Constitutional AI (CAI)<a class="headerlink" href="#constitutional-ai-cai" title="Link to this heading">#</a></h3>
+<p>Anthropic (2022) propone usar el propio LLM para autocrticar y revisar sus respuestas segun un conjunto de principios (<span class="math notranslate nohighlight">\(\mathcal{C}\)</span>, la «constitucion»):</p>
+<ol class="arabic simple">
+<li><p><strong>Critique:</strong> <span class="math notranslate nohighlight">\(y_c = \text{LLM}(x, y_0, \text{&quot;critica segun } \mathcal{C}\text{&quot;})\)</span></p></li>
+<li><p><strong>Revision:</strong> <span class="math notranslate nohighlight">\(y_1 = \text{LLM}(x, y_0, y_c, \text{&quot;revisa segun } \mathcal{C}\text{&quot;})\)</span></p></li>
+<li><p><strong>RL-CAI:</strong> usar preferencias generadas por el modelo como señal de entrenamiento.</p></li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="inferencia-eficiente">
+<h2>8. Inferencia Eficiente<a class="headerlink" href="#inferencia-eficiente" title="Link to this heading">#</a></h2>
+<section id="cuantizacion">
+<h3>8.1 Cuantizacion<a class="headerlink" href="#cuantizacion" title="Link to this heading">#</a></h3>
+<p>La cuantizacion reduce la precision numerica de los pesos para disminuir memoria y acelerar el computo.</p>
+<p><strong>Cuantizacion uniforme:</strong> mapea pesos de punto flotante <span class="math notranslate nohighlight">\(w \in [\alpha, \beta]\)</span> a enteros de <span class="math notranslate nohighlight">\(b\)</span> bits:</p>
+<div class="math notranslate nohighlight">
+\[w_q = \text{round}\!\left(\frac{w - \alpha}{\Delta}\right), \quad \Delta = \frac{\beta - \alpha}{2^b - 1}\]</div>
+<p><strong>Dequantizacion:</strong> <span class="math notranslate nohighlight">\(\tilde{w} = w_q \cdot \Delta + \alpha\)</span>.</p>
+<p><strong>Error de cuantizacion:</strong> <span class="math notranslate nohighlight">\(\|w - \tilde{w}\|^2 \leq \Delta^2 / 4\)</span>.</p>
+<p><strong>GPTQ</strong> (Frantar et al., 2022): cuantizacion post-entrenamiento de 4 bits que minimiza el error de reconstruccion capa por capa:</p>
+<div class="math notranslate nohighlight">
+\[\min_{\hat{\mathbf{W}}} \|\mathbf{W}\mathbf{X} - \hat{\mathbf{W}}\mathbf{X}\|_F^2\]</div>
+<p>usando el Hessiano del error para compensar los errores de cuantizacion de forma iterativa.</p>
+<p><strong>NF4 (NormalFloat-4):</strong> cuantizacion de 4 bits para distribuciones normales (tipica de pesos de redes neuronales). Los niveles de cuantizacion se distribuyen segun los cuantiles de <span class="math notranslate nohighlight">\(\mathcal{N}(0,1)\)</span>, minimizando el error esperado para pesos gaussianos.</p>
+</section>
+<section id="especulative-decoding">
+<h3>8.2 Especulative Decoding<a class="headerlink" href="#especulative-decoding" title="Link to this heading">#</a></h3>
+<p>Usa un modelo pequeño (draft model <span class="math notranslate nohighlight">\(M_q\)</span>, <span class="math notranslate nohighlight">\(\approx 7B\)</span>) para generar <span class="math notranslate nohighlight">\(K\)</span> tokens candidatos, y el modelo grande (target <span class="math notranslate nohighlight">\(M_p\)</span>, <span class="math notranslate nohighlight">\(\approx 70B\)</span>) los verifica en paralelo:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(M_q\)</span> genera <span class="math notranslate nohighlight">\(K\)</span> tokens autoregresivamente.</p></li>
+<li><p><span class="math notranslate nohighlight">\(M_p\)</span> procesa los <span class="math notranslate nohighlight">\(K\)</span> tokens en una sola pasada (paralelizable).</p></li>
+<li><p>Se aceptan los tokens donde <span class="math notranslate nohighlight">\(M_p(x) \geq M_q(x)\)</span>; el primero rechazado se remuestrea.</p></li>
+</ol>
+<p><strong>Aceptacion con rechazo corregido:</strong> para garantizar que la distribucion de salida sea exactamente <span class="math notranslate nohighlight">\(M_p\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\alpha_t = \min\!\left(1, \frac{p_t}{q_t}\right)\]</div>
+<p>donde <span class="math notranslate nohighlight">\(p_t = M_p(x_t \mid x_{&lt;t})\)</span> y <span class="math notranslate nohighlight">\(q_t = M_q(x_t \mid x_{&lt;t})\)</span>.</p>
+<p>El <strong>speedup</strong> teorico con <span class="math notranslate nohighlight">\(K\)</span> tokens draft y tasa de aceptacion <span class="math notranslate nohighlight">\(\alpha\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\text{speedup} = \frac{K + 1}{1 + (1 - \alpha^K) / (1 - \alpha)} \approx \frac{1}{1 - \alpha} \quad \text{si } \alpha \to 1\]</div>
+</section>
+<section id="continuous-batching">
+<h3>8.3 Continuous Batching<a class="headerlink" href="#continuous-batching" title="Link to this heading">#</a></h3>
+<p>En la inferencia autorregresiva, distintas secuencias terminan en momentos diferentes. El <strong>static batching</strong> mantiene el batch hasta que la secuencia mas larga termina, desperdiciando computo.</p>
+<p><strong>Continuous batching:</strong> cuando una secuencia termina, su slot en el batch se reutiliza inmediatamente para una nueva secuencia, sin esperar al resto del batch. Aumenta el throughput en 2-4x en produccion.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="adaptacion-eficiente-en-parametros-peft">
+<h2>9. Adaptacion Eficiente en Parametros (PEFT)<a class="headerlink" href="#adaptacion-eficiente-en-parametros-peft" title="Link to this heading">#</a></h2>
+<section id="lora-low-rank-adaptation">
+<h3>9.1 LoRA (Low-Rank Adaptation)<a class="headerlink" href="#lora-low-rank-adaptation" title="Link to this heading">#</a></h3>
+<p>La hipotesis de LoRA (Hu et al., 2021): las actualizaciones de pesos durante el ajuste fino tienen <strong>rango intrisecamente bajo</strong>. Por tanto, se parametriza la actualizacion <span class="math notranslate nohighlight">\(\Delta \mathbf{W}\)</span> como:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{W}' = \mathbf{W}_0 + \Delta \mathbf{W} = \mathbf{W}_0 + \mathbf{B}\mathbf{A}\]</div>
+<p>con <span class="math notranslate nohighlight">\(\mathbf{W}_0 \in \mathbb{R}^{d \times k}\)</span> congelada, <span class="math notranslate nohighlight">\(\mathbf{B} \in \mathbb{R}^{d \times r}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{A} \in \mathbb{R}^{r \times k}\)</span>, <span class="math notranslate nohighlight">\(r \ll \min(d, k)\)</span>.</p>
+<p><strong>Inicializacion:</strong> <span class="math notranslate nohighlight">\(\mathbf{A} \sim \mathcal{N}(0, \sigma^2)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{B} = \mathbf{0}\)</span>, de modo que <span class="math notranslate nohighlight">\(\Delta \mathbf{W} = \mathbf{0}\)</span> al inicio. Esto garantiza que el modelo comienza el fine-tuning desde el comportamiento original del modelo preentrenado.</p>
+<p><strong>Escala:</strong> la actualizacion se escala por <span class="math notranslate nohighlight">\(\alpha/r\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{W}' = \mathbf{W}_0 + \frac{\alpha}{r}\mathbf{B}\mathbf{A}\]</div>
+<p>donde <span class="math notranslate nohighlight">\(\alpha\)</span> es un hiperparametro (tipicamente <span class="math notranslate nohighlight">\(\alpha = r\)</span> o <span class="math notranslate nohighlight">\(\alpha = 2r\)</span>).</p>
+<p><strong>Reduccion de parametros:</strong> para <span class="math notranslate nohighlight">\(d = k = 4096\)</span>, <span class="math notranslate nohighlight">\(r = 16\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\text{Parametros LoRA} = r(d + k) = 16 \times 8192 = 131{,}072\]</div>
+<div class="math notranslate nohighlight">
+\[\text{Parametros originales} = d \times k = 4096^2 = 16{,}777{,}216\]</div>
+<div class="math notranslate nohighlight">
+\[\text{Reduccion} = 128\times\]</div>
+<p><strong>Aplicacion tipica:</strong> LoRA se aplica a las matrices <span class="math notranslate nohighlight">\(\mathbf{W}^Q\)</span> y <span class="math notranslate nohighlight">\(\mathbf{W}^V\)</span> de cada capa de atencion.</p>
+</section>
+<section id="qlora">
+<h3>9.2 QLoRA<a class="headerlink" href="#qlora" title="Link to this heading">#</a></h3>
+<p>Dettmers et al. (2023) combinan cuantizacion y LoRA:</p>
+<ol class="arabic simple">
+<li><p>Cuantizar el modelo base a 4 bits (NF4).</p></li>
+<li><p>Agregar adaptadores LoRA en BFloat16.</p></li>
+<li><p>Durante el forward, dequantizar los pesos a BFloat16 para el computo.</p></li>
+<li><p>El gradiente fluye solo por los adaptadores LoRA (los pesos base permanecen congelados y cuantizados).</p></li>
+</ol>
+<p>Permite ajustar un modelo de 65B en una GPU de 48GB con degradacion minima de calidad respecto al SFT completo.</p>
+<p><strong>Memoria:</strong></p>
+<div class="math notranslate nohighlight">
+\[\text{Memoria}_{QLoRA} \approx \frac{N \cdot 4}{8} + \text{Activaciones} + r(d+k) \cdot L \cdot \text{sizeof(bf16)}\]</div>
+<p>donde el primer termino es el modelo a 4 bits.</p>
+</section>
+<section id="prompt-tuning-y-prefix-tuning">
+<h3>9.3 Prompt Tuning y Prefix Tuning<a class="headerlink" href="#prompt-tuning-y-prefix-tuning" title="Link to this heading">#</a></h3>
+<p><strong>Prompt Tuning</strong> (Lester et al., 2021): añadir <span class="math notranslate nohighlight">\(k\)</span> tokens «blandos» (soft tokens) entrenables al inicio de la secuencia, manteniendo el modelo congelado:</p>
+<div class="math notranslate nohighlight">
+\[p_\theta(y \mid [\mathbf{P}; x]) \quad \mathbf{P} \in \mathbb{R}^{k \times d_{model}}\]</div>
+<p>Solo se actualizan <span class="math notranslate nohighlight">\(k \cdot d_{model}\)</span> parametros (tipicamente <span class="math notranslate nohighlight">\(k \in [1, 100]\)</span>).</p>
+<p><strong>Prefix Tuning</strong> (Li &amp; Liang, 2021): prepone vectores entrenables a las K y V de cada capa:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{K}_l' = [\mathbf{P}_l^K; \mathbf{K}_l], \quad \mathbf{V}_l' = [\mathbf{P}_l^V; \mathbf{V}_l]\]</div>
+<p>Mas expresivo que prompt tuning pero con mas parametros: <span class="math notranslate nohighlight">\(2L \cdot k \cdot d_{model}\)</span>.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="capacidades-emergentes">
+<h2>10. Capacidades Emergentes<a class="headerlink" href="#capacidades-emergentes" title="Link to this heading">#</a></h2>
+<section id="in-context-learning">
+<h3>10.1 In-Context Learning<a class="headerlink" href="#in-context-learning" title="Link to this heading">#</a></h3>
+<p>Los LLMs pueden adaptarse a nuevas tareas viendo ejemplos en el prompt sin actualizar pesos:</p>
+<div class="math notranslate nohighlight">
+\[p_\theta(y \mid x, \mathcal{C}) = p_\theta(y \mid \underbrace{(x_1, y_1), \ldots, (x_k, y_k)}_{\mathcal{C}}, x)\]</div>
+<p>Donde <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> son las <span class="math notranslate nohighlight">\(k\)</span> demostraciones en el contexto. Esta capacidad <strong>emerge</strong> a cierta escala y no es explicable como interpolacion de la distribucion de entrenamiento.</p>
+</section>
+<section id="chain-of-thought-cot">
+<h3>10.2 Chain-of-Thought (CoT)<a class="headerlink" href="#chain-of-thought-cot" title="Link to this heading">#</a></h3>
+<p>Wei et al. (2022) demostraron que pedir al modelo que genere pasos intermedios mejora drasticamente el razonamiento en tareas aritmeticas y logicas:</p>
+<p><strong>Zero-shot CoT:</strong> añadir «Pensemos paso a paso» al prompt.</p>
+<p><strong>Few-shot CoT:</strong> incluir ejemplos con razonamiento explicito:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Q: Roger tiene 5 pelotas. Compra 2 cajas de 3. ¿Cuantas pelotas tiene?
+A: Roger comienza con 5. 2 x 3 = 6 pelotas nuevas. 5 + 6 = 11. La respuesta es 11.
+</pre></div>
+</div>
+<p><strong>Fundamento matematico:</strong> el CoT permite al modelo realizar computos distribuidos en multiples pasos de generacion, aumentando efectivamente el «computo» disponible de <span class="math notranslate nohighlight">\(O(d_{ff})\)</span> por token a <span class="math notranslate nohighlight">\(O(T_{CoT} \cdot d_{ff})\)</span>.</p>
+</section>
+<section id="emergencia-y-cambios-de-fase">
+<h3>10.3 Emergencia y Cambios de Fase<a class="headerlink" href="#emergencia-y-cambios-de-fase" title="Link to this heading">#</a></h3>
+<p>Algunas capacidades de los LLMs aparecen abruptamente al superar cierto umbral de escala, no de forma gradual. Wei et al. (2022) documentaron mas de 100 capacidades emergentes.</p>
+<p><strong>Hipotesis de la metrica:</strong> muchas emergencias son artefactos de metricas no lineales (ej. accuracy exacta vs. probabilidad parcial). Schaeffer et al. (2023) argumentan que bajo metricas continuas, las curvas son suaves.</p>
+</section>
+<section id="retrieval-augmented-generation-rag">
+<h3>10.4 Retrieval-Augmented Generation (RAG)<a class="headerlink" href="#retrieval-augmented-generation-rag" title="Link to this heading">#</a></h3>
+<p>Extiende el LLM con acceso a una base de conocimiento externa <span class="math notranslate nohighlight">\(\mathcal{K}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[p_\theta(y \mid x) = \sum_{z \in \mathcal{K}} p_\theta(y \mid x, z) \cdot p_\eta(z \mid x)\]</div>
+<p>donde <span class="math notranslate nohighlight">\(p_\eta(z \mid x)\)</span> es la probabilidad de recuperar el documento <span class="math notranslate nohighlight">\(z\)</span> dado el query <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>En la practica se usa <strong>recuperacion densa</strong> (Dense Passage Retrieval):</p>
+<div class="math notranslate nohighlight">
+\[\text{score}(q, z) = \text{sim}(\mathbf{E}_q(q), \mathbf{E}_z(z)) = \frac{\mathbf{E}_q(q)^\top \mathbf{E}_z(z)}{\|\mathbf{E}_q(q)\| \|\mathbf{E}_z(z)\|}\]</div>
+<p>donde <span class="math notranslate nohighlight">\(\mathbf{E}_q\)</span> y <span class="math notranslate nohighlight">\(\mathbf{E}_z\)</span> son encoders de query y documentos (tipicamente BERT o similar).</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="evaluacion-de-llms">
+<h2>11. Evaluacion de LLMs<a class="headerlink" href="#evaluacion-de-llms" title="Link to this heading">#</a></h2>
+<section id="perplejidad">
+<h3>11.1 Perplejidad<a class="headerlink" href="#perplejidad" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\text{PPL}(\mathcal{D}_{test}) = \exp\!\left(-\frac{1}{\sum_i T_i} \sum_i \sum_{t=1}^{T_i} \log p_\theta(x_t^{(i)} \mid x_{&lt;t}^{(i)})\right)\]</div>
+<p>Metrica intrinseca que mide la incertidumbre promedio del modelo por token. No mide directamente utilidad en tareas downstream.</p>
+</section>
+<section id="benchmarks-estandar">
+<h3>11.2 Benchmarks Estandar<a class="headerlink" href="#benchmarks-estandar" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Benchmark</p></th>
+<th class="head"><p>Tarea</p></th>
+<th class="head"><p>Metrica</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>MMLU</strong> (Hendrycks et al.)</p></td>
+<td><p>57 materias academicas</p></td>
+<td><p>Accuracy</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>HellaSwag</strong> (Zellers et al.)</p></td>
+<td><p>Completacion de oraciones</p></td>
+<td><p>Accuracy</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>HumanEval</strong> (Chen et al.)</p></td>
+<td><p>Generacion de codigo</p></td>
+<td><p>pass&#64;k</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>GSM8K</strong> (Cobbe et al.)</p></td>
+<td><p>Matematicas de primaria</p></td>
+<td><p>Accuracy</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>MATH</strong> (Hendrycks et al.)</p></td>
+<td><p>Matematicas olimpiadas</p></td>
+<td><p>Accuracy</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>BIG-Bench Hard</strong></p></td>
+<td><p>23 tareas dificiles</p></td>
+<td><p>Varios</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>MT-Bench</strong> (Zheng et al.)</p></td>
+<td><p>Dialogo multi-turno</p></td>
+<td><p>GPT-4 score</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>GPQA</strong> (Rein et al.)</p></td>
+<td><p>Preguntas expertas</p></td>
+<td><p>Accuracy</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="pass-k-para-codigo">
+<h3>11.3 pass&#64;k para codigo<a class="headerlink" href="#pass-k-para-codigo" title="Link to this heading">#</a></h3>
+<p>La metrica <code class="docutils literal notranslate"><span class="pre">pass&#64;k</span></code> estima la probabilidad de que al menos una de <span class="math notranslate nohighlight">\(k\)</span> muestras generadas pase los tests:</p>
+<div class="math notranslate nohighlight">
+\[\text{pass&#64;}k = 1 - \frac{\binom{n-c}{k}}{\binom{n}{k}}\]</div>
+<p>donde <span class="math notranslate nohighlight">\(n\)</span> es el numero total de muestras generadas por problema y <span class="math notranslate nohighlight">\(c\)</span> es el numero de muestras correctas. Se usa <span class="math notranslate nohighlight">\(n &gt; k\)</span> para reducir la varianza del estimador.</p>
+</section>
+<section id="llm-as-judge">
+<h3>11.4 LLM-as-Judge<a class="headerlink" href="#llm-as-judge" title="Link to this heading">#</a></h3>
+<p>Usar GPT-4 u otro LLM potente para evaluar la calidad de respuestas. La correlacion con juicios humanos es alta (<span class="math notranslate nohighlight">\(\rho &gt; 0.8\)</span>) para tareas de respuesta abierta donde la evaluacion automatica clasica falla.</p>
+<p><strong>Sesgos conocidos del LLM-judge:</strong></p>
+<ul class="simple">
+<li><p><strong>Sesgo de posicion:</strong> prefiere respuestas en la primera posicion.</p></li>
+<li><p><strong>Sesgo de verbosidad:</strong> prefiere respuestas mas largas.</p></li>
+<li><p><strong>Sesgo de auto-preferencia:</strong> GPT-4 prefiere respuestas estilo GPT-4.</p></li>
+</ul>
+<p>Mitigacion: evaluar en ambos ordenes y promediar; normalizar por longitud.</p>
+</section>
+<section id="rlhf-reward-model-como-proxy-de-alineacion">
+<h3>11.5 RLHF Reward Model como proxy de alineacion<a class="headerlink" href="#rlhf-reward-model-como-proxy-de-alineacion" title="Link to this heading">#</a></h3>
+<p>El <strong>reward hacking</strong> ocurre cuando la politica maximiza la recompensa del RM sin mejorar la calidad real:</p>
+<div class="math notranslate nohighlight">
+\[r_{human}(\pi) \not\approx r_{RM}(\pi) \quad \text{si } \pi \text{ se aleja mucho de } \pi_{SFT}\]</div>
+<p>El termino KL en RLHF actua como regularizador para evitar este problema. El coeficiente <span class="math notranslate nohighlight">\(\beta\)</span> controla el compromiso entre maximizar recompensa y mantenerse cerca de la politica de referencia:</p>
+<div class="math notranslate nohighlight">
+\[\pi^* = \arg\max_\pi \mathbb{E}_y[r(x,y)] - \beta \cdot D_{KL}(\pi \| \pi_{ref})\]</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="referencias">
+<h2>12. Referencias<a class="headerlink" href="#referencias" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Vaswani, A., et al. (2017). Attention is all you need. <em>NeurIPS 2017</em>.</p></li>
+<li><p>Brown, T., et al. (2020). Language models are few-shot learners. <em>NeurIPS 2020</em>.</p></li>
+<li><p>Kaplan, J., et al. (2020). Scaling laws for neural language models. <em>arXiv:2001.08361</em>.</p></li>
+<li><p>Hoffmann, J., et al. (2022). Training compute-optimal large language models (Chinchilla). <em>NeurIPS 2022</em>.</p></li>
+<li><p>Su, J., et al. (2021). RoFormer: Enhanced transformer with rotary position embedding. <em>arXiv:2104.09864</em>.</p></li>
+<li><p>Ainslie, J., et al. (2023). GQA: Training generalized multi-query transformer models. <em>EMNLP 2023</em>.</p></li>
+<li><p>Dao, T., et al. (2022). FlashAttention: Fast and memory-efficient exact attention. <em>NeurIPS 2022</em>.</p></li>
+<li><p>Ouyang, L., et al. (2022). Training language models to follow instructions with human feedback. <em>NeurIPS 2022</em>.</p></li>
+<li><p>Bai, Y., et al. (2022). Constitutional AI: Harmlessness from AI feedback. <em>arXiv:2212.08073</em>.</p></li>
+<li><p>Rafailov, R., et al. (2023). Direct preference optimization. <em>NeurIPS 2023</em>.</p></li>
+<li><p>Hu, E., et al. (2021). LoRA: Low-rank adaptation of large language models. <em>ICLR 2022</em>.</p></li>
+<li><p>Dettmers, T., et al. (2023). QLoRA: Efficient finetuning of quantized LLMs. <em>NeurIPS 2023</em>.</p></li>
+<li><p>Frantar, E., et al. (2022). GPTQ: Accurate post-training quantization for generative pre-trained transformers. <em>arXiv:2210.17323</em>.</p></li>
+<li><p>Wei, J., et al. (2022). Chain-of-thought prompting elicits reasoning in large language models. <em>NeurIPS 2022</em>.</p></li>
+<li><p>Wei, J., et al. (2022). Emergent abilities of large language models. <em>TMLR 2022</em>.</p></li>
+<li><p>Lewis, P., et al. (2020). Retrieval-augmented generation for knowledge-intensive NLP tasks. <em>NeurIPS 2020</em>.</p></li>
+<li><p>Leviathan, Y., et al. (2023). Fast inference from transformers via speculative decoding. <em>ICML 2023</em>.</p></li>
+<li><p>Press, O., et al. (2021). Train short, test long: Attention with linear biases (ALiBi). <em>ICLR 2022</em>.</p></li>
+<li><p>Schulman, J., et al. (2017). Proximal policy optimization algorithms. <em>arXiv:1707.06347</em>.</p></li>
+<li><p>Sennrich, R., et al. (2016). Neural machine translation of rare words with subword units. <em>ACL 2016</em>.</p></li>
+<li><p>Lester, B., et al. (2021). The power of scale for parameter-efficient prompt tuning. <em>EMNLP 2021</em>.</p></li>
+<li><p>Li, X.L., &amp; Liang, P. (2021). Prefix-tuning: Optimizing continuous prompts for generation. <em>ACL 2021</em>.</p></li>
+</ul>
+<hr class="docutils" />
+<!-- IMAGEN: Diagrama de la arquitectura GPT completa: embedding + positional encoding + L bloques decoder (MHA causal + FFN + Pre-LN + residual) + cabeza de prediccion con weight tying -->
+<!-- IMAGEN: Curvas de scaling laws: loss vs. N (parametros), D (tokens) y C (compute) en escala log-log mostrando las leyes de potencias -->
+<!-- IMAGEN: Diagrama del pipeline RLHF completo: SFT -> Reward Model -> PPO con las cuatro fases y flujo de datos -->
+<!-- IMAGEN: Comparativa de MHA vs MQA vs GQA mostrando las cabezas Q, K, V y su agrupacion -->
+<!-- IMAGEN: Diagrama de LoRA: matriz W0 congelada con la rama paralela B*A de bajo rango, mostrando el flujo del gradiente -->
+<!-- IMAGEN: Visualizacion de RoPE: rotacion de vectores Q y K en el plano complejo por posicion, mostrando que el producto interno solo depende de la diferencia de posiciones -->
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Unidad 1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="nlp_tensorflow.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">1.9 Procesamiento de Lenguaje Natural con TensorFlow / Keras</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="llms_colab.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">1.11 LLMs en la Practica: OpenAI GPT y Ollama</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indice">Indice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitectura-base-transformer-decoder">1. Arquitectura Base: Transformer Decoder</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#formulacion-del-modelo-de-lenguaje-autorregresivo">1.1 Formulacion del modelo de lenguaje autorregresivo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformer-decoder-con-pre-layernorm">1.2 Transformer decoder con Pre-LayerNorm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scaled-dot-product-attention-con-mascara-causal">1.3 Scaled Dot-Product Attention con mascara causal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-head-attention">1.4 Multi-Head Attention</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feed-forward-network">1.5 Feed-Forward Network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#layer-normalization">1.6 Layer Normalization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weight-tying">1.7 Weight Tying</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conteo-de-parametros">1.8 Conteo de parametros</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preentrenamiento-a-escala">2. Preentrenamiento a Escala</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo-de-modelado-de-lenguaje">2.1 Objetivo de modelado de lenguaje</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizacion-adamw">2.2 Optimizacion: AdamW</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-rate-scheduling">2.3 Learning rate scheduling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-clipping">2.4 Gradient Clipping</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#procesamiento-del-corpus">2.5 Procesamiento del corpus</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#leyes-de-escala">3. Leyes de Escala</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ley-de-potencias-de-kaplan-et-al-2020">3.1 Ley de potencias de Kaplan et al. (2020)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ley-de-chinchilla-hoffmann-et-al-2022">3.2 Ley de Chinchilla (Hoffmann et al., 2022)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perdida-conjunta">3.3 Perdida conjunta</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenizacion-avanzada">4. Tokenizacion Avanzada</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#byte-pair-encoding-bpe">4.1 Byte-Pair Encoding (BPE)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wordpiece-bert">4.2 WordPiece (BERT)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sentencepiece">4.3 SentencePiece</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fertilidad">4.4 Fertilidad</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mejoras-arquitectonicas-modernas">5. Mejoras Arquitectonicas Modernas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rotary-positional-embedding-rope">5.1 Rotary Positional Embedding (RoPE)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grouped-query-attention-gqa">5.2 Grouped Query Attention (GQA)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kv-cache">5.3 KV-Cache</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flash-attention">5.4 Flash Attention</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extended-context-ventanas-de-atencion-y-alibi">5.5 Extended Context: Ventanas de Atencion y ALiBi</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ajuste-fino-supervisado">6. Ajuste Fino Supervisado</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#instruction-tuning-sft">6.1 Instruction Tuning (SFT)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#catastrophic-forgetting">6.2 Catastrophic Forgetting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rlhf-y-alineacion">7. RLHF y Alineacion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reward-modeling">7.1 Reward Modeling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppo-para-llms">7.2 PPO para LLMs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dpo-direct-preference-optimization">7.3 DPO (Direct Preference Optimization)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constitutional-ai-cai">7.4 Constitutional AI (CAI)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inferencia-eficiente">8. Inferencia Eficiente</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cuantizacion">8.1 Cuantizacion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#especulative-decoding">8.2 Especulative Decoding</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-batching">8.3 Continuous Batching</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adaptacion-eficiente-en-parametros-peft">9. Adaptacion Eficiente en Parametros (PEFT)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lora-low-rank-adaptation">9.1 LoRA (Low-Rank Adaptation)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qlora">9.2 QLoRA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-tuning-y-prefix-tuning">9.3 Prompt Tuning y Prefix Tuning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#capacidades-emergentes">10. Capacidades Emergentes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-context-learning">10.1 In-Context Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chain-of-thought-cot">10.2 Chain-of-Thought (CoT)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#emergencia-y-cambios-de-fase">10.3 Emergencia y Cambios de Fase</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieval-augmented-generation-rag">10.4 Retrieval-Augmented Generation (RAG)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-de-llms">11. Evaluacion de LLMs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perplejidad">11.1 Perplejidad</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmarks-estandar">11.2 Benchmarks Estandar</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pass-k-para-codigo">11.3 pass@k para codigo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#llm-as-judge">11.4 LLM-as-Judge</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rlhf-reward-model-como-proxy-de-alineacion">11.5 RLHF Reward Model como proxy de alineacion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencias">12. Referencias</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Sergio Alejandro Holguin García
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
