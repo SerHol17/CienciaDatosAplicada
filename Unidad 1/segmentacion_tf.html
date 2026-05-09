@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Segmentacion con Inteligencia Artificial — TensorFlow / Keras &#8212; Ciencia de Datos Aplicada- 01 Ucaldas</title>
+    <title>1.7 Segmentacion con Inteligencia Artificial — TensorFlow / Keras &#8212; Ciencia de Datos Aplicada- 01 Ucaldas</title>
   
   
   
@@ -186,11 +186,11 @@
 
 
 <li class="toctree-l2"><a class="reference internal" href="02_Autoencoders.html">1.2 Autoencoders</a></li>
-<li class="toctree-l2"><a class="reference internal" href="autoencoders_tf.html">Autoencoders en TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoencoders_tf.html">1.3 Autoencoders en TensorFlow / Keras</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Gans_teoria.html">1.4 Redes Generativas Adversariales (GANs)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gans_tf.html">Redes Generativas Adversariales (GANs) en TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gans_tf.html">1.5 Redes Generativas Adversariales (GANs) en TensorFlow / Keras</a></li>
 <li class="toctree-l2"><a class="reference internal" href="segmentacion_teoria.html">1.6 Segmentación con Inteligencia Artificial</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Segmentacion con Inteligencia Artificial — TensorFlow / Keras</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.7 Segmentacion con Inteligencia Artificial — TensorFlow / Keras</a></li>
 </ul>
 </details></li>
 </ul>
@@ -406,7 +406,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Segmentacion con Inteligencia Artificial — TensorFlow / Keras</h1>
+    <h1>1.7 Segmentacion con Inteligencia Artificial — TensorFlow / Keras</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -440,7 +440,7 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="segmentacion-con-inteligencia-artificial-tensorflow-keras">
-<h1>Segmentacion con Inteligencia Artificial — TensorFlow / Keras<a class="headerlink" href="#segmentacion-con-inteligencia-artificial-tensorflow-keras" title="Link to this heading">#</a></h1>
+<h1>1.7 Segmentacion con Inteligencia Artificial — TensorFlow / Keras<a class="headerlink" href="#segmentacion-con-inteligencia-artificial-tensorflow-keras" title="Link to this heading">#</a></h1>
 <p>Este notebook implementa segmentacion semantica con el dataset <strong>Oxford-IIIT Pet</strong>, descargado automaticamente con <code class="docutils literal notranslate"><span class="pre">tensorflow_datasets</span></code>. Se trabajan dos arquitecturas (FCN y U-Net), cinco funciones de perdida y todas las metricas estandar del campo.</p>
 <p>El dataset Oxford Pet contiene 7,349 imagenes de mascotas con mascaras de segmentacion en 3 clases:</p>
 <ul class="simple">
@@ -540,7 +540,7 @@ GPU        : [PhysicalDevice(name=&#39;/physical_device:GPU:0&#39;, device_type=
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading and preparing dataset Unknown size (download: Unknown size, generated: Unknown size, total: Unknown size) to /root/tensorflow_datasets/oxford_iiit_pet/4.0.0...
 </pre></div>
 </div>
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "3a1022f0f790495da88af7a72ae1ee01"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "46c07b90a913415d899a3ee9fec24665"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "5a63c3b915654cef9b534408698ff554"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "75a0d417fc4b4eac8c03a348ae9187b4"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "bcca463f68e74621836cc06fb4897a4b"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "258d15228a684eaeb698f00d54280985"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "8106788aef8b47ac8a3db6a2e269a61e"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "3cbe2ed3d11e485bb32ebb40be489ed8"}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dataset oxford_iiit_pet downloaded and prepared to /root/tensorflow_datasets/oxford_iiit_pet/4.0.0. Subsequent calls will reuse this data.
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "3a1022f0f790495da88af7a72ae1ee01", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "46c07b90a913415d899a3ee9fec24665", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "5a63c3b915654cef9b534408698ff554", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "75a0d417fc4b4eac8c03a348ae9187b4", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "bcca463f68e74621836cc06fb4897a4b", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "258d15228a684eaeb698f00d54280985", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "8106788aef8b47ac8a3db6a2e269a61e", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "3cbe2ed3d11e485bb32ebb40be489ed8", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dataset oxford_iiit_pet downloaded and prepared to /root/tensorflow_datasets/oxford_iiit_pet/4.0.0. Subsequent calls will reuse this data.
 Train+Val: 3680 imagenes
 Test     : 3669 imagenes
 Features : FeaturesDict({
