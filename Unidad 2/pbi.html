@@ -1,0 +1,2133 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.16 Visualizacion con Power BI &#8212; Ciencia de Datos Aplicada- 01 Ucaldas</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unidad 2/pbi';</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="prev" title="2.15 Caso Práctico: Análisis Visual del Dataset FIFA 23" href="caso_practico_fifa23.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Ciencia de Datos Aplicada- 01 Ucaldas - Home"/>
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark pst-js-only" alt="Ciencia de Datos Aplicada- 01 Ucaldas - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Ciencia de datos aplicada
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Unidad1.html">Unidad 1: Deep Learning Avanzado</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/01_introduccion_ia.html">1.1 Tópicos Emergentes de la IA — 2026</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/02_Autoencoders.html">1.2 Autoencoders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/autoencoders_tf.html">1.3 Autoencoders en TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/Gans_teoria.html">1.4 Redes Generativas Adversariales (GANs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/gans_tf.html">1.5 Redes Generativas Adversariales (GANs) en TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/segmentacion_teoria.html">1.6 Segmentación con Inteligencia Artificial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/segmentacion_tf.html">1.7 Segmentacion con Inteligencia Artificial — TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/16_nlp_transformers.html">1.8 Procesamiento de Lenguaje Natural y Transformers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/nlp_tensorflow.html">1.9 Procesamiento de Lenguaje Natural con TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/17_llms.html">1.10 Modelos de Lenguaje de Gran Escala (LLMs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/llms_colab.html">1.11 LLMs en la Practica: OpenAI GPT y Ollama</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/18_agentes.html">1.12 Agentes de Inteligencia Artificial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/agentes_colab.html">1.13 Agentes de Inteligencia Artificial</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/frameworks_agentes.html">1.14 LangChain · LangGraph · CrewAI</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Unidad2.html">Unidad 2: Visualizacion de Datos</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Matplotlib.html">2.1 Visualizacion con Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_matplotlib_intro.html">2.2 Matplotlib — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_matplotlib_avanzado.html">2.3: Matplotlib — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Seaborn.html">2.4 Visualizacion con Seaborn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_seaborn_intro.html">2.5 Seaborn — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotly.html">2.7 Visualizacion Interactiva con Plotly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_seaborn_avanzado.html">2.6: Seaborn — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_plotly_intro.html">2.8: Plotly — Gráficos Interactivos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_plotly_avanzado.html">2.9: Plotly — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_comparativa_y_casos.html">2.10: Comparativa y Casos de Uso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Buenas_Practicas.html">2. 11 Buenas Practicas de Visualizacion de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="buenas_practicas_visualizacion.html">2.12 Buenas Prácticas de Visualización de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Que_Escoger.html">2.13 Que Grafica Escoger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Que%20Grafica%20escoger.html">2.14 Analítica de Datos: Tipos de Gráficos y Análisis Exploratorio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="caso_practico_fifa23.html">2.15 Caso Práctico: Análisis Visual del Dataset FIFA 23</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.16 Visualizacion con Power BI</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/CienciaDatosAplicada" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/CienciaDatosAplicada/issues/new?title=Issue%20on%20page%20%2FUnidad 2/pbi.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Unidad 2/pbi.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>2.16 Visualizacion con Power BI</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indice">Indice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitectura-y-ecosistema">1. Arquitectura y Ecosistema</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#componentes-del-ecosistema">1.1 Componentes del ecosistema</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#motor-vertipaq">1.3 Motor Vertipaq</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparativa-con-otras-herramientas">1.4 Comparativa con otras herramientas</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flujo-de-trabajo">2. Flujo de Trabajo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-proceso-completo-en-power-bi-desktop">2.1 El proceso completo en Power BI Desktop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vistas-de-power-bi-desktop">2.2 Vistas de Power BI Desktop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conectar-a-fuentes-de-datos">2.3 Conectar a fuentes de datos</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power-query-transformacion-de-datos">3. Power Query: Transformacion de Datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-editor-de-power-query">3.1 El Editor de Power Query</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformaciones-comunes">3.2 Transformaciones comunes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parametros-en-power-query">3.3 Parametros en Power Query</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-personalizadas-en-m">3.4 Funciones personalizadas en M</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelado-de-datos">4. Modelado de Datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-esquema-en-estrella">4.1 El esquema en estrella</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relaciones">4.2 Relaciones</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tablas-de-fechas">4.3 Tablas de fechas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#buenas-practicas-de-modelado">4.4 Buenas practicas de modelado</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dax-data-analysis-expressions">5. DAX: Data Analysis Expressions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conceptos-fundamentales">5.1 Conceptos fundamentales</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sintaxis-basica">5.2 Sintaxis basica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-de-agregacion">5.3 Funciones de agregacion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-la-funcion-mas-importante-de-dax">5.4 CALCULATE: la funcion mas importante de DAX</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-de-tabla">5.5 Funciones de tabla</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-logicas-y-condicionales">5.6 Funciones logicas y condicionales</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#columna-calculada-vs-medida">6.1 Columna calculada vs. Medida</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#organizar-medidas-en-tablas-de-medidas">6.2 Organizar medidas en tablas de medidas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-en-dax">6.3 Variables en DAX</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#medidas-de-formato-y-presentacion">6.4 Medidas de formato y presentacion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizaciones">7. Visualizaciones</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-visualizaciones-nativas">7.1 Tipos de visualizaciones nativas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-de-una-visual">7.2 Configuracion de una visual</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#formato-condicional">7.3 Formato condicional</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tooltips-de-pagina">7.4 Tooltips de pagina</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drill-through-y-drill-down">7.5 Drill-through y Drill-down</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtros-y-segmentadores">8. Filtros y Segmentadores</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-filtros">8.1 Tipos de filtros</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentadores-slicers">8.2 Segmentadores (Slicers)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interacciones-entre-visuales">8.3 Interacciones entre visuales</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seguridad-a-nivel-de-fila-rls">8.4 Seguridad a nivel de fila (RLS)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temas-y-diseno">9. Temas y Diseño</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temas-en-power-bi">9.1 Temas en Power BI</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principios-de-diseno-en-power-bi">9.2 Principios de diseño en Power BI</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alineacion-y-distribucion">9.3 Alineacion y distribucion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fondos-y-formas-decorativas">9.4 Fondos y formas decorativas</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power-bi-service-y-colaboracion">10. Power BI Service y Colaboracion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#publicar-un-informe">10.1 Publicar un informe</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workspaces">10.2 Workspaces</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actualizacion-de-datos">10.3 Actualizacion de datos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dashboards-en-power-bi-service">10.4 Dashboards en Power BI Service</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embedding-embeber-en-otras-aplicaciones">10.6 Embedding (embeber en otras aplicaciones)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dax-avanzado-inteligencia-de-tiempo">11. DAX Avanzado: Inteligencia de Tiempo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-basicas-de-inteligencia-de-tiempo">11.1 Funciones basicas de inteligencia de tiempo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desplazamientos-de-periodo">11.2 Desplazamientos de periodo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparativas-avanzadas">11.3 Comparativas avanzadas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rankings-y-posiciones">11.4 Rankings y posiciones</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#buenas-practicas">12. Buenas Practicas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nomenclatura">12.1 Nomenclatura</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rendimiento-en-dax">12.2 Rendimiento en DAX</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reducir-el-tamano-del-modelo">12.3 Reducir el tamaño del modelo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lista-de-verificacion-pre-publicacion">12.4 Lista de verificacion pre-publicacion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencias">13. Referencias</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="visualizacion-con-power-bi">
+<h1>2.16 Visualizacion con Power BI<a class="headerlink" href="#visualizacion-con-power-bi" title="Link to this heading">#</a></h1>
+<section id="indice">
+<h2>Indice<a class="headerlink" href="#indice" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#1-arquitectura-y-ecosistema"><span class="xref myst">Arquitectura y ecosistema</span></a></p></li>
+<li><p><a class="reference internal" href="#2-flujo-de-trabajo"><span class="xref myst">Flujo de trabajo en Power BI</span></a></p></li>
+<li><p><a class="reference internal" href="#3-power-query"><span class="xref myst">Power Query: transformacion de datos</span></a></p></li>
+<li><p><a class="reference internal" href="#4-modelado-de-datos"><span class="xref myst">Modelado de datos</span></a></p></li>
+<li><p><a class="reference internal" href="#5-dax"><span class="xref myst">DAX: Data Analysis Expressions</span></a></p></li>
+<li><p><a class="reference internal" href="#6-medidas-y-columnas-calculadas"><span class="xref myst">Medidas y columnas calculadas</span></a></p></li>
+<li><p><a class="reference internal" href="#7-visualizaciones"><span class="xref myst">Visualizaciones</span></a></p></li>
+<li><p><a class="reference internal" href="#8-filtros-y-segmentadores"><span class="xref myst">Filtros y segmentadores</span></a></p></li>
+<li><p><a class="reference internal" href="#9-temas-y-dise%C3%B1o"><span class="xref myst">Temas y diseño</span></a></p></li>
+<li><p><a class="reference internal" href="#10-power-bi-service"><span class="xref myst">Power BI Service y colaboracion</span></a></p></li>
+<li><p><a class="reference internal" href="#11-dax-avanzado"><span class="xref myst">DAX avanzado: inteligencia de tiempo</span></a></p></li>
+<li><p><a class="reference internal" href="#12-buenas-practicas"><span class="xref myst">Buenas practicas</span></a></p></li>
+<li><p><a class="reference internal" href="#13-referencias"><span class="xref myst">Referencias</span></a></p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="arquitectura-y-ecosistema">
+<h2>1. Arquitectura y Ecosistema<a class="headerlink" href="#arquitectura-y-ecosistema" title="Link to this heading">#</a></h2>
+<section id="componentes-del-ecosistema">
+<h3>1.1 Componentes del ecosistema<a class="headerlink" href="#componentes-del-ecosistema" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Fuentes de datos
+  (Excel, SQL, CSV, APIs, SharePoint, Azure...)
+          ↓
+   Power Query (ETL)
+          ↓
+   Motor Vertipaq (columnar, comprimido en RAM)
+          ↓
+   Modelo de datos (tablas + relaciones)
+          ↓
+   DAX (calculos y medidas)
+          ↓
+   Visualizaciones (reportes interactivos)
+          ↓
+   Power BI Service (nube) → Dashboards, Apps, Alertas
+</pre></div>
+</div>
+<img src="../_static/images/pbi1.png" width="600" />
+### 1.2 Las tres herramientas principales
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Herramienta</p></th>
+<th class="head"><p>Descripcion</p></th>
+<th class="head"><p>Uso</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Power BI Desktop</strong></p></td>
+<td><p>Aplicacion Windows gratuita</p></td>
+<td><p>Construir reportes</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Power BI Service</strong></p></td>
+<td><p>Plataforma web (<a class="reference external" href="http://powerbi.com">powerbi.com</a>)</p></td>
+<td><p>Publicar, compartir, colaborar</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Power BI Mobile</strong></p></td>
+<td><p>App iOS / Android</p></td>
+<td><p>Consumir reportes</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="motor-vertipaq">
+<h3>1.3 Motor Vertipaq<a class="headerlink" href="#motor-vertipaq" title="Link to this heading">#</a></h3>
+<p>El motor de almacenamiento de Power BI es <strong>Vertipaq</strong>, un motor columnar en memoria (IMDB — In-Memory Database):</p>
+<ul class="simple">
+<li><p>Almacena los datos <strong>por columna</strong>, no por fila.</p></li>
+<li><p>Aplica <strong>compresion por diccionario</strong>: reemplaza valores repetidos por indices enteros.</p></li>
+<li><p>Compresion tipica: 10:1 a 100:1 sobre el dato original.</p></li>
+<li><p>Todas las consultas DAX pasan por Vertipaq, que ejecuta en multiples hilos.</p></li>
+</ul>
+<p><strong>Por que columnar es mas rapido para analitica:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Tabla</span> <span class="n">tradicional</span> <span class="p">(</span><span class="n">row</span><span class="o">-</span><span class="n">store</span><span class="p">):</span>
+  <span class="n">Fila1</span><span class="p">:</span> <span class="p">[</span><span class="mi">2024</span><span class="o">-</span><span class="mi">01</span><span class="p">,</span> <span class="n">Norte</span><span class="p">,</span> <span class="mi">1200</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">]</span>
+  <span class="n">Fila2</span><span class="p">:</span> <span class="p">[</span><span class="mi">2024</span><span class="o">-</span><span class="mi">01</span><span class="p">,</span> <span class="n">Sur</span><span class="p">,</span>   <span class="mi">980</span><span class="p">,</span>  <span class="mf">0.12</span><span class="p">]</span>
+  <span class="o">...</span>
+
+  <span class="n">SUM</span><span class="p">(</span><span class="n">Ventas</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">leer</span> <span class="n">TODAS</span> <span class="n">las</span> <span class="n">columnas</span> <span class="n">de</span> <span class="n">TODAS</span> <span class="n">las</span> <span class="n">filas</span>
+
+<span class="n">Vertipaq</span> <span class="p">(</span><span class="n">column</span><span class="o">-</span><span class="n">store</span><span class="p">):</span>
+  <span class="n">Col_Fecha</span><span class="p">:</span>  <span class="p">[</span><span class="mi">2024</span><span class="o">-</span><span class="mi">01</span><span class="p">,</span> <span class="mi">2024</span><span class="o">-</span><span class="mi">01</span><span class="p">,</span> <span class="mi">2024</span><span class="o">-</span><span class="mi">02</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+  <span class="n">Col_Region</span><span class="p">:</span> <span class="p">[</span><span class="n">Norte</span><span class="p">,</span> <span class="n">Sur</span><span class="p">,</span> <span class="n">Norte</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+  <span class="n">Col_Ventas</span><span class="p">:</span> <span class="p">[</span><span class="mi">1200</span><span class="p">,</span> <span class="mi">980</span><span class="p">,</span> <span class="mi">1350</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+  <span class="n">Col_Desc</span><span class="p">:</span>   <span class="p">[</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.18</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+
+  <span class="n">SUM</span><span class="p">(</span><span class="n">Ventas</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">leer</span> <span class="n">SOLO</span> <span class="n">la</span> <span class="n">columna</span> <span class="n">Col_Ventas</span>
+</pre></div>
+</div>
+</section>
+<section id="comparativa-con-otras-herramientas">
+<h3>1.4 Comparativa con otras herramientas<a class="headerlink" href="#comparativa-con-otras-herramientas" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Aspecto</p></th>
+<th class="head"><p>Power BI</p></th>
+<th class="head"><p>Tableau</p></th>
+<th class="head"><p>Looker</p></th>
+<th class="head"><p>Python (Plotly/Seaborn)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Publico</p></td>
+<td><p>Negocio / BI</p></td>
+<td><p>Negocio / BI</p></td>
+<td><p>Negocio</p></td>
+<td><p>Tecnico / Data Science</p></td>
+</tr>
+<tr class="row-odd"><td><p>Codigo</p></td>
+<td><p>No (DAX/M)</p></td>
+<td><p>No (calc. fields)</p></td>
+<td><p>Si (LookML)</p></td>
+<td><p>Si (Python)</p></td>
+</tr>
+<tr class="row-even"><td><p>Interactividad</p></td>
+<td><p>Alta</p></td>
+<td><p>Alta</p></td>
+<td><p>Alta</p></td>
+<td><p>Alta (Plotly/Dash)</p></td>
+</tr>
+<tr class="row-odd"><td><p>ETL integrado</p></td>
+<td><p>Si (Power Query)</p></td>
+<td><p>Limitado</p></td>
+<td><p>Si (dbt)</p></td>
+<td><p>Manual</p></td>
+</tr>
+<tr class="row-even"><td><p>Costo</p></td>
+<td><p>Desde gratis</p></td>
+<td><p>Alto</p></td>
+<td><p>Alto</p></td>
+<td><p>Gratis</p></td>
+</tr>
+<tr class="row-odd"><td><p>ML integrado</p></td>
+<td><p>Si (AutoML)</p></td>
+<td><p>Si</p></td>
+<td><p>Si</p></td>
+<td><p>Total control</p></td>
+</tr>
+<tr class="row-even"><td><p>Curva de aprendizaje</p></td>
+<td><p>Media</p></td>
+<td><p>Media</p></td>
+<td><p>Alta</p></td>
+<td><p>Alta</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="flujo-de-trabajo">
+<h2>2. Flujo de Trabajo<a class="headerlink" href="#flujo-de-trabajo" title="Link to this heading">#</a></h2>
+<section id="el-proceso-completo-en-power-bi-desktop">
+<h3>2.1 El proceso completo en Power BI Desktop<a class="headerlink" href="#el-proceso-completo-en-power-bi-desktop" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>1. CONECTAR     → Elegir fuente de datos
+        ↓
+2. TRANSFORMAR  → Power Query Editor (ETL)
+        ↓
+3. MODELAR      → Vista de Modelo (relaciones, tablas)
+        ↓
+4. CALCULAR     → DAX (medidas, columnas calculadas, tablas calculadas)
+        ↓
+5. VISUALIZAR   → Vista de Informe (graficas, filtros, slicers)
+        ↓
+6. PUBLICAR     → Power BI Service (reportes, dashboards, apps)
+        ↓
+7. COMPARTIR    → Workspaces, Apps, Embedding
+</pre></div>
+</div>
+</section>
+<section id="vistas-de-power-bi-desktop">
+<h3>2.2 Vistas de Power BI Desktop<a class="headerlink" href="#vistas-de-power-bi-desktop" title="Link to this heading">#</a></h3>
+<p><strong>Vista de Informe:</strong> donde se construyen las paginas del reporte con visualizaciones arrastradas del panel de Visualizaciones.</p>
+<p><strong>Vista de Tabla:</strong> muestra los datos tal como estan en el modelo despues de Power Query. Util para verificar columnas calculadas.</p>
+<p><strong>Vista de Modelo:</strong> muestra las tablas y las relaciones entre ellas (diagrama entidad-relacion). Aqui se configuran cardinalidades y direcciones de filtro.</p>
+</section>
+<section id="conectar-a-fuentes-de-datos">
+<h3>2.3 Conectar a fuentes de datos<a class="headerlink" href="#conectar-a-fuentes-de-datos" title="Link to this heading">#</a></h3>
+<p>Power BI Desktop tiene mas de 200 conectores nativos:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Archivo</span><span class="p">:</span>      <span class="n">Excel</span><span class="p">,</span> <span class="n">CSV</span><span class="p">,</span> <span class="n">XML</span><span class="p">,</span> <span class="n">JSON</span><span class="p">,</span> <span class="n">PDF</span><span class="p">,</span> <span class="n">SharePoint</span>
+<span class="n">Base</span> <span class="n">de</span> <span class="n">datos</span><span class="p">:</span> <span class="n">SQL</span> <span class="n">Server</span><span class="p">,</span> <span class="n">MySQL</span><span class="p">,</span> <span class="n">PostgreSQL</span><span class="p">,</span> <span class="n">Oracle</span><span class="p">,</span> <span class="n">MongoDB</span><span class="p">,</span> <span class="n">Snowflake</span>
+<span class="n">Servicio</span><span class="p">:</span>     <span class="n">SharePoint</span><span class="p">,</span> <span class="n">Dynamics</span> <span class="mi">365</span><span class="p">,</span> <span class="n">Salesforce</span><span class="p">,</span> <span class="n">Google</span> <span class="n">Analytics</span>
+<span class="n">Azure</span><span class="p">:</span>        <span class="n">Azure</span> <span class="n">SQL</span><span class="p">,</span> <span class="n">Synapse</span><span class="p">,</span> <span class="n">Data</span> <span class="n">Lake</span><span class="p">,</span> <span class="n">Blob</span> <span class="n">Storage</span>
+<span class="n">Web</span><span class="p">:</span>          <span class="n">Pagina</span> <span class="n">web</span><span class="p">,</span> <span class="n">API</span> <span class="n">REST</span> <span class="p">(</span><span class="n">con</span> <span class="n">M</span> <span class="n">personalizado</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Modos de conectividad:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modo</p></th>
+<th class="head"><p>Descripcion</p></th>
+<th class="head"><p>Cuando usarlo</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Import</strong></p></td>
+<td><p>Copia los datos en Vertipaq</p></td>
+<td><p>Datos &lt; 1GB, mejor rendimiento</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>DirectQuery</strong></p></td>
+<td><p>Consulta la fuente en tiempo real</p></td>
+<td><p>Datos grandes, sin copia</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Live Connection</strong></p></td>
+<td><p>Conecta a SSAS / AAS / Power BI Dataset</p></td>
+<td><p>Modelo centralizado</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Composite</strong></p></td>
+<td><p>Mezcla Import + DirectQuery en un modelo</p></td>
+<td><p>Escenarios hibridos</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="power-query-transformacion-de-datos">
+<h2>3. Power Query: Transformacion de Datos<a class="headerlink" href="#power-query-transformacion-de-datos" title="Link to this heading">#</a></h2>
+<p>Power Query es el motor ETL de Power BI. Usa el lenguaje <strong>M</strong> (Mashup). Cada paso de transformacion se guarda como una expresion M inmutable.</p>
+<section id="el-editor-de-power-query">
+<h3>3.1 El Editor de Power Query<a class="headerlink" href="#el-editor-de-power-query" title="Link to this heading">#</a></h3>
+<p>La interfaz tiene cuatro areas:</p>
+<ul class="simple">
+<li><p><strong>Panel de Consultas</strong> (izquierda): lista de tablas/consultas.</p></li>
+<li><p><strong>Vista previa de datos</strong> (centro): muestra las filas de la tabla actual.</p></li>
+<li><p><strong>Pasos aplicados</strong> (derecha): historial de transformaciones en orden.</p></li>
+<li><p><strong>Barra de formulas</strong>: muestra el codigo M del paso seleccionado.</p></li>
+</ul>
+</section>
+<section id="transformaciones-comunes">
+<h3>3.2 Transformaciones comunes<a class="headerlink" href="#transformaciones-comunes" title="Link to this heading">#</a></h3>
+<p><strong>Promover encabezados:</strong></p>
+<div class="highlight-m notranslate"><div class="highlight"><pre><span></span>// M generado automaticamente al hacer clic en &quot;Usar primera fila como encabezado&quot;
+= Table.PromoteHeaders(Fuente, [PromoteAllScalars=true])
+</pre></div>
+</div>
+<p><strong>Cambiar tipo de datos:</strong></p>
+<div class="highlight-m notranslate"><div class="highlight"><pre><span></span>= Table.TransformColumnTypes(Paso_anterior, {
+    {&quot;Fecha&quot;,    type date},
+    {&quot;Ventas&quot;,   type number},
+    {&quot;Producto&quot;, type text},
+    {&quot;Activo&quot;,   type logical}
+})
+</pre></div>
+</div>
+<p><strong>Filtrar filas:</strong></p>
+<div class="highlight-m notranslate"><div class="highlight"><pre><span></span>// Mantener solo filas donde Region = &quot;Norte&quot; y Ventas &gt; 1000
+= Table.SelectRows(Paso_anterior, each
+    [Region] = &quot;Norte&quot; and [Ventas] &gt; 1000
+)
+</pre></div>
+</div>
+<p><strong>Agregar columna calculada:</strong></p>
+<div class="highlight-m notranslate"><div class="highlight"><pre><span></span>// Nueva columna = Ventas * (1 - Descuento)
+= Table.AddColumn(Paso_anterior, &quot;Ventas Netas&quot;,
+    each [Ventas] * (1 - [Descuento]),
+    type number
+)
+</pre></div>
+</div>
+<p><strong>Combinar tablas (Merge = JOIN):</strong></p>
+<div class="highlight-m notranslate"><div class="highlight"><pre><span></span>// Left Join entre Ventas y Productos por la columna ProductoID
+= Table.NestedJoin(
+    Ventas,   {&quot;ProductoID&quot;},
+    Productos, {&quot;ID&quot;},
+    &quot;Productos_Expandido&quot;,
+    JoinKind.LeftOuter   // Inner, LeftOuter, RightOuter, FullOuter, LeftAnti, RightAnti
+)
+</pre></div>
+</div>
+<p><strong>Apilar tablas (Append = UNION):</strong></p>
+<div class="highlight-m notranslate"><div class="highlight"><pre><span></span>// Combinar tres tablas con la misma estructura
+= Table.Combine({Ventas_2022, Ventas_2023, Ventas_2024})
+</pre></div>
+</div>
+<p><strong>Transponer y pivotar:</strong></p>
+<div class="highlight-m notranslate"><div class="highlight"><pre><span></span>// Pivotar: de long a wide (una columna de categorias a multiples columnas)
+= Table.Pivot(
+    Tabla,
+    List.Distinct(Tabla[Mes]),  // valores que se convierten en columnas
+    &quot;Mes&quot;,                       // columna de categorias
+    &quot;Ventas&quot;,                    // columna de valores
+    List.Sum                     // funcion de agregacion
+)
+
+// Despivotar: de wide a long (multiple columnas a dos columnas)
+= Table.UnpivotOtherColumns(Tabla, {&quot;Producto&quot;}, &quot;Mes&quot;, &quot;Ventas&quot;)
+</pre></div>
+</div>
+</section>
+<section id="parametros-en-power-query">
+<h3>3.3 Parametros en Power Query<a class="headerlink" href="#parametros-en-power-query" title="Link to this heading">#</a></h3>
+<p>Los parametros permiten construir consultas dinamicas (ej. cambiar el servidor o la fecha de corte).</p>
+<div class="highlight-m notranslate"><div class="highlight"><pre><span></span>// Definir un parametro (en Administrar Parametros)
+// Nombre: FechaCorte, Tipo: Date, Valor actual: 2024-12-31
+
+// Usar el parametro en una consulta
+= Table.SelectRows(Ventas, each [Fecha] &lt;= FechaCorte)
+
+// Parametro de texto para cambiar el servidor
+= Sql.Database(ServidorSQL, &quot;BaseDatos&quot;)
+</pre></div>
+</div>
+</section>
+<section id="funciones-personalizadas-en-m">
+<h3>3.4 Funciones personalizadas en M<a class="headerlink" href="#funciones-personalizadas-en-m" title="Link to this heading">#</a></h3>
+<div class="highlight-m notranslate"><div class="highlight"><pre><span></span>// Definir una funcion que limpia y estandariza un nombre
+limpiar_nombre = (texto as text) as text =&gt;
+    let
+        sin_espacios = Text.Trim(texto),
+        minusculas   = Text.Lower(sin_espacios),
+        primera_may  = Text.Proper(minusculas)
+    in
+        primera_may
+
+// Aplicar la funcion a una columna completa
+= Table.TransformColumns(Tabla, {{&quot;Nombre&quot;, limpiar_nombre, type text}})
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="modelado-de-datos">
+<h2>4. Modelado de Datos<a class="headerlink" href="#modelado-de-datos" title="Link to this heading">#</a></h2>
+<section id="el-esquema-en-estrella">
+<h3>4.1 El esquema en estrella<a class="headerlink" href="#el-esquema-en-estrella" title="Link to this heading">#</a></h3>
+<p>El modelo recomendado en Power BI es el <strong>esquema en estrella</strong> (Star Schema):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                    <span class="n">DIM_Tiempo</span>
+                       <span class="o">|</span>
+<span class="n">DIM_Producto</span> <span class="o">---</span> <span class="n">FACT_Ventas</span> <span class="o">---</span> <span class="n">DIM_Cliente</span>
+                       <span class="o">|</span>
+                   <span class="n">DIM_Region</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Tablas de hechos (FACT):</strong> contienen los eventos medibles (ventas, transacciones, clicks). Tienen muchas filas, pocos campos. Los campos son claves foraneas y medidas numericas.</p></li>
+<li><p><strong>Tablas de dimension (DIM):</strong> describen el contexto de los hechos (quien, que, cuando, donde). Tienen pocas filas, muchos campos descriptivos.</p></li>
+</ul>
+<p><strong>Por que el esquema en estrella es optimo para Power BI:</strong></p>
+<ul class="simple">
+<li><p>Minimiza el numero de relaciones (joins) que Vertipaq necesita resolver.</p></li>
+<li><p>Los filtros de las dimensiones se propagan de forma eficiente a la tabla de hechos.</p></li>
+<li><p>Facilita la escritura de DAX correcto y predecible.</p></li>
+</ul>
+<img src="../_static/images/pbi2.png" width="600" />
+</section>
+<section id="relaciones">
+<h3>4.2 Relaciones<a class="headerlink" href="#relaciones" title="Link to this heading">#</a></h3>
+<p>Una relacion conecta dos tablas por una columna comun. Las propiedades de una relacion son:</p>
+<p><strong>Cardinalidad:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">1:Muchos</span></code> (uno a muchos): lo mas comun. Un cliente puede tener muchas ventas.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1:1</span></code> (uno a uno): tablas que se podrian unir pero estan separadas por razones de rendimiento.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Muchos:Muchos</span></code>: evitar si es posible; requiere tabla puente o DAX especial.</p></li>
+</ul>
+<p><strong>Direccion de filtro cruzado:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Simple</span></code> (→): el filtro va de la tabla «uno» a la tabla «muchos». Recomendado.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ambas</span></code> (↔): el filtro va en ambas direcciones. Usar con cuidado; puede causar ambiguedad.</p></li>
+</ul>
+<p><strong>Activa / Inactiva:</strong></p>
+<ul class="simple">
+<li><p>Solo puede haber una relacion activa entre dos tablas.</p></li>
+<li><p>Las relaciones inactivas se activan puntualmente con <code class="docutils literal notranslate"><span class="pre">USERELATIONSHIP()</span></code> en DAX.</p></li>
+</ul>
+</section>
+<section id="tablas-de-fechas">
+<h3>4.3 Tablas de fechas<a class="headerlink" href="#tablas-de-fechas" title="Link to this heading">#</a></h3>
+<p>Una tabla de fechas es esencial para usar las funciones de inteligencia de tiempo de DAX. Debe:</p>
+<ul class="simple">
+<li><p>Tener una fila por cada dia del rango.</p></li>
+<li><p>La columna de fecha debe ser de tipo <code class="docutils literal notranslate"><span class="pre">Date</span></code>, sin huecos.</p></li>
+<li><p>Estar marcada como «Tabla de fechas» (clic derecho en la tabla → Marcar como tabla de fechas).</p></li>
+</ul>
+<div class="highlight-dax notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Crear una tabla de fechas con DAX (tabla calculada)</span>
+DIM_Fecha =
+<span class="nf">ADDCOLUMNS</span><span class="p">(</span>
+<span class="w">    </span><span class="nf">CALENDAR</span><span class="p">(</span><span class="nf">DATE</span><span class="p">(</span><span class="m">2020</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="nf">DATE</span><span class="p">(</span><span class="m">2025</span><span class="p">,</span><span class="w"> </span><span class="m">12</span><span class="p">,</span><span class="w"> </span><span class="m">31</span><span class="p">)),</span>
+<span class="w">    </span><span class="s">&quot;Año&quot;</span><span class="p">,</span><span class="w">           </span><span class="nf">YEAR</span><span class="p">(</span><span class="na">[Date]</span><span class="p">),</span>
+<span class="w">    </span><span class="s">&quot;Trimestre&quot;</span><span class="p">,</span><span class="w">     </span><span class="s">&quot;Q&quot;</span><span class="w"> </span>&amp; QUARTER([Date]),
+<span class="w">    </span><span class="s">&quot;Mes Num&quot;</span><span class="p">,</span><span class="w">       </span><span class="nf">MONTH</span><span class="p">(</span><span class="na">[Date]</span><span class="p">),</span>
+<span class="w">    </span><span class="s">&quot;Mes Nombre&quot;</span><span class="p">,</span><span class="w">    </span><span class="nf">FORMAT</span><span class="p">(</span><span class="na">[Date]</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;MMMM&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="s">&quot;Mes Abreviado&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">FORMAT</span><span class="p">(</span><span class="na">[Date]</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;MMM&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="s">&quot;Semana&quot;</span><span class="p">,</span><span class="w">        </span><span class="nf">WEEKNUM</span><span class="p">(</span><span class="na">[Date]</span><span class="p">),</span>
+<span class="w">    </span><span class="s">&quot;Dia Semana&quot;</span><span class="p">,</span><span class="w">    </span><span class="nf">FORMAT</span><span class="p">(</span><span class="na">[Date]</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dddd&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="s">&quot;Es Fin Semana&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">IF</span><span class="p">(</span><span class="nf">WEEKDAY</span><span class="p">(</span><span class="na">[Date]</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span>&gt;= 6, TRUE, FALSE),
+<span class="w">    </span><span class="s">&quot;Año-Mes&quot;</span><span class="p">,</span><span class="w">       </span><span class="nf">FORMAT</span><span class="p">(</span><span class="na">[Date]</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;YYYY-MM&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="buenas-practicas-de-modelado">
+<h3>4.4 Buenas practicas de modelado<a class="headerlink" href="#buenas-practicas-de-modelado" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>HACER:
+  ✓ Esquema en estrella: dimensiones y hechos separados.
+  ✓ Una tabla de fechas por modelo.
+  ✓ Relaciones 1:Muchos con direccion Simple.
+  ✓ Columnas de clave con tipo entero (mas compacto que texto).
+  ✓ Ocultar columnas de clave foranea de la vista del informe.
+  ✓ Organizar medidas en tablas de medidas vacias.
+
+NO HACER:
+  ✗ Esquema de copo de nieve con muchos niveles de dimension.
+  ✗ Relaciones Muchos:Muchos innecesarias.
+  ✗ Filtros cruzados bidireccionales por defecto.
+  ✗ Columnas calculadas cuando una medida serviria.
+  ✗ Importar columnas innecesarias (aumentan el tamaño del modelo).
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="dax-data-analysis-expressions">
+<h2>5. DAX: Data Analysis Expressions<a class="headerlink" href="#dax-data-analysis-expressions" title="Link to this heading">#</a></h2>
+<p>DAX es el lenguaje de formulas de Power BI (y Analysis Services). Es funcionalmente parecido a Excel, pero trabaja sobre tablas completas en lugar de celdas individuales.</p>
+<section id="conceptos-fundamentales">
+<h3>5.1 Conceptos fundamentales<a class="headerlink" href="#conceptos-fundamentales" title="Link to this heading">#</a></h3>
+<p><strong>Contexto de fila:</strong> cuando DAX evalua una expresion fila por fila (en columnas calculadas o SUMX/AVERAGEX/etc.), existe un contexto de fila que sabe en que fila se esta evaluando.</p>
+<p><strong>Contexto de filtro:</strong> cuando una medida se evalua en una visual, el contexto de filtro define que subconjunto de datos es visible. Los filtros vienen de: slicers, filtros de pagina, filtros de visual, y otras medidas que usan CALCULATE.</p>
+<p><strong>La diferencia critica:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Columna</span> <span class="n">calculada</span><span class="p">:</span> <span class="n">evaluada</span> <span class="n">fila</span> <span class="n">por</span> <span class="n">fila</span> <span class="n">en</span> <span class="n">el</span> <span class="n">contexto</span> <span class="n">de</span> <span class="n">fila</span><span class="o">.</span>
+  <span class="n">Ventas</span> <span class="n">Netas</span> <span class="o">=</span> <span class="n">Ventas</span><span class="p">[</span><span class="n">Precio</span><span class="p">]</span> <span class="o">*</span> <span class="n">Ventas</span><span class="p">[</span><span class="n">Cantidad</span><span class="p">]</span>  <span class="o">--</span> <span class="n">tiene</span> <span class="n">acceso</span> <span class="n">a</span> <span class="n">la</span> <span class="n">fila</span> <span class="n">actual</span>
+
+<span class="n">Medida</span><span class="p">:</span> <span class="n">evaluada</span> <span class="n">en</span> <span class="n">el</span> <span class="n">contexto</span> <span class="n">de</span> <span class="n">filtro</span> <span class="n">actual</span> <span class="n">de</span> <span class="n">la</span> <span class="n">visual</span><span class="o">.</span>
+  <span class="n">Total</span> <span class="n">Ventas</span> <span class="o">:=</span> <span class="n">SUM</span><span class="p">(</span><span class="n">Ventas</span><span class="p">[</span><span class="n">Monto</span><span class="p">])</span>  <span class="o">--</span> <span class="n">SUM</span> <span class="n">sobre</span> <span class="n">todas</span> <span class="n">las</span> <span class="n">filas</span> <span class="n">visibles</span>
+</pre></div>
+</div>
+</section>
+<section id="sintaxis-basica">
+<h3>5.2 Sintaxis basica<a class="headerlink" href="#sintaxis-basica" title="Link to this heading">#</a></h3>
+<div class="highlight-dax notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Columna calculada (sin :=)</span>
+Beneficio = Ventas[Precio] * Ventas[Cantidad] - Ventas[Costo]
+
+<span class="c1">-- Medida (con :=)</span>
+Total Ventas := SUM(Ventas[Monto])
+
+<span class="c1">-- Comentarios</span>
+<span class="c1">-- Esto es un comentario de una linea</span>
+<span class="cm">/* Esto es un</span>
+<span class="cm">   comentario multilinea */</span>
+
+<span class="c1">-- Tipos de datos: Integer, Decimal, Text, Boolean, Date, DateTime, Currency</span>
+
+<span class="c1">-- Referencias</span>
+<span class="na">[Monto]</span><span class="w">              </span><span class="c1">-- columna de la tabla actual (en columna calculada)</span>
+<span class="na">Ventas[Monto]</span><span class="w">        </span><span class="c1">-- columna de tabla especifica (siempre preferible)</span>
+<span class="na">[Total Ventas]</span><span class="w">       </span><span class="c1">-- medida (con corchetes, sin nombre de tabla)</span>
+</pre></div>
+</div>
+</section>
+<section id="funciones-de-agregacion">
+<h3>5.3 Funciones de agregacion<a class="headerlink" href="#funciones-de-agregacion" title="Link to this heading">#</a></h3>
+<div class="highlight-dax notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Funciones basicas que operan sobre columnas</span>
+Total Ventas     := SUM(Ventas[Monto])
+Promedio Ventas  := AVERAGE(Ventas[Monto])
+<span class="nf">Max</span><span class="w"> </span>Venta        := MAX(Ventas[Monto])
+<span class="nf">Min</span><span class="w"> </span>Venta        := MIN(Ventas[Monto])
+Num Transacciones := COUNT(Ventas[ID])          -- cuenta no vacios numericos
+Num Transacciones := COUNTA(Ventas[ID])         -- cuenta no vacios (cualquier tipo)
+Filas Totales    := COUNTROWS(Ventas)           -- cuenta filas de la tabla
+Distintos Clientes := DISTINCTCOUNT(Ventas[ClienteID])
+
+<span class="c1">-- Funciones iteradoras (X): evaluan expresion fila por fila y luego agregan</span>
+<span class="c1">-- SUMX(tabla, expresion): suma la expresion evaluada en cada fila</span>
+Ventas Netas := SUMX(
+<span class="w">    </span>Ventas,
+<span class="w">    </span><span class="na">Ventas[Precio]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="na">Ventas[Cantidad]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="na">Ventas[Descuento]</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1">-- AVERAGEX, MAXX, MINX, COUNTX siguen el mismo patron</span>
+Ticket Medio := AVERAGEX(
+<span class="w">    </span><span class="nf">VALUES</span><span class="p">(</span><span class="na">Ventas[PedidoID]</span><span class="p">),</span>
+<span class="w">    </span><span class="nf">CALCULATE</span><span class="p">(</span><span class="nf">SUM</span><span class="p">(</span><span class="na">Ventas[Monto]</span><span class="p">))</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="calculate-la-funcion-mas-importante-de-dax">
+<h3>5.4 CALCULATE: la funcion mas importante de DAX<a class="headerlink" href="#calculate-la-funcion-mas-importante-de-dax" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">CALCULATE</span></code> evalua una expresion en un contexto de filtro modificado. Es el mecanismo central de DAX para manipular el contexto.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CALCULATE</span><span class="p">(</span><span class="n">expresion</span><span class="p">,</span> <span class="n">filtro1</span><span class="p">,</span> <span class="n">filtro2</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Cada filtro en CALCULATE puede:</p>
+<ul class="simple">
+<li><p><strong>Añadir</strong> un nuevo filtro.</p></li>
+<li><p><strong>Sobrescribir</strong> un filtro existente de la misma columna.</p></li>
+<li><p><strong>Eliminar</strong> filtros con <code class="docutils literal notranslate"><span class="pre">ALL</span></code>, <code class="docutils literal notranslate"><span class="pre">ALLEXCEPT</span></code>, etc. (funciones de modificacion de contexto).</p></li>
+</ul>
+<div class="highlight-dax notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Ventas solo de la region Norte (sobrescribe el filtro de Region si existe)</span>
+Ventas Norte := CALCULATE(
+<span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="na">Ventas[Monto]</span><span class="p">),</span>
+<span class="w">    </span><span class="na">DIM_Region[Region]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Norte&quot;</span>
+<span class="p">)</span>
+
+<span class="c1">-- Ventas del año 2024 (independiente del filtro de fecha del informe)</span>
+Ventas 2024 := CALCULATE(
+<span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="na">Ventas[Monto]</span><span class="p">),</span>
+<span class="w">    </span><span class="na">DIM_Fecha[Año]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2024</span>
+<span class="p">)</span>
+
+<span class="c1">-- Ventas eliminando el filtro de Producto (ALL elimina todos los filtros de esa tabla)</span>
+Ventas Todas Categorias := CALCULATE(
+<span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="na">Ventas[Monto]</span><span class="p">),</span>
+<span class="w">    </span><span class="nf">ALL</span><span class="p">(</span>DIM_Producto)
+<span class="p">)</span>
+
+<span class="c1">-- Ventas eliminando solo el filtro de Subcategoria, manteniendo el de Categoria</span>
+Ventas Categoria := CALCULATE(
+<span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="na">Ventas[Monto]</span><span class="p">),</span>
+<span class="w">    </span><span class="nf">ALLEXCEPT</span><span class="p">(</span>DIM_Producto, DIM_Producto[Categoria])
+<span class="p">)</span>
+
+<span class="c1">-- Multiples condiciones de filtro (AND implicito)</span>
+Ventas Norte Premium := CALCULATE(
+<span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="na">Ventas[Monto]</span><span class="p">),</span>
+<span class="w">    </span><span class="na">DIM_Region[Region]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Norte&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="na">DIM_Producto[Segmento]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Premium&quot;</span>
+<span class="p">)</span>
+
+<span class="c1">-- Filtro con OR: usar KEEPFILTERS o listas de valores</span>
+Ventas NorteSur := CALCULATE(
+<span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="na">Ventas[Monto]</span><span class="p">),</span>
+<span class="w">    </span><span class="na">DIM_Region[Region]</span><span class="w"> </span><span class="ow">IN</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;Norte&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Sur&quot;</span><span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="funciones-de-tabla">
+<h3>5.5 Funciones de tabla<a class="headerlink" href="#funciones-de-tabla" title="Link to this heading">#</a></h3>
+<p>Las funciones de tabla retornan una tabla completa y se usan como argumento de otras funciones.</p>
+<div class="highlight-dax notranslate"><div class="highlight"><pre><span></span><span class="c1">-- ALL: retorna todos los valores de una columna o tabla, ignorando filtros</span>
+<span class="c1">-- ALLEXCEPT: retorna todos los valores excepto los de las columnas indicadas</span>
+<span class="c1">-- VALUES: retorna los valores unicos de una columna bajo el contexto de filtro actual</span>
+<span class="c1">-- DISTINCT: igual que VALUES pero incluye el valor en blanco</span>
+<span class="c1">-- FILTER: filtra una tabla segun una condicion</span>
+
+<span class="c1">-- Ejemplo: porcentaje sobre el total (ALL elimina el filtro de Categoria)</span>
+% del Total := DIVIDE(
+<span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="na">Ventas[Monto]</span><span class="p">),</span>
+<span class="w">    </span><span class="nf">CALCULATE</span><span class="p">(</span><span class="nf">SUM</span><span class="p">(</span><span class="na">Ventas[Monto]</span><span class="p">),</span><span class="w"> </span><span class="nf">ALL</span><span class="p">(</span><span class="na">DIM_Producto[Categoria]</span><span class="p">))</span>
+<span class="p">)</span>
+
+<span class="c1">-- FILTER: retorna una tabla filtrada (no modifica el contexto global)</span>
+Ventas Alta Demanda := CALCULATE(
+<span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="na">Ventas[Monto]</span><span class="p">),</span>
+<span class="w">    </span><span class="nf">FILTER</span><span class="p">(</span>
+<span class="w">        </span>DIM_Producto,
+<span class="w">        </span><span class="na">DIM_Producto[UnidadesVendidas]</span><span class="w"> </span>&gt; 1000
+<span class="w">    </span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1">-- CROSSJOIN: producto cartesiano de dos tablas</span>
+<span class="c1">-- UNION: apila dos tablas con las mismas columnas</span>
+<span class="c1">-- INTERSECT: filas que existen en ambas tablas</span>
+<span class="c1">-- EXCEPT: filas en la primera tabla que no estan en la segunda</span>
+<span class="c1">-- SELECTCOLUMNS: elige columnas de una tabla (como SELECT en SQL)</span>
+<span class="c1">-- ADDCOLUMNS: añade columnas calculadas a una tabla</span>
+<span class="c1">-- SUMMARIZE: agrupa y resume (GROUP BY en SQL)</span>
+<span class="c1">-- SUMMARIZECOLUMNS: version mejorada de SUMMARIZE</span>
+
+<span class="c1">-- SUMMARIZE ejemplo: ventas por region y categoria</span>
+Resumen := SUMMARIZE(
+<span class="w">    </span>Ventas,
+<span class="w">    </span><span class="na">DIM_Region[Region]</span><span class="p">,</span>
+<span class="w">    </span><span class="na">DIM_Producto[Categoria]</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;Total&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">SUM</span><span class="p">(</span><span class="na">Ventas[Monto]</span><span class="p">),</span>
+<span class="w">    </span><span class="s">&quot;Unidades&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">SUM</span><span class="p">(</span><span class="na">Ventas[Cantidad]</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="funciones-logicas-y-condicionales">
+<h3>5.6 Funciones logicas y condicionales<a class="headerlink" href="#funciones-logicas-y-condicionales" title="Link to this heading">#</a></h3>
+<div class="highlight-dax notranslate"><div class="highlight"><pre><span></span><span class="c1">-- IF simple</span>
+Clasificacion = IF(Ventas[Monto] &gt; 1000, &quot;Alta&quot;, &quot;Baja&quot;)
+
+<span class="c1">-- IF anidado (usar SWITCH para mas de 3 condiciones)</span>
+Segmento = IF(
+<span class="w">    </span><span class="na">Ventas[Monto]</span><span class="w"> </span>&gt; 5000, &quot;Premium&quot;,
+<span class="w">    </span><span class="nf">IF</span><span class="p">(</span><span class="na">Ventas[Monto]</span><span class="w"> </span>&gt; 1000, &quot;Medio&quot;,
+<span class="w">    </span><span class="nf">IF</span><span class="p">(</span><span class="na">Ventas[Monto]</span><span class="w"> </span>&gt; 0,    &quot;Basico&quot;, &quot;Sin ventas&quot;))
+<span class="p">)</span>
+
+<span class="c1">-- SWITCH: mas legible que IF anidado</span>
+Segmento DAX = SWITCH(
+<span class="w">    </span><span class="nf">TRUE</span><span class="p">(),</span><span class="w">                                  </span><span class="c1">-- SWITCH(TRUE()) evalua condiciones booleanas</span>
+<span class="w">    </span><span class="na">Ventas[Monto]</span><span class="w"> </span>&gt; 5000,  &quot;Premium&quot;,
+<span class="w">    </span><span class="na">Ventas[Monto]</span><span class="w"> </span>&gt; 1000,  &quot;Medio&quot;,
+<span class="w">    </span><span class="na">Ventas[Monto]</span><span class="w"> </span>&gt; 0,     &quot;Basico&quot;,
+<span class="w">    </span><span class="s">&quot;Sin ventas&quot;</span><span class="w">                             </span><span class="c1">-- caso por defecto</span>
+<span class="p">)</span>
+
+<span class="c1">-- SWITCH con valor exacto</span>
+Nombre Dia = SWITCH(
+<span class="w">    </span><span class="nf">WEEKDAY</span><span class="p">(</span><span class="na">[Fecha]</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w">   </span><span class="c1">-- 1=Lunes, 7=Domingo</span>
+<span class="w">    </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Lunes&quot;</span><span class="p">,</span><span class="w">   </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Martes&quot;</span><span class="p">,</span><span class="w">  </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Miercoles&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Jueves&quot;</span><span class="p">,</span><span class="w">  </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Viernes&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Sabado&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;Domingo&quot;</span>
+<span class="p">)</span>
+
+<span class="c1">-- IFERROR: manejar errores (division por cero, etc.)</span>
+Ratio Seguro = IFERROR(
+<span class="w">    </span><span class="nf">DIVIDE</span><span class="p">(</span><span class="na">[Ventas]</span><span class="p">,</span><span class="w"> </span><span class="na">[Meta]</span><span class="p">),</span>
+<span class="w">    </span><span class="m">0</span><span class="w">    </span><span class="c1">-- valor si hay error</span>
+<span class="p">)</span>
+
+<span class="c1">-- DIVIDE: division segura (retorna 0 o valor alternativo si denominador = 0)</span>
+Margen % = DIVIDE([Beneficio], [Ventas], 0)
+
+<span class="c1">-- ISBLANK, ISEMPTY, ISERROR</span>
+Tiene Ventas = NOT ISBLANK([Total Ventas])
+</pre></div>
+</div>
+<hr class="docutils" />
+<img src="../_static/images/pbi3.png" width="600" />
+## 6. Medidas y Columnas Calculadas
+</section>
+<section id="columna-calculada-vs-medida">
+<h3>6.1 Columna calculada vs. Medida<a class="headerlink" href="#columna-calculada-vs-medida" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">COLUMNA</span> <span class="n">CALCULADA</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">Se</span> <span class="n">calcula</span> <span class="n">al</span> <span class="n">refrescar</span> <span class="n">el</span> <span class="n">modelo</span> <span class="p">(</span><span class="n">una</span> <span class="n">vez</span><span class="p">)</span><span class="o">.</span>
+  <span class="o">-</span> <span class="n">El</span> <span class="n">resultado</span> <span class="n">se</span> <span class="n">almacena</span> <span class="n">en</span> <span class="n">Vertipaq</span> <span class="p">(</span><span class="n">ocupa</span> <span class="n">memoria</span><span class="p">)</span><span class="o">.</span>
+  <span class="o">-</span> <span class="n">Se</span> <span class="n">evalua</span> <span class="n">fila</span> <span class="n">por</span> <span class="n">fila</span> <span class="n">con</span> <span class="n">contexto</span> <span class="n">de</span> <span class="n">fila</span><span class="o">.</span>
+  <span class="o">-</span> <span class="n">Util</span> <span class="n">para</span><span class="p">:</span> <span class="n">segmentar</span><span class="p">,</span> <span class="n">filtrar</span><span class="p">,</span> <span class="n">usar</span> <span class="n">en</span> <span class="n">relaciones</span><span class="p">,</span> <span class="n">ordenar</span><span class="o">.</span>
+  <span class="o">-</span> <span class="n">Aparece</span> <span class="n">en</span> <span class="n">la</span> <span class="n">tabla</span> <span class="n">como</span> <span class="n">columna</span> <span class="n">adicional</span><span class="o">.</span>
+
+<span class="n">MEDIDA</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">Se</span> <span class="n">calcula</span> <span class="n">en</span> <span class="n">tiempo</span> <span class="n">de</span> <span class="n">consulta</span> <span class="p">(</span><span class="n">cada</span> <span class="n">vez</span> <span class="n">que</span> <span class="n">cambia</span> <span class="n">el</span> <span class="n">contexto</span><span class="p">)</span><span class="o">.</span>
+  <span class="o">-</span> <span class="n">No</span> <span class="n">ocupa</span> <span class="n">memoria</span> <span class="n">de</span> <span class="n">almacenamiento</span><span class="o">.</span>
+  <span class="o">-</span> <span class="n">Se</span> <span class="n">evalua</span> <span class="n">en</span> <span class="n">el</span> <span class="n">contexto</span> <span class="n">de</span> <span class="n">filtro</span> <span class="n">de</span> <span class="n">la</span> <span class="n">visual</span><span class="o">.</span>
+  <span class="o">-</span> <span class="n">Util</span> <span class="n">para</span><span class="p">:</span> <span class="n">todos</span> <span class="n">los</span> <span class="n">calculos</span> <span class="n">que</span> <span class="n">se</span> <span class="n">muestran</span> <span class="n">en</span> <span class="n">visualizaciones</span><span class="o">.</span>
+  <span class="o">-</span> <span class="n">Aparece</span> <span class="n">con</span> <span class="n">el</span> <span class="n">icono</span> <span class="n">de</span> <span class="n">calculadora</span> <span class="n">en</span> <span class="n">el</span> <span class="n">panel</span> <span class="n">de</span> <span class="n">Campos</span><span class="o">.</span>
+
+<span class="n">REGLA</span> <span class="n">GENERAL</span><span class="p">:</span> <span class="n">preferir</span> <span class="n">medidas</span> <span class="n">sobre</span> <span class="n">columnas</span> <span class="n">calculadas</span> <span class="n">siempre</span> <span class="n">que</span> <span class="n">sea</span> <span class="n">posible</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="organizar-medidas-en-tablas-de-medidas">
+<h3>6.2 Organizar medidas en tablas de medidas<a class="headerlink" href="#organizar-medidas-en-tablas-de-medidas" title="Link to this heading">#</a></h3>
+<p>La mejor practica es crear una <strong>tabla de medidas vacia</strong> para organizar todas las medidas del modelo:</p>
+<div class="highlight-dax notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Crear tabla vacia (como tabla calculada)</span>
+_Medidas = {BLANK()}   -- convencion: prefijo _ para distinguir de tablas de datos
+
+<span class="c1">-- Luego crear todas las medidas dentro de esta tabla</span>
+<span class="c1">-- Esto facilita encontrarlas en el panel de Campos</span>
+</pre></div>
+</div>
+</section>
+<section id="variables-en-dax">
+<h3>6.3 Variables en DAX<a class="headerlink" href="#variables-en-dax" title="Link to this heading">#</a></h3>
+<p>Las variables mejoran la legibilidad y el rendimiento (se evaluan una sola vez).</p>
+<div class="highlight-dax notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Sin variables: [Total Ventas] se evalua dos veces</span>
+Diferencia vs Media =
+<span class="w">    </span><span class="na">[Total Ventas]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">AVERAGEX</span><span class="p">(</span><span class="nf">ALL</span><span class="p">(</span>DIM_Producto), [Total Ventas])
+
+<span class="c1">-- Con variables: mas legible, [Total Ventas] se evalua solo cuando es necesario</span>
+Diferencia vs Media :=
+<span class="nb">VAR</span><span class="w"> </span>vVentasActual = [Total Ventas]
+<span class="nb">VAR</span><span class="w"> </span>vVentasMedia  = AVERAGEX(ALL(DIM_Producto[Categoria]), [Total Ventas])
+<span class="nb">VAR</span><span class="w"> </span>vDiferencia   = vVentasActual - vVentasMedia
+<span class="nb">RETURN</span>
+<span class="w">    </span>vDiferencia
+
+<span class="c1">-- Variables para DEBUG (retornar la variable intermedia para verificar)</span>
+Debug Media := AVERAGEX(ALL(DIM_Producto[Categoria]), [Total Ventas])
+</pre></div>
+</div>
+</section>
+<section id="medidas-de-formato-y-presentacion">
+<h3>6.4 Medidas de formato y presentacion<a class="headerlink" href="#medidas-de-formato-y-presentacion" title="Link to this heading">#</a></h3>
+<div class="highlight-dax notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Usar FORMAT para presentar numeros como texto</span>
+Ventas Formato = FORMAT([Total Ventas], &quot;$#,##0.00&quot;)
+Crecimiento Texto = FORMAT([Crecimiento YoY %], &quot;+0.0%;-0.0%;0.0%&quot;)
+
+<span class="c1">-- KPI con icono (retorna texto con emoji o simbolo)</span>
+Indicador Tendencia :=
+<span class="nb">VAR</span><span class="w"> </span>vCambio = [Crecimiento YoY %]
+<span class="nb">RETURN</span>
+<span class="w">    </span><span class="nf">SWITCH</span><span class="p">(</span>
+<span class="w">        </span><span class="nf">TRUE</span><span class="p">(),</span>
+<span class="w">        </span>vCambio &gt;  0.05, &quot;▲ &quot; &amp; FORMAT(vCambio, &quot;0.0%&quot;),
+<span class="w">        </span>vCambio &lt; -0.05, &quot;▼ &quot; &amp; FORMAT(vCambio, &quot;0.0%&quot;),
+<span class="w">        </span><span class="s">&quot;→ &quot;</span><span class="w"> </span>&amp; FORMAT(vCambio, &quot;0.0%&quot;)
+<span class="w">    </span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="visualizaciones">
+<h2>7. Visualizaciones<a class="headerlink" href="#visualizaciones" title="Link to this heading">#</a></h2>
+<section id="tipos-de-visualizaciones-nativas">
+<h3>7.1 Tipos de visualizaciones nativas<a class="headerlink" href="#tipos-de-visualizaciones-nativas" title="Link to this heading">#</a></h3>
+<p><strong>Graficas de comparacion:</strong></p>
+<ul class="simple">
+<li><p><strong>Grafico de barras / columnas:</strong> comparar categorias. Variantes: apilado, 100% apilado.</p></li>
+<li><p><strong>Grafico de columnas agrupadas:</strong> comparar multiples series en cada categoria.</p></li>
+</ul>
+<p><strong>Graficas de tendencia:</strong></p>
+<ul class="simple">
+<li><p><strong>Grafico de lineas:</strong> series temporales, tendencias.</p></li>
+<li><p><strong>Grafico de areas:</strong> tendencia + magnitud acumulada.</p></li>
+<li><p><strong>Grafico de lineas y columnas combinado:</strong> dos escalas en un mismo grafico.</p></li>
+</ul>
+<p><strong>Graficas de distribucion:</strong></p>
+<ul class="simple">
+<li><p><strong>Histograma:</strong> frecuencias de una variable numerica.</p></li>
+<li><p><strong>Diagrama de dispersion:</strong> relacion entre dos variables numericas.</p></li>
+</ul>
+<p><strong>Graficas de parte-todo:</strong></p>
+<ul class="simple">
+<li><p><strong>Grafico circular / de anillo:</strong> proporciones (max 5-6 categorias).</p></li>
+<li><p><strong>Treemap:</strong> jerarquia y proporciones anidadas.</p></li>
+</ul>
+<p><strong>Graficas de rendimiento:</strong></p>
+<ul class="simple">
+<li><p><strong>KPI:</strong> valor actual vs. objetivo con tendencia.</p></li>
+<li><p><strong>Medidor (Gauge):</strong> progreso hacia un objetivo.</p></li>
+<li><p><strong>Tarjeta:</strong> un unico numero destacado.</p></li>
+<li><p><strong>Tarjeta de varias filas:</strong> multiples metricas en lista.</p></li>
+</ul>
+<p><strong>Graficas geograficas:</strong></p>
+<ul class="simple">
+<li><p><strong>Mapa de burbujas:</strong> puntos en mapa, tamaño = valor.</p></li>
+<li><p><strong>Mapa coropletico (Mapa relleno):</strong> regiones coloreadas por valor.</p></li>
+<li><p><strong>Mapa de Azure:</strong> tiles interactivos de Azure Maps.</p></li>
+<li><p><strong>Mapa de forma:</strong> SVG personalizado de regiones.</p></li>
+</ul>
+<p><strong>Tablas y matrices:</strong></p>
+<ul class="simple">
+<li><p><strong>Tabla:</strong> datos en filas y columnas con formato condicional.</p></li>
+<li><p><strong>Matriz:</strong> tabla pivotante con jerarquias en filas y columnas (pivot table).</p></li>
+</ul>
+<p><strong>Visualizaciones de IA:</strong></p>
+<ul class="simple">
+<li><p><strong>Influenciadores clave:</strong> factores que mas afectan a una metrica.</p></li>
+<li><p><strong>Arbol de descomposicion:</strong> desglose jerarquico de una medida.</p></li>
+<li><p><strong>Preguntas y respuestas (Q&amp;A):</strong> consultas en lenguaje natural.</p></li>
+</ul>
+</section>
+<section id="configuracion-de-una-visual">
+<h3>7.2 Configuracion de una visual<a class="headerlink" href="#configuracion-de-una-visual" title="Link to this heading">#</a></h3>
+<p>Cada visual tiene tres paneles de configuracion:</p>
+<p><strong>Campos:</strong> que datos muestra (eje X, eje Y, leyenda, tooltips, filtros, detalles).</p>
+<p><strong>Formato:</strong> apariencia visual (colores, fuentes, ejes, leyenda, fondo, bordes).</p>
+<p><strong>Analitica:</strong> lineas de referencia, lineas de tendencia, banda de error, pronostico.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Panel</span> <span class="n">de</span> <span class="n">Analitica</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">Linea</span> <span class="n">de</span> <span class="n">minimo</span> <span class="o">/</span> <span class="n">maximo</span> <span class="o">/</span> <span class="n">promedio</span> <span class="o">/</span> <span class="n">percentil</span>
+  <span class="o">-</span> <span class="n">Linea</span> <span class="n">constante</span> <span class="p">(</span><span class="n">umbral</span> <span class="n">manual</span><span class="p">)</span>
+  <span class="o">-</span> <span class="n">Linea</span> <span class="n">de</span> <span class="n">tendencia</span> <span class="p">(</span><span class="n">con</span> <span class="n">IC</span><span class="p">)</span>
+  <span class="o">-</span> <span class="n">Banda</span> <span class="n">de</span> <span class="n">error</span>
+  <span class="o">-</span> <span class="n">Pronostico</span> <span class="p">(</span><span class="n">solo</span> <span class="n">en</span> <span class="n">series</span> <span class="n">temporales</span><span class="p">)</span>
+  <span class="o">-</span> <span class="n">Cuadrante</span> <span class="p">(</span><span class="n">en</span> <span class="n">scatter</span><span class="p">)</span>
+  <span class="o">-</span> <span class="n">Lineas</span> <span class="n">de</span> <span class="n">simetria</span> <span class="p">(</span><span class="n">en</span> <span class="n">scatter</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="formato-condicional">
+<h3>7.3 Formato condicional<a class="headerlink" href="#formato-condicional" title="Link to this heading">#</a></h3>
+<p>El formato condicional aplica colores, iconos o barras de datos a tablas y matrices segun los valores.</p>
+<p><strong>Tipos de formato condicional:</strong></p>
+<ul class="simple">
+<li><p><strong>Color de fondo:</strong> gradiente de color segun el valor.</p></li>
+<li><p><strong>Color de fuente:</strong> cambia el color del texto.</p></li>
+<li><p><strong>Barras de datos:</strong> mini-barra proporcional dentro de la celda.</p></li>
+<li><p><strong>Iconos:</strong> sets de iconos (semaforo, flechas, etc.) segun rangos.</p></li>
+<li><p><strong>URL de imagen:</strong> muestra imagenes desde URLs.</p></li>
+</ul>
+<div class="highlight-dax notranslate"><div class="highlight"><pre><span></span><span class="c1">-- El formato condicional tambien se puede basar en medidas DAX</span>
+<span class="c1">-- Medida que retorna un color HTML para el formato condicional de fondo</span>
+Color Ventas :=
+<span class="nb">VAR</span><span class="w"> </span>vMeta = 50000
+<span class="nb">VAR</span><span class="w"> </span>vVentas = [Total Ventas]
+<span class="nb">RETURN</span>
+<span class="w">    </span><span class="nf">SWITCH</span><span class="p">(</span>
+<span class="w">        </span><span class="nf">TRUE</span><span class="p">(),</span>
+<span class="w">        </span>vVentas &gt;= vMeta * 1.1, &quot;#27AE60&quot;,    -- verde: &gt;110% de meta
+<span class="w">        </span>vVentas &gt;= vMeta,       &quot;#F39C12&quot;,    -- amarillo: 100-110%
+<span class="w">        </span>vVentas &gt;= vMeta * 0.9, &quot;#E67E22&quot;,    -- naranja: 90-100%
+<span class="w">        </span><span class="s">&quot;#E74C3C&quot;</span><span class="w">                              </span><span class="c1">-- rojo: &lt;90%</span>
+<span class="w">    </span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="tooltips-de-pagina">
+<h3>7.4 Tooltips de pagina<a class="headerlink" href="#tooltips-de-pagina" title="Link to this heading">#</a></h3>
+<p>Los <strong>tooltips de pagina</strong> son paginas de informe que aparecen al hacer hover sobre un punto de datos. Se configuran:</p>
+<ol class="arabic simple">
+<li><p>Crear una pagina de informe nueva.</p></li>
+<li><p>En la configuracion de la pagina: activar «Tooltip» y ajustar el tamaño (tipicamente 320x240px).</p></li>
+<li><p>En la visual principal: en Formato → Informacion sobre herramientas → Tipo: «Pagina de informe» → seleccionar la pagina.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Ventajas</span> <span class="n">de</span> <span class="n">tooltips</span> <span class="n">de</span> <span class="n">pagina</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">Muestran</span> <span class="n">graficas</span> <span class="n">completas</span> <span class="n">en</span> <span class="n">el</span> <span class="n">hover</span> <span class="p">(</span><span class="n">no</span> <span class="n">solo</span> <span class="n">texto</span><span class="p">)</span><span class="o">.</span>
+  <span class="o">-</span> <span class="n">El</span> <span class="n">contexto</span> <span class="n">de</span> <span class="n">filtro</span> <span class="k">del</span> <span class="n">punto</span> <span class="n">de</span> <span class="n">datos</span> <span class="n">se</span> <span class="n">propaga</span> <span class="n">automaticamente</span> <span class="n">al</span> <span class="n">tooltip</span><span class="o">.</span>
+  <span class="o">-</span> <span class="n">Pueden</span> <span class="n">mostrar</span> <span class="n">sparklines</span><span class="p">,</span> <span class="n">KPIs</span><span class="p">,</span> <span class="n">tablas</span> <span class="n">mini</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="drill-through-y-drill-down">
+<h3>7.5 Drill-through y Drill-down<a class="headerlink" href="#drill-through-y-drill-down" title="Link to this heading">#</a></h3>
+<p><strong>Drill-down:</strong> navegar de un nivel de jerarquia al siguiente dentro de la misma visual.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Ejemplo: Año → Trimestre → Mes → Dia
+  El eje X tiene una jerarquia de fecha.
+  Los botones de drill-down (+/-) permiten expandir/colapsar niveles.
+</pre></div>
+</div>
+<p><strong>Drill-through:</strong> navegar a una pagina de detalle al hacer clic derecho en un punto de datos.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Configuracion:
+  1. Crear pagina de detalle.
+  2. En esa pagina: arrastrar el campo de drill-through al pozo &quot;Filtros de obtener detalles&quot;.
+  3. Desde cualquier visual que tenga ese campo: clic derecho → Obtener detalles → [pagina].
+  4. El filtro del elemento clickeado se propaga automaticamente a la pagina de detalle.
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="filtros-y-segmentadores">
+<h2>8. Filtros y Segmentadores<a class="headerlink" href="#filtros-y-segmentadores" title="Link to this heading">#</a></h2>
+<section id="tipos-de-filtros">
+<h3>8.1 Tipos de filtros<a class="headerlink" href="#tipos-de-filtros" title="Link to this heading">#</a></h3>
+<p>Power BI tiene cuatro niveles de filtro con diferente alcance:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Nivel</p></th>
+<th class="head"><p>Alcance</p></th>
+<th class="head"><p>Configuracion</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Visual</strong></p></td>
+<td><p>Solo esa visual en esa pagina</p></td>
+<td><p>Panel de Filtros → Esta visual</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Pagina</strong></p></td>
+<td><p>Todas las visuales de la pagina</p></td>
+<td><p>Panel de Filtros → Esta pagina</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Informe</strong></p></td>
+<td><p>Todas las paginas del informe</p></td>
+<td><p>Panel de Filtros → Todas las paginas</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Medida</strong></p></td>
+<td><p>Solo afecta al calculo DAX</p></td>
+<td><p>CALCULATE en DAX</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="segmentadores-slicers">
+<h3>8.2 Segmentadores (Slicers)<a class="headerlink" href="#segmentadores-slicers" title="Link to this heading">#</a></h3>
+<p>Los segmentadores son controles de filtro interactivos en el canvas del informe.</p>
+<p><strong>Tipos de segmentador:</strong></p>
+<ul class="simple">
+<li><p><strong>Lista:</strong> lista vertical u horizontal de valores.</p></li>
+<li><p><strong>Desplegable:</strong> lista colapsada (ahorra espacio).</p></li>
+<li><p><strong>Entre (between):</strong> rango numerico con dos handles.</p></li>
+<li><p><strong>Antes de / Despues de:</strong> filtro de fecha con una fecha limite.</p></li>
+<li><p><strong>Relativo:</strong> filtro de fecha relativa («ultimos 3 meses», «esta semana»).</p></li>
+<li><p><strong>Mosaico (tile):</strong> botones visuales por valor.</p></li>
+</ul>
+<p><strong>Sincronizacion de segmentadores:</strong></p>
+<p>Los segmentadores se pueden sincronizar entre paginas del informe (Vista → Sincronizar segmentadores). Util para que un filtro global persista al navegar entre paginas.</p>
+</section>
+<section id="interacciones-entre-visuales">
+<h3>8.3 Interacciones entre visuales<a class="headerlink" href="#interacciones-entre-visuales" title="Link to this heading">#</a></h3>
+<p>Por defecto, al hacer clic en un elemento de una visual, Power BI filtra las demas visuales. Este comportamiento se puede editar:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Formato → Editar interacciones
+  Para cada par de visuales se puede elegir:
+  - Filtrar (reduccion a los datos relacionados)
+  - Resaltar (resto en gris, seleccion en color)
+  - Ninguno (la visual no reacciona al clic)
+</pre></div>
+</div>
+</section>
+<section id="seguridad-a-nivel-de-fila-rls">
+<h3>8.4 Seguridad a nivel de fila (RLS)<a class="headerlink" href="#seguridad-a-nivel-de-fila-rls" title="Link to this heading">#</a></h3>
+<p>La seguridad a nivel de fila restringe que datos ve cada usuario en el informe publicado.</p>
+<div class="highlight-dax notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Regla de RLS: filtrar por el email del usuario conectado</span>
+<span class="c1">-- Se configura en Modelado → Administrar roles</span>
+
+<span class="c1">-- Rol &quot;VendedorPropio&quot;: el vendedor solo ve sus propias ventas</span>
+<span class="na">[EmailVendedor]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">USERPRINCIPALNAME</span><span class="p">()</span>
+
+<span class="c1">-- Rol &quot;RegionManager&quot;: el manager ve su region segun una tabla de acceso</span>
+<span class="na">[Region]</span><span class="w"> </span><span class="ow">IN</span>
+<span class="w">    </span><span class="nf">CALCULATETABLE</span><span class="p">(</span>
+<span class="w">        </span><span class="nf">VALUES</span><span class="p">(</span><span class="na">TablaAcceso[Region]</span><span class="p">),</span>
+<span class="w">        </span><span class="na">TablaAcceso[Email]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">USERPRINCIPALNAME</span><span class="p">()</span>
+<span class="w">    </span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="temas-y-diseno">
+<h2>9. Temas y Diseño<a class="headerlink" href="#temas-y-diseno" title="Link to this heading">#</a></h2>
+<section id="temas-en-power-bi">
+<h3>9.1 Temas en Power BI<a class="headerlink" href="#temas-en-power-bi" title="Link to this heading">#</a></h3>
+<p>Un tema es un archivo JSON que define los colores, fuentes y estilos por defecto de todas las visualizaciones del informe.</p>
+<p><strong>Estructura basica de un tema:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Tema Empresa&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;dataColors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;#1E3A5F&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;#2E86C1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;#27AE60&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;#F39C12&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;#E74C3C&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;#8E44AD&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;#16A085&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;#D35400&quot;</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#F8F9FA&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;foreground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#212529&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;tableAccent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#2E86C1&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;visualStyles&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;*&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;*&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;fontFamily&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Segoe UI&quot;</span><span class="p">}],</span>
+<span class="w">        </span><span class="nt">&quot;fontSize&quot;</span><span class="p">:</span><span class="w">   </span><span class="p">[{</span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">}]</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;card&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;*&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;dataLabels&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span>
+<span class="w">          </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;solid&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#212529&quot;</span><span class="p">}},</span>
+<span class="w">          </span><span class="nt">&quot;fontSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">28</span>
+<span class="w">        </span><span class="p">}]</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Aplicar el tema:</strong> Vista → Temas → Examinar para temas → seleccionar el JSON.</p>
+</section>
+<section id="principios-de-diseno-en-power-bi">
+<h3>9.2 Principios de diseño en Power BI<a class="headerlink" href="#principios-de-diseno-en-power-bi" title="Link to this heading">#</a></h3>
+<p><strong>Layout:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Regla</span> <span class="n">de</span> <span class="n">los</span> <span class="n">tercios</span><span class="p">:</span> <span class="n">dividir</span> <span class="n">el</span> <span class="n">canvas</span> <span class="n">en</span> <span class="n">una</span> <span class="n">cuadricula</span> <span class="mi">3</span><span class="n">x3</span><span class="o">.</span>
+<span class="n">Los</span> <span class="n">elementos</span> <span class="n">mas</span> <span class="n">importantes</span> <span class="n">van</span> <span class="n">en</span> <span class="n">las</span> <span class="n">intersecciones</span><span class="o">.</span>
+
+<span class="n">Jerarquia</span> <span class="n">visual</span><span class="p">:</span>
+  <span class="mf">1.</span> <span class="n">KPIs</span> <span class="n">y</span> <span class="n">metricas</span> <span class="n">clave</span><span class="p">:</span> <span class="n">arriba</span> <span class="n">a</span> <span class="n">la</span> <span class="n">izquierda</span> <span class="p">(</span><span class="n">donde</span> <span class="n">el</span> <span class="n">ojo</span> <span class="n">va</span> <span class="n">primero</span><span class="p">)</span><span class="o">.</span>
+  <span class="mf">2.</span> <span class="n">Grafica</span> <span class="n">principal</span><span class="p">:</span> <span class="n">centro</span><span class="o">.</span>
+  <span class="mf">3.</span> <span class="n">Filtros</span> <span class="n">y</span> <span class="n">slicers</span><span class="p">:</span> <span class="n">arriba</span> <span class="n">o</span> <span class="n">izquierda</span><span class="o">.</span>
+  <span class="mf">4.</span> <span class="n">Detalles</span> <span class="n">y</span> <span class="n">tablas</span><span class="p">:</span> <span class="n">abajo</span><span class="o">.</span>
+</pre></div>
+</div>
+<p><strong>Paleta de colores:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Usar</span> <span class="n">maximo</span> <span class="mi">4</span><span class="o">-</span><span class="mi">6</span> <span class="n">colores</span> <span class="n">en</span> <span class="n">un</span> <span class="n">informe</span><span class="o">.</span>
+<span class="n">Un</span> <span class="n">color</span> <span class="n">dominante</span> <span class="p">(</span><span class="n">marca</span><span class="o">/</span><span class="n">empresa</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="o">-</span><span class="mi">3</span> <span class="n">colores</span> <span class="n">de</span> <span class="n">apoyo</span> <span class="o">+</span> <span class="n">colores</span> <span class="n">de</span> <span class="n">alerta</span><span class="o">.</span>
+<span class="n">Reservar</span> <span class="n">rojo</span><span class="o">/</span><span class="n">verde</span> <span class="n">para</span> <span class="n">indicadores</span> <span class="n">de</span> <span class="n">rendimiento</span> <span class="p">(</span><span class="n">KPIs</span><span class="p">)</span><span class="o">.</span>
+<span class="n">Verificar</span> <span class="n">accesibilidad</span> <span class="n">para</span> <span class="n">daltonismo</span> <span class="p">(</span><span class="n">evitar</span> <span class="n">rojo</span><span class="o">-</span><span class="n">verde</span> <span class="n">puros</span><span class="p">)</span><span class="o">.</span>
+</pre></div>
+</div>
+<p><strong>Tipografia:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Un</span> <span class="n">solo</span> <span class="n">tipo</span> <span class="n">de</span> <span class="n">fuente</span> <span class="n">por</span> <span class="n">informe</span> <span class="p">(</span><span class="n">Segoe</span> <span class="n">UI</span> <span class="n">es</span> <span class="n">el</span> <span class="n">estandar</span> <span class="n">de</span> <span class="n">Microsoft</span><span class="p">)</span><span class="o">.</span>
+<span class="n">Jerarquia</span> <span class="n">clara</span><span class="p">:</span> <span class="n">titulo</span> <span class="n">de</span> <span class="n">pagina</span> <span class="o">&gt;</span> <span class="n">titulo</span> <span class="n">de</span> <span class="n">visual</span> <span class="o">&gt;</span> <span class="n">etiquetas</span> <span class="o">&gt;</span> <span class="n">texto</span> <span class="n">cuerpo</span><span class="o">.</span>
+<span class="n">Tamanos</span> <span class="n">tipicos</span><span class="p">:</span> <span class="n">titulo</span> <span class="n">pagina</span> <span class="mi">20</span><span class="o">-</span><span class="mi">24</span><span class="n">pt</span><span class="p">,</span> <span class="n">titulo</span> <span class="n">visual</span> <span class="mi">12</span><span class="o">-</span><span class="mi">14</span><span class="n">pt</span><span class="p">,</span> <span class="n">etiquetas</span> <span class="mi">9</span><span class="o">-</span><span class="mi">11</span><span class="n">pt</span><span class="o">.</span>
+</pre></div>
+</div>
+<p><strong>Espacio en blanco:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Dejar</span> <span class="n">margenes</span> <span class="n">consistentes</span> <span class="n">entre</span> <span class="n">visuales</span> <span class="p">(</span><span class="mi">8</span><span class="o">-</span><span class="mi">16</span><span class="n">px</span><span class="p">)</span><span class="o">.</span>
+<span class="n">Agrupar</span> <span class="n">visuales</span> <span class="n">relacionadas</span> <span class="n">con</span> <span class="n">rectangulos</span> <span class="n">de</span> <span class="n">fondo</span><span class="o">.</span>
+<span class="n">No</span> <span class="n">sobrecargar</span> <span class="n">el</span> <span class="n">canvas</span><span class="p">:</span> <span class="n">menos</span> <span class="n">es</span> <span class="n">mas</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="alineacion-y-distribucion">
+<h3>9.3 Alineacion y distribucion<a class="headerlink" href="#alineacion-y-distribucion" title="Link to this heading">#</a></h3>
+<p>Power BI Desktop tiene herramientas de alineacion (pestana Formato cuando hay multiples visuales seleccionadas):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Alinear</span><span class="p">:</span> <span class="n">izquierda</span><span class="p">,</span> <span class="n">centrar</span><span class="p">,</span> <span class="n">derecha</span><span class="p">,</span> <span class="n">arriba</span><span class="p">,</span> <span class="n">centrar</span> <span class="n">verticalmente</span><span class="p">,</span> <span class="n">abajo</span><span class="o">.</span>
+<span class="n">Distribuir</span><span class="p">:</span> <span class="n">espacio</span> <span class="n">horizontal</span> <span class="n">uniforme</span><span class="p">,</span> <span class="n">espacio</span> <span class="n">vertical</span> <span class="n">uniforme</span><span class="o">.</span>
+<span class="n">Tamaño</span><span class="p">:</span> <span class="n">igualar</span> <span class="n">ancho</span><span class="p">,</span> <span class="n">igualar</span> <span class="n">alto</span><span class="p">,</span> <span class="n">igualar</span> <span class="n">ambos</span><span class="o">.</span>
+<span class="n">Orden</span><span class="p">:</span> <span class="n">traer</span> <span class="n">al</span> <span class="n">frente</span><span class="p">,</span> <span class="n">enviar</span> <span class="n">atras</span><span class="p">,</span> <span class="n">traer</span> <span class="n">adelante</span><span class="p">,</span> <span class="n">enviar</span> <span class="n">detras</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="fondos-y-formas-decorativas">
+<h3>9.4 Fondos y formas decorativas<a class="headerlink" href="#fondos-y-formas-decorativas" title="Link to this heading">#</a></h3>
+<p>Power BI permite añadir:</p>
+<ul class="simple">
+<li><p><strong>Imagenes de fondo de pagina:</strong> logotipos, marcos, gradientes (PNG/JPEG).</p></li>
+<li><p><strong>Rectangulos:</strong> para agrupar visuales visualmente.</p></li>
+<li><p><strong>Botones:</strong> navegacion entre paginas, acciones de drill-through, URL.</p></li>
+<li><p><strong>Cuadros de texto:</strong> titulos, descripciones, anotaciones.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="power-bi-service-y-colaboracion">
+<h2>10. Power BI Service y Colaboracion<a class="headerlink" href="#power-bi-service-y-colaboracion" title="Link to this heading">#</a></h2>
+<section id="publicar-un-informe">
+<h3>10.1 Publicar un informe<a class="headerlink" href="#publicar-un-informe" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Desde Power BI Desktop:
+  Inicio → Publicar → Seleccionar workspace → Publicar
+
+Resultado en Power BI Service:
+  Workspace → [Nombre del informe].pbix
+           → [Nombre del dataset] (el modelo de datos separado)
+</pre></div>
+</div>
+</section>
+<section id="workspaces">
+<h3>10.2 Workspaces<a class="headerlink" href="#workspaces" title="Link to this heading">#</a></h3>
+<p>Los workspaces son espacios de colaboracion:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Workspace</p></th>
+<th class="head"><p>Descripcion</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Mi area de trabajo</strong></p></td>
+<td><p>Espacio personal. No se puede compartir directamente.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Workspace colaborativo</strong></p></td>
+<td><p>Equipo comparte informes y datasets.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Workspace premium</strong></p></td>
+<td><p>Capacidad dedicada, mayor rendimiento.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Roles en un workspace:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Rol</p></th>
+<th class="head"><p>Publicar</p></th>
+<th class="head"><p>Editar</p></th>
+<th class="head"><p>Ver</p></th>
+<th class="head"><p>Compartir</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Administrador</p></td>
+<td><p>Si</p></td>
+<td><p>Si</p></td>
+<td><p>Si</p></td>
+<td><p>Si</p></td>
+</tr>
+<tr class="row-odd"><td><p>Miembro</p></td>
+<td><p>Si</p></td>
+<td><p>Si</p></td>
+<td><p>Si</p></td>
+<td><p>Si</p></td>
+</tr>
+<tr class="row-even"><td><p>Colaborador</p></td>
+<td><p>Si</p></td>
+<td><p>Si</p></td>
+<td><p>Si</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-odd"><td><p>Espectador</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>Si</p></td>
+<td><p>No</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="actualizacion-de-datos">
+<h3>10.3 Actualizacion de datos<a class="headerlink" href="#actualizacion-de-datos" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Modos de actualizacion:
+  Manual:    Conjunto de datos → Actualizar ahora
+  Programada: Conjunto de datos → Configuracion → Actualizar
+              Hasta 8 actualizaciones/dia (Pro) o 48/dia (Premium)
+
+Gateway de datos:
+  Para actualizar datos en servidores locales (on-premise) se necesita
+  el Data Gateway instalado en un servidor con acceso a la fuente.
+
+DirectQuery:
+  Los datos siempre estan actualizados (consulta en tiempo real),
+  pero el rendimiento depende de la fuente.
+</pre></div>
+</div>
+</section>
+<section id="dashboards-en-power-bi-service">
+<h3>10.4 Dashboards en Power BI Service<a class="headerlink" href="#dashboards-en-power-bi-service" title="Link to this heading">#</a></h3>
+<p>Los <strong>dashboards</strong> son colecciones de tiles (mosaicos) fijados desde distintos informes.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Diferencia</span> <span class="n">informe</span> <span class="n">vs</span><span class="o">.</span> <span class="n">dashboard</span><span class="p">:</span>
+  <span class="n">INFORME</span><span class="p">:</span> <span class="n">multiple</span> <span class="n">paginas</span><span class="p">,</span> <span class="n">interactivo</span><span class="p">,</span> <span class="n">filtros</span><span class="p">,</span> <span class="n">drill</span><span class="o">-</span><span class="n">through</span><span class="o">.</span>
+           <span class="n">Se</span> <span class="n">construye</span> <span class="n">en</span> <span class="n">Desktop</span> <span class="n">y</span> <span class="n">se</span> <span class="n">publica</span><span class="o">.</span>
+  <span class="n">DASHBOARD</span><span class="p">:</span> <span class="n">una</span> <span class="n">sola</span> <span class="n">pagina</span><span class="p">,</span> <span class="n">tiles</span> <span class="n">de</span> <span class="n">varios</span> <span class="n">informes</span><span class="p">,</span>
+             <span class="n">alertas</span> <span class="n">de</span> <span class="n">datos</span><span class="p">,</span> <span class="n">preguntas</span> <span class="n">y</span> <span class="n">respuestas</span><span class="o">.</span>
+             <span class="n">Se</span> <span class="n">construye</span> <span class="n">en</span> <span class="n">Service</span> <span class="p">(</span><span class="n">no</span> <span class="n">en</span> <span class="n">Desktop</span><span class="p">)</span><span class="o">.</span>
+</pre></div>
+</div>
+<p><strong>Fijar un tile:</strong> en el informe publicado → pasar el cursor sobre la visual → icono de pin → seleccionar dashboard.</p>
+<img src="../_static/images/pbi4.png" width="600" />
+### 10.5 Apps de Power BI
+<p>Las <strong>apps</strong> son bundles de informes y dashboards que se publican a usuarios finales:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Flujo de publicacion de una App:
+  1. Workspace (desarrollo) → preparar contenido.
+  2. Publicar como App → definir audiencia (grupos de seguridad).
+  3. Usuarios instalan la App desde AppSource de Power BI.
+
+Ventajas:
+  - Los usuarios solo ven la app, no el workspace de desarrollo.
+  - Se puede actualizar sin que los usuarios reinstalen.
+  - Control de acceso granular por seccion.
+</pre></div>
+</div>
+</section>
+<section id="embedding-embeber-en-otras-aplicaciones">
+<h3>10.6 Embedding (embeber en otras aplicaciones)<a class="headerlink" href="#embedding-embeber-en-otras-aplicaciones" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Modalidades de embedding:
+  &quot;Embed for your organization&quot;: usuarios autenticados en AAD.
+    Usar: Publish to web (publico), Secure Embed (autenticado).
+
+  &quot;Embed for your customers&quot;: usuarios sin cuenta de Power BI.
+    Usar: la API REST de Power BI + token de servicio.
+    Requiere licencia Premium o Premium Per User (PPU).
+
+Ejemplo de URL de embed seguro:
+  https://app.powerbi.com/reportEmbed?reportId=...&amp;groupId=...
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="dax-avanzado-inteligencia-de-tiempo">
+<h2>11. DAX Avanzado: Inteligencia de Tiempo<a class="headerlink" href="#dax-avanzado-inteligencia-de-tiempo" title="Link to this heading">#</a></h2>
+<p>Las funciones de inteligencia de tiempo de DAX permiten calculos sobre periodos como «mismo periodo del año anterior», «acumulado del año» o «variacion mes a mes».</p>
+<p><strong>Requisito:</strong> tener una tabla de fechas marcada como tal y con una relacion activa con la tabla de hechos.</p>
+<section id="funciones-basicas-de-inteligencia-de-tiempo">
+<h3>11.1 Funciones basicas de inteligencia de tiempo<a class="headerlink" href="#funciones-basicas-de-inteligencia-de-tiempo" title="Link to this heading">#</a></h3>
+<div class="highlight-dax notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Ventas del mismo periodo del año anterior (Year over Year)</span>
+Ventas PY := CALCULATE(
+<span class="w">    </span><span class="na">[Total Ventas]</span><span class="p">,</span>
+<span class="w">    </span><span class="nf">SAMEPERIODLASTYEAR</span><span class="p">(</span><span class="na">DIM_Fecha[Date]</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1">-- Variacion YoY absoluta</span>
+Variacion YoY := [Total Ventas] - [Ventas PY]
+
+<span class="c1">-- Variacion YoY porcentual (Year over Year %)</span>
+Crecimiento YoY % := DIVIDE(
+<span class="w">    </span><span class="na">[Total Ventas]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="na">[Ventas PY]</span><span class="p">,</span>
+<span class="w">    </span><span class="na">[Ventas PY]</span>
+<span class="p">)</span>
+
+<span class="c1">-- Acumulado del año hasta la fecha (Year to Date)</span>
+Ventas YTD := CALCULATE(
+<span class="w">    </span><span class="na">[Total Ventas]</span><span class="p">,</span>
+<span class="w">    </span><span class="nf">DATESYTD</span><span class="p">(</span><span class="na">DIM_Fecha[Date]</span><span class="p">)</span><span class="w">   </span><span class="c1">-- desde el 1 de enero hasta la fecha actual del contexto</span>
+<span class="p">)</span>
+
+<span class="c1">-- Acumulado del año fiscal (si el año fiscal termina en junio)</span>
+Ventas YTD Fiscal := CALCULATE(
+<span class="w">    </span><span class="na">[Total Ventas]</span><span class="p">,</span>
+<span class="w">    </span><span class="nf">DATESYTD</span><span class="p">(</span><span class="na">DIM_Fecha[Date]</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;06-30&quot;</span><span class="p">)</span><span class="w">   </span><span class="c1">-- &quot;MM-DD&quot; del ultimo dia del año fiscal</span>
+<span class="p">)</span>
+
+<span class="c1">-- Acumulado del trimestre hasta la fecha (Quarter to Date)</span>
+Ventas QTD := CALCULATE(
+<span class="w">    </span><span class="na">[Total Ventas]</span><span class="p">,</span>
+<span class="w">    </span><span class="nf">DATESQTD</span><span class="p">(</span><span class="na">DIM_Fecha[Date]</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1">-- Acumulado del mes hasta la fecha (Month to Date)</span>
+Ventas MTD := CALCULATE(
+<span class="w">    </span><span class="na">[Total Ventas]</span><span class="p">,</span>
+<span class="w">    </span><span class="nf">DATESMTD</span><span class="p">(</span><span class="na">DIM_Fecha[Date]</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1">-- Ventas del mismo YTD en el año anterior</span>
+Ventas PYTD := CALCULATE(
+<span class="w">    </span><span class="na">[Ventas YTD]</span><span class="p">,</span>
+<span class="w">    </span><span class="nf">SAMEPERIODLASTYEAR</span><span class="p">(</span><span class="na">DIM_Fecha[Date]</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="desplazamientos-de-periodo">
+<h3>11.2 Desplazamientos de periodo<a class="headerlink" href="#desplazamientos-de-periodo" title="Link to this heading">#</a></h3>
+<div class="highlight-dax notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Mes anterior</span>
+Ventas Mes Anterior := CALCULATE(
+<span class="w">    </span><span class="na">[Total Ventas]</span><span class="p">,</span>
+<span class="w">    </span><span class="nf">DATEADD</span><span class="p">(</span><span class="na">DIM_Fecha[Date]</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="nf">MONTH</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1">-- Trimestre anterior</span>
+Ventas Q Anterior := CALCULATE(
+<span class="w">    </span><span class="na">[Total Ventas]</span><span class="p">,</span>
+<span class="w">    </span><span class="nf">DATEADD</span><span class="p">(</span><span class="na">DIM_Fecha[Date]</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="nf">QUARTER</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1">-- Año anterior (alternativa a SAMEPERIODLASTYEAR)</span>
+Ventas Año Anterior := CALCULATE(
+<span class="w">    </span><span class="na">[Total Ventas]</span><span class="p">,</span>
+<span class="w">    </span><span class="nf">DATEADD</span><span class="p">(</span><span class="na">DIM_Fecha[Date]</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="nf">YEAR</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1">-- Ultimos 12 meses rodantes (rolling 12 months)</span>
+Ventas R12M := CALCULATE(
+<span class="w">    </span><span class="na">[Total Ventas]</span><span class="p">,</span>
+<span class="w">    </span><span class="nf">DATESINPERIOD</span><span class="p">(</span>
+<span class="w">        </span><span class="na">DIM_Fecha[Date]</span><span class="p">,</span>
+<span class="w">        </span><span class="nf">LASTDATE</span><span class="p">(</span><span class="na">DIM_Fecha[Date]</span><span class="p">),</span><span class="w">   </span><span class="c1">-- desde la ultima fecha del contexto</span>
+<span class="w">        </span><span class="o">-</span><span class="m">12</span><span class="p">,</span><span class="w">                          </span><span class="c1">-- retroceder 12</span>
+<span class="w">        </span><span class="nf">MONTH</span><span class="w">                         </span><span class="c1">-- unidad: MONTH, QUARTER, YEAR, DAY</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1">-- Ultimos 30 dias</span>
+Ventas R30D := CALCULATE(
+<span class="w">    </span><span class="na">[Total Ventas]</span><span class="p">,</span>
+<span class="w">    </span><span class="nf">DATESINPERIOD</span><span class="p">(</span><span class="na">DIM_Fecha[Date]</span><span class="p">,</span><span class="w"> </span><span class="nf">LASTDATE</span><span class="p">(</span><span class="na">DIM_Fecha[Date]</span><span class="p">),</span><span class="w"> </span><span class="o">-</span><span class="m">30</span><span class="p">,</span><span class="w"> </span><span class="nf">DAY</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="comparativas-avanzadas">
+<h3>11.3 Comparativas avanzadas<a class="headerlink" href="#comparativas-avanzadas" title="Link to this heading">#</a></h3>
+<div class="highlight-dax notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Tabla de periodos para comparacion dinamica</span>
+<span class="c1">-- (usando SWITCH y un parametro de What-If o slicer)</span>
+
+Periodo Comparacion := SWITCH(
+<span class="w">    </span><span class="nf">SELECTEDVALUE</span><span class="p">(</span><span class="na">TablaParametro[Valor]</span><span class="p">),</span>
+<span class="w">    </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="na">[Ventas PY]</span><span class="p">,</span>
+<span class="w">    </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="na">[Ventas Mes Anterior]</span><span class="p">,</span>
+<span class="w">    </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="na">[Ventas YTD]</span><span class="p">,</span>
+<span class="w">    </span><span class="nf">BLANK</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="c1">-- Media movil de N periodos (configurable)</span>
+Media Movil 3M := CALCULATE(
+<span class="w">    </span><span class="nf">AVERAGEX</span><span class="p">(</span>
+<span class="w">        </span><span class="nf">DATESINPERIOD</span><span class="p">(</span><span class="na">DIM_Fecha[Date]</span><span class="p">,</span><span class="w"> </span><span class="nf">LASTDATE</span><span class="p">(</span><span class="na">DIM_Fecha[Date]</span><span class="p">),</span><span class="w"> </span><span class="o">-</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="nf">MONTH</span><span class="p">),</span>
+<span class="w">        </span><span class="na">[Total Ventas]</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1">-- Maximo historico hasta la fecha (Running Maximum)</span>
+Maximo Historico :=
+<span class="nb">VAR</span><span class="w"> </span>vFechaActual = MAX(DIM_Fecha[Date])
+<span class="nb">RETURN</span>
+<span class="nf">CALCULATE</span><span class="p">(</span>
+<span class="w">    </span><span class="nf">MAXX</span><span class="p">(</span>
+<span class="w">        </span><span class="nf">FILTER</span><span class="p">(</span><span class="nf">ALL</span><span class="p">(</span>DIM_Fecha), DIM_Fecha[Date] &lt;= vFechaActual),
+<span class="w">        </span><span class="na">[Total Ventas]</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="rankings-y-posiciones">
+<h3>11.4 Rankings y posiciones<a class="headerlink" href="#rankings-y-posiciones" title="Link to this heading">#</a></h3>
+<div class="highlight-dax notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Ranking de productos por ventas (1 = mayor)</span>
+Ranking Producto :=
+<span class="nb">VAR</span><span class="w"> </span>vVentasActual = [Total Ventas]
+<span class="nb">RETURN</span>
+<span class="nf">RANKX</span><span class="p">(</span>
+<span class="w">    </span><span class="nf">ALL</span><span class="p">(</span><span class="na">DIM_Producto[Producto]</span><span class="p">),</span><span class="w">   </span><span class="c1">-- sobre todos los productos (ignora filtro de producto)</span>
+<span class="w">    </span><span class="na">[Total Ventas]</span><span class="p">,</span><span class="w">                 </span><span class="c1">-- expresion a rankear</span>
+<span class="w">    </span>vVentasActual,                  -- valor del contexto actual (opcional, mejor practica)
+<span class="w">    </span><span class="nb">DESC</span><span class="p">,</span><span class="w">                           </span><span class="c1">-- orden: DESC=mayor primero, ASC=menor primero</span>
+<span class="w">    </span>Dense                           -- tipo: Dense=sin huecos, Skip=con huecos (1,2,2,4)
+<span class="p">)</span>
+
+<span class="c1">-- Top N: mostrar solo los N primeros</span>
+Es Top 5 :=
+<span class="nf">IF</span><span class="p">(</span>
+<span class="w">    </span><span class="na">[Ranking Producto]</span><span class="w"> </span>&lt;= 5,
+<span class="w">    </span><span class="na">[Total Ventas]</span><span class="p">,</span>
+<span class="w">    </span><span class="nf">BLANK</span><span class="p">()</span><span class="w">   </span><span class="c1">-- BLANK() hace que la visual omita la fila</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="buenas-practicas">
+<h2>12. Buenas Practicas<a class="headerlink" href="#buenas-practicas" title="Link to this heading">#</a></h2>
+<section id="nomenclatura">
+<h3>12.1 Nomenclatura<a class="headerlink" href="#nomenclatura" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Tablas</span> <span class="n">de</span> <span class="n">hechos</span><span class="p">:</span>     <span class="n">FACT_Ventas</span><span class="p">,</span> <span class="n">FACT_Transacciones</span>
+<span class="n">Tablas</span> <span class="n">de</span> <span class="n">dimension</span><span class="p">:</span>  <span class="n">DIM_Producto</span><span class="p">,</span> <span class="n">DIM_Fecha</span><span class="p">,</span> <span class="n">DIM_Cliente</span>
+<span class="n">Tablas</span> <span class="n">de</span> <span class="n">medidas</span><span class="p">:</span>    <span class="n">_Medidas</span><span class="p">,</span> <span class="n">_KPIs</span>
+<span class="n">Tablas</span> <span class="n">calculadas</span><span class="p">:</span>    <span class="n">CALC_ResumenMensual</span>
+
+<span class="n">Medidas</span><span class="p">:</span>              <span class="p">[</span><span class="n">Total</span> <span class="n">Ventas</span><span class="p">],</span> <span class="p">[</span><span class="n">Crecimiento</span> <span class="n">YoY</span> <span class="o">%</span><span class="p">],</span> <span class="p">[</span><span class="n">Ticket</span> <span class="n">Medio</span><span class="p">]</span>
+                      <span class="o">--</span> <span class="n">Sin</span> <span class="n">prefijo</span><span class="p">,</span> <span class="n">con</span> <span class="n">espacios</span><span class="p">,</span> <span class="n">en</span> <span class="n">español</span> <span class="n">o</span> <span class="n">ingles</span> <span class="n">consistente</span>
+
+<span class="n">Columnas</span> <span class="n">calculadas</span><span class="p">:</span>  <span class="n">Segmento</span><span class="p">,</span> <span class="n">Año</span><span class="o">-</span><span class="n">Mes</span><span class="p">,</span> <span class="n">Flag</span> <span class="n">Activo</span>
+                      <span class="o">--</span> <span class="n">Sin</span> <span class="n">prefijo</span><span class="p">,</span> <span class="n">descriptivas</span>
+
+<span class="n">Variables</span> <span class="n">DAX</span><span class="p">:</span>        <span class="n">vVentasActual</span><span class="p">,</span> <span class="n">vMeta</span><span class="p">,</span> <span class="n">vFechaMax</span>
+                      <span class="o">--</span> <span class="n">Prefijo</span> <span class="n">v</span> <span class="p">(</span><span class="n">variable</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="rendimiento-en-dax">
+<h3>12.2 Rendimiento en DAX<a class="headerlink" href="#rendimiento-en-dax" title="Link to this heading">#</a></h3>
+<div class="highlight-dax notranslate"><div class="highlight"><pre><span></span><span class="c1">-- MAL: usar FILTER con una columna de alta cardinalidad</span>
+Ventas Grandes :=
+<span class="nf">CALCULATE</span><span class="p">(</span>
+<span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="na">Ventas[Monto]</span><span class="p">),</span>
+<span class="w">    </span><span class="nf">FILTER</span><span class="p">(</span>Ventas, Ventas[Monto] &gt; 1000)   -- itera fila por fila en la tabla de hechos
+<span class="p">)</span>
+
+<span class="c1">-- BIEN: filtrar en la dimension o usar comparacion directa</span>
+Ventas Grandes :=
+<span class="nf">CALCULATE</span><span class="p">(</span>
+<span class="w">    </span><span class="nf">SUM</span><span class="p">(</span><span class="na">Ventas[Monto]</span><span class="p">),</span>
+<span class="w">    </span><span class="na">Ventas[Monto]</span><span class="w"> </span>&gt; 1000   -- predicado en CALCULATE: mas eficiente
+<span class="p">)</span>
+
+<span class="c1">-- MAL: CALCULATE dentro de SUMX (doble evaluacion de contexto)</span>
+Suma Compleja :=
+<span class="nf">SUMX</span><span class="p">(</span>
+<span class="w">    </span>Ventas,
+<span class="w">    </span><span class="nf">CALCULATE</span><span class="p">(</span><span class="na">Ventas[Precio]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="na">Ventas[Cantidad]</span><span class="p">)</span><span class="w">   </span><span class="c1">-- innecesario</span>
+<span class="p">)</span>
+
+<span class="c1">-- BIEN: expresion directa en SUMX</span>
+Suma Correcta :=
+<span class="nf">SUMX</span><span class="p">(</span>Ventas, Ventas[Precio] * Ventas[Cantidad])
+
+<span class="c1">-- Usar variables para evitar evaluaciones repetidas</span>
+Ratio Eficiente :=
+<span class="nb">VAR</span><span class="w"> </span>vTotal = [Total Ventas]
+<span class="nb">VAR</span><span class="w"> </span>vMeta  = [Meta Ventas]
+<span class="nb">RETURN</span>
+<span class="w">    </span><span class="nf">IF</span><span class="p">(</span>vMeta = 0, BLANK(), vTotal / vMeta)   -- vMeta evaluado una sola vez
+</pre></div>
+</div>
+</section>
+<section id="reducir-el-tamano-del-modelo">
+<h3>12.3 Reducir el tamaño del modelo<a class="headerlink" href="#reducir-el-tamano-del-modelo" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.</span> <span class="n">Eliminar</span> <span class="n">columnas</span> <span class="n">innecesarias</span> <span class="n">en</span> <span class="n">Power</span> <span class="n">Query</span> <span class="p">(</span><span class="n">antes</span> <span class="n">de</span> <span class="n">cargar</span> <span class="n">al</span> <span class="n">modelo</span><span class="p">)</span><span class="o">.</span>
+<span class="mf">2.</span> <span class="n">Usar</span> <span class="n">tipos</span> <span class="n">de</span> <span class="n">datos</span> <span class="n">correctos</span> <span class="p">(</span><span class="n">entero</span> <span class="n">en</span> <span class="n">lugar</span> <span class="n">de</span> <span class="n">decimal</span> <span class="n">cuando</span> <span class="n">sea</span> <span class="n">posible</span><span class="p">)</span><span class="o">.</span>
+<span class="mf">3.</span> <span class="n">No</span> <span class="n">importar</span> <span class="n">columnas</span> <span class="n">de</span> <span class="n">texto</span> <span class="n">de</span> <span class="n">alta</span> <span class="n">cardinalidad</span> <span class="n">si</span> <span class="n">no</span> <span class="n">se</span> <span class="n">necesitan</span><span class="o">.</span>
+<span class="mf">4.</span> <span class="n">Preferir</span> <span class="n">medidas</span> <span class="n">sobre</span> <span class="n">columnas</span> <span class="n">calculadas</span><span class="o">.</span>
+<span class="mf">5.</span> <span class="n">Desactivar</span> <span class="n">la</span> <span class="n">carga</span> <span class="n">de</span> <span class="n">tablas</span> <span class="n">intermedias</span> <span class="n">de</span> <span class="n">Power</span> <span class="n">Query</span> <span class="p">(</span><span class="n">solo</span> <span class="n">usarlas</span> <span class="n">como</span> <span class="n">referencias</span><span class="p">)</span><span class="o">.</span>
+<span class="mf">6.</span> <span class="n">Usar</span> <span class="n">resumenes</span> <span class="n">en</span> <span class="n">lugar</span> <span class="n">de</span> <span class="n">datos</span> <span class="n">granulares</span> <span class="n">cuando</span> <span class="n">el</span> <span class="n">detalle</span> <span class="n">no</span> <span class="n">es</span> <span class="n">necesario</span><span class="o">.</span>
+<span class="mf">7.</span> <span class="n">Comprimir</span> <span class="n">imagenes</span> <span class="n">antes</span> <span class="n">de</span> <span class="n">incrustarlas</span> <span class="n">en</span> <span class="n">el</span> <span class="n">informe</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="lista-de-verificacion-pre-publicacion">
+<h3>12.4 Lista de verificacion pre-publicacion<a class="headerlink" href="#lista-de-verificacion-pre-publicacion" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>MODELO:
+  ✓ Esquema en estrella con tabla de fechas marcada.
+  ✓ Relaciones 1:Muchos con direccion Simple.
+  ✓ Sin columnas innecesarias importadas.
+  ✓ Columnas clave ocultas de la vista del informe.
+  ✓ Medidas organizadas en tabla de medidas.
+  ✓ Formato de medidas configurado (simbolo moneda, decimales, %).
+
+SEGURIDAD:
+  ✓ RLS configurado si el informe contiene datos sensibles.
+  ✓ Roles de RLS probados con &quot;Ver como rol&quot;.
+
+INFORME:
+  ✓ Titulo de pagina visible en cada pagina.
+  ✓ Tooltips descriptivos en las visuales.
+  ✓ Segmentadores sincronizados entre paginas si aplica.
+  ✓ Interacciones entre visuales revisadas.
+  ✓ Visuales alineadas y con espaciado consistente.
+  ✓ Informe probado en distintas resoluciones de pantalla.
+
+PUBLICACION:
+  ✓ Actualizacion programada configurada.
+  ✓ Gateway configurado si los datos son locales.
+  ✓ Permisos de workspace asignados correctamente.
+  ✓ RLS probada con usuarios reales antes de publicar.
+</pre></div>
+</div>
+<img src="../_static/images/pbi5.png" width="600" />
+---
+</section>
+</section>
+<section id="referencias">
+<h2>13. Referencias<a class="headerlink" href="#referencias" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Microsoft Docs — Power BI: <a class="reference external" href="https://learn.microsoft.com/power-bi/">https://learn.microsoft.com/power-bi/</a></p></li>
+<li><p>Microsoft Docs — DAX Reference: <a class="reference external" href="https://learn.microsoft.com/dax/">https://learn.microsoft.com/dax/</a></p></li>
+<li><p>SQLBI — DAX Patterns: <a class="reference external" href="https://www.daxpatterns.com">https://www.daxpatterns.com</a></p></li>
+<li><p>SQLBI — The Definitive Guide to DAX (Russo, Ferrari, Webb). 2nd ed., Microsoft Press, 2022.</p></li>
+<li><p>Goggins, A., &amp; Webb, C. (2014). <em>Power Query for Power BI and Excel</em>. Apress.</p></li>
+<li><p>Mola, M. (2019). <em>Mastering Microsoft Power BI</em>. Packt Publishing.</p></li>
+<li><p>SQLBI — DAX Studio (herramienta de depuracion DAX): <a class="reference external" href="https://daxstudio.org">https://daxstudio.org</a></p></li>
+<li><p>Enterprise DNA — Power BI Forum: <a class="reference external" href="https://enterprisedna.co">https://enterprisedna.co</a></p></li>
+</ul>
+<hr class="docutils" />
+<!-- IMAGEN: Diagrama de arquitectura de Power BI: fuentes de datos -> Power Query (ETL) -> Motor Vertipaq -> DAX -> Visualizaciones -> Power BI Service -->
+<!-- IMAGEN: Esquema en estrella con FACT_Ventas en el centro y DIM_Fecha, DIM_Producto, DIM_Cliente, DIM_Region en los radios, con cardinalidades 1:Muchos -->
+<!-- IMAGEN: Flujo de CALCULATE: contexto de filtro original -> modificadores de filtro -> nuevo contexto -> resultado de la expresion -->
+<!-- IMAGEN: Dashboard de ejemplo con KPI cards en la fila superior, grafico de lineas temporal en el centro, mapa coropletico a la derecha, slicers en la izquierda -->
+<!-- IMAGEN: Comparativa visual de los tipos de relacion: 1:Muchos (recomendado), 1:1, Muchos:Muchos (evitar), con iconos de cardinalidad --></section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Unidad 2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="caso_practico_fifa23.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">2.15 Caso Práctico: Análisis Visual del Dataset FIFA 23</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indice">Indice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitectura-y-ecosistema">1. Arquitectura y Ecosistema</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#componentes-del-ecosistema">1.1 Componentes del ecosistema</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#motor-vertipaq">1.3 Motor Vertipaq</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparativa-con-otras-herramientas">1.4 Comparativa con otras herramientas</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flujo-de-trabajo">2. Flujo de Trabajo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-proceso-completo-en-power-bi-desktop">2.1 El proceso completo en Power BI Desktop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vistas-de-power-bi-desktop">2.2 Vistas de Power BI Desktop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conectar-a-fuentes-de-datos">2.3 Conectar a fuentes de datos</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power-query-transformacion-de-datos">3. Power Query: Transformacion de Datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-editor-de-power-query">3.1 El Editor de Power Query</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformaciones-comunes">3.2 Transformaciones comunes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parametros-en-power-query">3.3 Parametros en Power Query</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-personalizadas-en-m">3.4 Funciones personalizadas en M</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelado-de-datos">4. Modelado de Datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-esquema-en-estrella">4.1 El esquema en estrella</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relaciones">4.2 Relaciones</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tablas-de-fechas">4.3 Tablas de fechas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#buenas-practicas-de-modelado">4.4 Buenas practicas de modelado</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dax-data-analysis-expressions">5. DAX: Data Analysis Expressions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conceptos-fundamentales">5.1 Conceptos fundamentales</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sintaxis-basica">5.2 Sintaxis basica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-de-agregacion">5.3 Funciones de agregacion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-la-funcion-mas-importante-de-dax">5.4 CALCULATE: la funcion mas importante de DAX</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-de-tabla">5.5 Funciones de tabla</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-logicas-y-condicionales">5.6 Funciones logicas y condicionales</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#columna-calculada-vs-medida">6.1 Columna calculada vs. Medida</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#organizar-medidas-en-tablas-de-medidas">6.2 Organizar medidas en tablas de medidas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-en-dax">6.3 Variables en DAX</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#medidas-de-formato-y-presentacion">6.4 Medidas de formato y presentacion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizaciones">7. Visualizaciones</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-visualizaciones-nativas">7.1 Tipos de visualizaciones nativas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-de-una-visual">7.2 Configuracion de una visual</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#formato-condicional">7.3 Formato condicional</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tooltips-de-pagina">7.4 Tooltips de pagina</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drill-through-y-drill-down">7.5 Drill-through y Drill-down</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtros-y-segmentadores">8. Filtros y Segmentadores</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-filtros">8.1 Tipos de filtros</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentadores-slicers">8.2 Segmentadores (Slicers)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interacciones-entre-visuales">8.3 Interacciones entre visuales</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seguridad-a-nivel-de-fila-rls">8.4 Seguridad a nivel de fila (RLS)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temas-y-diseno">9. Temas y Diseño</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temas-en-power-bi">9.1 Temas en Power BI</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principios-de-diseno-en-power-bi">9.2 Principios de diseño en Power BI</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alineacion-y-distribucion">9.3 Alineacion y distribucion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fondos-y-formas-decorativas">9.4 Fondos y formas decorativas</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power-bi-service-y-colaboracion">10. Power BI Service y Colaboracion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#publicar-un-informe">10.1 Publicar un informe</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workspaces">10.2 Workspaces</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actualizacion-de-datos">10.3 Actualizacion de datos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dashboards-en-power-bi-service">10.4 Dashboards en Power BI Service</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embedding-embeber-en-otras-aplicaciones">10.6 Embedding (embeber en otras aplicaciones)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dax-avanzado-inteligencia-de-tiempo">11. DAX Avanzado: Inteligencia de Tiempo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-basicas-de-inteligencia-de-tiempo">11.1 Funciones basicas de inteligencia de tiempo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desplazamientos-de-periodo">11.2 Desplazamientos de periodo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparativas-avanzadas">11.3 Comparativas avanzadas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rankings-y-posiciones">11.4 Rankings y posiciones</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#buenas-practicas">12. Buenas Practicas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nomenclatura">12.1 Nomenclatura</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rendimiento-en-dax">12.2 Rendimiento en DAX</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reducir-el-tamano-del-modelo">12.3 Reducir el tamaño del modelo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lista-de-verificacion-pre-publicacion">12.4 Lista de verificacion pre-publicacion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencias">13. Referencias</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Sergio Alejandro Holguin García
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

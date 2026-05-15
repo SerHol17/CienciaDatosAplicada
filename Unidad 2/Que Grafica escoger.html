@@ -1,0 +1,1765 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.14 Analítica de Datos: Tipos de Gráficos y Análisis Exploratorio &#8212; Ciencia de Datos Aplicada- 01 Ucaldas</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unidad 2/Que Grafica escoger';</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="2.15 Caso Práctico: Análisis Visual del Dataset FIFA 23" href="caso_practico_fifa23.html" />
+    <link rel="prev" title="2.13 Que Grafica Escoger" href="Que_Escoger.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Ciencia de Datos Aplicada- 01 Ucaldas - Home"/>
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark pst-js-only" alt="Ciencia de Datos Aplicada- 01 Ucaldas - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Ciencia de datos aplicada
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Unidad1.html">Unidad 1: Deep Learning Avanzado</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/01_introduccion_ia.html">1.1 Tópicos Emergentes de la IA — 2026</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/02_Autoencoders.html">1.2 Autoencoders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/autoencoders_tf.html">1.3 Autoencoders en TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/Gans_teoria.html">1.4 Redes Generativas Adversariales (GANs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/gans_tf.html">1.5 Redes Generativas Adversariales (GANs) en TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/segmentacion_teoria.html">1.6 Segmentación con Inteligencia Artificial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/segmentacion_tf.html">1.7 Segmentacion con Inteligencia Artificial — TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/16_nlp_transformers.html">1.8 Procesamiento de Lenguaje Natural y Transformers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/nlp_tensorflow.html">1.9 Procesamiento de Lenguaje Natural con TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/17_llms.html">1.10 Modelos de Lenguaje de Gran Escala (LLMs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/llms_colab.html">1.11 LLMs en la Practica: OpenAI GPT y Ollama</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/18_agentes.html">1.12 Agentes de Inteligencia Artificial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/agentes_colab.html">1.13 Agentes de Inteligencia Artificial</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/frameworks_agentes.html">1.14 LangChain · LangGraph · CrewAI</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Unidad2.html">Unidad 2: Visualizacion de Datos</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Matplotlib.html">2.1 Visualizacion con Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_matplotlib_intro.html">2.2 Matplotlib — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_matplotlib_avanzado.html">2.3: Matplotlib — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Seaborn.html">2.4 Visualizacion con Seaborn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_seaborn_intro.html">2.5 Seaborn — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotly.html">2.7 Visualizacion Interactiva con Plotly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_seaborn_avanzado.html">2.6: Seaborn — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_plotly_intro.html">2.8: Plotly — Gráficos Interactivos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_plotly_avanzado.html">2.9: Plotly — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_comparativa_y_casos.html">2.10: Comparativa y Casos de Uso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Buenas_Practicas.html">2. 11 Buenas Practicas de Visualizacion de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="buenas_practicas_visualizacion.html">2.12 Buenas Prácticas de Visualización de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Que_Escoger.html">2.13 Que Grafica Escoger</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.14 Analítica de Datos: Tipos de Gráficos y Análisis Exploratorio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="caso_practico_fifa23.html">2.15 Caso Práctico: Análisis Visual del Dataset FIFA 23</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pbi.html">2.16 Visualizacion con Power BI</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/SerHol17/CienciaDatosAplicada/blob/main/Unidad 2/Que Grafica escoger.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/CienciaDatosAplicada" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/CienciaDatosAplicada/issues/new?title=Issue%20on%20page%20%2FUnidad 2/Que Grafica escoger.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Unidad 2/Que Grafica escoger.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>2.14 Analítica de Datos: Tipos de Gráficos y Análisis Exploratorio</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">Contenido</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-son-importantes-los-datos">1. ¿Por qué son importantes los datos?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-del-entorno">2. Configuración del entorno</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-graficos">3. Tipos de gráficos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-barras">3.1 Gráfico de barras</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-columnas">3.2 Gráfico de columnas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-circular-pastel">3.3 Gráfico circular (pastel)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-lineas">3.4 Gráfico de líneas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mapa-de-calor-heatmap">3.5 Mapa de calor (heatmap)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-dispersion-scatter-plot">3.6 Gráfico de dispersión (scatter plot)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diagrama-de-caja-box-plot">3.7 Diagrama de caja (box plot)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histograma">3.8 Histograma</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-exploratorio-identificacion-de-valores-atipicos">4. Análisis exploratorio: identificación de valores atípicos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-es-importante-identificarlos">¿Por qué es importante identificarlos?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-un-dataset-con-valores-atipicos">4.1 Crear un dataset con valores atípicos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detectar-outliers-visualmente-con-un-box-plot">4.2 Detectar outliers visualmente con un box plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detectar-outliers-con-el-metodo-del-iqr-rango-intercuartilico">4.3 Detectar outliers con el método del IQR (rango intercuartílico)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detectar-outliers-con-el-metodo-del-z-score">4.4 Detectar outliers con el método del Z-Score</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizar-los-outliers-detectados">4.5 Visualizar los outliers detectados</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#que-hacer-con-los-outliers">4.6 ¿Qué hacer con los outliers?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-final-que-grafico-elijo">5. Resumen final: ¿qué gráfico elijo?</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="analitica-de-datos-tipos-de-graficos-y-analisis-exploratorio">
+<h1>2.14 Analítica de Datos: Tipos de Gráficos y Análisis Exploratorio<a class="headerlink" href="#analitica-de-datos-tipos-de-graficos-y-analisis-exploratorio" title="Link to this heading">#</a></h1>
+<p><strong>Clase 1 — Versión Python con Matplotlib, Seaborn y Pandas</strong></p>
+<p>Sergio Alejandro Holguín García</p>
+<hr class="docutils" />
+<section id="contenido">
+<h2>Contenido<a class="headerlink" href="#contenido" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Por qué son importantes los datos</p></li>
+<li><p>Configuración del entorno</p></li>
+<li><p>Tipos de gráficos:</p>
+<ul class="simple">
+<li><p>Gráfico de barras</p></li>
+<li><p>Gráfico de columnas</p></li>
+<li><p>Gráfico circular (pastel)</p></li>
+<li><p>Gráfico de líneas</p></li>
+<li><p>Mapa de calor (heatmap)</p></li>
+<li><p>Gráfico de dispersión (scatter plot)</p></li>
+<li><p>Diagrama de caja (box plot)</p></li>
+<li><p>Histograma</p></li>
+</ul>
+</li>
+<li><p>Análisis exploratorio: identificación de valores atípicos</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="por-que-son-importantes-los-datos">
+<h2>1. ¿Por qué son importantes los datos?<a class="headerlink" href="#por-que-son-importantes-los-datos" title="Link to this heading">#</a></h2>
+<p>Los datos nos ayudan a <strong>tomar mejores decisiones</strong>, entender lo que está pasando y encontrar patrones que a simple vista no se ven.</p>
+<p>Cuando sabemos interpretarlos bien, podemos descubrir información valiosa y compartirla de forma clara, para que otros también la comprendan y la usen.</p>
+<p>La clave está en <strong>hacer sencillo lo complejo</strong>: transformar números y tablas en mensajes fáciles de entender.</p>
+<p>Para lograrlo necesitamos dos cosas:</p>
+<ol class="arabic simple">
+<li><p><strong>Saber qué tipo de gráfico usar</strong> según la pregunta que queremos responder.</p></li>
+<li><p><strong>Saber explorar los datos</strong> antes de visualizarlos (limpieza, valores extremos, distribución).</p></li>
+</ol>
+<p>Este notebook recorre ambos aspectos con ejemplos prácticos en Python.</p>
+</section>
+<hr class="docutils" />
+<section id="configuracion-del-entorno">
+<h2>2. Configuración del entorno<a class="headerlink" href="#configuracion-del-entorno" title="Link to this heading">#</a></h2>
+<p>Importamos las librerías que vamos a usar en todo el notebook.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Manipulación numérica y de tablas</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Visualización</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+
+<span class="c1"># Semilla para que los datos aleatorios sean reproducibles</span>
+<span class="c1"># (cada vez que ejecutemos el notebook obtendremos los mismos valores)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Configuración estética general para que los gráficos se vean limpios</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s1">&#39;whitegrid&#39;</span><span class="p">)</span>           <span class="c1"># Fondo blanco con cuadrícula sutil</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>     <span class="c1"># Resolución</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.titleweight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span>  <span class="c1"># Títulos en negrita por defecto</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Librerías cargadas correctamente&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Librerías cargadas correctamente
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="tipos-de-graficos">
+<h2>3. Tipos de gráficos<a class="headerlink" href="#tipos-de-graficos" title="Link to this heading">#</a></h2>
+<p>Cada gráfico tiene un <strong>propósito</strong>. Elegir el correcto facilita la lectura; elegir el incorrecto confunde al lector. A continuación veremos los más usados.</p>
+<section id="grafico-de-barras">
+<h3>3.1 Gráfico de barras<a class="headerlink" href="#grafico-de-barras" title="Link to this heading">#</a></h3>
+<p><strong>¿Qué es?</strong> Representa datos con barras rectangulares horizontales. Cada barra muestra el valor de una categoría.</p>
+<p><strong>¿Cuándo usarlo?</strong> Para <strong>comparar cantidades entre categorías</strong>. Es especialmente útil cuando los nombres de las categorías son largos (porque caben en horizontal) o cuando hay muchas categorías.</p>
+<p><strong>Ejemplo:</strong> comparar ventas por producto.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Datos del ejemplo: ventas por producto</span>
+<span class="n">productos</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Producto A&#39;</span><span class="p">,</span> <span class="s1">&#39;Producto B&#39;</span><span class="p">,</span> <span class="s1">&#39;Producto C&#39;</span><span class="p">]</span>
+<span class="n">ventas</span>    <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">120</span><span class="p">]</span>
+
+<span class="c1"># Crear la figura y el eje</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># barh = bar horizontal (gráfico de BARRAS, no de columnas)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">productos</span><span class="p">,</span> <span class="n">ventas</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#4c72b0&#39;</span><span class="p">)</span>
+
+<span class="c1"># Añadir el valor numérico al final de cada barra para facilitar la lectura</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ventas</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">v</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Títulos y etiquetas</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Ventas por producto&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Unidades vendidas&#39;</span><span class="p">)</span>
+
+<span class="c1"># Quitar bordes superiores y derechos para una apariencia limpia</span>
+<span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/0a5d1856512346e59731c8d44fa5b0166ee7db86baf35497f7cb4df931dc6d24.png" src="../_images/0a5d1856512346e59731c8d44fa5b0166ee7db86baf35497f7cb4df931dc6d24.png" />
+</div>
+</div>
+<p><strong>Interpretación:</strong> El Producto C lidera con 120 unidades, seguido de A (100) y B (80). En un gráfico de barras horizontal el ojo compara longitudes, que es la tarea visual más precisa para los seres humanos.</p>
+</section>
+<section id="grafico-de-columnas">
+<h3>3.2 Gráfico de columnas<a class="headerlink" href="#grafico-de-columnas" title="Link to this heading">#</a></h3>
+<p><strong>¿Qué es?</strong> Similar al de barras, pero <strong>vertical</strong>. Las categorías están en el eje X y los valores en el eje Y.</p>
+<p><strong>¿Cuándo usarlo?</strong> Para comparar valores <strong>a lo largo del tiempo</strong> o entre categorías cuando los nombres son cortos. Es la opción natural para series temporales discretas (trimestres, meses, años).</p>
+<p><strong>Ejemplo:</strong> ventas por trimestre comparando dos años.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Datos: ventas trimestrales en dos años distintos</span>
+<span class="n">trimestres</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Q1&#39;</span><span class="p">,</span> <span class="s1">&#39;Q2&#39;</span><span class="p">,</span> <span class="s1">&#39;Q3&#39;</span><span class="p">,</span> <span class="s1">&#39;Q4&#39;</span><span class="p">]</span>
+<span class="n">ventas_2022</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5000</span><span class="p">,</span> <span class="mi">6000</span><span class="p">,</span> <span class="mi">5500</span><span class="p">,</span> <span class="mi">7000</span><span class="p">]</span>
+<span class="n">ventas_2023</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5500</span><span class="p">,</span> <span class="mi">7200</span><span class="p">,</span> <span class="mi">6300</span><span class="p">,</span> <span class="mi">8100</span><span class="p">]</span>
+
+<span class="c1"># Posiciones numéricas para colocar las columnas lado a lado</span>
+<span class="n">x</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">trimestres</span><span class="p">))</span>   <span class="c1"># [0, 1, 2, 3]</span>
+<span class="n">ancho</span> <span class="o">=</span> <span class="mf">0.35</span>                          <span class="c1"># ancho de cada columna</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
+
+<span class="c1"># Dos series: una desplazada a la izquierda y otra a la derecha del centro</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">ancho</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">ventas_2022</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">ancho</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;2022&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#1f77b4&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">ancho</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">ventas_2023</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">ancho</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;2023&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#ff7f0e&#39;</span><span class="p">)</span>
+
+<span class="c1"># Configurar las etiquetas del eje X (los trimestres)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">trimestres</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Ventas trimestrales: 2022 vs 2023&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Ventas (USD)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/9f9ab31824cce2b1a0154236abd0c026c0b9bd9ca01c0523c80bcfd0102d1615.png" src="../_images/9f9ab31824cce2b1a0154236abd0c026c0b9bd9ca01c0523c80bcfd0102d1615.png" />
+</div>
+</div>
+<p><strong>Interpretación:</strong> En todos los trimestres 2023 superó a 2022. La diferencia más grande está en Q4, lo que indica una temporada alta cada vez más fuerte.</p>
+<p><strong>Diferencia entre barras y columnas:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Característica</p></th>
+<th class="head"><p>Barras (horizontal)</p></th>
+<th class="head"><p>Columnas (vertical)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Orientación</p></td>
+<td><p>Horizontal</p></td>
+<td><p>Vertical</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ideal para</p></td>
+<td><p>Categorías con nombres largos</p></td>
+<td><p>Series temporales</p></td>
+</tr>
+<tr class="row-even"><td><p>Función matplotlib</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ax.barh()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ax.bar()</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="grafico-circular-pastel">
+<h3>3.3 Gráfico circular (pastel)<a class="headerlink" href="#grafico-circular-pastel" title="Link to this heading">#</a></h3>
+<p><strong>¿Qué es?</strong> Muestra proporciones como segmentos de un círculo. La suma de todos los segmentos representa el 100%.</p>
+<p><strong>¿Cuándo usarlo?</strong> Para mostrar <strong>partes de un total</strong>, idealmente con <strong>pocas categorías</strong> (entre 2 y 5). Con más categorías el ojo no compara bien los ángulos.</p>
+<p><strong>Ejemplo:</strong> distribución del presupuesto.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Datos: distribución porcentual del presupuesto</span>
+<span class="n">categorias</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Operaciones&#39;</span><span class="p">,</span> <span class="s1">&#39;Marketing&#39;</span><span class="p">,</span> <span class="s1">&#39;Investigación&#39;</span><span class="p">]</span>
+<span class="n">porcentajes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">60</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="n">colores</span>     <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#e63946&#39;</span><span class="p">,</span> <span class="s1">&#39;#457b9d&#39;</span><span class="p">,</span> <span class="s1">&#39;#f4a261&#39;</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span>
+    <span class="n">porcentajes</span><span class="p">,</span>
+    <span class="n">labels</span><span class="o">=</span><span class="n">categorias</span><span class="p">,</span>
+    <span class="n">colors</span><span class="o">=</span><span class="n">colores</span><span class="p">,</span>
+    <span class="n">autopct</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%1.0f%%</span><span class="s1">&#39;</span><span class="p">,</span>     <span class="c1"># Muestra el porcentaje dentro de cada porción</span>
+    <span class="n">startangle</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span>          <span class="c1"># Inicia desde arriba (12 en punto)</span>
+    <span class="n">counterclock</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>     <span class="c1"># Sentido horario, lectura más natural</span>
+    <span class="n">wedgeprops</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;edgecolor&#39;</span><span class="p">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="s1">&#39;linewidth&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>  <span class="c1"># Borde blanco entre porciones</span>
+<span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Distribución del presupuesto&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/28fe3631444214f8b7f69379be20b17be092795f02441099d219cc67bfb82b09.png" src="../_images/28fe3631444214f8b7f69379be20b17be092795f02441099d219cc67bfb82b09.png" />
+</div>
+</div>
+<p><strong>Interpretación:</strong> Operaciones se lleva la mayor parte del presupuesto (60%), Marketing el 30% e Investigación el 10%.</p>
+<p><strong>Advertencia:</strong> si tuviéramos 10 o 15 categorías, este gráfico se volvería ilegible. En esos casos es mejor un <strong>gráfico de barras</strong> ordenado de mayor a menor.</p>
+</section>
+<section id="grafico-de-lineas">
+<h3>3.4 Gráfico de líneas<a class="headerlink" href="#grafico-de-lineas" title="Link to this heading">#</a></h3>
+<p><strong>¿Qué es?</strong> Usa puntos conectados por líneas para mostrar <strong>tendencias</strong>.</p>
+<p><strong>¿Cuándo usarlo?</strong> Para mostrar <strong>evolución en el tiempo</strong>. Es el gráfico ideal cuando el eje X representa una variable continua u ordenada (días, meses, años).</p>
+<p><strong>Ejemplo:</strong> evolución de visitas a una página web durante 12 meses.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Datos: visitas mensuales a un sitio web</span>
+<span class="n">meses</span>   <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Ene&#39;</span><span class="p">,</span> <span class="s1">&#39;Feb&#39;</span><span class="p">,</span> <span class="s1">&#39;Mar&#39;</span><span class="p">,</span> <span class="s1">&#39;Abr&#39;</span><span class="p">,</span> <span class="s1">&#39;May&#39;</span><span class="p">,</span> <span class="s1">&#39;Jun&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;Jul&#39;</span><span class="p">,</span> <span class="s1">&#39;Ago&#39;</span><span class="p">,</span> <span class="s1">&#39;Sep&#39;</span><span class="p">,</span> <span class="s1">&#39;Oct&#39;</span><span class="p">,</span> <span class="s1">&#39;Nov&#39;</span><span class="p">,</span> <span class="s1">&#39;Dic&#39;</span><span class="p">]</span>
+<span class="n">visitas</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1200</span><span class="p">,</span> <span class="mi">1350</span><span class="p">,</span> <span class="mi">1500</span><span class="p">,</span> <span class="mi">1700</span><span class="p">,</span> <span class="mi">1650</span><span class="p">,</span> <span class="mi">1900</span><span class="p">,</span>
+           <span class="mi">2200</span><span class="p">,</span> <span class="mi">2400</span><span class="p">,</span> <span class="mi">2300</span><span class="p">,</span> <span class="mi">2700</span><span class="p">,</span> <span class="mi">3100</span><span class="p">,</span> <span class="mi">3500</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
+
+<span class="c1"># Línea con marcadores en cada punto para destacar las observaciones</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">meses</span><span class="p">,</span> <span class="n">visitas</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#2ca02c&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span>
+        <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+
+<span class="c1"># Resaltar el punto máximo y mínimo con anotaciones</span>
+<span class="n">idx_max</span> <span class="o">=</span> <span class="n">visitas</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">visitas</span><span class="p">))</span>
+<span class="n">idx_min</span> <span class="o">=</span> <span class="n">visitas</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">visitas</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Máximo: </span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="n">visitas</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">idx_max</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">visitas</span><span class="p">)),</span>
+            <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="n">idx_max</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">visitas</span><span class="p">)</span> <span class="o">+</span> <span class="mi">100</span><span class="p">),</span>
+            <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#2ca02c&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Mínimo: </span><span class="si">{</span><span class="nb">min</span><span class="p">(</span><span class="n">visitas</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">idx_min</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">visitas</span><span class="p">)),</span>
+            <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="n">idx_min</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">visitas</span><span class="p">)</span> <span class="o">-</span> <span class="mi">200</span><span class="p">),</span>
+            <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Visitas mensuales al sitio web&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Número de visitas&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d1a9a5b14415ec4dd3be7701dbbf141a2654e75363bcc4112c76c70ebff0db8a.png" src="../_images/d1a9a5b14415ec4dd3be7701dbbf141a2654e75363bcc4112c76c70ebff0db8a.png" />
+</div>
+</div>
+<p><strong>Interpretación:</strong> Las visitas crecieron de manera sostenida durante el año, casi triplicándose entre enero (1.200) y diciembre (3.500). La línea facilita ver no solo los valores, sino también el <strong>ritmo</strong> del crecimiento.</p>
+</section>
+<section id="mapa-de-calor-heatmap">
+<h3>3.5 Mapa de calor (heatmap)<a class="headerlink" href="#mapa-de-calor-heatmap" title="Link to this heading">#</a></h3>
+<p><strong>¿Qué es?</strong> Representa valores usando <strong>colores en una matriz</strong>. Cada celda toma un color según su valor numérico.</p>
+<p><strong>¿Cuándo usarlo?</strong> Para ver <strong>patrones y concentraciones</strong> cuando tenemos datos cruzados por dos dimensiones (por ejemplo: día de la semana × hora del día, o región × categoría de producto).</p>
+<p><strong>Ejemplo:</strong> tiempos de respuesta de servicio al cliente por área geográfica y día de la semana.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Construimos una matriz simulada: filas = regiones, columnas = días</span>
+<span class="n">regiones</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Norte&#39;</span><span class="p">,</span> <span class="s1">&#39;Sur&#39;</span><span class="p">,</span> <span class="s1">&#39;Este&#39;</span><span class="p">,</span> <span class="s1">&#39;Oeste&#39;</span><span class="p">,</span> <span class="s1">&#39;Centro&#39;</span><span class="p">]</span>
+<span class="n">dias</span>     <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Lun&#39;</span><span class="p">,</span> <span class="s1">&#39;Mar&#39;</span><span class="p">,</span> <span class="s1">&#39;Mié&#39;</span><span class="p">,</span> <span class="s1">&#39;Jue&#39;</span><span class="p">,</span> <span class="s1">&#39;Vie&#39;</span><span class="p">,</span> <span class="s1">&#39;Sáb&#39;</span><span class="p">,</span> <span class="s1">&#39;Dom&#39;</span><span class="p">]</span>
+
+<span class="c1"># Tiempos de respuesta en minutos (datos aleatorios entre 5 y 60)</span>
+<span class="n">tiempos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">regiones</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">dias</span><span class="p">)))</span>
+
+<span class="c1"># Convertir a DataFrame para que seaborn etiquete los ejes automáticamente</span>
+<span class="n">df_tiempos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">tiempos</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">regiones</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">dias</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Matriz de tiempos de respuesta (en minutos):&#39;</span><span class="p">)</span>
+<span class="n">df_tiempos</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matriz de tiempos de respuesta (en minutos):
+</pre></div>
+</div>
+<div class="output text_html">
+  <div id="df-96583010-b4a0-44ae-8db0-d6c260f6b4f5" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Lun</th>
+      <th>Mar</th>
+      <th>Mié</th>
+      <th>Jue</th>
+      <th>Vie</th>
+      <th>Sáb</th>
+      <th>Dom</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Norte</th>
+      <td>43</td>
+      <td>56</td>
+      <td>33</td>
+      <td>19</td>
+      <td>47</td>
+      <td>12</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <th>Sur</th>
+      <td>43</td>
+      <td>23</td>
+      <td>27</td>
+      <td>15</td>
+      <td>15</td>
+      <td>28</td>
+      <td>57</td>
+    </tr>
+    <tr>
+      <th>Este</th>
+      <td>40</td>
+      <td>44</td>
+      <td>28</td>
+      <td>7</td>
+      <td>26</td>
+      <td>57</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>Oeste</th>
+      <td>28</td>
+      <td>48</td>
+      <td>34</td>
+      <td>42</td>
+      <td>6</td>
+      <td>25</td>
+      <td>37</td>
+    </tr>
+    <tr>
+      <th>Centro</th>
+      <td>16</td>
+      <td>26</td>
+      <td>48</td>
+      <td>29</td>
+      <td>53</td>
+      <td>31</td>
+      <td>46</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-96583010-b4a0-44ae-8db0-d6c260f6b4f5')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-96583010-b4a0-44ae-8db0-d6c260f6b4f5 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-96583010-b4a0-44ae-8db0-d6c260f6b4f5');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+  <div id="id_106e59da-f0f1-4a9b-b263-0556887cd816">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('df_tiempos')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_106e59da-f0f1-4a9b-b263-0556887cd816 button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('df_tiempos');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
+
+<span class="c1"># annot=True escribe el número dentro de cada celda</span>
+<span class="c1"># cmap=&#39;YlOrRd&#39; = paleta secuencial (amarillo -&gt; rojo): bajo a alto</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">df_tiempos</span><span class="p">,</span>
+            <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">,</span>
+            <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;YlOrRd&#39;</span><span class="p">,</span>
+            <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">linecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>
+            <span class="n">cbar_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Tiempo (min)&#39;</span><span class="p">},</span>
+            <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Tiempos de respuesta por región y día&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Día de la semana&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Región&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/efd7a8ef2d2bf59c52c271ac723b6d2a09625ac40a6944bc4a0d47ed62599e1c.png" src="../_images/efd7a8ef2d2bf59c52c271ac723b6d2a09625ac40a6944bc4a0d47ed62599e1c.png" />
+</div>
+</div>
+<p><strong>Interpretación:</strong> Los colores más intensos (rojos) marcan los puntos donde el servicio fue más lento. De un vistazo se identifican las combinaciones región/día que requieren atención.</p>
+<p><strong>Consejo:</strong> elige la paleta según el tipo de dato:</p>
+<ul class="simple">
+<li><p><strong>Secuencial</strong> (<code class="docutils literal notranslate"><span class="pre">YlOrRd</span></code>, <code class="docutils literal notranslate"><span class="pre">Blues</span></code>, <code class="docutils literal notranslate"><span class="pre">viridis</span></code>): valores que van de menos a más.</p></li>
+<li><p><strong>Divergente</strong> (<code class="docutils literal notranslate"><span class="pre">RdBu</span></code>, <code class="docutils literal notranslate"><span class="pre">coolwarm</span></code>): valores con un punto medio (por ejemplo, ganancia/pérdida).</p></li>
+<li><p><strong>Cualitativa</strong> (<code class="docutils literal notranslate"><span class="pre">Set2</span></code>, <code class="docutils literal notranslate"><span class="pre">tab10</span></code>): categorías sin orden.</p></li>
+</ul>
+</section>
+<section id="grafico-de-dispersion-scatter-plot">
+<h3>3.6 Gráfico de dispersión (scatter plot)<a class="headerlink" href="#grafico-de-dispersion-scatter-plot" title="Link to this heading">#</a></h3>
+<p><strong>¿Qué es?</strong> Usa puntos para mostrar la <strong>relación entre dos variables numéricas</strong>.</p>
+<p><strong>¿Cuándo usarlo?</strong> Para identificar <strong>correlaciones</strong>, agrupaciones (clusters) o valores atípicos.</p>
+<p><strong>Ejemplo:</strong> relación entre horas de estudio y calificación obtenida.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generar datos simulados con correlación positiva</span>
+<span class="n">horas_estudio</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>             <span class="c1"># 50 estudiantes, 0-10 horas</span>
+<span class="n">ruido</span>         <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>               <span class="c1"># Variabilidad realista</span>
+<span class="n">calificacion</span>  <span class="o">=</span> <span class="mi">40</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">horas_estudio</span> <span class="o">+</span> <span class="n">ruido</span>           <span class="c1"># Relación lineal + ruido</span>
+<span class="n">calificacion</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">calificacion</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>            <span class="c1"># Acotar entre 0 y 100</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Cada punto representa un estudiante</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">horas_estudio</span><span class="p">,</span> <span class="n">calificacion</span><span class="p">,</span>
+           <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#1f77b4&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+
+<span class="c1"># Línea de tendencia (regresión lineal simple) para visualizar la correlación</span>
+<span class="n">coef</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">horas_estudio</span><span class="p">,</span> <span class="n">calificacion</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>        <span class="c1"># ajuste de grado 1</span>
+<span class="n">x_linea</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="n">y_linea</span> <span class="o">=</span> <span class="n">coef</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">x_linea</span> <span class="o">+</span> <span class="n">coef</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_linea</span><span class="p">,</span> <span class="n">y_linea</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Tendencia: y = </span><span class="si">{</span><span class="n">coef</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">x + </span><span class="si">{</span><span class="n">coef</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Coeficiente de correlación de Pearson</span>
+<span class="n">correlacion</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">horas_estudio</span><span class="p">,</span> <span class="n">calificacion</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Correlación: </span><span class="si">{</span><span class="n">correlacion</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Horas de estudio vs calificación&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Horas de estudio&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Calificación obtenida&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Coeficiente de correlación: </span><span class="si">{</span><span class="n">correlacion</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/af6996c6a62b93a946dc63a3f7b4d0eeaad15524470008bd2555b732961c1820.png" src="../_images/af6996c6a62b93a946dc63a3f7b4d0eeaad15524470008bd2555b732961c1820.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coeficiente de correlación: 0.864
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Interpretación:</strong> Cada punto es un estudiante. La nube se inclina hacia arriba: <strong>a más horas de estudio, mayor calificación</strong>. La correlación cercana a 0,9 confirma una relación positiva fuerte.</p>
+<p><strong>Lectura del coeficiente de correlación de Pearson:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Valor</p></th>
+<th class="head"><p>Interpretación</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Cerca de  +1</p></td>
+<td><p>Correlación positiva fuerte</p></td>
+</tr>
+<tr class="row-odd"><td><p>Cerca de   0</p></td>
+<td><p>Sin correlación lineal</p></td>
+</tr>
+<tr class="row-even"><td><p>Cerca de  -1</p></td>
+<td><p>Correlación negativa fuerte</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Importante:</strong> correlación no implica causalidad. Que dos variables se muevan juntas no significa que una cause la otra.</p>
+</section>
+<section id="diagrama-de-caja-box-plot">
+<h3>3.7 Diagrama de caja (box plot)<a class="headerlink" href="#diagrama-de-caja-box-plot" title="Link to this heading">#</a></h3>
+<p><strong>¿Qué es?</strong> Muestra de un solo vistazo:</p>
+<ul class="simple">
+<li><p>La <strong>mediana</strong> (línea dentro de la caja).</p></li>
+<li><p>Los <strong>cuartiles</strong> Q1 y Q3 (bordes inferior y superior de la caja).</p></li>
+<li><p>El <strong>rango</strong> de los datos («bigotes»).</p></li>
+<li><p>Los <strong>valores atípicos</strong> (puntos fuera de los bigotes).</p></li>
+</ul>
+<p><strong>¿Cuándo usarlo?</strong> Para <strong>resumir la dispersión</strong> de un conjunto de datos numéricos y <strong>comparar varios grupos</strong> entre sí.</p>
+<p><strong>Ejemplo:</strong> comparar salarios entre departamentos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simular salarios para 4 departamentos (en miles de USD anuales)</span>
+<span class="n">salarios</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Ventas&#39;</span><span class="p">:</span>       <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">45</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>
+    <span class="s1">&#39;Ingeniería&#39;</span><span class="p">:</span>   <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>
+    <span class="s1">&#39;Marketing&#39;</span><span class="p">:</span>    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">55</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>
+    <span class="s1">&#39;Operaciones&#39;</span><span class="p">:</span>  <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span>  <span class="mi">8</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>
+<span class="p">})</span>
+
+<span class="c1"># Añadimos algunos valores atípicos artificiales para que el box plot los detecte</span>
+<span class="n">salarios</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Ingeniería&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="mi">150</span>  <span class="c1"># Un salario muy alto</span>
+<span class="n">salarios</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Operaciones&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="mi">90</span>   <span class="c1"># Otro outlier</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">salarios</span><span class="p">,</span>
+            <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;Set2&#39;</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+            <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Distribución de salarios por departamento&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Salario anual (miles USD)&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/5cf5cc70c0821b3b2ad7ee60acb31682a1d54be7b0a1059a2fa21a566e2ea680.png" src="../_images/5cf5cc70c0821b3b2ad7ee60acb31682a1d54be7b0a1059a2fa21a566e2ea680.png" />
+</div>
+</div>
+<p><strong>Cómo leer el box plot:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>         <span class="n">o</span>   <span class="o">&lt;-</span> <span class="n">valores</span> <span class="n">atípicos</span> <span class="p">(</span><span class="n">outliers</span><span class="p">)</span>
+         <span class="o">|</span>
+       <span class="o">-----</span>  <span class="o">&lt;-</span> <span class="n">bigote</span> <span class="n">superior</span> <span class="p">(</span><span class="n">máximo</span> <span class="n">no</span> <span class="n">atípico</span><span class="p">)</span>
+      <span class="o">|</span>     <span class="o">|</span>
+      <span class="o">|-----|</span>  <span class="o">&lt;-</span> <span class="n">Q3</span> <span class="p">(</span><span class="mi">75</span><span class="o">%</span> <span class="n">de</span> <span class="n">los</span> <span class="n">datos</span> <span class="n">por</span> <span class="n">debajo</span><span class="p">)</span>
+      <span class="o">|</span>     <span class="o">|</span>
+      <span class="o">|-----|</span>  <span class="o">&lt;-</span> <span class="n">mediana</span> <span class="p">(</span><span class="mi">50</span><span class="o">%</span><span class="p">)</span>
+      <span class="o">|</span>     <span class="o">|</span>
+      <span class="o">|-----|</span>  <span class="o">&lt;-</span> <span class="n">Q1</span> <span class="p">(</span><span class="mi">25</span><span class="o">%</span><span class="p">)</span>
+      <span class="o">|</span>     <span class="o">|</span>
+       <span class="o">-----</span>  <span class="o">&lt;-</span> <span class="n">bigote</span> <span class="n">inferior</span> <span class="p">(</span><span class="n">mínimo</span> <span class="n">no</span> <span class="n">atípico</span><span class="p">)</span>
+         <span class="o">|</span>
+         <span class="n">o</span>   <span class="o">&lt;-</span> <span class="n">valores</span> <span class="n">atípicos</span>
+</pre></div>
+</div>
+<p><strong>Interpretación del ejemplo:</strong> Ingeniería tiene los salarios más altos en mediana, pero también la mayor dispersión. Operaciones es el departamento con menor variabilidad. Los puntos sueltos por encima son <strong>outliers</strong>: salarios excepcionalmente altos respecto al resto.</p>
+</section>
+<section id="histograma">
+<h3>3.8 Histograma<a class="headerlink" href="#histograma" title="Link to this heading">#</a></h3>
+<p><strong>¿Qué es?</strong> Gráfico de barras que muestra la <strong>distribución de frecuencias</strong> de una variable numérica. El eje X se divide en intervalos («bins») y la altura de cada barra cuenta cuántos valores caen en ese intervalo.</p>
+<p><strong>¿Cuándo usarlo?</strong> Para analizar <strong>cómo se distribuyen</strong> los valores de una sola variable: si están concentrados, dispersos, sesgados a un lado, etc.</p>
+<p><strong>Ejemplo:</strong> distribución de edades en un estudio de mercado.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simulamos las edades de 1.000 personas con una distribución realista</span>
+<span class="n">edades</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">35</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">edades</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">edades</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>   <span class="c1"># acotar entre 18 y 80 años</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># bins=20 divide el rango en 20 intervalos</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">edades</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#4c72b0&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+
+<span class="c1"># Líneas verticales para mostrar media y mediana</span>
+<span class="n">media</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">edades</span><span class="p">)</span>
+<span class="n">mediana</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">edades</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">media</span><span class="p">,</span>   <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>    <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+           <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Media: </span><span class="si">{</span><span class="n">media</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">mediana</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+           <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Mediana: </span><span class="si">{</span><span class="n">mediana</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Distribución de edades en el estudio&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Edad&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frecuencia (número de personas)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/136654333e5d7086855a33d01885e0286bc6f39afc2fc3e91fc396a2f00bc75f.png" src="../_images/136654333e5d7086855a33d01885e0286bc6f39afc2fc3e91fc396a2f00bc75f.png" />
+</div>
+</div>
+<p><strong>Interpretación:</strong> La distribución se concentra alrededor de los 35 años, con forma aproximadamente simétrica («campana»). Si la media y la mediana son muy parecidas, la distribución está balanceada; si difieren mucho, hay sesgo o valores extremos.</p>
+<p><strong>Diferencia entre histograma y gráfico de barras:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Histograma</p></th>
+<th class="head"><p>Gráfico de barras</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Variable <strong>numérica continua</strong></p></td>
+<td><p>Variable <strong>categórica</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Las barras están <strong>pegadas</strong></p></td>
+<td><p>Las barras están <strong>separadas</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Eje X = intervalos numéricos</p></td>
+<td><p>Eje X = categorías</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="analisis-exploratorio-identificacion-de-valores-atipicos">
+<h2>4. Análisis exploratorio: identificación de valores atípicos<a class="headerlink" href="#analisis-exploratorio-identificacion-de-valores-atipicos" title="Link to this heading">#</a></h2>
+<p>Los <strong>valores atípicos</strong> (también llamados <em>outliers</em> o anomalías) son observaciones que se desvían significativamente del patrón general del conjunto de datos.</p>
+<section id="por-que-es-importante-identificarlos">
+<h3>¿Por qué es importante identificarlos?<a class="headerlink" href="#por-que-es-importante-identificarlos" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Influencia en los resultados estadísticos:</strong> un outlier puede mover bruscamente la media, la desviación estándar o las correlaciones.</p></li>
+<li><p><strong>Sesgo en los modelos predictivos:</strong> los algoritmos de Machine Learning pueden «distraerse» intentando predecir esos casos extremos.</p></li>
+<li><p><strong>Impacto en el análisis de tendencias y patrones:</strong> un outlier puede dar la impresión de un pico o caída que en realidad no es representativo.</p></li>
+<li><p><strong>Indicadores de problemas o eventos especiales:</strong> a veces los outliers no son errores, sino señales de algo importante (un fraude, un fallo en el sensor, una promoción exitosa).</p></li>
+<li><p><strong>Interpretación correcta de los resultados:</strong> entender por qué existen ayuda a contar la historia real detrás de los datos.</p></li>
+</ol>
+<p>Veamos a continuación las <strong>dos técnicas más usadas</strong> para detectarlos.</p>
+</section>
+<section id="crear-un-dataset-con-valores-atipicos">
+<h3>4.1 Crear un dataset con valores atípicos<a class="headerlink" href="#crear-un-dataset-con-valores-atipicos" title="Link to this heading">#</a></h3>
+<p>Para los ejemplos, simulamos las ventas diarias de una tienda durante 100 días, e introducimos algunos valores extremos a propósito.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Datos normales: ventas diarias alrededor de 500 USD</span>
+<span class="n">ventas_normales</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Introducimos 5 valores atípicos (días con ventas anormalmente altas o bajas)</span>
+<span class="n">valores_atipicos</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1200</span><span class="p">,</span> <span class="mi">1500</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">1800</span><span class="p">]</span>
+<span class="n">ventas_completas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">ventas_normales</span><span class="p">,</span> <span class="n">valores_atipicos</span><span class="p">])</span>
+
+<span class="c1"># Convertimos a DataFrame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;ventas_diarias&#39;</span><span class="p">:</span> <span class="n">ventas_completas</span><span class="p">})</span>
+
+<span class="c1"># Estadísticas descriptivas básicas</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Resumen estadístico:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;ventas_diarias&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resumen estadístico:
+count     105.00
+mean      525.74
+std       189.67
+min        50.00
+25%       471.05
+50%       505.00
+75%       539.89
+max      1800.00
+Name: ventas_diarias, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="detectar-outliers-visualmente-con-un-box-plot">
+<h3>4.2 Detectar outliers visualmente con un box plot<a class="headerlink" href="#detectar-outliers-visualmente-con-un-box-plot" title="Link to this heading">#</a></h3>
+<p>El box plot es la herramienta más rápida: cualquier punto que aparezca <strong>fuera de los bigotes</strong> es un outlier según el criterio del rango intercuartílico.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
+
+<span class="c1"># Box plot: muestra los outliers como puntos individuales</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;ventas_diarias&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#4c72b0&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Box plot: los puntos sueltos son outliers&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Ventas diarias (USD)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Histograma: los outliers aparecen como barras aisladas en los extremos</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;ventas_diarias&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+             <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#4c72b0&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Histograma: vea las colas de la distribución&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Ventas diarias (USD)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frecuencia&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e30f62a344a8e7b5088592772dfff2e3680af804d3ef7e56fa053f0fff7be61f.png" src="../_images/e30f62a344a8e7b5088592772dfff2e3680af804d3ef7e56fa053f0fff7be61f.png" />
+</div>
+</div>
+</section>
+<section id="detectar-outliers-con-el-metodo-del-iqr-rango-intercuartilico">
+<h3>4.3 Detectar outliers con el método del IQR (rango intercuartílico)<a class="headerlink" href="#detectar-outliers-con-el-metodo-del-iqr-rango-intercuartilico" title="Link to this heading">#</a></h3>
+<p>Es el método más usado y el que aplica el box plot por defecto. La idea:</p>
+<ol class="arabic simple">
+<li><p>Calcular Q1 (percentil 25) y Q3 (percentil 75).</p></li>
+<li><p>Calcular IQR = Q3 - Q1.</p></li>
+<li><p>Considerar outlier todo valor que esté:</p>
+<ul class="simple">
+<li><p>Por debajo de <strong>Q1 − 1,5 × IQR</strong></p></li>
+<li><p>Por encima de <strong>Q3 + 1,5 × IQR</strong></p></li>
+</ul>
+</li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">detectar_outliers_iqr</span><span class="p">(</span><span class="n">serie</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Detecta valores atípicos usando el método del rango intercuartílico (IQR).</span>
+
+<span class="sd">    Parámetros</span>
+<span class="sd">    ----------</span>
+<span class="sd">    serie : pd.Series</span>
+<span class="sd">        Columna numérica de un DataFrame.</span>
+
+<span class="sd">    Devuelve</span>
+<span class="sd">    -------</span>
+<span class="sd">    outliers : pd.Series</span>
+<span class="sd">        Subconjunto de la serie con los valores considerados atípicos.</span>
+<span class="sd">    limite_inferior, limite_superior : float</span>
+<span class="sd">        Umbrales calculados.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Q1</span>  <span class="o">=</span> <span class="n">serie</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+    <span class="n">Q3</span>  <span class="o">=</span> <span class="n">serie</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
+    <span class="n">IQR</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">-</span> <span class="n">Q1</span>
+
+    <span class="n">limite_inferior</span> <span class="o">=</span> <span class="n">Q1</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+    <span class="n">limite_superior</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+
+    <span class="c1"># Selecciona los valores fuera de los límites</span>
+    <span class="n">outliers</span> <span class="o">=</span> <span class="n">serie</span><span class="p">[(</span><span class="n">serie</span> <span class="o">&lt;</span> <span class="n">limite_inferior</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">serie</span> <span class="o">&gt;</span> <span class="n">limite_superior</span><span class="p">)]</span>
+
+    <span class="k">return</span> <span class="n">outliers</span><span class="p">,</span> <span class="n">limite_inferior</span><span class="p">,</span> <span class="n">limite_superior</span>
+
+
+<span class="c1"># Aplicar la función</span>
+<span class="n">outliers</span><span class="p">,</span> <span class="n">lim_inf</span><span class="p">,</span> <span class="n">lim_sup</span> <span class="o">=</span> <span class="n">detectar_outliers_iqr</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;ventas_diarias&#39;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Límite inferior: </span><span class="si">{</span><span class="n">lim_inf</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Límite superior: </span><span class="si">{</span><span class="n">lim_sup</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Número de outliers detectados: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">outliers</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Valores atípicos:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">outliers</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to_list</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Límite inferior: 367.78
+Límite superior: 643.16
+Número de outliers detectados: 6
+Valores atípicos:
+[359.69, 1200.0, 1500.0, 50.0, 80.0, 1800.0]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="detectar-outliers-con-el-metodo-del-z-score">
+<h3>4.4 Detectar outliers con el método del Z-Score<a class="headerlink" href="#detectar-outliers-con-el-metodo-del-z-score" title="Link to this heading">#</a></h3>
+<p>Otra técnica común: convertir cada valor a su <strong>distancia (en desviaciones estándar) respecto a la media</strong>.</p>
+<div class="math notranslate nohighlight">
+\[Z = \frac{x - \mu}{\sigma}\]</div>
+<p>Un criterio típico es marcar como outlier cualquier observación con <strong>|Z| &gt; 3</strong>, es decir, que esté a más de 3 desviaciones estándar de la media.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">detectar_outliers_zscore</span><span class="p">(</span><span class="n">serie</span><span class="p">,</span> <span class="n">umbral</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Detecta outliers usando el Z-Score.</span>
+<span class="sd">    Marca como atípico todo valor cuya distancia a la media,</span>
+<span class="sd">    medida en desviaciones estándar, supere el umbral.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">media</span> <span class="o">=</span> <span class="n">serie</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">desv</span>  <span class="o">=</span> <span class="n">serie</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+
+    <span class="n">z_scores</span> <span class="o">=</span> <span class="p">(</span><span class="n">serie</span> <span class="o">-</span> <span class="n">media</span><span class="p">)</span> <span class="o">/</span> <span class="n">desv</span>
+    <span class="n">outliers</span> <span class="o">=</span> <span class="n">serie</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">z_scores</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">umbral</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">outliers</span><span class="p">,</span> <span class="n">z_scores</span>
+
+
+<span class="n">outliers_z</span><span class="p">,</span> <span class="n">z_scores</span> <span class="o">=</span> <span class="n">detectar_outliers_zscore</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;ventas_diarias&#39;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Outliers detectados con |Z| &gt; 3: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">outliers_z</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Valores y sus Z-scores:&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">valor</span><span class="p">,</span> <span class="n">z</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">outliers_z</span><span class="p">,</span> <span class="n">z_scores</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">z_scores</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">]):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Valor: </span><span class="si">{</span><span class="n">valor</span><span class="si">:</span><span class="s1">7.2f</span><span class="si">}</span><span class="s1">  |  Z-score: </span><span class="si">{</span><span class="n">z</span><span class="si">:</span><span class="s1">5.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Outliers detectados con |Z| &gt; 3: 3
+Valores y sus Z-scores:
+  Valor: 1200.00  |  Z-score:  3.55
+  Valor: 1500.00  |  Z-score:  5.14
+  Valor: 1800.00  |  Z-score:  6.72
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizar-los-outliers-detectados">
+<h3>4.5 Visualizar los outliers detectados<a class="headerlink" href="#visualizar-los-outliers-detectados" title="Link to this heading">#</a></h3>
+<p>Marcamos en rojo los valores atípicos sobre la serie original para verlos en contexto.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Crear una marca booleana: True si el valor es atípico</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;es_outlier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;ventas_diarias&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">lim_inf</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;ventas_diarias&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">lim_sup</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
+
+<span class="c1"># Puntos normales en azul</span>
+<span class="n">normales</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;es_outlier&#39;</span><span class="p">]]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">normales</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">normales</span><span class="p">[</span><span class="s1">&#39;ventas_diarias&#39;</span><span class="p">],</span>
+           <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#4c72b0&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Normal&#39;</span><span class="p">)</span>
+
+<span class="c1"># Outliers en rojo y más grandes para destacarlos</span>
+<span class="n">atipicos</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;es_outlier&#39;</span><span class="p">]]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">atipicos</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">atipicos</span><span class="p">[</span><span class="s1">&#39;ventas_diarias&#39;</span><span class="p">],</span>
+           <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Outlier&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># Líneas de los límites IQR como referencia</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">lim_sup</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+           <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Límite superior (</span><span class="si">{</span><span class="n">lim_sup</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">lim_inf</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+           <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Límite inferior (</span><span class="si">{</span><span class="n">lim_inf</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Ventas diarias con outliers destacados&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Día&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Ventas (USD)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/a0adbbd71401047446d9969bd54a5956f9364527d843262471c847bdbeec8eb2.png" src="../_images/a0adbbd71401047446d9969bd54a5956f9364527d843262471c847bdbeec8eb2.png" />
+</div>
+</div>
+</section>
+<section id="que-hacer-con-los-outliers">
+<h3>4.6 ¿Qué hacer con los outliers?<a class="headerlink" href="#que-hacer-con-los-outliers" title="Link to this heading">#</a></h3>
+<p><strong>No siempre se eliminan.</strong> La decisión depende del contexto:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Situación</p></th>
+<th class="head"><p>Acción recomendada</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Error de captura (tipo digitar 5000 en vez de 500)</p></td>
+<td><p>Corregir o eliminar</p></td>
+</tr>
+<tr class="row-odd"><td><p>Lectura defectuosa de un sensor</p></td>
+<td><p>Eliminar o imputar</p></td>
+</tr>
+<tr class="row-even"><td><p>Evento real (Black Friday, fraude detectado, promoción)</p></td>
+<td><p><strong>Conservar</strong> y analizar aparte</p></td>
+</tr>
+<tr class="row-odd"><td><p>No se sabe el origen</p></td>
+<td><p>Analizar con y sin él, y comparar conclusiones</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Comparemos cómo cambia la media</strong> al eliminar los outliers:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Crear una versión &quot;limpia&quot; del dataset (sin outliers)</span>
+<span class="n">df_limpio</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;es_outlier&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Comparar estadísticas antes y después</span>
+<span class="n">comparacion</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Con outliers&#39;</span><span class="p">:</span>   <span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;ventas_diarias&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+                       <span class="n">df</span><span class="p">[</span><span class="s1">&#39;ventas_diarias&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">(),</span>
+                       <span class="n">df</span><span class="p">[</span><span class="s1">&#39;ventas_diarias&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()],</span>
+    <span class="s1">&#39;Sin outliers&#39;</span><span class="p">:</span>   <span class="p">[</span><span class="n">df_limpio</span><span class="p">[</span><span class="s1">&#39;ventas_diarias&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+                       <span class="n">df_limpio</span><span class="p">[</span><span class="s1">&#39;ventas_diarias&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">(),</span>
+                       <span class="n">df_limpio</span><span class="p">[</span><span class="s1">&#39;ventas_diarias&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()],</span>
+<span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Media&#39;</span><span class="p">,</span> <span class="s1">&#39;Mediana&#39;</span><span class="p">,</span> <span class="s1">&#39;Desv. estándar&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Comparación de estadísticas:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">comparacion</span><span class="p">)</span>
+
+<span class="c1"># Diferencia porcentual en la media</span>
+<span class="n">dif_pct</span> <span class="o">=</span> <span class="p">(</span><span class="n">comparacion</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Media&#39;</span><span class="p">,</span> <span class="s1">&#39;Con outliers&#39;</span><span class="p">]</span>
+           <span class="o">-</span> <span class="n">comparacion</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Media&#39;</span><span class="p">,</span> <span class="s1">&#39;Sin outliers&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="n">comparacion</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Media&#39;</span><span class="p">,</span> <span class="s1">&#39;Sin outliers&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Los outliers inflaron la media un </span><span class="si">{</span><span class="n">dif_pct</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">% respecto al valor real.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Comparación de estadísticas:
+                Con outliers  Sin outliers
+Media                 525.74        507.20
+Mediana               505.00        505.00
+Desv. estándar        189.67         48.16
+
+Los outliers inflaron la media un 3.7% respecto al valor real.
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Observación clave:</strong> la <strong>mediana</strong> apenas cambia, pero la <strong>media</strong> sí. Por eso, cuando hay outliers conviene reportar la mediana, que es más robusta.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="resumen-final-que-grafico-elijo">
+<h2>5. Resumen final: ¿qué gráfico elijo?<a class="headerlink" href="#resumen-final-que-grafico-elijo" title="Link to this heading">#</a></h2>
+<p>Una guía rápida para decidir:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Pregunta de negocio</p></th>
+<th class="head"><p>Gráfico recomendado</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>¿Cuánto vende cada producto?</p></td>
+<td><p>Barras / Columnas</p></td>
+</tr>
+<tr class="row-odd"><td><p>¿Cómo evolucionan las ventas en el tiempo?</p></td>
+<td><p>Líneas</p></td>
+</tr>
+<tr class="row-even"><td><p>¿Qué porcentaje del total representa cada categoría?</p></td>
+<td><p>Circular (con pocas categorías)</p></td>
+</tr>
+<tr class="row-odd"><td><p>¿Cómo se distribuyen las edades de mis clientes?</p></td>
+<td><p>Histograma</p></td>
+</tr>
+<tr class="row-even"><td><p>¿Hay relación entre dos variables numéricas?</p></td>
+<td><p>Dispersión</p></td>
+</tr>
+<tr class="row-odd"><td><p>¿Cómo varían los salarios entre departamentos?</p></td>
+<td><p>Box plot</p></td>
+</tr>
+<tr class="row-even"><td><p>¿Hay zonas calientes en mi matriz de datos?</p></td>
+<td><p>Heatmap</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Y antes de visualizar, <strong>siempre</strong> explora los datos:</p>
+<ol class="arabic simple">
+<li><p>Revisa el resumen estadístico (<code class="docutils literal notranslate"><span class="pre">df.describe()</span></code>).</p></li>
+<li><p>Busca valores faltantes (<code class="docutils literal notranslate"><span class="pre">df.isna().sum()</span></code>).</p></li>
+<li><p>Detecta outliers con IQR o Z-score.</p></li>
+<li><p>Decide qué hacer con cada anomalía según su origen.</p></li>
+</ol>
+<hr class="docutils" />
+<p><strong>Universidad Autónoma de Manizales — Educación Continuada</strong></p>
+<p><em>Sergio Alejandro Holguín García</em></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Unidad 2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Que_Escoger.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">2.13 Que Grafica Escoger</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="caso_practico_fifa23.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">2.15 Caso Práctico: Análisis Visual del Dataset FIFA 23</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">Contenido</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-son-importantes-los-datos">1. ¿Por qué son importantes los datos?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-del-entorno">2. Configuración del entorno</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-graficos">3. Tipos de gráficos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-barras">3.1 Gráfico de barras</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-columnas">3.2 Gráfico de columnas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-circular-pastel">3.3 Gráfico circular (pastel)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-lineas">3.4 Gráfico de líneas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mapa-de-calor-heatmap">3.5 Mapa de calor (heatmap)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-dispersion-scatter-plot">3.6 Gráfico de dispersión (scatter plot)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diagrama-de-caja-box-plot">3.7 Diagrama de caja (box plot)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histograma">3.8 Histograma</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-exploratorio-identificacion-de-valores-atipicos">4. Análisis exploratorio: identificación de valores atípicos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-es-importante-identificarlos">¿Por qué es importante identificarlos?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-un-dataset-con-valores-atipicos">4.1 Crear un dataset con valores atípicos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detectar-outliers-visualmente-con-un-box-plot">4.2 Detectar outliers visualmente con un box plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detectar-outliers-con-el-metodo-del-iqr-rango-intercuartilico">4.3 Detectar outliers con el método del IQR (rango intercuartílico)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detectar-outliers-con-el-metodo-del-z-score">4.4 Detectar outliers con el método del Z-Score</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizar-los-outliers-detectados">4.5 Visualizar los outliers detectados</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#que-hacer-con-los-outliers">4.6 ¿Qué hacer con los outliers?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-final-que-grafico-elijo">5. Resumen final: ¿qué gráfico elijo?</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Sergio Alejandro Holguin García
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

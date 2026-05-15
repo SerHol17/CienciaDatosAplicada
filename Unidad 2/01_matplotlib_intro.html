@@ -1,0 +1,1248 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.2 Matplotlib — Fundamentos &#8212; Ciencia de Datos Aplicada- 01 Ucaldas</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unidad 2/01_matplotlib_intro';</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="2.3: Matplotlib — Avanzado" href="02_matplotlib_avanzado.html" />
+    <link rel="prev" title="2.1 Visualizacion con Matplotlib" href="Matplotlib.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Ciencia de Datos Aplicada- 01 Ucaldas - Home"/>
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark pst-js-only" alt="Ciencia de Datos Aplicada- 01 Ucaldas - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Ciencia de datos aplicada
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Unidad1.html">Unidad 1: Deep Learning Avanzado</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/01_introduccion_ia.html">1.1 Tópicos Emergentes de la IA — 2026</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/02_Autoencoders.html">1.2 Autoencoders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/autoencoders_tf.html">1.3 Autoencoders en TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/Gans_teoria.html">1.4 Redes Generativas Adversariales (GANs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/gans_tf.html">1.5 Redes Generativas Adversariales (GANs) en TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/segmentacion_teoria.html">1.6 Segmentación con Inteligencia Artificial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/segmentacion_tf.html">1.7 Segmentacion con Inteligencia Artificial — TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/16_nlp_transformers.html">1.8 Procesamiento de Lenguaje Natural y Transformers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/nlp_tensorflow.html">1.9 Procesamiento de Lenguaje Natural con TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/17_llms.html">1.10 Modelos de Lenguaje de Gran Escala (LLMs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/llms_colab.html">1.11 LLMs en la Practica: OpenAI GPT y Ollama</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/18_agentes.html">1.12 Agentes de Inteligencia Artificial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/agentes_colab.html">1.13 Agentes de Inteligencia Artificial</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/frameworks_agentes.html">1.14 LangChain · LangGraph · CrewAI</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Unidad2.html">Unidad 2: Visualizacion de Datos</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Matplotlib.html">2.1 Visualizacion con Matplotlib</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.2 Matplotlib — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_matplotlib_avanzado.html">2.3: Matplotlib — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Seaborn.html">2.4 Visualizacion con Seaborn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_seaborn_intro.html">2.5 Seaborn — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotly.html">2.7 Visualizacion Interactiva con Plotly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_seaborn_avanzado.html">2.6: Seaborn — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_plotly_intro.html">2.8: Plotly — Gráficos Interactivos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_plotly_avanzado.html">2.9: Plotly — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_comparativa_y_casos.html">2.10: Comparativa y Casos de Uso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Buenas_Practicas.html">2. 11 Buenas Practicas de Visualizacion de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="buenas_practicas_visualizacion.html">2.12 Buenas Prácticas de Visualización de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Que_Escoger.html">2.13 Que Grafica Escoger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Que%20Grafica%20escoger.html">2.14 Analítica de Datos: Tipos de Gráficos y Análisis Exploratorio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="caso_practico_fifa23.html">2.15 Caso Práctico: Análisis Visual del Dataset FIFA 23</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pbi.html">2.16 Visualizacion con Power BI</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/SerHol17/CienciaDatosAplicada/blob/main/Unidad 2/01_matplotlib_intro.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/CienciaDatosAplicada" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/CienciaDatosAplicada/issues/new?title=Issue%20on%20page%20%2FUnidad 2/01_matplotlib_intro.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Unidad 2/01_matplotlib_intro.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>2.2 Matplotlib — Fundamentos</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-arquitectura-de-matplotlib">1.1 La arquitectura de Matplotlib</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tu-primer-grafico-paso-a-paso">1.2 Tu primer gráfico — paso a paso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-interfaz-orientada-a-objetos-recomendada">1.3 La interfaz orientada a objetos (recomendada)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-barras">1.4 Gráfico de Barras</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-dispersion-scatter-plot">1.5 Gráfico de Dispersión (Scatter Plot)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#histograma-y-grafico-de-pastel">1.6 Histograma y Gráfico de Pastel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-de-parametros-clave">1.7 Resumen de parámetros clave</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="matplotlib-fundamentos">
+<h1>2.2 Matplotlib — Fundamentos<a class="headerlink" href="#matplotlib-fundamentos" title="Link to this heading">#</a></h1>
+<p>Matplotlib es la <strong>biblioteca madre</strong> de visualización en Python. Fue creada en 2003 por John Hunter y está inspirada en MATLAB. Todo en Python de visualización (Seaborn, Pandas plots, etc.) está construido sobre ella.</p>
+<hr class="docutils" />
+<section id="la-arquitectura-de-matplotlib">
+<h2>1.1 La arquitectura de Matplotlib<a class="headerlink" href="#la-arquitectura-de-matplotlib" title="Link to this heading">#</a></h2>
+<p>Matplotlib tiene una jerarquía de objetos:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Figure  (el lienzo completo — como una hoja de papel)
+  └── Axes  (el área donde se dibuja — los ejes X e Y)
+        ├── Axis  (el eje en sí: X o Y con sus ticks)
+        ├── Line2D (líneas del gráfico)
+        ├── Text  (títulos, etiquetas)
+        └── Patch (rectángulos, círculos, áreas)
+</pre></div>
+</div>
+<p>Entender esto es clave: siempre trabajas con una <code class="docutils literal notranslate"><span class="pre">Figure</span></code> que contiene uno o más <code class="docutils literal notranslate"><span class="pre">Axes</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ══════════════════════════════════════════════</span>
+<span class="c1"># IMPORTACIONES FUNDAMENTALES</span>
+<span class="c1"># ══════════════════════════════════════════════</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="c1"># matplotlib  → el paquete completo</span>
+<span class="c1"># .pyplot     → submódulo con la interfaz de alto nivel (estilo MATLAB)</span>
+<span class="c1"># as plt      → alias estándar en TODO el ecosistema Python</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="c1"># numpy       → biblioteca de arrays numéricos de alta performance</span>
+<span class="c1"># as np       → alias estándar universal</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="c1"># pandas      → tablas de datos (DataFrames), muy útil con Matplotlib</span>
+<span class="c1"># as pd       → alias estándar</span>
+
+<span class="c1"># Esta línea configura el tamaño predeterminado de TODAS las figuras</span>
+<span class="c1"># [ancho, alto] en pulgadas — 1 pulgada ≈ 100 píxeles en pantalla</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+
+<span class="c1"># Activa el renderizado de alta resolución en Jupyter</span>
+<span class="c1"># %matplotlib inline  # ← descomenta si usas Jupyter clásico</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Matplotlib versión: </span><span class="si">{</span><span class="n">plt</span><span class="o">.</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;NumPy versión: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matplotlib versión: 3.10.0
+NumPy versión: 2.0.2
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="tu-primer-grafico-paso-a-paso">
+<h2>1.2 Tu primer gráfico — paso a paso<a class="headerlink" href="#tu-primer-grafico-paso-a-paso" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ══════════════════════════════════════════════</span>
+<span class="c1"># GRÁFICO MÁS SIMPLE POSIBLE</span>
+<span class="c1"># ══════════════════════════════════════════════</span>
+
+<span class="c1"># Paso 1: Crear datos</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>    <span class="c1"># Lista normal de Python — eje X</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>    <span class="c1"># Lista normal de Python — eje Y</span>
+
+<span class="c1"># Paso 2: Llamar a plt.plot()</span>
+<span class="c1"># plot(x, y) dibuja una línea conectando los puntos (x[0],y[0]), (x[1],y[1])...</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Paso 3: Mostrar el gráfico</span>
+<span class="c1"># En Jupyter se muestra automáticamente al final de la celda</span>
+<span class="c1"># En scripts .py NECESITAS llamar plt.show() obligatoriamente</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/f3caa2555455163a0316136a6e7d3dfb9036f4ad2a8f2281f4e2c708679d379f.png" src="../_images/f3caa2555455163a0316136a6e7d3dfb9036f4ad2a8f2281f4e2c708679d379f.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ══════════════════════════════════════════════</span>
+<span class="c1"># GRÁFICO MÁS SIMPLE POSIBLE</span>
+<span class="c1"># ══════════════════════════════════════════════</span>
+
+<span class="c1"># Paso 1: Crear datos</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>    <span class="c1"># Lista normal de Python — eje X</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>    <span class="c1"># Lista normal de Python — eje Y</span>
+
+<span class="c1"># Paso 2: Llamar a plt.plot()</span>
+<span class="c1"># plot(x, y) dibuja una línea conectando los puntos (x[0],y[0]), (x[1],y[1])...</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Paso 3: Mostrar el gráfico</span>
+<span class="c1"># En Jupyter se muestra automáticamente al final de la celda</span>
+<span class="c1"># En scripts .py NECESITAS llamar plt.show() obligatoriamente</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/f06637bc0941b956a235593530d7557faa7a403d9f45ec8bc08c308c0c250fe0.png" src="../_images/f06637bc0941b956a235593530d7557faa7a403d9f45ec8bc08c308c0c250fe0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ══════════════════════════════════════════════</span>
+<span class="c1"># GRÁFICO CON TODOS LOS ELEMENTOS BÁSICOS</span>
+<span class="c1"># ══════════════════════════════════════════════</span>
+
+<span class="c1"># --- Generación de datos con NumPy ---</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="c1"># np.linspace(inicio, fin, cantidad_de_puntos)</span>
+<span class="c1"># Genera 100 números IGUALMENTE ESPACIADOS entre 0 y 10</span>
+<span class="c1"># Resultado: [0.0, 0.101, 0.202, ..., 10.0]</span>
+
+<span class="n">y_seno</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>    <span class="c1"># sin() de cada elemento del array x</span>
+<span class="n">y_coseno</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>   <span class="c1"># cos() de cada elemento del array x</span>
+<span class="n">y_tan</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="c1"># --- Creación de la figura ---</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="c1"># figure()   → crea una nueva figura vacía (el &quot;lienzo&quot;)</span>
+<span class="c1"># figsize    → (ancho, alto) en pulgadas</span>
+<span class="c1"># Si no llamas figure(), plt usa la figura anterior o crea una automáticamente</span>
+
+<span class="c1"># --- Trazado de líneas ---</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_seno</span><span class="p">,</span>
+         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;royalblue&#39;</span><span class="p">,</span>   <span class="c1"># color de la línea (nombre, hex &#39;#1234ab&#39;, o RGB)</span>
+         <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>         <span class="c1"># grosor de la línea en puntos</span>
+         <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span>       <span class="c1"># estilo: &#39;-&#39; sólida, &#39;--&#39; discontinua, &#39;:&#39; punteada, &#39;-.&#39; punto-raya</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;sen(x)&#39;</span><span class="p">)</span>      <span class="c1"># etiqueta para la leyenda</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_coseno</span><span class="p">,</span>
+         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tomato&#39;</span><span class="p">,</span>
+         <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+         <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;cos(x)&#39;</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_tan</span><span class="p">,</span>
+         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lawngreen&#39;</span><span class="p">,</span>
+         <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+         <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Tan&#39;</span><span class="p">)</span>
+
+<span class="c1"># --- Etiquetas y título ---</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Funciones Trigonométricas&#39;</span><span class="p">,</span>
+          <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>        <span class="c1"># tamaño de fuente en puntos</span>
+          <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span>  <span class="c1"># grosor: &#39;normal&#39;, &#39;bold&#39;</span>
+          <span class="n">pad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>             <span class="c1"># espacio entre el título y el gráfico (puntos)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Ángulo (radianes)&#39;</span><span class="p">,</span>
+           <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>       <span class="c1"># etiqueta del eje X</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitud&#39;</span><span class="p">,</span>
+           <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>       <span class="c1"># etiqueta del eje Y</span>
+
+<span class="c1"># --- Leyenda ---</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span>
+    <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span>   <span class="c1"># ubicación: &#39;best&#39;, &#39;upper left/right&#39;, &#39;lower left/right&#39;, &#39;center&#39;</span>
+    <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span>
+    <span class="n">framealpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>      <span class="c1"># transparencia del fondo de la leyenda (0=transparente, 1=sólido)</span>
+
+<span class="c1"># --- Cuadrícula ---</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span>
+    <span class="kc">True</span><span class="p">,</span>                <span class="c1"># True = activar, False = desactivar</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>           <span class="c1"># transparencia de las líneas de la cuadrícula</span>
+    <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>      <span class="c1"># estilo de las líneas de la cuadrícula</span>
+
+<span class="c1"># --- Límites de los ejes ---</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>          <span class="c1"># rango del eje X: de 0 a 10</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>      <span class="c1"># rango del eje Y: de -1.5 a 1.5</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>       <span class="c1"># ajusta automáticamente los márgenes para que nada se corte</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/b29bff73aeaa456a867e0a67e4d4d90a6caace03aac24b90831009fd352e2d16.png" src="../_images/b29bff73aeaa456a867e0a67e4d4d90a6caace03aac24b90831009fd352e2d16.png" />
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="la-interfaz-orientada-a-objetos-recomendada">
+<h2>1.3 La interfaz orientada a objetos (recomendada)<a class="headerlink" href="#la-interfaz-orientada-a-objetos-recomendada" title="Link to this heading">#</a></h2>
+<p>Hay <strong>dos formas</strong> de usar Matplotlib:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Interfaz</p></th>
+<th class="head"><p>Sintaxis</p></th>
+<th class="head"><p>Cuándo usarla</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>pyplot</strong> (implícita)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">plt.plot()</span></code>, <code class="docutils literal notranslate"><span class="pre">plt.title()</span></code></p></td>
+<td><p>Scripts rápidos, exploración</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>OO</strong> (orientada a objetos)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">fig,</span> <span class="pre">ax</span> <span class="pre">=</span> <span class="pre">plt.subplots()</span></code> → <code class="docutils literal notranslate"><span class="pre">ax.plot()</span></code></p></td>
+<td><p>Producción, múltiples gráficos, mayor control</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ══════════════════════════════════════════════</span>
+<span class="c1"># INTERFAZ ORIENTADA A OBJETOS (forma profesional)</span>
+<span class="c1"># ══════════════════════════════════════════════</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="c1"># np.pi  → el número π (3.14159...)</span>
+<span class="c1"># 2*π    → una vuelta completa en radianes</span>
+<span class="c1"># 200    → 200 puntos para una curva muy suave</span>
+
+<span class="c1"># plt.subplots() hace DOS cosas a la vez:</span>
+<span class="c1">#   1. Crea una Figure (fig) — el contenedor de todo</span>
+<span class="c1">#   2. Crea un Axes (ax)  — el área de dibujo con sus ejes</span>
+<span class="c1"># Retorna una tupla (fig, ax) que desempacamos</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># A partir de aquí todo se llama SOBRE ax, no sobre plt</span>
+<span class="c1"># ax.plot() en lugar de plt.plot()</span>
+<span class="c1"># ax.set_title() en lugar de plt.title()  ← nota el &#39;set_&#39;</span>
+
+<span class="n">line</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+                <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span>
+                <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="s1">&#39;sen(x)&#39;</span><span class="p">)</span>
+<span class="c1"># line,  → la coma desempaca la lista que retorna plot()</span>
+<span class="c1"># &#39;line&#39; es ahora un objeto Line2D que puedes modificar después</span>
+
+<span class="c1"># Rellenar el área bajo la curva</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
+    <span class="n">x</span><span class="p">,</span>              <span class="c1"># eje X</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>      <span class="c1"># límite superior del relleno</span>
+    <span class="mi">0</span><span class="p">,</span>              <span class="c1"># límite inferior del relleno (el eje X)</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span>     <span class="c1"># transparencia del relleno</span>
+    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">)</span>
+
+<span class="c1"># Con la interfaz OO usamos set_* para configurar propiedades</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Onda Senoidal con área rellena&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Radianes&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitud&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.3</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">)</span>
+
+<span class="c1"># Personalizar los ticks (marcas) del eje X</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">])</span>
+<span class="c1"># set_xticks() define DÓNDE van las marcas en el eje X</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="s1">&#39;π/2&#39;</span><span class="p">,</span> <span class="s1">&#39;π&#39;</span><span class="p">,</span> <span class="s1">&#39;3π/2&#39;</span><span class="p">,</span> <span class="s1">&#39;2π&#39;</span><span class="p">],</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="c1"># set_xticklabels() define QUÉ texto se muestra en cada marca</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="c1"># axhline()  → dibuja una línea horizontal en y=valor específico</span>
+<span class="c1"># Útil para marcar el cero o umbrales importantes</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c1"># fig.savefig()  → guarda la figura en un archivo</span>
+<span class="c1"># fig.savefig(&#39;mi_grafico.png&#39;, dpi=150, bbox_inches=&#39;tight&#39;)</span>
+<span class="c1"># dpi=150 → resolución (dots per inch). 72=pantalla, 150=calidad media, 300=impresión</span>
+<span class="c1"># bbox_inches=&#39;tight&#39; → recorta el espacio vacío alrededor</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/80244fd13fecd73f99ebc34295729c63b3f91a3ae1704721d93db692e744f897.png" src="../_images/80244fd13fecd73f99ebc34295729c63b3f91a3ae1704721d93db692e744f897.png" />
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="grafico-de-barras">
+<h2>1.4 Gráfico de Barras<a class="headerlink" href="#grafico-de-barras" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ══════════════════════════════════════════════</span>
+<span class="c1"># GRÁFICO DE BARRAS — vertical y horizontal</span>
+<span class="c1"># ══════════════════════════════════════════════</span>
+
+<span class="n">categorias</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Enero&#39;</span><span class="p">,</span> <span class="s1">&#39;Febrero&#39;</span><span class="p">,</span> <span class="s1">&#39;Marzo&#39;</span><span class="p">,</span> <span class="s1">&#39;Abril&#39;</span><span class="p">,</span> <span class="s1">&#39;Mayo&#39;</span><span class="p">,</span> <span class="s1">&#39;Junio&#39;</span><span class="p">]</span>
+<span class="n">ventas</span>     <span class="o">=</span> <span class="p">[</span><span class="mi">1200</span><span class="p">,</span> <span class="mi">1800</span><span class="p">,</span> <span class="mi">1400</span><span class="p">,</span> <span class="mi">2200</span><span class="p">,</span> <span class="mi">1900</span><span class="p">,</span> <span class="mi">2500</span><span class="p">]</span>
+<span class="n">costos</span>     <span class="o">=</span> <span class="p">[</span><span class="mi">800</span><span class="p">,</span>  <span class="mi">1100</span><span class="p">,</span> <span class="mi">950</span><span class="p">,</span>  <span class="mi">1400</span><span class="p">,</span> <span class="mi">1200</span><span class="p">,</span> <span class="mi">1600</span><span class="p">]</span>
+
+<span class="c1"># Creamos posiciones numéricas para las barras</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">categorias</span><span class="p">))</span>
+<span class="c1"># np.arange(n)  → genera [0, 1, 2, 3, ..., n-1]</span>
+<span class="c1"># Equivalente a range() pero retorna un array de NumPy</span>
+
+<span class="n">ancho</span> <span class="o">=</span> <span class="mf">0.35</span>  <span class="c1"># ancho de cada barra (el espacio total es 1.0)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="c1"># subplots(filas, columnas)  → crea una CUADRÍCULA de Axes</span>
+<span class="c1"># (1, 2)  → 1 fila, 2 columnas = dos gráficos lado a lado</span>
+<span class="c1"># axes    → ahora es un ARRAY de objetos Axes: axes[0] y axes[1]</span>
+
+<span class="c1"># ── Gráfico izquierdo: barras verticales agrupadas ──</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">bars1</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+    <span class="n">x</span> <span class="o">-</span> <span class="n">ancho</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>      <span class="c1"># posición X de la barra (desplazada a la izquierda)</span>
+    <span class="n">ventas</span><span class="p">,</span>            <span class="c1"># altura de las barras</span>
+    <span class="n">ancho</span><span class="p">,</span>             <span class="c1"># ancho de las barras</span>
+    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ventas&#39;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="c1"># color del borde de cada barra</span>
+    <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+
+<span class="n">bars2</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+    <span class="n">x</span> <span class="o">+</span> <span class="n">ancho</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>       <span class="c1"># posición X desplazada a la derecha</span>
+    <span class="n">costos</span><span class="p">,</span>
+    <span class="n">ancho</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Costos&#39;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tomato&#39;</span><span class="p">,</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+    <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+
+<span class="c1"># Añadir etiquetas de valor encima de cada barra</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">etiquetar_barras</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">barras</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">barra</span> <span class="ow">in</span> <span class="n">barras</span><span class="p">:</span>
+        <span class="n">altura</span> <span class="o">=</span> <span class="n">barra</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span>  <span class="c1"># obtiene el valor (altura) de la barra</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;$</span><span class="si">{</span><span class="n">altura</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>           <span class="c1"># texto a mostrar (formato con separador de miles)</span>
+            <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">barra</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">barra</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">altura</span><span class="p">),</span>  <span class="c1"># posición en el gráfico</span>
+            <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>            <span class="c1"># desplazamiento en píxeles desde xy</span>
+            <span class="n">textcoords</span><span class="o">=</span><span class="s1">&#39;offset points&#39;</span><span class="p">,</span>
+            <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>              <span class="c1"># alineación horizontal</span>
+            <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span>              <span class="c1"># alineación vertical</span>
+            <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="n">etiquetar_barras</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">bars1</span><span class="p">)</span>
+<span class="n">etiquetar_barras</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">bars2</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Ventas vs Costos (2024)&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>                        <span class="c1"># marcas en las posiciones 0,1,2,3,4,5</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">categorias</span><span class="p">)</span>          <span class="c1"># texto de las marcas</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Monto ($)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>            <span class="c1"># grid solo en el eje Y (horizontal)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">ventas</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.15</span><span class="p">)</span>     <span class="c1"># 15% de espacio arriba para las etiquetas</span>
+
+<span class="c1"># ── Gráfico derecho: barras horizontales ──</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">colores</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">coolwarm</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">categorias</span><span class="p">)))</span>
+<span class="c1"># plt.cm         → módulo de mapas de color (colormaps)</span>
+<span class="c1"># RdYlGn         → colormap Rojo-Amarillo-Verde</span>
+<span class="c1"># np.linspace()  → 6 valores igualmente espaciados entre 0.2 y 0.9</span>
+<span class="c1"># Esto asigna un color diferente a cada barra automáticamente</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span>
+    <span class="n">categorias</span><span class="p">,</span>    <span class="c1"># eje Y (categorías)</span>
+    <span class="n">ventas</span><span class="p">,</span>        <span class="c1"># eje X (valores) → barras horizontales</span>
+    <span class="n">color</span><span class="o">=</span><span class="n">colores</span><span class="p">,</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>
+    <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>    <span class="c1"># grosor de las barras horizontales (equivalente a &#39;width&#39; en bar)</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Ventas por Mes&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Monto ($)&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>  <span class="c1"># invertir el eje Y para que Enero quede arriba</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02ca69719a48dcf2ee793e5397a53bfef498dbf18edac01bd93a008abd4fc12f.png" src="../_images/02ca69719a48dcf2ee793e5397a53bfef498dbf18edac01bd93a008abd4fc12f.png" />
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="grafico-de-dispersion-scatter-plot">
+<h2>1.5 Gráfico de Dispersión (Scatter Plot)<a class="headerlink" href="#grafico-de-dispersion-scatter-plot" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ══════════════════════════════════════════════</span>
+<span class="c1"># SCATTER PLOT — dispersión con color y tamaño</span>
+<span class="c1"># ══════════════════════════════════════════════</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="c1"># random.seed(42)  → fija la semilla del generador aleatorio</span>
+<span class="c1"># Con la misma semilla, siempre obtendrás los MISMOS números aleatorios</span>
+<span class="c1"># Fundamental para reproducibilidad científica</span>
+<span class="c1"># El 42 no es especial, puedes usar cualquier entero</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">150</span>  <span class="c1"># número de puntos</span>
+
+<span class="c1"># Generamos datos simulados de una empresa: empleados, ventas, satisfacción y región</span>
+<span class="n">empleados</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>          <span class="c1"># enteros entre 10 y 500</span>
+<span class="n">ventas</span>       <span class="o">=</span> <span class="n">empleados</span> <span class="o">*</span> <span class="mi">50</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3000</span>  <span class="c1"># correlación con ruido</span>
+<span class="c1"># np.random.randn(n)  → n números con distribución normal estándar (media=0, std=1)</span>
+<span class="n">satisfaccion</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>           <span class="c1"># floats entre 60 y 100</span>
+<span class="n">region</span>       <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;Norte&#39;</span><span class="p">,</span> <span class="s1">&#39;Sur&#39;</span><span class="p">,</span> <span class="s1">&#39;Este&#39;</span><span class="p">,</span> <span class="s1">&#39;Oeste&#39;</span><span class="p">],</span> <span class="n">n</span><span class="p">)</span>  <span class="c1"># categorías</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Colores por categoría</span>
+<span class="n">colores_region</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Norte&#39;</span><span class="p">:</span> <span class="s1">&#39;#E74C3C&#39;</span><span class="p">,</span> <span class="s1">&#39;Sur&#39;</span><span class="p">:</span> <span class="s1">&#39;#3498DB&#39;</span><span class="p">,</span> <span class="s1">&#39;Este&#39;</span><span class="p">:</span> <span class="s1">&#39;#2ECC71&#39;</span><span class="p">,</span> <span class="s1">&#39;Oeste&#39;</span><span class="p">:</span> <span class="s1">&#39;#F39C12&#39;</span><span class="p">}</span>
+<span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="n">colores_region</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">region</span><span class="p">]</span>  <span class="c1"># lista de colores correspondiente a cada punto</span>
+
+<span class="n">scatter</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">empleados</span><span class="p">,</span>          <span class="c1"># posición X de cada punto</span>
+    <span class="n">ventas</span><span class="p">,</span>             <span class="c1"># posición Y de cada punto</span>
+    <span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="p">,</span>                <span class="c1"># color de cada punto (lista o array)</span>
+    <span class="n">s</span><span class="o">=</span><span class="n">satisfaccion</span><span class="p">,</span>     <span class="c1"># TAMAÑO de cada punto (en puntos²) — representa la satisfacción</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>          <span class="c1"># transparencia — útil cuando los puntos se superponen</span>
+    <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="c1"># borde blanco alrededor de cada punto</span>
+    <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>     <span class="c1"># grosor del borde</span>
+
+<span class="c1"># Línea de tendencia (regresión lineal) con NumPy</span>
+<span class="n">coeficientes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">empleados</span><span class="p">,</span> <span class="n">ventas</span><span class="p">,</span> <span class="n">deg</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># np.polyfit(x, y, grado)  → ajusta un polinomio de grado &#39;deg&#39;</span>
+<span class="c1"># deg=1  → línea recta (y = mx + b)</span>
+<span class="c1"># Retorna [pendiente m, intercepto b]</span>
+
+<span class="n">polinomio</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">coeficientes</span><span class="p">)</span>
+<span class="c1"># np.poly1d()  → convierte los coeficientes en una función callable</span>
+<span class="c1"># Así podemos llamar polinomio(x) para obtener y</span>
+
+<span class="n">x_linea</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">empleados</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">empleados</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_linea</span><span class="p">,</span> <span class="n">polinomio</span><span class="p">(</span><span class="n">x_linea</span><span class="p">),</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Tendencia&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="c1"># zorder  → orden de dibujo (mayor = encima)</span>
+<span class="c1"># Por defecto los puntos tienen zorder=1; con 5 la línea queda encima</span>
+
+<span class="c1"># Leyenda manual para las regiones</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.lines</span><span class="w"> </span><span class="kn">import</span> <span class="n">Line2D</span>
+<span class="n">legend_elements</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">markerfacecolor</span><span class="o">=</span><span class="n">color</span><span class="p">,</span>
+           <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">region_nombre</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">region_nombre</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">colores_region</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+<span class="p">]</span>
+<span class="c1"># Line2D()  → crea un elemento de leyenda personalizado</span>
+<span class="c1"># marker=&#39;o&#39;  → círculo; color=&#39;w&#39;  → línea blanca (invisible)</span>
+<span class="c1"># Este truco crea solo el marcador sin la línea</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">legend_elements</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Región&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+
+<span class="c1"># Anotación de un punto específico</span>
+<span class="n">idx_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">ventas</span><span class="p">)</span>  <span class="c1"># índice del valor máximo</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s1">&#39;Máx: $</span><span class="si">{</span><span class="n">ventas</span><span class="p">[</span><span class="n">idx_max</span><span class="p">]</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>  <span class="c1"># texto de la anotación</span>
+    <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">empleados</span><span class="p">[</span><span class="n">idx_max</span><span class="p">],</span> <span class="n">ventas</span><span class="p">[</span><span class="n">idx_max</span><span class="p">]),</span>  <span class="c1"># punto donde apunta la flecha</span>
+    <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="n">empleados</span><span class="p">[</span><span class="n">idx_max</span><span class="p">]</span> <span class="o">+</span> <span class="mi">30</span><span class="p">,</span> <span class="n">ventas</span><span class="p">[</span><span class="n">idx_max</span><span class="p">]</span> <span class="o">-</span> <span class="mi">5000</span><span class="p">),</span>  <span class="c1"># posición del texto</span>
+    <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s1">&#39;-&gt;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">),</span>
+    <span class="c1"># arrowstyle  → estilo de flecha: &#39;-&gt;&#39;, &#39;&lt;-&#39;, &#39;&lt;-&gt;&#39;, &#39;-|&gt;&#39;, etc.</span>
+    <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Relación Empleados vs Ventas por Región</span><span class="se">\n</span><span class="s1">(tamaño = satisfacción del cliente)&#39;</span><span class="p">,</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Número de Empleados&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Ventas Anuales ($)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;$</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">))</span>
+<span class="c1"># FuncFormatter  → formatea los ticks con una función personalizada</span>
+<span class="c1"># lambda x, p   → x=valor del tick, p=posición (no se usa aquí)</span>
+<span class="c1"># f&#39;${x:,.0f}&#39;  → formato: $1,234,567</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/46c55da77dcd2f4f7b7aa8a2c5a0b203ce7a45f97008970334224df3be3592e6.png" src="../_images/46c55da77dcd2f4f7b7aa8a2c5a0b203ce7a45f97008970334224df3be3592e6.png" />
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="histograma-y-grafico-de-pastel">
+<h2>1.6 Histograma y Gráfico de Pastel<a class="headerlink" href="#histograma-y-grafico-de-pastel" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ══════════════════════════════════════════════</span>
+<span class="c1"># HISTOGRAMA y PIE CHART</span>
+<span class="c1"># ══════════════════════════════════════════════</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">datos_normales</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">170</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="c1"># random.normal(loc, scale, size)</span>
+<span class="c1"># loc=170    → media (valor central) — altura promedio en cm</span>
+<span class="c1"># scale=10   → desviación estándar — cuánto varían los datos</span>
+<span class="c1"># size=1000  → cantidad de muestras a generar</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="c1"># Desempacamos directamente: ax1 y ax2</span>
+
+<span class="c1"># ── Histograma ──</span>
+<span class="n">n_hist</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span>
+    <span class="n">datos_normales</span><span class="p">,</span>
+    <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>           <span class="c1"># número de barras (bins) del histograma</span>
+                       <span class="c1"># más bins = más detalle pero más ruido</span>
+    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>
+    <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+    <span class="n">density</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>     <span class="c1"># density=True normaliza a densidad de probabilidad (suma=1)</span>
+<span class="c1"># hist() retorna 3 cosas:</span>
+<span class="c1"># n_hist   → alturas (frecuencias) de cada barra</span>
+<span class="c1"># bins     → bordes de cada bin (tiene len(n)+1 elementos)</span>
+<span class="c1"># patches  → objetos Rectangle de cada barra (para colorear individualmente)</span>
+
+<span class="c1"># Colorear barras según su posición (mapa de color)</span>
+<span class="n">fracciones</span> <span class="o">=</span> <span class="p">(</span><span class="n">n_hist</span> <span class="o">-</span> <span class="n">n_hist</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">n_hist</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">n_hist</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+<span class="c1"># Normalizamos a [0, 1] para mapear colores</span>
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Blues</span>
+<span class="k">for</span> <span class="n">fraccion</span><span class="p">,</span> <span class="n">patch</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">fracciones</span><span class="p">,</span> <span class="n">patches</span><span class="p">):</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="n">cmap</span><span class="p">(</span><span class="n">fraccion</span><span class="p">)</span>          <span class="c1"># obtiene el color del mapa para ese valor</span>
+    <span class="n">patch</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>      <span class="c1"># aplica el color a esa barra</span>
+
+<span class="c1"># Línea de la media</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">datos_normales</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>
+            <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Media: </span><span class="si">{</span><span class="n">datos_normales</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> cm&#39;</span><span class="p">)</span>
+<span class="c1"># axvline()  → línea VERTICAL en x=valor</span>
+<span class="c1"># :.1f       → formato de 1 decimal</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">datos_normales</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-.&#39;</span><span class="p">,</span>
+            <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Mediana: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">datos_normales</span><span class="p">)</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> cm&#39;</span><span class="p">)</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Distribución de Alturas&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Altura (cm)&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frecuencia&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># ── Gráfico de Pastel ──</span>
+<span class="n">etiquetas</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Básico&#39;</span><span class="p">,</span> <span class="s1">&#39;Estándar&#39;</span><span class="p">,</span> <span class="s1">&#39;Premium&#39;</span><span class="p">,</span> <span class="s1">&#39;Enterprise&#39;</span><span class="p">]</span>
+<span class="n">tamaños</span>    <span class="o">=</span> <span class="p">[</span><span class="mi">35</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>   <span class="c1"># porcentajes (no necesitan sumar 100 exactamente)</span>
+<span class="n">colores_p</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#3498DB&#39;</span><span class="p">,</span> <span class="s1">&#39;#2ECC71&#39;</span><span class="p">,</span> <span class="s1">&#39;#E74C3C&#39;</span><span class="p">,</span> <span class="s1">&#39;#9B59B6&#39;</span><span class="p">]</span>
+<span class="n">explosiones</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="c1"># explode    → cuánto se separa cada sector del centro</span>
+<span class="c1"># 0.1        → el sector &#39;Premium&#39; (índice 2) se separa un 10% del radio</span>
+
+<span class="n">wedges</span><span class="p">,</span> <span class="n">texts</span><span class="p">,</span> <span class="n">autotexts</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span>
+    <span class="n">tamaños</span><span class="p">,</span>
+    <span class="n">labels</span><span class="o">=</span><span class="n">etiquetas</span><span class="p">,</span>
+    <span class="n">colors</span><span class="o">=</span><span class="n">colores_p</span><span class="p">,</span>
+    <span class="n">explode</span><span class="o">=</span><span class="n">explosiones</span><span class="p">,</span>
+    <span class="n">autopct</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%1.1f%%</span><span class="s1">&#39;</span><span class="p">,</span>    <span class="c1"># formato del porcentaje dentro de cada sector</span>
+                          <span class="c1"># %1.1f → 1 dígito antes del punto, 1 decimal</span>
+    <span class="n">startangle</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span>        <span class="c1"># ángulo de inicio (90=arriba, 0=derecha)</span>
+    <span class="n">pctdistance</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>      <span class="c1"># distancia del porcentaje al centro (0=centro, 1=borde)</span>
+    <span class="n">wedgeprops</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;edgecolor&#39;</span><span class="p">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="s1">&#39;linewidth&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>  <span class="c1"># borde blanco entre sectores</span>
+
+<span class="c1"># wedges    → lista de Wedge (sectores)</span>
+<span class="c1"># texts     → objetos Text de las etiquetas externas</span>
+<span class="c1"># autotexts → objetos Text de los porcentajes internos</span>
+
+<span class="c1"># Hacer los porcentajes internos en blanco y bold</span>
+<span class="k">for</span> <span class="n">autotext</span> <span class="ow">in</span> <span class="n">autotexts</span><span class="p">:</span>
+    <span class="n">autotext</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+    <span class="n">autotext</span><span class="o">.</span><span class="n">set_fontweight</span><span class="p">(</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+    <span class="n">autotext</span><span class="o">.</span><span class="n">set_fontsize</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Distribución de Clientes por Plan&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3285a0d0db7584a7acd66ad5b0d7072bd177997e1f692ea585ff4afc1d9fa61f.png" src="../_images/3285a0d0db7584a7acd66ad5b0d7072bd177997e1f692ea585ff4afc1d9fa61f.png" />
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="resumen-de-parametros-clave">
+<h2>1.7 Resumen de parámetros clave<a class="headerlink" href="#resumen-de-parametros-clave" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parámetro</p></th>
+<th class="head"><p>Valores posibles</p></th>
+<th class="head"><p>Qué controla</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">color</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'red'</span></code>, <code class="docutils literal notranslate"><span class="pre">'#FF0000'</span></code>, <code class="docutils literal notranslate"><span class="pre">(1,0,0)</span></code>, <code class="docutils literal notranslate"><span class="pre">'C0'</span></code></p></td>
+<td><p>Color de línea/punto/barra</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">linewidth</span></code> / <code class="docutils literal notranslate"><span class="pre">lw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.5</span></code>, <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">2</span></code>, <code class="docutils literal notranslate"><span class="pre">5</span></code></p></td>
+<td><p>Grosor de línea</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">linestyle</span></code> / <code class="docutils literal notranslate"><span class="pre">ls</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'-'</span></code>, <code class="docutils literal notranslate"><span class="pre">'--'</span></code>, <code class="docutils literal notranslate"><span class="pre">':'</span></code>, <code class="docutils literal notranslate"><span class="pre">'-.'</span></code></p></td>
+<td><p>Estilo de línea</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">marker</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'o'</span></code>, <code class="docutils literal notranslate"><span class="pre">'s'</span></code>, <code class="docutils literal notranslate"><span class="pre">'^'</span></code>, <code class="docutils literal notranslate"><span class="pre">'*'</span></code>, <code class="docutils literal notranslate"><span class="pre">'+'</span></code></p></td>
+<td><p>Marcador en cada punto</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">markersize</span></code> / <code class="docutils literal notranslate"><span class="pre">ms</span></code></p></td>
+<td><p>número</p></td>
+<td><p>Tamaño del marcador</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">alpha</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.0</span></code> a <code class="docutils literal notranslate"><span class="pre">1.0</span></code></p></td>
+<td><p>Transparencia</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">label</span></code></p></td>
+<td><p>string</p></td>
+<td><p>Texto en la leyenda</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">zorder</span></code></p></td>
+<td><p>entero</p></td>
+<td><p>Orden de superposición</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Unidad 2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Matplotlib.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">2.1 Visualizacion con Matplotlib</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="02_matplotlib_avanzado.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">2.3: Matplotlib — Avanzado</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-arquitectura-de-matplotlib">1.1 La arquitectura de Matplotlib</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tu-primer-grafico-paso-a-paso">1.2 Tu primer gráfico — paso a paso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-interfaz-orientada-a-objetos-recomendada">1.3 La interfaz orientada a objetos (recomendada)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-barras">1.4 Gráfico de Barras</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-dispersion-scatter-plot">1.5 Gráfico de Dispersión (Scatter Plot)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#histograma-y-grafico-de-pastel">1.6 Histograma y Gráfico de Pastel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-de-parametros-clave">1.7 Resumen de parámetros clave</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Sergio Alejandro Holguin García
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1713 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.12 Buenas Prácticas de Visualización de Datos &#8212; Ciencia de Datos Aplicada- 01 Ucaldas</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unidad 2/buenas_practicas_visualizacion';</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="2.13 Que Grafica Escoger" href="Que_Escoger.html" />
+    <link rel="prev" title="2. 11 Buenas Practicas de Visualizacion de Datos" href="Buenas_Practicas.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Ciencia de Datos Aplicada- 01 Ucaldas - Home"/>
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark pst-js-only" alt="Ciencia de Datos Aplicada- 01 Ucaldas - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Ciencia de datos aplicada
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Unidad1.html">Unidad 1: Deep Learning Avanzado</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/01_introduccion_ia.html">1.1 Tópicos Emergentes de la IA — 2026</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/02_Autoencoders.html">1.2 Autoencoders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/autoencoders_tf.html">1.3 Autoencoders en TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/Gans_teoria.html">1.4 Redes Generativas Adversariales (GANs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/gans_tf.html">1.5 Redes Generativas Adversariales (GANs) en TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/segmentacion_teoria.html">1.6 Segmentación con Inteligencia Artificial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/segmentacion_tf.html">1.7 Segmentacion con Inteligencia Artificial — TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/16_nlp_transformers.html">1.8 Procesamiento de Lenguaje Natural y Transformers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/nlp_tensorflow.html">1.9 Procesamiento de Lenguaje Natural con TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/17_llms.html">1.10 Modelos de Lenguaje de Gran Escala (LLMs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/llms_colab.html">1.11 LLMs en la Practica: OpenAI GPT y Ollama</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/18_agentes.html">1.12 Agentes de Inteligencia Artificial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/agentes_colab.html">1.13 Agentes de Inteligencia Artificial</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/frameworks_agentes.html">1.14 LangChain · LangGraph · CrewAI</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Unidad2.html">Unidad 2: Visualizacion de Datos</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Matplotlib.html">2.1 Visualizacion con Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_matplotlib_intro.html">2.2 Matplotlib — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_matplotlib_avanzado.html">2.3: Matplotlib — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Seaborn.html">2.4 Visualizacion con Seaborn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_seaborn_intro.html">2.5 Seaborn — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotly.html">2.7 Visualizacion Interactiva con Plotly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_seaborn_avanzado.html">2.6: Seaborn — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_plotly_intro.html">2.8: Plotly — Gráficos Interactivos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_plotly_avanzado.html">2.9: Plotly — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_comparativa_y_casos.html">2.10: Comparativa y Casos de Uso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Buenas_Practicas.html">2. 11 Buenas Practicas de Visualizacion de Datos</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.12 Buenas Prácticas de Visualización de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Que_Escoger.html">2.13 Que Grafica Escoger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Que%20Grafica%20escoger.html">2.14 Analítica de Datos: Tipos de Gráficos y Análisis Exploratorio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="caso_practico_fifa23.html">2.15 Caso Práctico: Análisis Visual del Dataset FIFA 23</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pbi.html">2.16 Visualizacion con Power BI</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/SerHol17/CienciaDatosAplicada/blob/main/Unidad 2/buenas_practicas_visualizacion.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/CienciaDatosAplicada" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/CienciaDatosAplicada/issues/new?title=Issue%20on%20page%20%2FUnidad 2/buenas_practicas_visualizacion.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Unidad 2/buenas_practicas_visualizacion.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>2.12 Buenas Prácticas de Visualización de Datos</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-inicial">0. Configuración inicial</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-de-ejemplo">Dataset de ejemplo</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proposito-claro-cada-grafico-responde-una-pregunta">1. Propósito claro: cada gráfico responde una pregunta</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simplicidad-efectiva-eliminar-el-ruido-visual">2. Simplicidad efectiva: eliminar el ruido visual</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jerarquia-visual-guiar-la-mirada">3. Jerarquía visual: guiar la mirada</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consistencia-grafica">4. Consistencia gráfica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-correcto-del-color">5. Uso correcto del color</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accesibilidad-pensar-en-daltonismo">Accesibilidad: pensar en daltonismo</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipografia-clara-y-legible">6. Tipografía clara y legible</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#espacios-en-blanco">7. Espacios en blanco</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mostrar-solo-lo-relevante">8. Mostrar solo lo relevante</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errores-comunes-que-debes-evitar">9. Errores comunes que debes evitar</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejes-truncados-enganosos">9.1 Ejes truncados engañosos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#demasiadas-categorias-en-un-grafico-circular">9.2 Demasiadas categorías en un gráfico circular</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#efectos-3d">9.3 Efectos 3D</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-final-grafico-bien-vs-mal-disenado">10. Comparación final: gráfico bien vs mal diseñado</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diferencias-clave">Diferencias clave</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#narrativa-visual-storytelling">11. Narrativa visual (storytelling)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accesibilidad">12. Accesibilidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checklist-final">13. Checklist final ✅</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursos-para-seguir-aprendiendo">📚 Recursos para seguir aprendiendo</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="buenas-practicas-de-visualizacion-de-datos">
+<h1>2.12 Buenas Prácticas de Visualización de Datos<a class="headerlink" href="#buenas-practicas-de-visualizacion-de-datos" title="Link to this heading">#</a></h1>
+<p><strong>Versión Python con Matplotlib y Seaborn</strong></p>
+<p>Este notebook recorre, paso a paso, los principios fundamentales para crear visualizaciones efectivas. En cada tema veremos:</p>
+<ul class="simple">
+<li><p>📖 La <strong>teoría</strong> detrás del principio.</p></li>
+<li><p>❌ Un ejemplo de <strong>mala práctica</strong>.</p></li>
+<li><p>✅ Un ejemplo de <strong>buena práctica</strong>.</p></li>
+<li><p>💡 La <strong>explicación</strong> de por qué uno funciona mejor que el otro.</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Idea central:</strong> una buena visualización no busca decorar, sino <em>comunicar</em>. Cada elemento (color, tamaño, posición, tipografía) debe tener un propósito.</p>
+</div></blockquote>
+<hr class="docutils" />
+<section id="configuracion-inicial">
+<h2>0. Configuración inicial<a class="headerlink" href="#configuracion-inicial" title="Link to this heading">#</a></h2>
+<p>Importamos las librerías que usaremos en todo el notebook y fijamos una semilla aleatoria para que los resultados sean reproducibles.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Librerías estándar para análisis y visualización</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>                  <span class="c1"># Operaciones numéricas</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>                 <span class="c1"># Manejo de datos en tablas (DataFrames)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>     <span class="c1"># Visualización base</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>               <span class="c1"># Visualización estadística (encima de matplotlib)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.ticker</span><span class="w"> </span><span class="kn">import</span> <span class="n">FuncFormatter</span>  <span class="c1"># Para formatear números en los ejes</span>
+
+<span class="c1"># Semilla para reproducibilidad: garantiza que los datos aleatorios</span>
+<span class="c1"># sean siempre los mismos cada vez que se ejecuta el notebook.</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Configuración global recomendada para gráficos limpios</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>        <span class="c1"># Resolución de pantalla</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;savefig.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">150</span>       <span class="c1"># Resolución al guardar</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;DejaVu Sans&#39;</span>  <span class="c1"># Fuente legible y disponible</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;✅ Librerías cargadas correctamente&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✅ Librerías cargadas correctamente
+</pre></div>
+</div>
+</div>
+</div>
+<section id="dataset-de-ejemplo">
+<h3>Dataset de ejemplo<a class="headerlink" href="#dataset-de-ejemplo" title="Link to this heading">#</a></h3>
+<p>Crearemos un dataset ficticio de <strong>ventas mensuales por categoría de producto</strong> que usaremos en varios ejemplos. Trabajar con un mismo dataset facilita comparar técnicas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generamos datos sintéticos de ventas</span>
+<span class="n">meses</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Ene&#39;</span><span class="p">,</span> <span class="s1">&#39;Feb&#39;</span><span class="p">,</span> <span class="s1">&#39;Mar&#39;</span><span class="p">,</span> <span class="s1">&#39;Abr&#39;</span><span class="p">,</span> <span class="s1">&#39;May&#39;</span><span class="p">,</span> <span class="s1">&#39;Jun&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;Jul&#39;</span><span class="p">,</span> <span class="s1">&#39;Ago&#39;</span><span class="p">,</span> <span class="s1">&#39;Sep&#39;</span><span class="p">,</span> <span class="s1">&#39;Oct&#39;</span><span class="p">,</span> <span class="s1">&#39;Nov&#39;</span><span class="p">,</span> <span class="s1">&#39;Dic&#39;</span><span class="p">]</span>
+
+<span class="n">ventas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Mes&#39;</span><span class="p">:</span> <span class="n">meses</span><span class="p">,</span>
+    <span class="s1">&#39;Electrónica&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">120</span><span class="p">,</span> <span class="mi">132</span><span class="p">,</span> <span class="mi">145</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">175</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="mi">205</span><span class="p">,</span> <span class="mi">220</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">280</span><span class="p">],</span>
+    <span class="s1">&#39;Ropa&#39;</span><span class="p">:</span>        <span class="p">[</span> <span class="mi">90</span><span class="p">,</span>  <span class="mi">95</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">125</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">140</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span>
+    <span class="s1">&#39;Hogar&#39;</span><span class="p">:</span>       <span class="p">[</span> <span class="mi">70</span><span class="p">,</span>  <span class="mi">75</span><span class="p">,</span>  <span class="mi">78</span><span class="p">,</span>  <span class="mi">82</span><span class="p">,</span>  <span class="mi">85</span><span class="p">,</span>  <span class="mi">88</span><span class="p">,</span>  <span class="mi">92</span><span class="p">,</span>  <span class="mi">95</span><span class="p">,</span>  <span class="mi">98</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">130</span><span class="p">],</span>
+    <span class="s1">&#39;Deportes&#39;</span><span class="p">:</span>    <span class="p">[</span> <span class="mi">50</span><span class="p">,</span>  <span class="mi">55</span><span class="p">,</span>  <span class="mi">60</span><span class="p">,</span>  <span class="mi">62</span><span class="p">,</span>  <span class="mi">65</span><span class="p">,</span>  <span class="mi">70</span><span class="p">,</span>  <span class="mi">72</span><span class="p">,</span>  <span class="mi">74</span><span class="p">,</span>  <span class="mi">76</span><span class="p">,</span>  <span class="mi">78</span><span class="p">,</span>  <span class="mi">80</span><span class="p">,</span>  <span class="mi">95</span><span class="p">],</span>
+<span class="p">})</span>
+
+<span class="c1"># Vista rápida del DataFrame</span>
+<span class="n">ventas</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-5a741f6d-3fa6-48b5-978d-22ae7e484fe2" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Mes</th>
+      <th>Electrónica</th>
+      <th>Ropa</th>
+      <th>Hogar</th>
+      <th>Deportes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Ene</td>
+      <td>120</td>
+      <td>90</td>
+      <td>70</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Feb</td>
+      <td>132</td>
+      <td>95</td>
+      <td>75</td>
+      <td>55</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Mar</td>
+      <td>145</td>
+      <td>100</td>
+      <td>78</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Abr</td>
+      <td>150</td>
+      <td>110</td>
+      <td>82</td>
+      <td>62</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>May</td>
+      <td>160</td>
+      <td>115</td>
+      <td>85</td>
+      <td>65</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-5a741f6d-3fa6-48b5-978d-22ae7e484fe2')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-5a741f6d-3fa6-48b5-978d-22ae7e484fe2 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-5a741f6d-3fa6-48b5-978d-22ae7e484fe2');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+    </div>
+  </div>
+</div></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="proposito-claro-cada-grafico-responde-una-pregunta">
+<h2>1. Propósito claro: cada gráfico responde una pregunta<a class="headerlink" href="#proposito-claro-cada-grafico-responde-una-pregunta" title="Link to this heading">#</a></h2>
+<p>Antes de elegir el tipo de gráfico, debemos preguntarnos:</p>
+<blockquote>
+<div><p><strong>¿Qué pregunta quiero que el lector responda al ver esto?</strong></p>
+</div></blockquote>
+<p>Si no podemos formular esa pregunta en una frase, probablemente el gráfico sobra o necesita reenfocarse.</p>
+<p><strong>Ejemplo:</strong> queremos responder <em>«¿Cómo evolucionaron las ventas de Electrónica durante el año?»</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ❌ MALA PRÁCTICA: gráfico sin un propósito claro</span>
+<span class="c1"># Mostramos TODAS las categorías a la vez sin destacar nada,</span>
+<span class="c1"># así el lector no sabe en qué fijarse.</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Electrónica&#39;</span><span class="p">,</span> <span class="s1">&#39;Ropa&#39;</span><span class="p">,</span> <span class="s1">&#39;Hogar&#39;</span><span class="p">,</span> <span class="s1">&#39;Deportes&#39;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ventas</span><span class="p">[</span><span class="s1">&#39;Mes&#39;</span><span class="p">],</span> <span class="n">ventas</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Datos&#39;</span><span class="p">)</span>        <span class="c1"># Título vacío de significado</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Electrónica&#39;</span><span class="p">,</span> <span class="s1">&#39;Ropa&#39;</span><span class="p">,</span> <span class="s1">&#39;Hogar&#39;</span><span class="p">,</span> <span class="s1">&#39;Deportes&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/05f9f07bfdd75e63126553a738d3541a1326ff339849773e8e1b0320dcfdc2da.png" src="../_images/05f9f07bfdd75e63126553a738d3541a1326ff339849773e8e1b0320dcfdc2da.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ✅ BUENA PRÁCTICA: el gráfico responde una pregunta concreta.</span>
+<span class="c1"># Destacamos la categoría de interés (Electrónica) y dejamos</span>
+<span class="c1"># las demás en gris claro como contexto.</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># Líneas de contexto (grises, sin protagonismo)</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Ropa&#39;</span><span class="p">,</span> <span class="s1">&#39;Hogar&#39;</span><span class="p">,</span> <span class="s1">&#39;Deportes&#39;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ventas</span><span class="p">[</span><span class="s1">&#39;Mes&#39;</span><span class="p">],</span> <span class="n">ventas</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+
+<span class="c1"># Línea protagonista</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ventas</span><span class="p">[</span><span class="s1">&#39;Mes&#39;</span><span class="p">],</span> <span class="n">ventas</span><span class="p">[</span><span class="s1">&#39;Electrónica&#39;</span><span class="p">],</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#1f77b4&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.8</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Electrónica&#39;</span><span class="p">)</span>
+
+<span class="c1"># Título que ya cuenta la historia</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Las ventas de Electrónica crecieron un 133</span><span class="si">% e</span><span class="s1">n el año&#39;</span><span class="p">,</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Ventas (miles USD)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Quitamos bordes innecesarios para reducir ruido visual</span>
+<span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/081e17b438e537cc6561815f296716d4cc05c034d63c8eb43c80bb1e43078ddf.png" src="../_images/081e17b438e537cc6561815f296716d4cc05c034d63c8eb43c80bb1e43078ddf.png" />
+</div>
+</div>
+<p>💡 <strong>¿Por qué la segunda funciona mejor?</strong></p>
+<ol class="arabic simple">
+<li><p>El <strong>título</strong> ya entrega la conclusión, no obliga al lector a deducirla.</p></li>
+<li><p>Una sola serie está destacada → el ojo sabe a dónde mirar.</p></li>
+<li><p>Las demás categorías siguen ahí como <strong>contexto</strong>, pero no compiten por atención.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="simplicidad-efectiva-eliminar-el-ruido-visual">
+<h2>2. Simplicidad efectiva: eliminar el ruido visual<a class="headerlink" href="#simplicidad-efectiva-eliminar-el-ruido-visual" title="Link to this heading">#</a></h2>
+<p>Edward Tufte llamó <strong>«chartjunk»</strong> a todos los elementos decorativos que no aportan información: sombras, gradientes, fondos, bordes excesivos, efectos 3D…</p>
+<p>Regla práctica: <strong>si un elemento no añade información, quítalo</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ❌ MALA PRÁCTICA: muchos elementos decorativos que distraen</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;#fff8dc&#39;</span><span class="p">)</span>  <span class="c1"># Fondo crema innecesario</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">ventas</span><span class="p">[</span><span class="s1">&#39;Mes&#39;</span><span class="p">],</span> <span class="n">ventas</span><span class="p">[</span><span class="s1">&#39;Hogar&#39;</span><span class="p">],</span>
+       <span class="n">color</span><span class="o">=</span><span class="s1">&#39;hotpink&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">hatch</span><span class="o">=</span><span class="s1">&#39;///&#39;</span><span class="p">)</span>  <span class="c1"># Patrón hatch</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;#ffe4e1&#39;</span><span class="p">)</span>                   <span class="c1"># Fondo del área de plot</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>    <span class="c1"># Cuadrícula chillona</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;★ ¡¡¡VENTAS DE HOGAR!!! ★&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2424b1dfafefc2f6e9b38e78f2435c431177fbac12111f888430c48c3bfa2eeb.png" src="../_images/2424b1dfafefc2f6e9b38e78f2435c431177fbac12111f888430c48c3bfa2eeb.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ✅ BUENA PRÁCTICA: minimalista, solo lo necesario</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">ventas</span><span class="p">[</span><span class="s1">&#39;Mes&#39;</span><span class="p">],</span> <span class="n">ventas</span><span class="p">[</span><span class="s1">&#39;Hogar&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#4c72b0&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Ventas mensuales — Categoría Hogar&#39;</span><span class="p">,</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Miles USD&#39;</span><span class="p">)</span>
+
+<span class="c1"># Cuadrícula sutil solo en el eje Y, ayuda a leer sin distraer</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_axisbelow</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># La cuadrícula queda DETRÁS de las barras</span>
+
+<span class="c1"># Eliminar bordes superfluos</span>
+<span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/88e7a8c2a4d0bf8cc916e899c77f0b328299fd5b94d92271253b093ea9fedf21.png" src="../_images/88e7a8c2a4d0bf8cc916e899c77f0b328299fd5b94d92271253b093ea9fedf21.png" />
+</div>
+</div>
+<p>💡 <strong>Ratio dato-tinta</strong> (Tufte): la mayor parte de la «tinta» del gráfico debe representar <strong>datos</strong>, no decoración. Cuando dudes, <strong>quita</strong> elementos hasta que el mensaje quede claro.</p>
+</section>
+<hr class="docutils" />
+<section id="jerarquia-visual-guiar-la-mirada">
+<h2>3. Jerarquía visual: guiar la mirada<a class="headerlink" href="#jerarquia-visual-guiar-la-mirada" title="Link to this heading">#</a></h2>
+<p>El cerebro procesa la información visual con prioridades. Tres herramientas para guiar la mirada:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Recurso</p></th>
+<th class="head"><p>Uso recomendado</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Tamaño</strong></p></td>
+<td><p>Lo más grande se ve primero</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Color</strong></p></td>
+<td><p>Reserva colores intensos solo para lo importante</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Posición</strong></p></td>
+<td><p>Lectura natural: arriba-abajo, izquierda-derecha</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Vamos a destacar el mes con MAYOR ventas en Electrónica.</span>
+<span class="c1"># Identificamos el índice del valor máximo:</span>
+<span class="n">idx_max</span> <span class="o">=</span> <span class="n">ventas</span><span class="p">[</span><span class="s1">&#39;Electrónica&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span>
+
+<span class="c1"># Creamos una lista de colores: gris para todos, naranja para el máximo</span>
+<span class="n">colores</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#cfd8dc&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">ventas</span><span class="p">)</span>   <span class="c1"># gris claro por defecto</span>
+<span class="n">colores</span><span class="p">[</span><span class="n">idx_max</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;#e67e22&#39;</span>          <span class="c1"># naranja para destacar</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">ventas</span><span class="p">[</span><span class="s1">&#39;Mes&#39;</span><span class="p">],</span> <span class="n">ventas</span><span class="p">[</span><span class="s1">&#39;Electrónica&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colores</span><span class="p">)</span>
+
+<span class="c1"># Anotación que refuerza la jerarquía</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Máximo del año: $</span><span class="si">{</span><span class="n">ventas</span><span class="p">[</span><span class="s2">&quot;Electrónica&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s1">K&#39;</span><span class="p">,</span>
+            <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">idx_max</span><span class="p">,</span> <span class="n">ventas</span><span class="p">[</span><span class="s1">&#39;Electrónica&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()),</span>
+            <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="n">idx_max</span> <span class="o">-</span> <span class="mi">4</span><span class="p">,</span> <span class="n">ventas</span><span class="p">[</span><span class="s1">&#39;Electrónica&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">10</span><span class="p">),</span>
+            <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#e67e22&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span>
+            <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s1">&#39;-&gt;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#e67e22&#39;</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Diciembre concentra el pico de ventas en Electrónica&#39;</span><span class="p">,</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Miles USD&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/0e2fc559a2080ff908b76b403d38a0df0fbfffd48821f7f6c0b5dd10342759b2.png" src="../_images/0e2fc559a2080ff908b76b403d38a0df0fbfffd48821f7f6c0b5dd10342759b2.png" />
+</div>
+</div>
+<p>💡 <strong>La técnica del color destacado</strong> es muy potente: 11 barras grises + 1 naranja → la mirada va directo al insight, sin necesidad de leer todas las etiquetas.</p>
+</section>
+<hr class="docutils" />
+<section id="consistencia-grafica">
+<h2>4. Consistencia gráfica<a class="headerlink" href="#consistencia-grafica" title="Link to this heading">#</a></h2>
+<p>Cuando varios gráficos representan <strong>la misma categoría</strong> (por ejemplo, «Electrónica»), debe <strong>mantenerse el mismo color</strong> en todos. De lo contrario el lector se desorienta.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definimos UN diccionario de colores y lo reutilizamos siempre.</span>
+<span class="c1"># Esta es la mejor manera de garantizar consistencia.</span>
+<span class="n">PALETA_CATEGORIAS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Electrónica&#39;</span><span class="p">:</span> <span class="s1">&#39;#1f77b4&#39;</span><span class="p">,</span>  <span class="c1"># azul</span>
+    <span class="s1">&#39;Ropa&#39;</span><span class="p">:</span>        <span class="s1">&#39;#2ca02c&#39;</span><span class="p">,</span>  <span class="c1"># verde</span>
+    <span class="s1">&#39;Hogar&#39;</span><span class="p">:</span>       <span class="s1">&#39;#ff7f0e&#39;</span><span class="p">,</span>  <span class="c1"># naranja</span>
+    <span class="s1">&#39;Deportes&#39;</span><span class="p">:</span>    <span class="s1">&#39;#d62728&#39;</span><span class="p">,</span>  <span class="c1"># rojo</span>
+<span class="p">}</span>
+
+<span class="c1"># Dos gráficos distintos, MISMOS colores por categoría → consistente.</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># Gráfico 1: total anual por categoría (barras)</span>
+<span class="n">totales</span> <span class="o">=</span> <span class="n">ventas</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">PALETA_CATEGORIAS</span><span class="p">)]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">totales</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">totales</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="n">PALETA_CATEGORIAS</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">totales</span><span class="o">.</span><span class="n">index</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Ventas totales del año&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Miles USD&#39;</span><span class="p">)</span>
+
+<span class="c1"># Gráfico 2: evolución mensual (líneas)</span>
+<span class="k">for</span> <span class="n">cat</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">PALETA_CATEGORIAS</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ventas</span><span class="p">[</span><span class="s1">&#39;Mes&#39;</span><span class="p">],</span> <span class="n">ventas</span><span class="p">[</span><span class="n">cat</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">cat</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Evolución mensual&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Limpieza visual común</span>
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/260516cac11579034f301d1ade12a924af875a1c72f65fbdba5ea82fc7ba03fa.png" src="../_images/260516cac11579034f301d1ade12a924af875a1c72f65fbdba5ea82fc7ba03fa.png" />
+</div>
+</div>
+<p>💡 <strong>Truco profesional:</strong> define la paleta como un <strong>diccionario constante</strong> al inicio del notebook. Si luego decides cambiar un color, lo cambias en un único lugar.</p>
+</section>
+<hr class="docutils" />
+<section id="uso-correcto-del-color">
+<h2>5. Uso correcto del color<a class="headerlink" href="#uso-correcto-del-color" title="Link to this heading">#</a></h2>
+<p>Reglas básicas:</p>
+<ol class="arabic simple">
+<li><p><strong>Funcional</strong>, no decorativo: el color debe transmitir información.</p></li>
+<li><p><strong>Limitado</strong>: idealmente entre 5 y 7 colores.</p></li>
+<li><p><strong>Accesible</strong>: contraste suficiente y compatible con daltonismo.</p></li>
+<li><p><strong>Consistente</strong>: mismo color = misma categoría siempre.</p></li>
+</ol>
+<p>Existen tres tipos de paletas y cada una tiene su uso:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Datos para ilustrar los tres tipos de paleta</span>
+<span class="n">datos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]])</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># 1) CUALITATIVA: para categorías sin orden (países, productos…)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">datos</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;tab10&#39;</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Cualitativa (categorías sin orden) — ej: tab10&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([]);</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+
+<span class="c1"># 2) SECUENCIAL: para magnitudes que van de menos a más</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">datos</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Secuencial (de menor a mayor) — ej: Blues&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([]);</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+
+<span class="c1"># 3) DIVERGENTE: para datos con un punto medio (ej: pérdida vs ganancia)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">datos</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Divergente (con punto medio) — ej: RdBu&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([]);</span> <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/83bdf02dd858b83259718ca2d46c947962ce4af0dcbf34d28b9cb68316faf0bf.png" src="../_images/83bdf02dd858b83259718ca2d46c947962ce4af0dcbf34d28b9cb68316faf0bf.png" />
+</div>
+</div>
+<section id="accesibilidad-pensar-en-daltonismo">
+<h3>Accesibilidad: pensar en daltonismo<a class="headerlink" href="#accesibilidad-pensar-en-daltonismo" title="Link to this heading">#</a></h3>
+<p>Aproximadamente el <strong>8% de los hombres</strong> y el <strong>0.5% de las mujeres</strong> tienen algún tipo de daltonismo. La combinación rojo/verde es la más problemática.</p>
+<p>Las paletas como <code class="docutils literal notranslate"><span class="pre">viridis</span></code>, <code class="docutils literal notranslate"><span class="pre">cividis</span></code> o <code class="docutils literal notranslate"><span class="pre">tab10</span></code> están diseñadas para ser legibles incluso con daltonismo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ❌ MALA PRÁCTICA: rojo y verde son indistinguibles para daltónicos</span>
+<span class="c1"># ✅ BUENA PRÁCTICA: paletas perceptualmente uniformes (viridis)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">))</span>
+
+<span class="n">categorias</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">]</span>
+<span class="n">valores</span> <span class="o">=</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">55</span><span class="p">]</span>
+
+<span class="c1"># Mala paleta: rojo + verde</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">categorias</span><span class="p">,</span> <span class="n">valores</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;❌ Rojo/verde: problema para daltónicos&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+<span class="c1"># Buena paleta: viridis (segura para daltonismo)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">categorias</span><span class="p">,</span> <span class="n">valores</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;✅ Viridis: accesible para todos&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_10147/3866751215.py:21: UserWarning: Glyph 10060 (\N{CROSS MARK}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+/tmp/ipykernel_10147/3866751215.py:21: UserWarning: Glyph 9989 (\N{WHITE HEAVY CHECK MARK}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+/usr/local/lib/python3.12/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 10060 (\N{CROSS MARK}) missing from font(s) DejaVu Sans.
+  fig.canvas.print_figure(bytes_io, **kw)
+/usr/local/lib/python3.12/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 9989 (\N{WHITE HEAVY CHECK MARK}) missing from font(s) DejaVu Sans.
+  fig.canvas.print_figure(bytes_io, **kw)
+</pre></div>
+</div>
+<img alt="../_images/1be3cdce067d0a9bb9e1055bedea7d8af083d7d842cd53e0b0994d15153c6d63.png" src="../_images/1be3cdce067d0a9bb9e1055bedea7d8af083d7d842cd53e0b0994d15153c6d63.png" />
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="tipografia-clara-y-legible">
+<h2>6. Tipografía clara y legible<a class="headerlink" href="#tipografia-clara-y-legible" title="Link to this heading">#</a></h2>
+<p>La jerarquía tipográfica (tamaño, peso) ayuda al lector a identificar rápidamente qué leer primero.</p>
+<p>Una escala recomendada:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Elemento</p></th>
+<th class="head"><p>Tamaño aprox.</p></th>
+<th class="head"><p>Peso</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Título principal</p></td>
+<td><p>16–18 pt</p></td>
+<td><p>bold</p></td>
+</tr>
+<tr class="row-odd"><td><p>Subtítulo</p></td>
+<td><p>13–14 pt</p></td>
+<td><p>semibold</p></td>
+</tr>
+<tr class="row-even"><td><p>Etiquetas de datos</p></td>
+<td><p>10–11 pt</p></td>
+<td><p>normal</p></td>
+</tr>
+<tr class="row-odd"><td><p>Notas al pie</p></td>
+<td><p>8–9 pt</p></td>
+<td><p>normal o italic</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Aplicamos la jerarquía tipográfica en un gráfico real</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">ventas</span><span class="p">[</span><span class="s1">&#39;Mes&#39;</span><span class="p">],</span> <span class="n">ventas</span><span class="p">[</span><span class="s1">&#39;Electrónica&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#4c72b0&#39;</span><span class="p">)</span>
+
+<span class="c1"># Título principal: el más grande y en negrita</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Ventas de Electrónica 2024&#39;</span><span class="p">,</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># Subtítulo: explica el contenido (truco: usar text() porque matplotlib</span>
+<span class="c1"># no tiene un &quot;set_subtitle&quot; oficial)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.02</span><span class="p">,</span> <span class="s1">&#39;Cifras en miles de USD — incremento sostenido durante el año&#39;</span><span class="p">,</span>
+        <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;italic&#39;</span><span class="p">)</span>
+
+<span class="c1"># Etiquetas de los ejes: tamaño intermedio</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Ventas&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Nota al pie: la más pequeña</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="s1">&#39;Fuente: datos simulados con fines didácticos.&#39;</span><span class="p">,</span>
+         <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;italic&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/c7e188c37969ece04d2f3c9620782aab5d2c3833d374928bb1966e4ec9c2795a.png" src="../_images/c7e188c37969ece04d2f3c9620782aab5d2c3833d374928bb1966e4ec9c2795a.png" />
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="espacios-en-blanco">
+<h2>7. Espacios en blanco<a class="headerlink" href="#espacios-en-blanco" title="Link to this heading">#</a></h2>
+<p>El espacio vacío <strong>no es desperdicio</strong>. Aporta:</p>
+<ul class="simple">
+<li><p>📖 Mejor legibilidad.</p></li>
+<li><p>😌 Menor fatiga visual.</p></li>
+<li><p>🎯 Separación lógica entre elementos.</p></li>
+<li><p>👁️ Foco en el contenido importante.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ❌ MALA PRÁCTICA: gráficos pegados, sin respiración</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">cat</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s1">&#39;Electrónica&#39;</span><span class="p">,</span> <span class="s1">&#39;Ropa&#39;</span><span class="p">,</span> <span class="s1">&#39;Hogar&#39;</span><span class="p">]):</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">ventas</span><span class="p">[</span><span class="s1">&#39;Mes&#39;</span><span class="p">],</span> <span class="n">ventas</span><span class="p">[</span><span class="n">cat</span><span class="p">])</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">cat</span><span class="p">)</span>
+<span class="c1"># OJO: NO usamos tight_layout ni subplots_adjust → los textos se atropellan</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/53ec28138113e4352c6b3ed6ecae535a32d5201500fb9aa3478171f8bb313c15.png" src="../_images/53ec28138113e4352c6b3ed6ecae535a32d5201500fb9aa3478171f8bb313c15.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ✅ BUENA PRÁCTICA: espacio entre gráficos, márgenes generosos</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">cat</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s1">&#39;Electrónica&#39;</span><span class="p">,</span> <span class="s1">&#39;Ropa&#39;</span><span class="p">,</span> <span class="s1">&#39;Hogar&#39;</span><span class="p">]):</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">ventas</span><span class="p">[</span><span class="s1">&#39;Mes&#39;</span><span class="p">],</span> <span class="n">ventas</span><span class="p">[</span><span class="n">cat</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">PALETA_CATEGORIAS</span><span class="p">[</span><span class="n">cat</span><span class="p">])</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">cat</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="c1"># Mostramos solo cada 2º mes para evitar amontonamiento</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">meses</span><span class="p">[::</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Espaciado horizontal entre subgráficos</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.35</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/51b72e49f0fe186a6cc422e0246594b054d73456b542b1e75cc4d5e8ed73eb15.png" src="../_images/51b72e49f0fe186a6cc422e0246594b054d73456b542b1e75cc4d5e8ed73eb15.png" />
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="mostrar-solo-lo-relevante">
+<h2>8. Mostrar solo lo relevante<a class="headerlink" href="#mostrar-solo-lo-relevante" title="Link to this heading">#</a></h2>
+<p><strong>Filtra antes de visualizar.</strong> Si un dato no aporta a responder la pregunta del gráfico, sobra.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Imaginemos que tenemos 20 productos pero solo nos interesan los TOP 5</span>
+<span class="n">productos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;producto&#39;</span><span class="p">:</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;Producto </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">)],</span>
+    <span class="s1">&#39;ventas&#39;</span><span class="p">:</span>  <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="p">})</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;ventas&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
+
+<span class="c1"># ❌ Mostrar TODO sin filtrar: 20 barras saturan al lector</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">productos</span><span class="p">[</span><span class="s1">&#39;producto&#39;</span><span class="p">],</span> <span class="n">productos</span><span class="p">[</span><span class="s1">&#39;ventas&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#aaaaaa&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;❌ 20 productos: demasiada información&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="c1"># ✅ Mostrar solo el TOP 5: foco en lo que importa</span>
+<span class="n">top5</span> <span class="o">=</span> <span class="n">productos</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">top5</span><span class="p">[</span><span class="s1">&#39;producto&#39;</span><span class="p">],</span> <span class="n">top5</span><span class="p">[</span><span class="s1">&#39;ventas&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#4c72b0&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;✅ Top 5: foco en los líderes&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="c1"># Etiquetas de valor al final de cada barra del Top 5</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">prod</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">top5</span><span class="p">[</span><span class="s1">&#39;producto&#39;</span><span class="p">],</span> <span class="n">top5</span><span class="p">[</span><span class="s1">&#39;ventas&#39;</span><span class="p">])):</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">val</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">),</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_10147/872582507.py:29: UserWarning: Glyph 10060 (\N{CROSS MARK}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+/tmp/ipykernel_10147/872582507.py:29: UserWarning: Glyph 9989 (\N{WHITE HEAVY CHECK MARK}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+/usr/local/lib/python3.12/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 10060 (\N{CROSS MARK}) missing from font(s) DejaVu Sans.
+  fig.canvas.print_figure(bytes_io, **kw)
+/usr/local/lib/python3.12/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 9989 (\N{WHITE HEAVY CHECK MARK}) missing from font(s) DejaVu Sans.
+  fig.canvas.print_figure(bytes_io, **kw)
+</pre></div>
+</div>
+<img alt="../_images/f80b1a2040e5a533a754915e3f9567fa4d423c5b638a8496a2440cf95bfae9ef.png" src="../_images/f80b1a2040e5a533a754915e3f9567fa4d423c5b638a8496a2440cf95bfae9ef.png" />
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="errores-comunes-que-debes-evitar">
+<h2>9. Errores comunes que debes evitar<a class="headerlink" href="#errores-comunes-que-debes-evitar" title="Link to this heading">#</a></h2>
+<section id="ejes-truncados-enganosos">
+<h3>9.1 Ejes truncados engañosos<a class="headerlink" href="#ejes-truncados-enganosos" title="Link to this heading">#</a></h3>
+<p>Empezar el eje Y en un valor distinto de cero <strong>exagera diferencias</strong> y puede ser engañoso. En gráficos de barras esto es especialmente grave.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">valores</span> <span class="o">=</span> <span class="p">[</span><span class="mi">98</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span> <span class="mi">105</span><span class="p">]</span>
+<span class="n">etiquetas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Q1&#39;</span><span class="p">,</span> <span class="s1">&#39;Q2&#39;</span><span class="p">,</span> <span class="s1">&#39;Q3&#39;</span><span class="p">,</span> <span class="s1">&#39;Q4&#39;</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># ❌ Eje truncado: parece un crecimiento enorme cuando solo es 7%</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">etiquetas</span><span class="p">,</span> <span class="n">valores</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#d62728&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">95</span><span class="p">,</span> <span class="mi">107</span><span class="p">)</span>   <span class="c1"># ← truncamiento engañoso</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;❌ Eje truncado (95-107)</span><span class="se">\n</span><span class="s1">Parece que las ventas se duplicaron&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+<span class="c1"># ✅ Eje desde cero: la diferencia real es modesta</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">etiquetas</span><span class="p">,</span> <span class="n">valores</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#2ca02c&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;✅ Eje desde 0</span><span class="se">\n</span><span class="s1">Muestra el crecimiento real (~7%)&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_10147/3929472605.py:20: UserWarning: Glyph 10060 (\N{CROSS MARK}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+/tmp/ipykernel_10147/3929472605.py:20: UserWarning: Glyph 9989 (\N{WHITE HEAVY CHECK MARK}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+</pre></div>
+</div>
+<img alt="../_images/3314399a6296c878df548b742573d9acb40249c0a9f6501479da0f112cf23575.png" src="../_images/3314399a6296c878df548b742573d9acb40249c0a9f6501479da0f112cf23575.png" />
+</div>
+</div>
+<p>🚨 <strong>Regla:</strong> en <strong>gráficos de barras</strong>, el eje Y debe iniciar en cero. En <strong>gráficos de líneas</strong> se admite cierto truncamiento si interesa mostrar variaciones pequeñas, pero siempre con claridad.</p>
+</section>
+<section id="demasiadas-categorias-en-un-grafico-circular">
+<h3>9.2 Demasiadas categorías en un gráfico circular<a class="headerlink" href="#demasiadas-categorias-en-un-grafico-circular" title="Link to this heading">#</a></h3>
+<p>Los gráficos de torta funcionan <strong>mal</strong> con muchas categorías: el ojo no compara bien ángulos. Recomendación: <strong>máximo 5–7 segmentos</strong>, agrupando el resto como «Otros».</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generamos 12 categorías para ilustrar el problema</span>
+<span class="n">cats_muchas</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;Cat </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">)]</span>
+<span class="n">vals_muchas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># ❌ 12 segmentos: imposible comparar tamaños</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">vals_muchas</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">cats_muchas</span><span class="p">,</span> <span class="n">autopct</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%1.0f%%</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">startangle</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;❌ 12 categorías en un pie chart&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+<span class="c1"># ✅ Top 5 + &quot;Otros&quot;: claro y comparable</span>
+<span class="n">df_pie</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;cat&#39;</span><span class="p">:</span> <span class="n">cats_muchas</span><span class="p">,</span> <span class="s1">&#39;val&#39;</span><span class="p">:</span> <span class="n">vals_muchas</span><span class="p">})</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;val&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">top5_pie</span> <span class="o">=</span> <span class="n">df_pie</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">otros</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;cat&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Otros&#39;</span><span class="p">],</span> <span class="s1">&#39;val&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">df_pie</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">5</span><span class="p">:]</span><span class="o">.</span><span class="n">sum</span><span class="p">()]})</span>
+<span class="n">df_pie_final</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">top5_pie</span><span class="p">,</span> <span class="n">otros</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">df_pie_final</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="n">df_pie_final</span><span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">],</span>
+            <span class="n">autopct</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%1.0f%%</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">startangle</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span>
+            <span class="n">colors</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s1">&#39;Blues_r&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;✅ Top 5 + Otros: lectura clara&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_10147/4067019194.py:22: UserWarning: Glyph 10060 (\N{CROSS MARK}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+/tmp/ipykernel_10147/4067019194.py:22: UserWarning: Glyph 9989 (\N{WHITE HEAVY CHECK MARK}) missing from font(s) DejaVu Sans.
+  plt.tight_layout()
+</pre></div>
+</div>
+<img alt="../_images/9eaa0aade37be2cd47507479204608e72559fed76e94523e74fac006892f032d.png" src="../_images/9eaa0aade37be2cd47507479204608e72559fed76e94523e74fac006892f032d.png" />
+</div>
+</div>
+</section>
+<section id="efectos-3d">
+<h3>9.3 Efectos 3D<a class="headerlink" href="#efectos-3d" title="Link to this heading">#</a></h3>
+<p>Los efectos 3D casi siempre <strong>distorsionan la percepción</strong> del tamaño real. Salvo casos muy específicos (por ejemplo, datos genuinamente tridimensionales), evítalos.</p>
+<p>Matplotlib lo facilita: por defecto los gráficos son planos. Si ves a alguien usar 3D solo «para que se vea bonito», es probable que esté empeorando la lectura.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="comparacion-final-grafico-bien-vs-mal-disenado">
+<h2>10. Comparación final: gráfico bien vs mal diseñado<a class="headerlink" href="#comparacion-final-grafico-bien-vs-mal-disenado" title="Link to this heading">#</a></h2>
+<p>Vamos a integrar <strong>todos los principios</strong> en un único ejemplo lado a lado.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># ============================================================</span>
+<span class="c1"># ❌ MAL DISEÑADO: acumula casi todos los errores</span>
+<span class="c1"># ============================================================</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;#fff8dc&#39;</span><span class="p">)</span>
+
+<span class="c1"># Cada barra de un color distinto sin razón → exceso de colores</span>
+<span class="n">colores_random</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;purple&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;pink&#39;</span><span class="p">,</span> <span class="s1">&#39;cyan&#39;</span><span class="p">,</span> <span class="s1">&#39;magenta&#39;</span><span class="p">,</span> <span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="s1">&#39;brown&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;lime&#39;</span><span class="p">,</span> <span class="s1">&#39;navy&#39;</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">ventas</span><span class="p">[</span><span class="s1">&#39;Mes&#39;</span><span class="p">],</span> <span class="n">ventas</span><span class="p">[</span><span class="s1">&#39;Electrónica&#39;</span><span class="p">],</span>
+       <span class="n">color</span><span class="o">=</span><span class="n">colores_random</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">290</span><span class="p">)</span>            <span class="c1"># Eje truncado: engañoso</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Datos!!!&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>   <span class="c1"># Título sin información</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>             <span class="c1"># Grid chillón</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;MES&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;VAL&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="c1"># ============================================================</span>
+<span class="c1"># ✅ BIEN DISEÑADO: aplica los principios vistos</span>
+<span class="c1"># ============================================================</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Color uniforme + destacar el máximo</span>
+<span class="n">idx_max</span> <span class="o">=</span> <span class="n">ventas</span><span class="p">[</span><span class="s1">&#39;Electrónica&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span>
+<span class="n">colores_ok</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#cfd8dc&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">12</span>
+<span class="n">colores_ok</span><span class="p">[</span><span class="n">idx_max</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;#1f77b4&#39;</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">ventas</span><span class="p">[</span><span class="s1">&#39;Mes&#39;</span><span class="p">],</span> <span class="n">ventas</span><span class="p">[</span><span class="s1">&#39;Electrónica&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colores_ok</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">310</span><span class="p">)</span>              <span class="c1"># Eje desde cero</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Diciembre marcó el récord anual de ventas en Electrónica&#39;</span><span class="p">,</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Miles USD&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Anotación que ayuda a interpretar</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;$</span><span class="si">{</span><span class="n">ventas</span><span class="p">[</span><span class="s2">&quot;Electrónica&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s1">K&#39;</span><span class="p">,</span>
+            <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">idx_max</span><span class="p">,</span> <span class="n">ventas</span><span class="p">[</span><span class="s1">&#39;Electrónica&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()),</span>
+            <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">textcoords</span><span class="o">=</span><span class="s1">&#39;offset points&#39;</span><span class="p">,</span>
+            <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#1f77b4&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_axisbelow</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/7b87194dd18ccdd7e847f9f2b1dfbe5230dc78ffa5918ec3335bcd61cdc48aba.png" src="../_images/7b87194dd18ccdd7e847f9f2b1dfbe5230dc78ffa5918ec3335bcd61cdc48aba.png" />
+</div>
+</div>
+<section id="diferencias-clave">
+<h3>Diferencias clave<a class="headerlink" href="#diferencias-clave" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Aspecto</p></th>
+<th class="head"><p>❌ Mal diseñado</p></th>
+<th class="head"><p>✅ Bien diseñado</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Eje Y</p></td>
+<td><p>Truncado (100-290)</p></td>
+<td><p>Desde 0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Color</p></td>
+<td><p>12 colores aleatorios</p></td>
+<td><p>1 color + destacado funcional</p></td>
+</tr>
+<tr class="row-even"><td><p>Título</p></td>
+<td><p>«Datos!!!»</p></td>
+<td><p>Cuenta la conclusión</p></td>
+</tr>
+<tr class="row-odd"><td><p>Fondo</p></td>
+<td><p>Crema saturado</p></td>
+<td><p>Limpio</p></td>
+</tr>
+<tr class="row-even"><td><p>Cuadrícula</p></td>
+<td><p>Roja punteada</p></td>
+<td><p>Gris sutil</p></td>
+</tr>
+<tr class="row-odd"><td><p>Etiquetas</p></td>
+<td><p>«VAL», «MES»</p></td>
+<td><p>«Miles USD»</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="narrativa-visual-storytelling">
+<h2>11. Narrativa visual (storytelling)<a class="headerlink" href="#narrativa-visual-storytelling" title="Link to this heading">#</a></h2>
+<p>Una buena visualización no es solo un gráfico, es una <strong>historia con datos</strong>. Sigue esta estructura:</p>
+<ol class="arabic simple">
+<li><p><strong>Pregunta</strong>: ¿qué motivó el análisis?</p></li>
+<li><p><strong>Contexto</strong>: ¿de dónde vienen los datos? ¿qué periodo?</p></li>
+<li><p><strong>Hallazgos</strong>: ¿qué patrones aparecen?</p></li>
+<li><p><strong>Acción</strong>: ¿qué decisión sugiere?</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ejemplo: gráfico con narrativa completa</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">))</span>
+
+<span class="c1"># Datos protagonistas: Electrónica vs Deportes</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ventas</span><span class="p">[</span><span class="s1">&#39;Mes&#39;</span><span class="p">],</span> <span class="n">ventas</span><span class="p">[</span><span class="s1">&#39;Electrónica&#39;</span><span class="p">],</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#1f77b4&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.8</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Electrónica&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ventas</span><span class="p">[</span><span class="s1">&#39;Mes&#39;</span><span class="p">],</span> <span class="n">ventas</span><span class="p">[</span><span class="s1">&#39;Deportes&#39;</span><span class="p">],</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#cfd8dc&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Deportes&#39;</span><span class="p">)</span>
+
+<span class="c1"># 1) Pregunta como título principal</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;¿Vale la pena reforzar el inventario de Electrónica para fin de año?&#39;</span><span class="p">,</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+
+<span class="c1"># 2) Contexto como subtítulo</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.04</span><span class="p">,</span> <span class="s1">&#39;Comparación mensual 2024 — datos en miles de USD&#39;</span><span class="p">,</span>
+        <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;italic&#39;</span><span class="p">)</span>
+
+<span class="c1"># 3) Hallazgo destacado mediante anotación</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;Brecha máxima en Diciembre</span><span class="se">\n</span><span class="s1">(+195K vs Deportes)&#39;</span><span class="p">,</span>
+            <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">280</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mf">7.5</span><span class="p">,</span> <span class="mi">250</span><span class="p">),</span>
+            <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#1f77b4&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span>
+            <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s1">&#39;-&gt;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#1f77b4&#39;</span><span class="p">))</span>
+
+<span class="c1"># 4) Acción como nota al pie</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.02</span><span class="p">,</span>
+         <span class="s1">&#39;💡 Recomendación: anticipar el stock de Electrónica desde octubre.&#39;</span><span class="p">,</span>
+         <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#1f77b4&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Ventas (miles USD)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.12/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 128161 (\N{ELECTRIC LIGHT BULB}) missing from font(s) DejaVu Sans.
+  fig.canvas.print_figure(bytes_io, **kw)
+</pre></div>
+</div>
+<img alt="../_images/a6edeb86334676340704b6672ffe3e0ed5b0d065249521ad33bf5b06bc1af767.png" src="../_images/a6edeb86334676340704b6672ffe3e0ed5b0d065249521ad33bf5b06bc1af767.png" />
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="accesibilidad">
+<h2>12. Accesibilidad<a class="headerlink" href="#accesibilidad" title="Link to this heading">#</a></h2>
+<p>Una visualización accesible es una <strong>mejor</strong> visualización:</p>
+<ul class="simple">
+<li><p>🎨 <strong>Contraste</strong>: relación mínima 4.5:1 entre texto y fondo (WCAG).</p></li>
+<li><p>👁️ <strong>Daltonismo</strong>: usa paletas seguras (viridis, cividis, tab10).</p></li>
+<li><p>🔠 <strong>Tamaño legible</strong>: evita texto &lt; 9 pt en pantalla.</p></li>
+<li><p>📝 <strong>Texto alternativo</strong>: al guardar/exportar añade una descripción del gráfico.</p></li>
+<li><p>🔣 <strong>Redundancia</strong>: no dependas SOLO del color (añade etiquetas, formas o patrones).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ejemplo: redundancia color + marcador</span>
+<span class="c1"># Si alguien no distingue colores, los marcadores siguen funcionando.</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
+
+<span class="n">marcadores</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Electrónica&#39;</span><span class="p">:</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="s1">&#39;Ropa&#39;</span><span class="p">:</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="s1">&#39;Hogar&#39;</span><span class="p">:</span> <span class="s1">&#39;^&#39;</span><span class="p">,</span> <span class="s1">&#39;Deportes&#39;</span><span class="p">:</span> <span class="s1">&#39;D&#39;</span><span class="p">}</span>
+
+<span class="k">for</span> <span class="n">cat</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Electrónica&#39;</span><span class="p">,</span> <span class="s1">&#39;Ropa&#39;</span><span class="p">,</span> <span class="s1">&#39;Hogar&#39;</span><span class="p">,</span> <span class="s1">&#39;Deportes&#39;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ventas</span><span class="p">[</span><span class="s1">&#39;Mes&#39;</span><span class="p">],</span> <span class="n">ventas</span><span class="p">[</span><span class="n">cat</span><span class="p">],</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">PALETA_CATEGORIAS</span><span class="p">[</span><span class="n">cat</span><span class="p">],</span>
+            <span class="n">marker</span><span class="o">=</span><span class="n">marcadores</span><span class="p">[</span><span class="n">cat</span><span class="p">],</span>     <span class="c1"># ← redundancia visual</span>
+            <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="n">cat</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Ventas mensuales por categoría&#39;</span><span class="p">,</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Miles USD&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d6ff2bf4e9abf0e6c6f5779b0a0a7c64b2a34e2456769302dd27d0a85ba6a535.png" src="../_images/d6ff2bf4e9abf0e6c6f5779b0a0a7c64b2a34e2456769302dd27d0a85ba6a535.png" />
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="checklist-final">
+<h2>13. Checklist final ✅<a class="headerlink" href="#checklist-final" title="Link to this heading">#</a></h2>
+<p>Antes de publicar cualquier visualización, repasa esta lista:</p>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>¿Tiene un propósito claro?</strong> Una pregunta, una respuesta.</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>¿El título cuenta la conclusión?</strong></p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>¿Eliminé elementos decorativos</strong> (chartjunk)?</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>¿Hay jerarquía visual</strong> que guíe la mirada?</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>¿Los colores son consistentes</strong> entre gráficos del mismo informe?</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>¿Usé como máximo 5-7 colores distintos?</strong></p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>¿La paleta es accesible</strong> (apta para daltonismo)?</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>¿Los ejes parten de cero</strong> (en gráficos de barras)?</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>¿Las etiquetas son descriptivas</strong> y no abreviadas en exceso?</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>¿Hay suficiente espacio en blanco</strong>?</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>¿Filtré datos irrelevantes</strong>?</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <strong>¿Pasaría la prueba de los 5 segundos</strong> (¿se entiende rápido?)?</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="recursos-para-seguir-aprendiendo">
+<h2>📚 Recursos para seguir aprendiendo<a class="headerlink" href="#recursos-para-seguir-aprendiendo" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Libros</strong>: <em>The Visual Display of Quantitative Information</em> (Edward Tufte), <em>Storytelling with Data</em> (Cole Nussbaumer Knaflic), <em>Fundamentals of Data Visualization</em> (Claus Wilke).</p></li>
+<li><p><strong>Documentación</strong>: <a class="reference external" href="http://matplotlib.org">matplotlib.org</a>, <a class="reference external" href="http://seaborn.pydata.org">seaborn.pydata.org</a>, <a class="reference external" href="http://plotly.com/python">plotly.com/python</a>.</p></li>
+<li><p><strong>Inspiración</strong>: <a class="reference external" href="http://flowingdata.com">flowingdata.com</a>, <a class="reference external" href="http://informationisbeautiful.net">informationisbeautiful.net</a>.</p></li>
+<li><p><strong>Paletas accesibles</strong>: <a class="reference external" href="http://colorbrewer2.org">colorbrewer2.org</a>.</p></li>
+</ul>
+<blockquote>
+<div><p><em>«La visualización es la representación gráfica de la información para amplificar la cognición.»</em> — Card, Mackinlay &amp; Shneiderman</p>
+</div></blockquote>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Unidad 2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Buenas_Practicas.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">2. 11 Buenas Practicas de Visualizacion de Datos</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Que_Escoger.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">2.13 Que Grafica Escoger</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-inicial">0. Configuración inicial</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-de-ejemplo">Dataset de ejemplo</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proposito-claro-cada-grafico-responde-una-pregunta">1. Propósito claro: cada gráfico responde una pregunta</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simplicidad-efectiva-eliminar-el-ruido-visual">2. Simplicidad efectiva: eliminar el ruido visual</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jerarquia-visual-guiar-la-mirada">3. Jerarquía visual: guiar la mirada</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consistencia-grafica">4. Consistencia gráfica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-correcto-del-color">5. Uso correcto del color</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accesibilidad-pensar-en-daltonismo">Accesibilidad: pensar en daltonismo</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipografia-clara-y-legible">6. Tipografía clara y legible</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#espacios-en-blanco">7. Espacios en blanco</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mostrar-solo-lo-relevante">8. Mostrar solo lo relevante</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errores-comunes-que-debes-evitar">9. Errores comunes que debes evitar</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejes-truncados-enganosos">9.1 Ejes truncados engañosos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#demasiadas-categorias-en-un-grafico-circular">9.2 Demasiadas categorías en un gráfico circular</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#efectos-3d">9.3 Efectos 3D</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-final-grafico-bien-vs-mal-disenado">10. Comparación final: gráfico bien vs mal diseñado</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diferencias-clave">Diferencias clave</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#narrativa-visual-storytelling">11. Narrativa visual (storytelling)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accesibilidad">12. Accesibilidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checklist-final">13. Checklist final ✅</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursos-para-seguir-aprendiendo">📚 Recursos para seguir aprendiendo</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Sergio Alejandro Holguin García
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

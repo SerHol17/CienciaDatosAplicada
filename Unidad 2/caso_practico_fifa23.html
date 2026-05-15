@@ -1,0 +1,1850 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.15 Caso Práctico: Análisis Visual del Dataset FIFA 23 &#8212; Ciencia de Datos Aplicada- 01 Ucaldas</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unidad 2/caso_practico_fifa23';</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="2.16 Visualizacion con Power BI" href="pbi.html" />
+    <link rel="prev" title="2.14 Analítica de Datos: Tipos de Gráficos y Análisis Exploratorio" href="Que%20Grafica%20escoger.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Ciencia de Datos Aplicada- 01 Ucaldas - Home"/>
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark pst-js-only" alt="Ciencia de Datos Aplicada- 01 Ucaldas - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Ciencia de datos aplicada
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Unidad1.html">Unidad 1: Deep Learning Avanzado</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/01_introduccion_ia.html">1.1 Tópicos Emergentes de la IA — 2026</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/02_Autoencoders.html">1.2 Autoencoders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/autoencoders_tf.html">1.3 Autoencoders en TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/Gans_teoria.html">1.4 Redes Generativas Adversariales (GANs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/gans_tf.html">1.5 Redes Generativas Adversariales (GANs) en TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/segmentacion_teoria.html">1.6 Segmentación con Inteligencia Artificial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/segmentacion_tf.html">1.7 Segmentacion con Inteligencia Artificial — TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/16_nlp_transformers.html">1.8 Procesamiento de Lenguaje Natural y Transformers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/nlp_tensorflow.html">1.9 Procesamiento de Lenguaje Natural con TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/17_llms.html">1.10 Modelos de Lenguaje de Gran Escala (LLMs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/llms_colab.html">1.11 LLMs en la Practica: OpenAI GPT y Ollama</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/18_agentes.html">1.12 Agentes de Inteligencia Artificial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/agentes_colab.html">1.13 Agentes de Inteligencia Artificial</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/frameworks_agentes.html">1.14 LangChain · LangGraph · CrewAI</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Unidad2.html">Unidad 2: Visualizacion de Datos</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Matplotlib.html">2.1 Visualizacion con Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_matplotlib_intro.html">2.2 Matplotlib — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_matplotlib_avanzado.html">2.3: Matplotlib — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Seaborn.html">2.4 Visualizacion con Seaborn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_seaborn_intro.html">2.5 Seaborn — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotly.html">2.7 Visualizacion Interactiva con Plotly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_seaborn_avanzado.html">2.6: Seaborn — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_plotly_intro.html">2.8: Plotly — Gráficos Interactivos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_plotly_avanzado.html">2.9: Plotly — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_comparativa_y_casos.html">2.10: Comparativa y Casos de Uso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Buenas_Practicas.html">2. 11 Buenas Practicas de Visualizacion de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="buenas_practicas_visualizacion.html">2.12 Buenas Prácticas de Visualización de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Que_Escoger.html">2.13 Que Grafica Escoger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Que%20Grafica%20escoger.html">2.14 Analítica de Datos: Tipos de Gráficos y Análisis Exploratorio</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.15 Caso Práctico: Análisis Visual del Dataset FIFA 23</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pbi.html">2.16 Visualizacion con Power BI</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/SerHol17/CienciaDatosAplicada/blob/main/Unidad 2/caso_practico_fifa23.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/CienciaDatosAplicada" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/CienciaDatosAplicada/issues/new?title=Issue%20on%20page%20%2FUnidad 2/caso_practico_fifa23.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Unidad 2/caso_practico_fifa23.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>2.15 Caso Práctico: Análisis Visual del Dataset FIFA 23</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preguntas-que-vamos-a-resolver">Preguntas que vamos a resolver</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-inicial-y-carga-del-dataset">0. Configuración inicial y carga del dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limpieza-rapida">Limpieza rápida</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-1-como-se-distribuye-el-nivel-general-overall-de-los-jugadores">Pregunta 1: ¿Cómo se distribuye el nivel general (overall) de los jugadores?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-2-que-nacionalidades-aportan-mas-jugadores-al-futbol-mundial">Pregunta 2: ¿Qué nacionalidades aportan más jugadores al fútbol mundial?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-3-que-paises-producen-jugadores-con-mejor-calidad-promedio">Pregunta 3: ¿Qué países producen jugadores con mejor calidad promedio?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-4-como-se-relacionan-la-edad-y-el-overall">Pregunta 4: ¿Cómo se relacionan la edad y el overall?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-5-que-pie-preferido-predomina-entre-los-jugadores">Pregunta 5: ¿Qué pie preferido predomina entre los jugadores?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-6-como-cambia-el-overall-segun-la-posicion-en-el-campo">Pregunta 6: ¿Cómo cambia el overall según la posición en el campo?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-7-quienes-son-los-10-jugadores-mas-caros-del-mundo">Pregunta 7: ¿Quiénes son los 10 jugadores más caros del mundo?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-8-que-relacion-hay-entre-overall-y-valor-de-mercado">Pregunta 8: ¿Qué relación hay entre overall y valor de mercado?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-9-como-se-comparan-los-perfiles-de-los-4-mejores-delanteros">Pregunta 9: ¿Cómo se comparan los perfiles de los 4 mejores delanteros?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-10-que-clubes-concentran-mas-valor-en-su-plantilla">Pregunta 10: ¿Qué clubes concentran más valor en su plantilla?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-11-como-se-correlacionan-las-estadisticas-tecnicas">Pregunta 11: ¿Cómo se correlacionan las estadísticas técnicas?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-12-cual-es-el-potencial-de-crecimiento-por-edad">Pregunta 12: ¿Cuál es el potencial de crecimiento por edad?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-dashboard-combinado-de-un-jugador">Bonus: dashboard combinado de un jugador</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-del-analisis">Resumen del análisis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones-clave-del-dataset">Conclusiones clave del dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lecciones-de-visualizacion">Lecciones de visualización</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="caso-practico-analisis-visual-del-dataset-fifa-23">
+<h1>2.15 Caso Práctico: Análisis Visual del Dataset FIFA 23<a class="headerlink" href="#caso-practico-analisis-visual-del-dataset-fifa-23" title="Link to this heading">#</a></h1>
+<p><strong>Aplicación de visualizaciones comunes y avanzadas a un dataset real</strong></p>
+<p>Sergio Alejandro Holguín García</p>
+<hr class="docutils" />
+<p>En las clases anteriores vimos los <strong>tipos de gráficos</strong> y las <strong>buenas prácticas de visualización</strong>. Ahora vamos a aplicarlos a un dataset real: <strong>18.539 jugadores de FIFA 23</strong>, con 89 atributos cada uno (overall, potencial, valor de mercado, estadísticas técnicas, club, nacionalidad, etc.).</p>
+<p>El enfoque del notebook es <strong>responder preguntas de negocio con visualizaciones</strong>: cada sección plantea una pregunta y muestra el gráfico que mejor la responde, mezclando los comunes (barras, líneas, histograma) con los menos comunes (mapa coroplético, treemap, radar, hexbin, sunburst).
+<a class="reference external" href="https://drive.google.com/file/d/1PkH5bYRe2d0f-5HBmdVP7qFQc9oru5S0/view?usp=drive_link">Base de datos</a></p>
+<section id="preguntas-que-vamos-a-resolver">
+<h2>Preguntas que vamos a resolver<a class="headerlink" href="#preguntas-que-vamos-a-resolver" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>¿Cómo se distribuye el nivel general (overall) de los jugadores?</p></li>
+<li><p>¿Qué nacionalidades aportan más jugadores al fútbol mundial?</p></li>
+<li><p>¿Qué países producen jugadores con mejor calidad promedio? (mapa)</p></li>
+<li><p>¿Cómo se relacionan la edad y el overall?</p></li>
+<li><p>¿Qué pie preferido predomina?</p></li>
+<li><p>¿Cómo cambia el overall según la posición en el campo?</p></li>
+<li><p>¿Quiénes son los 10 jugadores más caros del mundo?</p></li>
+<li><p>¿Qué relación hay entre overall y valor de mercado?</p></li>
+<li><p>¿Cómo se comparan los perfiles de los 4 mejores delanteros? (radar)</p></li>
+<li><p>¿Qué clubes concentran más valor en su plantilla? (treemap)</p></li>
+<li><p>¿Cómo se correlacionan las estadísticas técnicas?</p></li>
+<li><p>¿Cuál es el potencial de crecimiento por edad?</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="configuracion-inicial-y-carga-del-dataset">
+<h2>0. Configuración inicial y carga del dataset<a class="headerlink" href="#configuracion-inicial-y-carga-del-dataset" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Si alguna librería no está instalada, descomenta:</span>
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>plotly<span class="w"> </span>squarify
+
+<span class="c1"># Librerías base</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">squarify</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.express</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">px</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
+
+<span class="c1"># Configuración estética general</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s1">&#39;whitegrid&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.titleweight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Librerías cargadas correctamente&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: plotly in /usr/local/lib/python3.12/dist-packages (5.24.1)
+Requirement already satisfied: squarify in /usr/local/lib/python3.12/dist-packages (0.4.4)
+Requirement already satisfied: tenacity&gt;=6.2.0 in /usr/local/lib/python3.12/dist-packages (from plotly) (9.1.4)
+Requirement already satisfied: packaging in /usr/local/lib/python3.12/dist-packages (from plotly) (26.1)
+Librerías cargadas correctamente
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cargar el dataset (asumimos que el CSV está en la misma carpeta del notebook)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/content/Fifa 23 Players Data.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># Información básica</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Filas: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">  |  Columnas: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Memoria: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1e6</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> MB&#39;</span><span class="p">)</span>
+
+<span class="c1"># Vista de las primeras columnas</span>
+<span class="n">df</span><span class="p">[[</span><span class="s1">&#39;Known As&#39;</span><span class="p">,</span> <span class="s1">&#39;Overall&#39;</span><span class="p">,</span> <span class="s1">&#39;Potential&#39;</span><span class="p">,</span> <span class="s1">&#39;Value(in Euro)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Best Position&#39;</span><span class="p">,</span> <span class="s1">&#39;Nationality&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Club Name&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Filas: 18,539  |  Columnas: 89
+Memoria: 30.0 MB
+</pre></div>
+</div>
+<div class="output text_html">
+  <div id="df-9d8a481b-a772-4cf2-94c3-a6fa0bb962e7" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Known As</th>
+      <th>Overall</th>
+      <th>Potential</th>
+      <th>Value(in Euro)</th>
+      <th>Best Position</th>
+      <th>Nationality</th>
+      <th>Age</th>
+      <th>Club Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>L. Messi</td>
+      <td>91</td>
+      <td>91</td>
+      <td>54000000</td>
+      <td>CAM</td>
+      <td>Argentina</td>
+      <td>35</td>
+      <td>Paris Saint-Germain</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>K. Benzema</td>
+      <td>91</td>
+      <td>91</td>
+      <td>64000000</td>
+      <td>CF</td>
+      <td>France</td>
+      <td>34</td>
+      <td>Real Madrid CF</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>R. Lewandowski</td>
+      <td>91</td>
+      <td>91</td>
+      <td>84000000</td>
+      <td>ST</td>
+      <td>Poland</td>
+      <td>33</td>
+      <td>FC Barcelona</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>K. De Bruyne</td>
+      <td>91</td>
+      <td>91</td>
+      <td>107500000</td>
+      <td>CM</td>
+      <td>Belgium</td>
+      <td>31</td>
+      <td>Manchester City</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>K. Mbappé</td>
+      <td>91</td>
+      <td>95</td>
+      <td>190500000</td>
+      <td>ST</td>
+      <td>France</td>
+      <td>23</td>
+      <td>Paris Saint-Germain</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-9d8a481b-a772-4cf2-94c3-a6fa0bb962e7')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-9d8a481b-a772-4cf2-94c3-a6fa0bb962e7 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-9d8a481b-a772-4cf2-94c3-a6fa0bb962e7');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+    </div>
+  </div>
+</div></div>
+</div>
+<section id="limpieza-rapida">
+<h3>Limpieza rápida<a class="headerlink" href="#limpieza-rapida" title="Link to this heading">#</a></h3>
+<p>Antes de visualizar conviene revisar el estado de los datos: tipos, nulos, valores extremos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Resumen rápido de variables clave</span>
+<span class="n">cols_resumen</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Overall&#39;</span><span class="p">,</span> <span class="s1">&#39;Potential&#39;</span><span class="p">,</span> <span class="s1">&#39;Value(in Euro)&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Wage(in Euro)&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Height(in cm)&#39;</span><span class="p">,</span> <span class="s1">&#39;Weight(in kg)&#39;</span><span class="p">]</span>
+<span class="n">df</span><span class="p">[</span><span class="n">cols_resumen</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-082193a1-9e71-45d4-b8cb-a0170184af6c" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Overall</th>
+      <th>Potential</th>
+      <th>Value(in Euro)</th>
+      <th>Wage(in Euro)</th>
+      <th>Age</th>
+      <th>Height(in cm)</th>
+      <th>Weight(in kg)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>18539.0</td>
+      <td>18539.0</td>
+      <td>18539.0</td>
+      <td>18539.0</td>
+      <td>18539.0</td>
+      <td>18539.0</td>
+      <td>18539.0</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>65.9</td>
+      <td>71.0</td>
+      <td>2875461.4</td>
+      <td>8824.5</td>
+      <td>25.2</td>
+      <td>181.6</td>
+      <td>75.2</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>6.8</td>
+      <td>6.2</td>
+      <td>7635128.9</td>
+      <td>19460.5</td>
+      <td>4.7</td>
+      <td>6.9</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>47.0</td>
+      <td>48.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>16.0</td>
+      <td>155.0</td>
+      <td>49.0</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>62.0</td>
+      <td>67.0</td>
+      <td>475000.0</td>
+      <td>1000.0</td>
+      <td>21.0</td>
+      <td>177.0</td>
+      <td>70.0</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>66.0</td>
+      <td>71.0</td>
+      <td>1000000.0</td>
+      <td>3000.0</td>
+      <td>25.0</td>
+      <td>182.0</td>
+      <td>75.0</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>70.0</td>
+      <td>75.0</td>
+      <td>2000000.0</td>
+      <td>8000.0</td>
+      <td>29.0</td>
+      <td>186.0</td>
+      <td>80.0</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>91.0</td>
+      <td>95.0</td>
+      <td>190500000.0</td>
+      <td>450000.0</td>
+      <td>44.0</td>
+      <td>206.0</td>
+      <td>105.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-082193a1-9e71-45d4-b8cb-a0170184af6c')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-082193a1-9e71-45d4-b8cb-a0170184af6c button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-082193a1-9e71-45d4-b8cb-a0170184af6c');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Valores nulos: ¿hay columnas con problemas?</span>
+<span class="n">nulos</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Columnas con valores nulos:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nulos</span><span class="p">[</span><span class="n">nulos</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">nulos</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;Ninguna columna tiene nulos&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Columnas con valores nulos:
+Ninguna columna tiene nulos
+</pre></div>
+</div>
+</div>
+</div>
+<p>El dataset está limpio. Pasamos directo a las preguntas.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="pregunta-1-como-se-distribuye-el-nivel-general-overall-de-los-jugadores">
+<h2>Pregunta 1: ¿Cómo se distribuye el nivel general (overall) de los jugadores?<a class="headerlink" href="#pregunta-1-como-se-distribuye-el-nivel-general-overall-de-los-jugadores" title="Link to this heading">#</a></h2>
+<p><strong>Gráfico apropiado:</strong> histograma. Es la herramienta natural para ver la <strong>forma de la distribución</strong> de una variable numérica continua.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Histograma con 30 intervalos</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Overall&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#1f77b4&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+
+<span class="c1"># Líneas de referencia: media y mediana</span>
+<span class="n">media</span>   <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Overall&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">mediana</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Overall&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">media</span><span class="p">,</span>   <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>    <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+           <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Media: </span><span class="si">{</span><span class="n">media</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">mediana</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+           <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Mediana: </span><span class="si">{</span><span class="n">mediana</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Distribución del overall en FIFA 23&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Overall (nivel general)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Cantidad de jugadores&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/bd72e69266743b4a6bc922b548874c7e53cefa67f92bd224e0f893f8b700e91d.png" src="../_images/bd72e69266743b4a6bc922b548874c7e53cefa67f92bd224e0f893f8b700e91d.png" />
+</div>
+</div>
+<p><strong>Respuesta:</strong> la distribución se concentra entre 60-70 con forma aproximadamente normal. Solo un puñado de jugadores supera el 85, lo que confirma que la <strong>excelencia es escasa</strong>: los Messi y Mbappé son la cola derecha de una campana enorme.</p>
+</section>
+<hr class="docutils" />
+<section id="pregunta-2-que-nacionalidades-aportan-mas-jugadores-al-futbol-mundial">
+<h2>Pregunta 2: ¿Qué nacionalidades aportan más jugadores al fútbol mundial?<a class="headerlink" href="#pregunta-2-que-nacionalidades-aportan-mas-jugadores-al-futbol-mundial" title="Link to this heading">#</a></h2>
+<p><strong>Gráfico apropiado:</strong> barras horizontales. Como los nombres de los países son largos, la versión horizontal facilita la lectura. Mostramos solo el top 15 (filtramos lo irrelevante, principio de «mostrar solo lo importante»).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Top 15 nacionalidades por cantidad de jugadores</span>
+<span class="n">top_paises</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Nationality&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">top_paises</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">top_paises</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#4c72b0&#39;</span><span class="p">)</span>
+
+<span class="c1"># Etiqueta con el valor al final de cada barra</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">top_paises</span><span class="o">.</span><span class="n">values</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">v</span> <span class="o">+</span> <span class="mi">15</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Top 15 nacionalidades con más jugadores en FIFA 23&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Cantidad de jugadores&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1be9571267af7a9b3b130151281a185df1d347f671f4778dfe8a3b37ea9fc325.png" src="../_images/1be9571267af7a9b3b130151281a185df1d347f671f4778dfe8a3b37ea9fc325.png" />
+</div>
+</div>
+<p><strong>Respuesta:</strong> Inglaterra lidera con más de 1.600 jugadores, seguida por Alemania y España. Esto refleja la fortaleza de las ligas locales y la profundidad del fútbol europeo.</p>
+</section>
+<hr class="docutils" />
+<section id="pregunta-3-que-paises-producen-jugadores-con-mejor-calidad-promedio">
+<h2>Pregunta 3: ¿Qué países producen jugadores con mejor calidad promedio?<a class="headerlink" href="#pregunta-3-que-paises-producen-jugadores-con-mejor-calidad-promedio" title="Link to this heading">#</a></h2>
+<p><strong>Gráfico apropiado:</strong> mapa coroplético. La pregunta tiene una dimensión geográfica natural, así que el mapa lo deja todo claro de un vistazo.</p>
+<p><strong>Importante:</strong> filtramos países con al menos 30 jugadores para evitar que naciones con 1 o 2 jugadores estrella distorsionen el promedio.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calcular overall promedio por país (solo países con &gt;= 30 jugadores)</span>
+<span class="n">stats_pais</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Nationality&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+    <span class="n">overall_medio</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Overall&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">),</span>
+    <span class="n">cantidad</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Overall&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="n">stats_pais</span> <span class="o">=</span> <span class="n">stats_pais</span><span class="p">[</span><span class="n">stats_pais</span><span class="p">[</span><span class="s1">&#39;cantidad&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">30</span><span class="p">]</span>
+<span class="n">stats_pais</span><span class="p">[</span><span class="s1">&#39;overall_medio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats_pais</span><span class="p">[</span><span class="s1">&#39;overall_medio&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Plotly mapea países por nombre, pero algunos tienen distinto formato.</span>
+<span class="c1"># Usamos el modo &#39;country names&#39; que es robusto.</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">choropleth</span><span class="p">(</span>
+    <span class="n">stats_pais</span><span class="p">,</span>
+    <span class="n">locations</span><span class="o">=</span><span class="s1">&#39;Nationality&#39;</span><span class="p">,</span> <span class="n">locationmode</span><span class="o">=</span><span class="s1">&#39;country names&#39;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;overall_medio&#39;</span><span class="p">,</span>
+    <span class="n">hover_name</span><span class="o">=</span><span class="s1">&#39;Nationality&#39;</span><span class="p">,</span>
+    <span class="n">hover_data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;cantidad&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;Nationality&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+    <span class="n">color_continuous_scale</span><span class="o">=</span><span class="s1">&#39;RdYlGn&#39;</span><span class="p">,</span>     <span class="c1"># rojo (bajo) a verde (alto)</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Overall promedio por país (mín. 30 jugadores)&#39;</span><span class="p">,</span>
+    <span class="n">labels</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;overall_medio&#39;</span><span class="p">:</span> <span class="s1">&#39;Overall medio&#39;</span><span class="p">},</span>
+<span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">950</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">550</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">l</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><html>
+<head><meta charset="utf-8" /></head>
+<body>
+    <div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script type="text/javascript">if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>                <div id="91b759a0-5747-4bff-a7f2-dbc76e682203" class="plotly-graph-div" style="height:550px; width:950px;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("91b759a0-5747-4bff-a7f2-dbc76e682203")) {                    Plotly.newPlot(                        "91b759a0-5747-4bff-a7f2-dbc76e682203",                        [{"coloraxis":"coloraxis","customdata":[[52,"Albania"],[58,"Algeria"],[937,"Argentina"],[275,"Australia"],[289,"Austria"],[318,"Belgium"],[131,"Bolivia"],[62,"Bosnia and Herzegovina"],[728,"Brazil"],[76,"Cameroon"],[82,"Canada"],[179,"Chile"],[439,"China PR"],[298,"Colombia"],[45,"Congo DR"],[167,"Croatia"],[103,"Czech Republic"],[101,"Côte d'Ivoire"],[318,"Denmark"],[176,"Ecuador"],[1632,"England"],[70,"Finland"],[963,"France"],[35,"Gambia"],[1204,"Germany"],[135,"Ghana"],[88,"Greece"],[38,"Guinea"],[41,"Hungary"],[55,"Iceland"],[219,"India"],[623,"Italy"],[44,"Jamaica"],[80,"Japan"],[319,"Korea Republic"],[56,"Kosovo"],[66,"Mali"],[60,"Mexico"],[106,"Morocco"],[428,"Netherlands"],[41,"New Zealand"],[131,"Nigeria"],[71,"Northern Ireland"],[373,"Norway"],[203,"Paraguay"],[151,"Peru"],[390,"Poland"],[382,"Portugal"],[30,"Qatar"],[385,"Republic of Ireland"],[341,"Romania"],[331,"Saudi Arabia"],[273,"Scotland"],[132,"Senegal"],[103,"Serbia"],[65,"Slovakia"],[48,"Slovenia"],[83,"South Africa"],[1074,"Spain"],[390,"Sweden"],[218,"Switzerland"],[31,"Tunisia"],[281,"Turkey"],[89,"Ukraine"],[437,"United States"],[278,"Uruguay"],[197,"Venezuela"],[164,"Wales"]],"geo":"geo","hovertemplate":"\u003cb\u003e%{hovertext}\u003c\u002fb\u003e\u003cbr\u003e\u003cbr\u003ecantidad=%{customdata[0]}\u003cbr\u003eOverall medio=%{z}\u003cextra\u003e\u003c\u002fextra\u003e","hovertext":["Albania","Algeria","Argentina","Australia","Austria","Belgium","Bolivia","Bosnia and Herzegovina","Brazil","Cameroon","Canada","Chile","China PR","Colombia","Congo DR","Croatia","Czech Republic","Côte d'Ivoire","Denmark","Ecuador","England","Finland","France","Gambia","Germany","Ghana","Greece","Guinea","Hungary","Iceland","India","Italy","Jamaica","Japan","Korea Republic","Kosovo","Mali","Mexico","Morocco","Netherlands","New Zealand","Nigeria","Northern Ireland","Norway","Paraguay","Peru","Poland","Portugal","Qatar","Republic of Ireland","Romania","Saudi Arabia","Scotland","Senegal","Serbia","Slovakia","Slovenia","South Africa","Spain","Sweden","Switzerland","Tunisia","Turkey","Ukraine","United States","Uruguay","Venezuela","Wales"],"locationmode":"country names","locations":["Albania","Algeria","Argentina","Australia","Austria","Belgium","Bolivia","Bosnia and Herzegovina","Brazil","Cameroon","Canada","Chile","China PR","Colombia","Congo DR","Croatia","Czech Republic","Côte d'Ivoire","Denmark","Ecuador","England","Finland","France","Gambia","Germany","Ghana","Greece","Guinea","Hungary","Iceland","India","Italy","Jamaica","Japan","Korea Republic","Kosovo","Mali","Mexico","Morocco","Netherlands","New Zealand","Nigeria","Northern Ireland","Norway","Paraguay","Peru","Poland","Portugal","Qatar","Republic of Ireland","Romania","Saudi Arabia","Scotland","Senegal","Serbia","Slovakia","Slovenia","South Africa","Spain","Sweden","Switzerland","Tunisia","Turkey","Ukraine","United States","Uruguay","Venezuela","Wales"],"name":"","z":[67.2,69.4,68.6,61.7,66.0,67.1,63.6,68.6,71.6,68.1,64.1,65.0,57.7,68.0,68.4,69.4,71.4,68.2,66.1,65.3,64.1,64.9,67.5,65.5,65.7,67.0,68.2,66.6,68.4,65.0,54.3,68.0,67.3,69.0,62.7,66.0,67.5,70.5,69.2,67.6,64.0,68.2,63.2,63.8,65.5,65.9,63.6,69.7,66.8,60.7,63.1,59.4,64.7,67.5,69.3,68.2,68.9,65.9,69.1,63.7,65.1,66.8,65.8,68.0,62.9,67.9,64.1,62.9],"type":"choropleth"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"geo":{"domain":{"x":[0.0,1.0],"y":[0.0,1.0]},"center":{}},"coloraxis":{"colorbar":{"title":{"text":"Overall medio"}},"colorscale":[[0.0,"rgb(165,0,38)"],[0.1,"rgb(215,48,39)"],[0.2,"rgb(244,109,67)"],[0.3,"rgb(253,174,97)"],[0.4,"rgb(254,224,139)"],[0.5,"rgb(255,255,191)"],[0.6,"rgb(217,239,139)"],[0.7,"rgb(166,217,106)"],[0.8,"rgb(102,189,99)"],[0.9,"rgb(26,152,80)"],[1.0,"rgb(0,104,55)"]]},"legend":{"tracegroupgap":0},"title":{"text":"Overall promedio por país (mín. 30 jugadores)"},"margin":{"l":10,"r":10,"t":50,"b":10},"width":950,"height":550},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('91b759a0-5747-4bff-a7f2-dbc76e682203');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                            </script>        </div>
+</body>
+</html></div></div>
+</div>
+<p><strong>Respuesta:</strong> los países con verdes más intensos (Brasil, Argentina, España, Francia, Alemania) producen jugadores de mayor calidad media. Pasa el mouse para ver el dato exacto y cuántos jugadores aporta cada país.</p>
+</section>
+<hr class="docutils" />
+<section id="pregunta-4-como-se-relacionan-la-edad-y-el-overall">
+<h2>Pregunta 4: ¿Cómo se relacionan la edad y el overall?<a class="headerlink" href="#pregunta-4-como-se-relacionan-la-edad-y-el-overall" title="Link to this heading">#</a></h2>
+<p><strong>Gráfico apropiado:</strong> dispersión (scatter plot). Pregunta clásica de correlación entre dos variables numéricas. Como tenemos 18.539 puntos, agregamos transparencia para evitar saturación.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">))</span>
+
+<span class="c1"># Scatter con alpha bajo para que se vea la densidad</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Overall&#39;</span><span class="p">],</span>
+           <span class="n">alpha</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#4c72b0&#39;</span><span class="p">)</span>
+
+<span class="c1"># Calcular el overall MEDIO por edad y trazar una línea de tendencia</span>
+<span class="n">tendencia</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Age&#39;</span><span class="p">)[</span><span class="s1">&#39;Overall&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tendencia</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">tendencia</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Promedio por edad&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Relación entre edad y overall&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Edad&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Overall&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/fabadf33ff7f90daabaec45b4a992ae19e9c0a4e7b7488f8da392047a9e6ec0c.png" src="../_images/fabadf33ff7f90daabaec45b4a992ae19e9c0a4e7b7488f8da392047a9e6ec0c.png" />
+</div>
+</div>
+<p><strong>Respuesta:</strong> la línea roja muestra el patrón típico de una carrera deportiva: el overall <strong>sube hasta los 30-32 años</strong> (pico de carrera) y luego <strong>baja</strong>. Los jugadores jóvenes (16-20) son mayoría pero con valores bajos; los veteranos son pocos pero con valores muy variables.</p>
+</section>
+<hr class="docutils" />
+<section id="pregunta-5-que-pie-preferido-predomina-entre-los-jugadores">
+<h2>Pregunta 5: ¿Qué pie preferido predomina entre los jugadores?<a class="headerlink" href="#pregunta-5-que-pie-preferido-predomina-entre-los-jugadores" title="Link to this heading">#</a></h2>
+<p><strong>Gráfico apropiado:</strong> circular (pastel). Solo hay 2 categorías (izquierdo/derecho), así que el pastel funciona perfectamente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pie_counts</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Preferred Foot&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">pie_counts</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">pie_counts</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+       <span class="n">autopct</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%1.1f%%</span><span class="s1">&#39;</span><span class="p">,</span>
+       <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;#1f77b4&#39;</span><span class="p">,</span> <span class="s1">&#39;#ff7f0e&#39;</span><span class="p">],</span>
+       <span class="n">startangle</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">counterclock</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+       <span class="n">wedgeprops</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;edgecolor&#39;</span><span class="p">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="s1">&#39;linewidth&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Pie preferido de los jugadores&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Diestros: </span><span class="si">{</span><span class="n">pie_counts</span><span class="p">[</span><span class="s2">&quot;Right&quot;</span><span class="p">]</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">pie_counts</span><span class="p">[</span><span class="s2">&quot;Right&quot;</span><span class="p">]</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%)&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Zurdos:   </span><span class="si">{</span><span class="n">pie_counts</span><span class="p">[</span><span class="s2">&quot;Left&quot;</span><span class="p">]</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">pie_counts</span><span class="p">[</span><span class="s2">&quot;Left&quot;</span><span class="p">]</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ebd8e2373e6866d578771d4ecf9f380950f6077fdbee8c0ab7a38907055cb085.png" src="../_images/ebd8e2373e6866d578771d4ecf9f380950f6077fdbee8c0ab7a38907055cb085.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Diestros: 14,045 (75.8%)
+Zurdos:   4,494 (24.2%)
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Respuesta:</strong> el ~76% son diestros y solo ~24% son zurdos, una proporción muy similar a la de la población general. Los jugadores zurdos son escasos, lo que explica por qué suelen ser cotizados (Messi, Maradona, Cruyff).</p>
+</section>
+<hr class="docutils" />
+<section id="pregunta-6-como-cambia-el-overall-segun-la-posicion-en-el-campo">
+<h2>Pregunta 6: ¿Cómo cambia el overall según la posición en el campo?<a class="headerlink" href="#pregunta-6-como-cambia-el-overall-segun-la-posicion-en-el-campo" title="Link to this heading">#</a></h2>
+<p><strong>Gráfico apropiado:</strong> <strong>violin plot</strong>. Un box plot serviría, pero el violin nos muestra además la <strong>forma de la distribución</strong>, lo que revela si una posición tiene jugadores muy concentrados o muy variados.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Agrupamos posiciones en categorías más amplias (defensa, mediocampo, ataque, portero)</span>
+<span class="n">mapa_posicion</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;GK&#39;</span><span class="p">:</span> <span class="s1">&#39;Portero&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CB&#39;</span><span class="p">:</span> <span class="s1">&#39;Defensa&#39;</span><span class="p">,</span> <span class="s1">&#39;LB&#39;</span><span class="p">:</span> <span class="s1">&#39;Defensa&#39;</span><span class="p">,</span> <span class="s1">&#39;RB&#39;</span><span class="p">:</span> <span class="s1">&#39;Defensa&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;LWB&#39;</span><span class="p">:</span> <span class="s1">&#39;Defensa&#39;</span><span class="p">,</span> <span class="s1">&#39;RWB&#39;</span><span class="p">:</span> <span class="s1">&#39;Defensa&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CDM&#39;</span><span class="p">:</span> <span class="s1">&#39;Mediocampo&#39;</span><span class="p">,</span> <span class="s1">&#39;CM&#39;</span><span class="p">:</span> <span class="s1">&#39;Mediocampo&#39;</span><span class="p">,</span> <span class="s1">&#39;CAM&#39;</span><span class="p">:</span> <span class="s1">&#39;Mediocampo&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;LM&#39;</span><span class="p">:</span> <span class="s1">&#39;Mediocampo&#39;</span><span class="p">,</span> <span class="s1">&#39;RM&#39;</span><span class="p">:</span> <span class="s1">&#39;Mediocampo&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;LW&#39;</span><span class="p">:</span> <span class="s1">&#39;Ataque&#39;</span><span class="p">,</span> <span class="s1">&#39;RW&#39;</span><span class="p">:</span> <span class="s1">&#39;Ataque&#39;</span><span class="p">,</span> <span class="s1">&#39;CF&#39;</span><span class="p">:</span> <span class="s1">&#39;Ataque&#39;</span><span class="p">,</span> <span class="s1">&#39;ST&#39;</span><span class="p">:</span> <span class="s1">&#39;Ataque&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Zona&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Best Position&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">mapa_posicion</span><span class="p">)</span>
+
+<span class="c1"># Orden lógico de las zonas</span>
+<span class="n">orden_zonas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Portero&#39;</span><span class="p">,</span> <span class="s1">&#39;Defensa&#39;</span><span class="p">,</span> <span class="s1">&#39;Mediocampo&#39;</span><span class="p">,</span> <span class="s1">&#39;Ataque&#39;</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Zona&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Overall&#39;</span><span class="p">,</span>
+    <span class="n">order</span><span class="o">=</span><span class="n">orden_zonas</span><span class="p">,</span>
+    <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;Set2&#39;</span><span class="p">,</span>
+    <span class="n">inner</span><span class="o">=</span><span class="s1">&#39;quartile&#39;</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Distribución del overall por zona del campo&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Overall&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_8335/2065024171.py:17: FutureWarning:
+
+
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+</pre></div>
+</div>
+<img alt="../_images/eedb9abc45fd8764b0869c38c52a9ee60d3a0b86f8a43595de56424842abacd8.png" src="../_images/eedb9abc45fd8764b0869c38c52a9ee60d3a0b86f8a43595de56424842abacd8.png" />
+</div>
+</div>
+<p><strong>Respuesta:</strong> las cuatro zonas tienen distribuciones muy parecidas en mediana, pero los <strong>delanteros y mediocampistas</strong> tienen colas superiores más largas: la «élite» (overall &gt; 85) está concentrada en posiciones ofensivas. Los porteros se ven muy compactos en el rango medio.</p>
+</section>
+<hr class="docutils" />
+<section id="pregunta-7-quienes-son-los-10-jugadores-mas-caros-del-mundo">
+<h2>Pregunta 7: ¿Quiénes son los 10 jugadores más caros del mundo?<a class="headerlink" href="#pregunta-7-quienes-son-los-10-jugadores-mas-caros-del-mundo" title="Link to this heading">#</a></h2>
+<p><strong>Gráfico apropiado:</strong> barras horizontales. Los nombres son largos y queremos un ranking claro.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ordenar por valor de mercado y tomar el top 10</span>
+<span class="n">top10</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;Value(in Euro)&#39;</span><span class="p">)[</span>
+    <span class="p">[</span><span class="s1">&#39;Known As&#39;</span><span class="p">,</span> <span class="s1">&#39;Value(in Euro)&#39;</span><span class="p">,</span> <span class="s1">&#39;Overall&#39;</span><span class="p">,</span> <span class="s1">&#39;Club Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">]</span>
+<span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;Value(in Euro)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Convertir valores a millones para mejor lectura</span>
+<span class="n">top10</span><span class="p">[</span><span class="s1">&#39;Valor_M&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">top10</span><span class="p">[</span><span class="s1">&#39;Value(in Euro)&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mf">1e6</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Color escalado según el valor (cuanto más caro, más oscuro)</span>
+<span class="n">colores</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">top10</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">top10</span><span class="p">[</span><span class="s1">&#39;Known As&#39;</span><span class="p">],</span> <span class="n">top10</span><span class="p">[</span><span class="s1">&#39;Valor_M&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colores</span><span class="p">)</span>
+
+<span class="c1"># Etiqueta al final de cada barra: valor en millones + overall</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">nombre</span><span class="p">,</span> <span class="n">valor</span><span class="p">,</span> <span class="n">ovr</span><span class="p">,</span> <span class="n">club</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>
+        <span class="nb">zip</span><span class="p">(</span><span class="n">top10</span><span class="p">[</span><span class="s1">&#39;Known As&#39;</span><span class="p">],</span> <span class="n">top10</span><span class="p">[</span><span class="s1">&#39;Valor_M&#39;</span><span class="p">],</span> <span class="n">top10</span><span class="p">[</span><span class="s1">&#39;Overall&#39;</span><span class="p">],</span> <span class="n">top10</span><span class="p">[</span><span class="s1">&#39;Club Name&#39;</span><span class="p">])):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">valor</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;EUR </span><span class="si">{</span><span class="n">valor</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">M  (OVR </span><span class="si">{</span><span class="n">ovr</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">,</span>
+            <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Top 10 jugadores más caros de FIFA 23&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Valor de mercado (millones de EUR)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">top10</span><span class="p">[</span><span class="s1">&#39;Valor_M&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1.25</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/7a8633fa8ff5874ecafb359fa9840bcdb4496bd76ec048bfd415230972cf59da.png" src="../_images/7a8633fa8ff5874ecafb359fa9840bcdb4496bd76ec048bfd415230972cf59da.png" />
+</div>
+</div>
+<p><strong>Respuesta:</strong> Mbappé encabeza el ranking, seguido por Haaland y Vinicius Jr. Lo interesante: el top está dominado por jugadores <strong>jóvenes con potencial</strong>, no necesariamente por los de mayor overall actual.</p>
+</section>
+<hr class="docutils" />
+<section id="pregunta-8-que-relacion-hay-entre-overall-y-valor-de-mercado">
+<h2>Pregunta 8: ¿Qué relación hay entre overall y valor de mercado?<a class="headerlink" href="#pregunta-8-que-relacion-hay-entre-overall-y-valor-de-mercado" title="Link to this heading">#</a></h2>
+<p><strong>Gráfico apropiado:</strong> <strong>hexbin plot</strong>. Con 18.539 jugadores un scatter común quedaría completamente saturado. El hexbin agrupa los puntos en hexágonos coloreados según la densidad.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filtramos jugadores con valor &gt; 0 para usar escala logarítmica</span>
+<span class="n">df_valor</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Value(in Euro)&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df_valor</span><span class="p">[</span><span class="s1">&#39;Valor_log&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">df_valor</span><span class="p">[</span><span class="s1">&#39;Value(in Euro)&#39;</span><span class="p">])</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Scatter clásico: queda saturado</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_valor</span><span class="p">[</span><span class="s1">&#39;Overall&#39;</span><span class="p">],</span> <span class="n">df_valor</span><span class="p">[</span><span class="s1">&#39;Value(in Euro)&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mf">1e6</span><span class="p">,</span>
+                <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Scatter clásico: 18.539 puntos saturados&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Overall&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Valor (millones EUR)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+
+<span class="c1"># Hexbin: la densidad se ve clara</span>
+<span class="n">hb</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hexbin</span><span class="p">(</span><span class="n">df_valor</span><span class="p">[</span><span class="s1">&#39;Overall&#39;</span><span class="p">],</span> <span class="n">df_valor</span><span class="p">[</span><span class="s1">&#39;Valor_log&#39;</span><span class="p">],</span>
+                    <span class="n">gridsize</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;YlOrRd&#39;</span><span class="p">,</span> <span class="n">mincnt</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Hexbin: la concentración real es visible&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Overall&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Valor (log10 EUR)&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">hb</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Cantidad de jugadores&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Coeficiente de correlación</span>
+<span class="n">corr</span> <span class="o">=</span> <span class="n">df_valor</span><span class="p">[</span><span class="s1">&#39;Overall&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">df_valor</span><span class="p">[</span><span class="s1">&#39;Valor_log&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Correlación entre Overall y log(Valor): </span><span class="si">{</span><span class="n">corr</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6b66a2f2125ff3c636386dfa0268ae77d3ae42b1eab95af105baf85b0c7f8cbf.png" src="../_images/6b66a2f2125ff3c636386dfa0268ae77d3ae42b1eab95af105baf85b0c7f8cbf.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Correlación entre Overall y log(Valor): 0.887
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Respuesta:</strong> la correlación es muy fuerte (~0,90). Pero la relación <strong>no es lineal</strong>: cada punto adicional de overall multiplica el valor (por eso el eje Y va en log). Pasar de 80 a 85 vale mucho más que pasar de 60 a 65.</p>
+</section>
+<hr class="docutils" />
+<section id="pregunta-9-como-se-comparan-los-perfiles-de-los-4-mejores-delanteros">
+<h2>Pregunta 9: ¿Cómo se comparan los perfiles de los 4 mejores delanteros?<a class="headerlink" href="#pregunta-9-como-se-comparan-los-perfiles-de-los-4-mejores-delanteros" title="Link to this heading">#</a></h2>
+<p><strong>Gráfico apropiado:</strong> <strong>radar chart</strong>. Tenemos 6 atributos (las 6 estadísticas FIFA) y queremos comparar varios jugadores al mismo tiempo. Es el caso de uso clásico del radar.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tomamos los 4 mejores delanteros (zona Ataque) por overall</span>
+<span class="n">delanteros</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Zona&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Ataque&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;Overall&#39;</span><span class="p">)</span>
+
+<span class="c1"># Las 6 estadísticas principales FIFA</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Pace Total&#39;</span><span class="p">,</span> <span class="s1">&#39;Shooting Total&#39;</span><span class="p">,</span> <span class="s1">&#39;Passing Total&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;Dribbling Total&#39;</span><span class="p">,</span> <span class="s1">&#39;Defending Total&#39;</span><span class="p">,</span> <span class="s1">&#39;Physicality Total&#39;</span><span class="p">]</span>
+<span class="n">labels_stats</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Velocidad&#39;</span><span class="p">,</span> <span class="s1">&#39;Tiro&#39;</span><span class="p">,</span> <span class="s1">&#39;Pase&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Regate&#39;</span><span class="p">,</span> <span class="s1">&#39;Defensa&#39;</span><span class="p">,</span> <span class="s1">&#39;Físico&#39;</span><span class="p">]</span>
+
+<span class="c1"># Ángulos para cada eje del radar</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">stats</span><span class="p">)</span>
+<span class="n">angulos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">angulos</span> <span class="o">+=</span> <span class="n">angulos</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span>   <span class="c1"># cerrar el polígono</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="n">subplot_kw</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">polar</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="n">colores</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#1f77b4&#39;</span><span class="p">,</span> <span class="s1">&#39;#e63946&#39;</span><span class="p">,</span> <span class="s1">&#39;#2ca02c&#39;</span><span class="p">,</span> <span class="s1">&#39;#ff7f0e&#39;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">jugador</span><span class="p">),</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">delanteros</span><span class="o">.</span><span class="n">iterrows</span><span class="p">(),</span> <span class="n">colores</span><span class="p">):</span>
+    <span class="n">valores</span> <span class="o">=</span> <span class="n">jugador</span><span class="p">[</span><span class="n">stats</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">valores</span> <span class="o">+=</span> <span class="n">valores</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span>   <span class="c1"># cerrar polígono</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">angulos</span><span class="p">,</span> <span class="n">valores</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">jugador</span><span class="p">[</span><span class="s1">&#39;Known As&#39;</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">angulos</span><span class="p">,</span> <span class="n">valores</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">angulos</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">labels_stats</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Perfiles técnicos: top 4 delanteros</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.3</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">),</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/c91d39fcd90dfff72a92b6c5e22c7aa7d089e8dda1b7b3b7e861ace55b6c026f.png" src="../_images/c91d39fcd90dfff72a92b6c5e22c7aa7d089e8dda1b7b3b7e861ace55b6c026f.png" />
+</div>
+</div>
+<p><strong>Respuesta:</strong> la «huella» de cada jugador revela su perfil. Algunos sobresalen en velocidad y regate, otros en tiro y físico. La forma del polígono permite identificar rápidamente fortalezas y debilidades relativas.</p>
+</section>
+<hr class="docutils" />
+<section id="pregunta-10-que-clubes-concentran-mas-valor-en-su-plantilla">
+<h2>Pregunta 10: ¿Qué clubes concentran más valor en su plantilla?<a class="headerlink" href="#pregunta-10-que-clubes-concentran-mas-valor-en-su-plantilla" title="Link to this heading">#</a></h2>
+<p><strong>Gráfico apropiado:</strong> <strong>treemap</strong>. Queremos ver «partes de un total» con muchos elementos. Un pastel con 20 categorías sería ilegible; el treemap funciona bien.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Suma del valor de mercado por club, top 20</span>
+<span class="n">valor_clubs</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Club Name&#39;</span><span class="p">)[</span><span class="s1">&#39;Value(in Euro)&#39;</span><span class="p">]</span>
+                 <span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+                 <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                 <span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span> <span class="o">/</span> <span class="mf">1e6</span>   <span class="c1"># en millones EUR</span>
+
+<span class="c1"># Etiquetas: club + valor en millones</span>
+<span class="n">etiquetas</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">club</span><span class="si">}</span><span class="se">\n</span><span class="s1">EUR </span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">M&#39;</span> <span class="k">for</span> <span class="n">club</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">valor_clubs</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+
+<span class="n">squarify</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">sizes</span><span class="o">=</span><span class="n">valor_clubs</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="n">etiquetas</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">valor_clubs</span><span class="p">)),</span>
+    <span class="n">text_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;fontsize&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span> <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="s1">&#39;fontweight&#39;</span><span class="p">:</span> <span class="s1">&#39;bold&#39;</span><span class="p">},</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Top 20 clubes por valor total de plantilla&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3a76cb1e5e6602b60573f92c8caedafd6fd73b285386156e7437300aa3155c3d.png" src="../_images/3a76cb1e5e6602b60573f92c8caedafd6fd73b285386156e7437300aa3155c3d.png" />
+</div>
+</div>
+<p><strong>Respuesta:</strong> Manchester City lidera, seguido por Liverpool, PSG, Real Madrid y Barcelona. Los 5 primeros clubes acumulan más de 5.000 millones de euros en plantilla. El tamaño relativo de cada rectángulo permite comparar de forma intuitiva.</p>
+</section>
+<hr class="docutils" />
+<section id="pregunta-11-como-se-correlacionan-las-estadisticas-tecnicas">
+<h2>Pregunta 11: ¿Cómo se correlacionan las estadísticas técnicas?<a class="headerlink" href="#pregunta-11-como-se-correlacionan-las-estadisticas-tecnicas" title="Link to this heading">#</a></h2>
+<p><strong>Gráfico apropiado:</strong> <strong>heatmap de correlaciones</strong>. Cuando hay muchas variables numéricas, este gráfico revela qué pares se mueven juntos. Es estándar en análisis exploratorio.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Stats técnicas a analizar</span>
+<span class="n">stats_corr</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Pace Total&#39;</span><span class="p">,</span> <span class="s1">&#39;Shooting Total&#39;</span><span class="p">,</span> <span class="s1">&#39;Passing Total&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;Dribbling Total&#39;</span><span class="p">,</span> <span class="s1">&#39;Defending Total&#39;</span><span class="p">,</span> <span class="s1">&#39;Physicality Total&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;Overall&#39;</span><span class="p">,</span> <span class="s1">&#39;Potential&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">]</span>
+
+<span class="c1"># Renombrar para que las etiquetas se lean en español</span>
+<span class="n">rename_map</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Pace Total&#39;</span><span class="p">:</span> <span class="s1">&#39;Velocidad&#39;</span><span class="p">,</span> <span class="s1">&#39;Shooting Total&#39;</span><span class="p">:</span> <span class="s1">&#39;Tiro&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Passing Total&#39;</span><span class="p">:</span> <span class="s1">&#39;Pase&#39;</span><span class="p">,</span>     <span class="s1">&#39;Dribbling Total&#39;</span><span class="p">:</span> <span class="s1">&#39;Regate&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Defending Total&#39;</span><span class="p">:</span> <span class="s1">&#39;Defensa&#39;</span><span class="p">,</span> <span class="s1">&#39;Physicality Total&#39;</span><span class="p">:</span> <span class="s1">&#39;Físico&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Overall&#39;</span><span class="p">:</span> <span class="s1">&#39;Overall&#39;</span><span class="p">,</span> <span class="s1">&#39;Potential&#39;</span><span class="p">:</span> <span class="s1">&#39;Potencial&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">:</span> <span class="s1">&#39;Edad&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">matriz_corr</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">stats_corr</span><span class="p">]</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">rename_map</span><span class="p">)</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+
+<span class="c1"># Paleta divergente: rojo (correlación negativa) - blanco (cero) - azul (positiva)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">matriz_corr</span><span class="p">,</span>
+            <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.2f&#39;</span><span class="p">,</span>
+            <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">linecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>
+            <span class="n">cbar_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Correlación&#39;</span><span class="p">},</span>
+            <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Matriz de correlaciones entre estadísticas&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6689dd3b62f8a405229f546cc5160644fce481d7a5ada7d3248417d5ffc615ef.png" src="../_images/6689dd3b62f8a405229f546cc5160644fce481d7a5ada7d3248417d5ffc615ef.png" />
+</div>
+</div>
+<p><strong>Respuesta:</strong></p>
+<ul class="simple">
+<li><p><strong>Defensa</strong> se correlaciona negativamente con tiro, regate y velocidad: confirma que defensores y atacantes tienen perfiles opuestos.</p></li>
+<li><p><strong>Tiro y regate</strong> están fuertemente correlacionados: los buenos atacantes son ambos.</p></li>
+<li><p><strong>Edad</strong> apenas se correlaciona con stats técnicas, pero <strong>negativamente con potencial</strong> (cuanto mayor el jugador, menos potencial de crecer).</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="pregunta-12-cual-es-el-potencial-de-crecimiento-por-edad">
+<h2>Pregunta 12: ¿Cuál es el potencial de crecimiento por edad?<a class="headerlink" href="#pregunta-12-cual-es-el-potencial-de-crecimiento-por-edad" title="Link to this heading">#</a></h2>
+<p><strong>Gráfico apropiado:</strong> scatter con dos series superpuestas (overall actual vs potencial), agregadas por edad. Permite responder: <em>¿hasta qué edad puede un jugador todavía mejorar?</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculamos overall medio y potencial medio para cada edad</span>
+<span class="n">evol</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Age&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+    <span class="n">overall_medio</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Overall&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">),</span>
+    <span class="n">potencial_medio</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Potential&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">),</span>
+    <span class="n">n_jugadores</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Overall&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">),</span>
+<span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="c1"># La diferencia es el &quot;margen de crecimiento&quot;</span>
+<span class="n">evol</span><span class="p">[</span><span class="s1">&#39;gap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">evol</span><span class="p">[</span><span class="s1">&#39;potencial_medio&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">evol</span><span class="p">[</span><span class="s1">&#39;overall_medio&#39;</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">))</span>
+
+<span class="c1"># Dos líneas: overall actual y potencial</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">evol</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">],</span> <span class="n">evol</span><span class="p">[</span><span class="s1">&#39;overall_medio&#39;</span><span class="p">],</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#1f77b4&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Overall actual&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">evol</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">],</span> <span class="n">evol</span><span class="p">[</span><span class="s1">&#39;potencial_medio&#39;</span><span class="p">],</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#e63946&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Potencial&#39;</span><span class="p">)</span>
+
+<span class="c1"># Sombrear la zona de crecimiento (gap entre las líneas)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">evol</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">],</span>
+                <span class="n">evol</span><span class="p">[</span><span class="s1">&#39;overall_medio&#39;</span><span class="p">],</span> <span class="n">evol</span><span class="p">[</span><span class="s1">&#39;potencial_medio&#39;</span><span class="p">],</span>
+                <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Margen de crecimiento&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Overall vs Potencial por edad&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Edad&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Puntuación FIFA&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/a14acddbc0718c8dde480118afebc08b4d1f3ecbda7e4988b20a974c2a50e7a6.png" src="../_images/a14acddbc0718c8dde480118afebc08b4d1f3ecbda7e4988b20a974c2a50e7a6.png" />
+</div>
+</div>
+<p><strong>Respuesta:</strong> la zona gris (margen de crecimiento) es <strong>enorme entre los 16-22 años</strong> y se cierra completamente alrededor de los 28-30. Esa es exactamente la lógica de mercado: los clubes pagan fortunas por jóvenes porque tienen recorrido para crecer.</p>
+</section>
+<hr class="docutils" />
+<section id="bonus-dashboard-combinado-de-un-jugador">
+<h2>Bonus: dashboard combinado de un jugador<a class="headerlink" href="#bonus-dashboard-combinado-de-un-jugador" title="Link to this heading">#</a></h2>
+<p>Para cerrar, combinamos varios gráficos en una sola figura para crear una <strong>«ficha visual»</strong> del mejor jugador del juego.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># El jugador con mayor overall</span>
+<span class="n">mejor</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Overall&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Jugador analizado: </span><span class="si">{</span><span class="n">mejor</span><span class="p">[</span><span class="s2">&quot;Known As&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">mejor</span><span class="p">[</span><span class="s2">&quot;Club Name&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Crear figura con grilla de subgráficos</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">gs</span>  <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_gridspec</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c1"># (1) Stats principales como barras</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Pace Total&#39;</span><span class="p">,</span> <span class="s1">&#39;Shooting Total&#39;</span><span class="p">,</span> <span class="s1">&#39;Passing Total&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;Dribbling Total&#39;</span><span class="p">,</span> <span class="s1">&#39;Defending Total&#39;</span><span class="p">,</span> <span class="s1">&#39;Physicality Total&#39;</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;VEL&#39;</span><span class="p">,</span> <span class="s1">&#39;TIR&#39;</span><span class="p">,</span> <span class="s1">&#39;PAS&#39;</span><span class="p">,</span> <span class="s1">&#39;REG&#39;</span><span class="p">,</span> <span class="s1">&#39;DEF&#39;</span><span class="p">,</span> <span class="s1">&#39;FIS&#39;</span><span class="p">]</span>
+<span class="n">valores</span> <span class="o">=</span> <span class="p">[</span><span class="n">mejor</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">stats</span><span class="p">]</span>
+
+<span class="n">barras</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">valores</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">b</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">barras</span><span class="p">,</span> <span class="n">valores</span><span class="p">):</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">v</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">),</span>
+             <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">105</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Estadísticas principales&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Puntuación&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># (2) Comparación con la media de su posición</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">media_pos</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Best Position&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">mejor</span><span class="p">[</span><span class="s1">&#39;Best Position&#39;</span><span class="p">]][</span><span class="n">stats</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">bar</span><span class="p">([</span><span class="s1">&#39;Mejor&#39;</span><span class="p">,</span> <span class="s1">&#39;Promedio&#39;</span><span class="p">],</span> <span class="p">[</span><span class="n">mejor</span><span class="p">[</span><span class="s1">&#39;Overall&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Overall&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()],</span>
+        <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;#e63946&#39;</span><span class="p">,</span> <span class="s1">&#39;#cccccc&#39;</span><span class="p">])</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Overall vs promedio&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Overall&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># (3) Texto con datos personales</span>
+<span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">info</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Nombre: </span><span class="si">{</span><span class="n">mejor</span><span class="p">[</span><span class="s1">&#39;Known As&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;Club: </span><span class="si">{</span><span class="n">mejor</span><span class="p">[</span><span class="s1">&#39;Club Name&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;País: </span><span class="si">{</span><span class="n">mejor</span><span class="p">[</span><span class="s1">&#39;Nationality&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;Edad: </span><span class="si">{</span><span class="n">mejor</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> años</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;Altura: </span><span class="si">{</span><span class="n">mejor</span><span class="p">[</span><span class="s1">&#39;Height(in cm)&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> cm</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;Posición: </span><span class="si">{</span><span class="n">mejor</span><span class="p">[</span><span class="s1">&#39;Best Position&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;Pie: </span><span class="si">{</span><span class="n">mejor</span><span class="p">[</span><span class="s1">&#39;Preferred Foot&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s1">&#39;monospace&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Datos personales&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+<span class="c1"># (4) Valor de mercado y salario</span>
+<span class="n">ax4</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:])</span>
+<span class="n">valor</span>   <span class="o">=</span> <span class="n">mejor</span><span class="p">[</span><span class="s1">&#39;Value(in Euro)&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mf">1e6</span>
+<span class="n">salario</span> <span class="o">=</span> <span class="n">mejor</span><span class="p">[</span><span class="s1">&#39;Wage(in Euro)&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mf">1e3</span>
+<span class="n">barras2</span> <span class="o">=</span> <span class="n">ax4</span><span class="o">.</span><span class="n">barh</span><span class="p">([</span><span class="s1">&#39;Valor (M EUR)&#39;</span><span class="p">,</span> <span class="s1">&#39;Salario (k EUR/sem)&#39;</span><span class="p">],</span>
+                   <span class="p">[</span><span class="n">valor</span><span class="p">,</span> <span class="n">salario</span><span class="p">],</span>
+                   <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;#2ca02c&#39;</span><span class="p">,</span> <span class="s1">&#39;#ff7f0e&#39;</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">b</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">barras2</span><span class="p">,</span> <span class="p">[</span><span class="n">valor</span><span class="p">,</span> <span class="n">salario</span><span class="p">]):</span>
+    <span class="n">ax4</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">v</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="n">valor</span><span class="p">,</span> <span class="n">salario</span><span class="p">)</span><span class="o">*</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">get_y</span><span class="p">()</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
+             <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Valor económico&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+    <span class="n">ax4</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">spine</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Ficha visual: </span><span class="si">{</span><span class="n">mejor</span><span class="p">[</span><span class="s2">&quot;Known As&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jugador analizado: L. Messi (Paris Saint-Germain)
+</pre></div>
+</div>
+<img alt="../_images/1d3d58eb8308e7237c87e1ec709810958f63c56e2a0decae73002e3d0f702b84.png" src="../_images/1d3d58eb8308e7237c87e1ec709810958f63c56e2a0decae73002e3d0f702b84.png" />
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="resumen-del-analisis">
+<h2>Resumen del análisis<a class="headerlink" href="#resumen-del-analisis" title="Link to this heading">#</a></h2>
+<p>Aplicamos 12 visualizaciones distintas a un dataset de 18.539 jugadores. Cada una respondió una pregunta concreta:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>#</p></th>
+<th class="head"><p>Pregunta</p></th>
+<th class="head"><p>Gráfico usado</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>¿Cómo se distribuye el overall?</p></td>
+<td><p>Histograma</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>¿Qué países tienen más jugadores?</p></td>
+<td><p>Barras horizontales</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>¿Qué países tienen mejor calidad?</p></td>
+<td><p>Mapa coroplético</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>¿Edad y overall están relacionados?</p></td>
+<td><p>Scatter + tendencia</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>¿Pie preferido predominante?</p></td>
+<td><p>Pastel</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>¿Overall por zona del campo?</p></td>
+<td><p>Violin plot</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>¿Top 10 jugadores más caros?</p></td>
+<td><p>Barras horizontales</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>¿Overall vs valor de mercado?</p></td>
+<td><p>Hexbin (por densidad)</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>¿Comparación de delanteros élite?</p></td>
+<td><p>Radar chart</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>¿Clubes con más valor?</p></td>
+<td><p>Treemap</p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>¿Correlación entre stats?</p></td>
+<td><p>Heatmap</p></td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td><p>¿Margen de crecimiento por edad?</p></td>
+<td><p>Líneas con área sombreada</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="conclusiones-clave-del-dataset">
+<h3>Conclusiones clave del dataset<a class="headerlink" href="#conclusiones-clave-del-dataset" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>La calidad de los jugadores se distribuye casi como una campana centrada en 65 puntos.</p></li>
+<li><p>Inglaterra, Alemania y España dominan en cantidad; Brasil y Argentina destacan en calidad media.</p></li>
+<li><p>El valor de mercado crece de forma <strong>exponencial</strong> con el overall: cada punto adicional vale mucho más que el anterior.</p></li>
+<li><p>La ventana de «crecimiento esperado» se cierra alrededor de los 28-30 años.</p></li>
+<li><p>Los clubes top de Europa concentran una porción enorme del valor mundial.</p></li>
+</ul>
+</section>
+<section id="lecciones-de-visualizacion">
+<h3>Lecciones de visualización<a class="headerlink" href="#lecciones-de-visualizacion" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Filtrar es parte de visualizar</strong>: top 10, top 15, top 20. Nadie quiere ver 18.539 nombres.</p></li>
+<li><p><strong>Cuando hay muchos puntos, usa hexbin</strong> o agrega información con líneas de promedio.</p></li>
+<li><p><strong>Los mapas no son adorno</strong>: cuando la pregunta es geográfica, el mapa siempre gana.</p></li>
+<li><p><strong>Cada pregunta tiene su gráfico ideal</strong>, no a la inversa.</p></li>
+</ol>
+<hr class="docutils" />
+<p><strong>Universidad Autónoma de Manizales — ¿Especialización en IA</strong></p>
+<p><em>Sergio Alejandro Holguín García</em></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Unidad 2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Que%20Grafica%20escoger.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">2.14 Analítica de Datos: Tipos de Gráficos y Análisis Exploratorio</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="pbi.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">2.16 Visualizacion con Power BI</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preguntas-que-vamos-a-resolver">Preguntas que vamos a resolver</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-inicial-y-carga-del-dataset">0. Configuración inicial y carga del dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limpieza-rapida">Limpieza rápida</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-1-como-se-distribuye-el-nivel-general-overall-de-los-jugadores">Pregunta 1: ¿Cómo se distribuye el nivel general (overall) de los jugadores?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-2-que-nacionalidades-aportan-mas-jugadores-al-futbol-mundial">Pregunta 2: ¿Qué nacionalidades aportan más jugadores al fútbol mundial?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-3-que-paises-producen-jugadores-con-mejor-calidad-promedio">Pregunta 3: ¿Qué países producen jugadores con mejor calidad promedio?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-4-como-se-relacionan-la-edad-y-el-overall">Pregunta 4: ¿Cómo se relacionan la edad y el overall?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-5-que-pie-preferido-predomina-entre-los-jugadores">Pregunta 5: ¿Qué pie preferido predomina entre los jugadores?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-6-como-cambia-el-overall-segun-la-posicion-en-el-campo">Pregunta 6: ¿Cómo cambia el overall según la posición en el campo?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-7-quienes-son-los-10-jugadores-mas-caros-del-mundo">Pregunta 7: ¿Quiénes son los 10 jugadores más caros del mundo?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-8-que-relacion-hay-entre-overall-y-valor-de-mercado">Pregunta 8: ¿Qué relación hay entre overall y valor de mercado?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-9-como-se-comparan-los-perfiles-de-los-4-mejores-delanteros">Pregunta 9: ¿Cómo se comparan los perfiles de los 4 mejores delanteros?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-10-que-clubes-concentran-mas-valor-en-su-plantilla">Pregunta 10: ¿Qué clubes concentran más valor en su plantilla?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-11-como-se-correlacionan-las-estadisticas-tecnicas">Pregunta 11: ¿Cómo se correlacionan las estadísticas técnicas?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-12-cual-es-el-potencial-de-crecimiento-por-edad">Pregunta 12: ¿Cuál es el potencial de crecimiento por edad?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-dashboard-combinado-de-un-jugador">Bonus: dashboard combinado de un jugador</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-del-analisis">Resumen del análisis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones-clave-del-dataset">Conclusiones clave del dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lecciones-de-visualizacion">Lecciones de visualización</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Sergio Alejandro Holguin García
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

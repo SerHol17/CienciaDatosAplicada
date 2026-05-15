@@ -1,0 +1,1508 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2. 11 Buenas Practicas de Visualizacion de Datos &#8212; Ciencia de Datos Aplicada- 01 Ucaldas</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unidad 2/Buenas_Practicas';</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="2.12 Buenas Prácticas de Visualización de Datos" href="buenas_practicas_visualizacion.html" />
+    <link rel="prev" title="2.10: Comparativa y Casos de Uso" href="07_comparativa_y_casos.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Ciencia de Datos Aplicada- 01 Ucaldas - Home"/>
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark pst-js-only" alt="Ciencia de Datos Aplicada- 01 Ucaldas - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Ciencia de datos aplicada
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Unidad1.html">Unidad 1: Deep Learning Avanzado</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/01_introduccion_ia.html">1.1 Tópicos Emergentes de la IA — 2026</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/02_Autoencoders.html">1.2 Autoencoders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/autoencoders_tf.html">1.3 Autoencoders en TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/Gans_teoria.html">1.4 Redes Generativas Adversariales (GANs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/gans_tf.html">1.5 Redes Generativas Adversariales (GANs) en TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/segmentacion_teoria.html">1.6 Segmentación con Inteligencia Artificial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/segmentacion_tf.html">1.7 Segmentacion con Inteligencia Artificial — TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/16_nlp_transformers.html">1.8 Procesamiento de Lenguaje Natural y Transformers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/nlp_tensorflow.html">1.9 Procesamiento de Lenguaje Natural con TensorFlow / Keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/17_llms.html">1.10 Modelos de Lenguaje de Gran Escala (LLMs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/llms_colab.html">1.11 LLMs en la Practica: OpenAI GPT y Ollama</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/18_agentes.html">1.12 Agentes de Inteligencia Artificial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/agentes_colab.html">1.13 Agentes de Inteligencia Artificial</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Unidad%201/frameworks_agentes.html">1.14 LangChain · LangGraph · CrewAI</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Unidad2.html">Unidad 2: Visualizacion de Datos</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Matplotlib.html">2.1 Visualizacion con Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_matplotlib_intro.html">2.2 Matplotlib — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_matplotlib_avanzado.html">2.3: Matplotlib — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Seaborn.html">2.4 Visualizacion con Seaborn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_seaborn_intro.html">2.5 Seaborn — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotly.html">2.7 Visualizacion Interactiva con Plotly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_seaborn_avanzado.html">2.6: Seaborn — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_plotly_intro.html">2.8: Plotly — Gráficos Interactivos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_plotly_avanzado.html">2.9: Plotly — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_comparativa_y_casos.html">2.10: Comparativa y Casos de Uso</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2. 11 Buenas Practicas de Visualizacion de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="buenas_practicas_visualizacion.html">2.12 Buenas Prácticas de Visualización de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Que_Escoger.html">2.13 Que Grafica Escoger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Que%20Grafica%20escoger.html">2.14 Analítica de Datos: Tipos de Gráficos y Análisis Exploratorio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="caso_practico_fifa23.html">2.15 Caso Práctico: Análisis Visual del Dataset FIFA 23</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pbi.html">2.16 Visualizacion con Power BI</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/CienciaDatosAplicada" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/CienciaDatosAplicada/issues/new?title=Issue%20on%20page%20%2FUnidad 2/Buenas_Practicas.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Unidad 2/Buenas_Practicas.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>2. 11 Buenas Practicas de Visualizacion de Datos</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indice">Indice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principios-fundamentales">1. Principios Fundamentales</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-jerarquia-de-precision-perceptual">1.1 La jerarquia de precision perceptual</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-relacion-datos-tinta-data-ink-ratio">1.2 La relacion datos-tinta (Data-Ink Ratio)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-cognitiva">1.3 Carga cognitiva</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-proposito-de-la-visualizacion">1.4 El proposito de la visualizacion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#percepcion-visual-y-preatencion">2. Percepcion Visual y Preatencion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atributos-preatentivos">2.1 Atributos preatentivos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#codificacion-multiple">2.2 Codificacion multiple</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#efecto-de-figura-y-fondo">2.3 Efecto de figura y fondo</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eleccion-y-uso-del-color">3. Eleccion y Uso del Color</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#los-tres-tipos-de-paletas">3.1 Los tres tipos de paletas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principios-de-uso-del-color">3.2 Principios de uso del color</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contraste-y-legibilidad">3.3 Contraste y legibilidad</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numero-de-colores">3.4 Numero de colores</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipografia-y-texto">4. Tipografia y Texto</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jerarquia-tipografica">4.1 Jerarquia tipografica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tipografias-recomendadas">4.2 Tipografias recomendadas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#etiquetas-de-datos">4.3 Etiquetas de datos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#titulos-y-subtitulos-efectivos">4.4 Titulos y subtitulos efectivos</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejes-escalas-y-proporciones">5. Ejes, Escalas y Proporciones</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-eje-y-y-el-cero">5.1 El eje Y y el cero</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#escalas-logaritmicas">5.2 Escalas logaritmicas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eje-secundario">5.3 Eje secundario</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aspect-ratio-relacion-de-aspecto">5.4 Aspect ratio (relacion de aspecto)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#truncar-graficas-de-area">5.5 Truncar graficas de area</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reduccion-del-ruido-visual">6. Reduccion del Ruido Visual</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-principio-de-eliminacion-progresiva">6.1 El principio de eliminacion progresiva</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cuadricula">6.2 Cuadricula</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#leyenda-vs-etiquetas-directas">6.3 Leyenda vs. Etiquetas directas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sobreannotacion">6.4 Sobreannotacion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accesibilidad">7. Accesibilidad</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#daltonismo">7.1 Daltonismo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#redundancia-visual-para-accesibilidad">7.2 Redundancia visual para accesibilidad</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tamanos-minimos">7.3 Tamanos minimos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#texto-alternativo-y-descripciones">7.4 Texto alternativo y descripciones</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#narrativa-con-datos">8. Narrativa con Datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-estructura-de-la-historia">8.1 La estructura de la historia</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#destacar-lo-que-importa">8.2 Destacar lo que importa</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-orden-de-lectura">8.3 El orden de lectura</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contexto-es-obligatorio">8.4 Contexto es obligatorio</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errores-comunes">9. Errores Comunes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficas-de-torta-con-demasiadas-categorias">9.1 Graficas de torta con demasiadas categorias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficas-3d-sin-justificacion">9.2 Graficas 3D sin justificacion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#doble-eje-y-mal-usado">9.3 Doble eje Y mal usado</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#saturacion-de-informacion">9.4 Saturacion de informacion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ordenacion-incorrecta">9.5 Ordenacion incorrecta</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lineas-en-datos-no-continuos">9.6 Lineas en datos no continuos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#escala-truncada-en-barras">9.7 Escala truncada en barras</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lista-de-verificacion">10. Lista de Verificacion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#antes-de-construir-la-grafica">Antes de construir la grafica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#al-construir-la-grafica">Al construir la grafica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#al-revisar-la-grafica">Al revisar la grafica</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencias">Referencias</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="buenas-practicas-de-visualizacion-de-datos">
+<h1>2. 11 Buenas Practicas de Visualizacion de Datos<a class="headerlink" href="#buenas-practicas-de-visualizacion-de-datos" title="Link to this heading">#</a></h1>
+<section id="indice">
+<h2>Indice<a class="headerlink" href="#indice" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#1-principios-fundamentales"><span class="xref myst">Principios fundamentales</span></a></p></li>
+<li><p><a class="reference internal" href="#2-percepcion-visual-y-preatencion"><span class="xref myst">Percepcion visual y preatencion</span></a></p></li>
+<li><p><a class="reference internal" href="#3-eleccion-y-uso-del-color"><span class="xref myst">Eleccion y uso del color</span></a></p></li>
+<li><p><a class="reference internal" href="#4-tipografia-y-texto"><span class="xref myst">Tipografia y texto</span></a></p></li>
+<li><p><a class="reference internal" href="#5-ejes-escalas-y-proporciones"><span class="xref myst">Ejes, escalas y proporciones</span></a></p></li>
+<li><p><a class="reference internal" href="#6-reduccion-del-ruido-visual"><span class="xref myst">Reduccion del ruido visual</span></a></p></li>
+<li><p><a class="reference internal" href="#7-accesibilidad"><span class="xref myst">Accesibilidad</span></a></p></li>
+<li><p><a class="reference internal" href="#8-narrativa-con-datos"><span class="xref myst">Narrativa con datos</span></a></p></li>
+<li><p><a class="reference internal" href="#9-errores-comunes"><span class="xref myst">Errores comunes</span></a></p></li>
+<li><p><a class="reference internal" href="#10-lista-de-verificacion"><span class="xref myst">Lista de verificacion</span></a></p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="principios-fundamentales">
+<h2>1. Principios Fundamentales<a class="headerlink" href="#principios-fundamentales" title="Link to this heading">#</a></h2>
+<section id="la-jerarquia-de-precision-perceptual">
+<h3>1.1 La jerarquia de precision perceptual<a class="headerlink" href="#la-jerarquia-de-precision-perceptual" title="Link to this heading">#</a></h3>
+<p>Cleveland y McGill (1984) demostraron experimentalmente que los humanos percibimos los encodings visuales con distinta precision. De mayor a menor exactitud:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>1. Posicion en escala comun          ← mas preciso
+2. Posicion en escalas no alineadas
+3. Longitud
+4. Angulo / pendiente
+5. Area
+6. Volumen
+7. Densidad / saturacion de color
+8. Tono de color                     ← menos preciso
+</pre></div>
+</div>
+<p><strong>Implicacion directa:</strong> cuando la comparacion precisa de valores es importante, usar posicion (graficas de barras, puntos en eje comun) en lugar de area (burbujas) o angulo (torta).</p>
+</section>
+<section id="la-relacion-datos-tinta-data-ink-ratio">
+<h3>1.2 La relacion datos-tinta (Data-Ink Ratio)<a class="headerlink" href="#la-relacion-datos-tinta-data-ink-ratio" title="Link to this heading">#</a></h3>
+<p>Tufte (1983) define la relacion datos-tinta como:</p>
+<div class="math notranslate nohighlight">
+\[\text{Data-Ink Ratio} = \frac{\text{Tinta usada para representar datos}}{\text{Tinta total de la grafica}}\]</div>
+<p>El objetivo es <strong>maximizar este ratio</strong>: eliminar todo elemento visual que no aporte informacion sobre los datos.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Elementos</span> <span class="n">que</span> <span class="n">reducen</span> <span class="n">el</span> <span class="n">Data</span><span class="o">-</span><span class="n">Ink</span> <span class="n">Ratio</span> <span class="p">(</span><span class="n">eliminar</span> <span class="n">si</span> <span class="n">no</span> <span class="n">aportan</span><span class="p">):</span>
+  <span class="o">-</span> <span class="n">Bordes</span> <span class="n">de</span> <span class="n">las</span> <span class="n">barras</span> <span class="n">cuando</span> <span class="n">el</span> <span class="n">color</span> <span class="n">ya</span> <span class="n">las</span> <span class="n">delimita</span>
+  <span class="o">-</span> <span class="n">Cuadricula</span> <span class="n">densa</span> <span class="n">cuando</span> <span class="n">los</span> <span class="n">valores</span> <span class="n">exactos</span> <span class="n">estan</span> <span class="n">anotados</span>
+  <span class="o">-</span> <span class="n">Fondo</span> <span class="n">de</span> <span class="n">color</span> <span class="n">cuando</span> <span class="n">el</span> <span class="n">blanco</span> <span class="n">sirve</span> <span class="n">igual</span>
+  <span class="o">-</span> <span class="n">Sombras</span> <span class="n">y</span> <span class="n">efectos</span> <span class="mi">3</span><span class="n">D</span> <span class="n">en</span> <span class="n">graficas</span> <span class="mi">2</span><span class="n">D</span>
+  <span class="o">-</span> <span class="n">Leyenda</span> <span class="n">cuando</span> <span class="n">se</span> <span class="n">puede</span> <span class="n">etiquetar</span> <span class="n">directamente</span>
+  <span class="o">-</span> <span class="n">Repeticion</span> <span class="n">de</span> <span class="n">etiquetas</span> <span class="n">que</span> <span class="n">ya</span> <span class="n">aparecen</span> <span class="n">en</span> <span class="n">el</span> <span class="n">eje</span>
+  <span class="o">-</span> <span class="n">Marcadores</span> <span class="n">en</span> <span class="n">cada</span> <span class="n">punto</span> <span class="n">de</span> <span class="n">una</span> <span class="n">linea</span> <span class="n">continua</span> <span class="n">densa</span>
+</pre></div>
+</div>
+</section>
+<section id="carga-cognitiva">
+<h3>1.3 Carga cognitiva<a class="headerlink" href="#carga-cognitiva" title="Link to this heading">#</a></h3>
+<p>La memoria de trabajo humana es limitada (Miller, 1956: 7 ± 2 elementos simultaneos). Una visualizacion efectiva minimiza la carga cognitiva:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Principio</span> <span class="n">de</span> <span class="n">proximidad</span><span class="p">:</span>   <span class="n">elementos</span> <span class="n">relacionados</span><span class="p">,</span> <span class="n">cerca</span> <span class="n">entre</span> <span class="n">si</span><span class="o">.</span>
+<span class="n">Principio</span> <span class="n">de</span> <span class="n">similitud</span><span class="p">:</span>    <span class="n">elementos</span> <span class="k">del</span> <span class="n">mismo</span> <span class="n">tipo</span><span class="p">,</span> <span class="n">mismo</span> <span class="n">color</span> <span class="n">o</span> <span class="n">forma</span><span class="o">.</span>
+<span class="n">Principio</span> <span class="n">de</span> <span class="n">continuidad</span><span class="p">:</span>  <span class="n">el</span> <span class="n">ojo</span> <span class="n">sigue</span> <span class="n">lineas</span> <span class="n">y</span> <span class="n">curvas</span> <span class="n">naturalmente</span><span class="o">.</span>
+<span class="n">Principio</span> <span class="n">de</span> <span class="n">cierre</span><span class="p">:</span>       <span class="n">el</span> <span class="n">ojo</span> <span class="n">completa</span> <span class="n">formas</span> <span class="n">incompletas</span><span class="o">.</span>
+<span class="n">Principio</span> <span class="n">de</span> <span class="n">figura</span><span class="o">-</span><span class="n">fondo</span><span class="p">:</span> <span class="n">el</span> <span class="n">objeto</span> <span class="n">de</span> <span class="n">atencion</span> <span class="n">destaca</span> <span class="k">del</span> <span class="n">fondo</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="el-proposito-de-la-visualizacion">
+<h3>1.4 El proposito de la visualizacion<a class="headerlink" href="#el-proposito-de-la-visualizacion" title="Link to this heading">#</a></h3>
+<p>Antes de construir cualquier grafica, responder:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>1. Quien es la audiencia?
+   Tecnica (cientificos, ingenieros): tolera mas complejidad y densidad.
+   Ejecutiva (directivos): prefiere simpleza, KPIs y narrativa clara.
+   General (publico amplio): necesita maxima claridad, minima jerga.
+
+2. Que decision o accion debe facilitar?
+   Comparar, identificar tendencia, mostrar distribucion, detectar outlier,
+   mostrar relacion, mostrar composicion, mostrar flujo geografico...
+
+3. Que medio la mostrara?
+   Pantalla interactiva: mas elementos, tooltips, zoom.
+   Presentacion (proyector): tamanos grandes, alto contraste, pocos elementos.
+   Impreso en papel: sin interactividad, tamano fijo, colores limitados.
+   Dashboard web: actualizacion en tiempo real, multiples vistas.
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="percepcion-visual-y-preatencion">
+<h2>2. Percepcion Visual y Preatencion<a class="headerlink" href="#percepcion-visual-y-preatencion" title="Link to this heading">#</a></h2>
+<section id="atributos-preatentivos">
+<h3>2.1 Atributos preatentivos<a class="headerlink" href="#atributos-preatentivos" title="Link to this heading">#</a></h3>
+<p>Los atributos preatentivos son propiedades visuales que el cerebro procesa en menos de 250ms, <strong>antes</strong> de que la atencion consciente se enfoque. Usarlos correctamente permite guiar la atencion del lector sin esfuerzo.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Atributo</p></th>
+<th class="head"><p>Eficaz para</p></th>
+<th class="head"><p>Ejemplo de uso</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Color (tono)</p></td>
+<td><p>Categorias, resaltar uno</p></td>
+<td><p>Una barra roja entre barras grises</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intensidad de color</p></td>
+<td><p>Magnitud ordinal</p></td>
+<td><p>Heatmap de correlacion</p></td>
+</tr>
+<tr class="row-even"><td><p>Tamano</p></td>
+<td><p>Magnitud cuantitativa</p></td>
+<td><p>Grafica de burbujas</p></td>
+</tr>
+<tr class="row-odd"><td><p>Forma</p></td>
+<td><p>Categorias (max 5-6)</p></td>
+<td><p>Marcadores distintos en scatter</p></td>
+</tr>
+<tr class="row-even"><td><p>Orientacion</p></td>
+<td><p>Direccion, anomalia</p></td>
+<td><p>Flecha apuntando en sentido contrario</p></td>
+</tr>
+<tr class="row-odd"><td><p>Longitud</p></td>
+<td><p>Magnitud cuantitativa</p></td>
+<td><p>Barras de distinto largo</p></td>
+</tr>
+<tr class="row-even"><td><p>Posicion</p></td>
+<td><p>Magnitud cuantitativa, relacion</p></td>
+<td><p>Punto en eje</p></td>
+</tr>
+<tr class="row-odd"><td><p>Movimiento</p></td>
+<td><p>Llamar atencion (animaciones)</p></td>
+<td><p>Punto parpadeante</p></td>
+</tr>
+<tr class="row-even"><td><p>Borde / contorno</p></td>
+<td><p>Agrupacion, enfasis</p></td>
+<td><p>Rectangulo alrededor de un grupo</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Regla de oro:</strong> usar un solo atributo preatentivo para resaltar lo mas importante. Usar dos o mas simultaneously anula el efecto.</p>
+</section>
+<section id="codificacion-multiple">
+<h3>2.2 Codificacion multiple<a class="headerlink" href="#codificacion-multiple" title="Link to this heading">#</a></h3>
+<p>Cuando el mismo dato se codifica con dos atributos simultaneamente, la percepcion mejora. Ejemplo canonico: en un grafico de barras de categorias, usar <strong>posicion</strong> (longitud de barra) Y <strong>color</strong> para codificar las mismas categorias.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Codificacion</span> <span class="n">simple</span> <span class="p">(</span><span class="n">solo</span> <span class="n">posicion</span><span class="p">):</span>
+  <span class="n">Barras</span> <span class="n">de</span> <span class="n">igual</span> <span class="n">color</span> <span class="o">-&gt;</span> <span class="n">distinguibles</span> <span class="n">por</span> <span class="n">longitud</span><span class="o">.</span>
+
+<span class="n">Codificacion</span> <span class="n">doble</span> <span class="p">(</span><span class="n">posicion</span> <span class="o">+</span> <span class="n">color</span><span class="p">):</span>
+  <span class="n">Barras</span> <span class="n">de</span> <span class="n">distinto</span> <span class="n">color</span> <span class="o">-&gt;</span> <span class="n">distinguibles</span> <span class="n">por</span> <span class="n">longitud</span> <span class="n">Y</span> <span class="n">color</span><span class="o">.</span>
+  <span class="n">Mas</span> <span class="n">rapido</span> <span class="n">de</span> <span class="n">leer</span><span class="p">,</span> <span class="n">especialmente</span> <span class="n">cuando</span> <span class="n">hay</span> <span class="n">leyenda</span> <span class="n">separada</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="efecto-de-figura-y-fondo">
+<h3>2.3 Efecto de figura y fondo<a class="headerlink" href="#efecto-de-figura-y-fondo" title="Link to this heading">#</a></h3>
+<p>El fondo debe ser neutral para no competir con los datos. Las reglas:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Fondo</span> <span class="n">blanco</span> <span class="n">o</span> <span class="n">gris</span> <span class="n">muy</span> <span class="n">claro</span><span class="p">:</span> <span class="n">optimo</span> <span class="n">para</span> <span class="n">publicaciones</span> <span class="n">e</span> <span class="n">informes</span><span class="o">.</span>
+<span class="n">Fondo</span> <span class="n">oscuro</span> <span class="p">(</span><span class="n">dark</span> <span class="n">mode</span><span class="p">):</span> <span class="n">util</span> <span class="n">en</span> <span class="n">dashboards</span> <span class="n">nocturnos</span> <span class="n">o</span> <span class="n">de</span> <span class="n">control</span><span class="p">,</span>
+                          <span class="n">requiere</span> <span class="n">paleta</span> <span class="n">de</span> <span class="n">colores</span> <span class="n">adaptada</span><span class="o">.</span>
+<span class="n">Fondo</span> <span class="n">con</span> <span class="n">cuadricula</span> <span class="n">visible</span><span class="p">:</span> <span class="n">la</span> <span class="n">cuadricula</span> <span class="n">debe</span> <span class="n">ser</span> <span class="n">mas</span> <span class="n">clara</span> <span class="n">que</span> <span class="n">los</span> <span class="n">datos</span><span class="o">.</span>
+<span class="n">Fondo</span> <span class="n">con</span> <span class="n">imagen</span><span class="p">:</span> <span class="n">casi</span> <span class="n">siempre</span> <span class="n">reduce</span> <span class="n">la</span> <span class="n">legibilidad</span><span class="o">.</span> <span class="n">Evitar</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="eleccion-y-uso-del-color">
+<h2>3. Eleccion y Uso del Color<a class="headerlink" href="#eleccion-y-uso-del-color" title="Link to this heading">#</a></h2>
+<section id="los-tres-tipos-de-paletas">
+<h3>3.1 Los tres tipos de paletas<a class="headerlink" href="#los-tres-tipos-de-paletas" title="Link to this heading">#</a></h3>
+<p><strong>Paleta cualitativa (categorica):</strong></p>
+<ul class="simple">
+<li><p>Para variables nominales sin orden (paises, categorias de producto, especies).</p></li>
+<li><p>Los colores deben ser igualmente distinguibles; ninguno debe destacar sobre otro.</p></li>
+<li><p>Maximo 8-10 categorias con color; mas de eso es inlegible.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Buenas</span> <span class="n">paletas</span> <span class="n">cualitativas</span><span class="p">:</span>
+  <span class="n">ColorBrewer</span> <span class="n">Set1</span><span class="p">,</span> <span class="n">Set2</span><span class="p">,</span> <span class="n">Set3</span>
+  <span class="n">Tableau</span> <span class="mi">10</span><span class="p">,</span> <span class="n">Tableau</span> <span class="mi">20</span>
+  <span class="n">Plotly</span> <span class="n">D3</span><span class="p">,</span> <span class="n">G10</span><span class="p">,</span> <span class="n">Bold</span>
+  <span class="n">Seaborn</span> <span class="s2">&quot;deep&quot;</span><span class="p">,</span> <span class="s2">&quot;muted&quot;</span><span class="p">,</span> <span class="s2">&quot;colorblind&quot;</span>
+</pre></div>
+</div>
+<p><strong>Paleta secuencial:</strong></p>
+<ul class="simple">
+<li><p>Para variables cuantitativas con un minimo y un maximo.</p></li>
+<li><p>Progresa de un color claro (valor bajo) a uno oscuro o saturado (valor alto).</p></li>
+<li><p>El lector infiere naturalmente que mas oscuro = mas valor.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Buenas</span> <span class="n">paletas</span> <span class="n">secuenciales</span><span class="p">:</span>
+  <span class="n">Viridis</span><span class="p">,</span> <span class="n">Plasma</span><span class="p">,</span> <span class="n">Inferno</span><span class="p">,</span> <span class="n">Magma</span><span class="p">,</span> <span class="n">Cividis</span> <span class="p">(</span><span class="n">perceptualmente</span> <span class="n">uniformes</span><span class="p">)</span>
+  <span class="n">Blues</span><span class="p">,</span> <span class="n">Greens</span><span class="p">,</span> <span class="n">Oranges</span><span class="p">,</span> <span class="n">YlOrRd</span><span class="p">,</span> <span class="n">BuPu</span>
+  <span class="n">Evitar</span><span class="p">:</span> <span class="n">arcoiris</span> <span class="p">(</span><span class="n">no</span> <span class="n">perceptualmente</span> <span class="n">uniforme</span><span class="p">,</span> <span class="n">problemas</span> <span class="n">de</span> <span class="n">daltonismo</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Paleta divergente:</strong></p>
+<ul class="simple">
+<li><p>Para variables cuantitativas con un punto medio significativo (cero, media).</p></li>
+<li><p>Progresa de un color en un extremo, pasa por un color neutro en el centro, y llega a otro color en el extremo opuesto.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Buenas</span> <span class="n">paletas</span> <span class="n">divergentes</span><span class="p">:</span>
+  <span class="n">RdBu</span> <span class="p">(</span><span class="n">rojo</span><span class="o">-</span><span class="n">blanco</span><span class="o">-</span><span class="n">azul</span><span class="p">)</span>
+  <span class="n">RdYlGn</span> <span class="p">(</span><span class="n">rojo</span><span class="o">-</span><span class="n">amarillo</span><span class="o">-</span><span class="n">verde</span><span class="p">,</span> <span class="n">problemas</span> <span class="n">con</span> <span class="n">daltonismo</span> <span class="n">rojo</span><span class="o">-</span><span class="n">verde</span><span class="p">)</span>
+  <span class="n">Coolwarm</span><span class="p">,</span> <span class="n">Spectral</span><span class="p">,</span> <span class="n">PiYG</span>
+  <span class="n">Uso</span> <span class="n">tipico</span><span class="p">:</span> <span class="n">correlaciones</span><span class="p">,</span> <span class="n">diferencias</span> <span class="n">vs</span> <span class="n">media</span><span class="p">,</span> <span class="n">anomalias</span>
+</pre></div>
+</div>
+</section>
+<section id="principios-de-uso-del-color">
+<h3>3.2 Principios de uso del color<a class="headerlink" href="#principios-de-uso-del-color" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">UN</span> <span class="n">SOLO</span> <span class="n">COLOR</span> <span class="n">para</span> <span class="n">graficas</span> <span class="n">de</span> <span class="n">una</span> <span class="n">sola</span> <span class="n">serie</span><span class="p">:</span>
+  <span class="n">Una</span> <span class="n">grafica</span> <span class="n">de</span> <span class="n">barras</span> <span class="n">con</span> <span class="n">todas</span> <span class="n">las</span> <span class="n">barras</span> <span class="k">del</span> <span class="n">mismo</span> <span class="n">color</span> <span class="n">es</span> <span class="n">mas</span> <span class="n">limpia</span>
+  <span class="n">y</span> <span class="n">eficiente</span> <span class="n">que</span> <span class="n">barras</span> <span class="n">de</span> <span class="n">distintos</span> <span class="n">colores</span> <span class="n">sin</span> <span class="n">significado</span><span class="o">.</span>
+
+<span class="n">COLOR</span> <span class="n">CON</span> <span class="n">SIGNIFICADO</span><span class="p">,</span> <span class="n">no</span> <span class="n">con</span> <span class="n">decoracion</span><span class="p">:</span>
+  <span class="n">Cada</span> <span class="n">color</span> <span class="n">debe</span> <span class="n">codificar</span> <span class="n">informacion</span><span class="o">.</span> <span class="n">Si</span> <span class="n">todas</span> <span class="n">las</span> <span class="n">barras</span> <span class="n">son</span> <span class="n">de</span> <span class="n">distinto</span>
+  <span class="n">color</span> <span class="n">pero</span> <span class="n">no</span> <span class="n">hay</span> <span class="n">leyenda</span> <span class="n">ni</span> <span class="n">diferencia</span> <span class="n">conceptual</span><span class="p">,</span> <span class="n">el</span> <span class="n">color</span> <span class="n">es</span> <span class="n">ruido</span><span class="o">.</span>
+
+<span class="n">RESALTAR</span> <span class="n">CON</span> <span class="n">COLOR</span> <span class="n">SATURADO</span><span class="p">,</span> <span class="n">apagar</span> <span class="n">el</span> <span class="n">resto</span><span class="p">:</span>
+  <span class="n">La</span> <span class="n">tecnica</span> <span class="n">mas</span> <span class="n">efectiva</span><span class="p">:</span> <span class="n">un</span> <span class="n">elemento</span> <span class="n">en</span> <span class="n">color</span> <span class="n">saturado</span> <span class="p">(</span><span class="n">rojo</span><span class="p">,</span> <span class="n">naranja</span><span class="p">),</span>
+  <span class="n">el</span> <span class="n">resto</span> <span class="n">en</span> <span class="n">gris</span><span class="o">.</span> <span class="n">El</span> <span class="n">ojo</span> <span class="n">va</span> <span class="n">directamente</span> <span class="n">al</span> <span class="n">elemento</span> <span class="n">destacado</span><span class="o">.</span>
+
+<span class="n">CONSISTENCIA</span> <span class="n">en</span> <span class="n">todo</span> <span class="n">el</span> <span class="n">dashboard</span> <span class="n">o</span> <span class="n">informe</span><span class="p">:</span>
+  <span class="n">Si</span> <span class="s2">&quot;Norte&quot;</span> <span class="n">es</span> <span class="n">azul</span> <span class="n">en</span> <span class="n">una</span> <span class="n">grafica</span><span class="p">,</span> <span class="n">debe</span> <span class="n">ser</span> <span class="n">azul</span> <span class="n">en</span> <span class="n">todas</span> <span class="n">las</span> <span class="n">demas</span><span class="o">.</span>
+  <span class="n">Cambiar</span> <span class="n">el</span> <span class="n">significado</span> <span class="k">del</span> <span class="n">color</span> <span class="n">entre</span> <span class="n">graficas</span> <span class="n">confunde</span> <span class="n">al</span> <span class="n">lector</span><span class="o">.</span>
+
+<span class="n">SEMANTICA</span> <span class="n">DEL</span> <span class="n">COLOR</span> <span class="n">cuando</span> <span class="n">existe</span> <span class="n">convencion</span><span class="p">:</span>
+  <span class="n">Rojo</span> <span class="o">=</span> <span class="n">negativo</span><span class="p">,</span> <span class="n">error</span><span class="p">,</span> <span class="n">perdida</span> <span class="o">/</span> <span class="n">Verde</span> <span class="o">=</span> <span class="n">positivo</span><span class="p">,</span> <span class="n">ok</span><span class="p">,</span> <span class="n">ganancia</span><span class="o">.</span>
+  <span class="n">Azul</span> <span class="o">=</span> <span class="n">agua</span><span class="p">,</span> <span class="n">frio</span> <span class="o">/</span> <span class="n">Naranja</span> <span class="o">=</span> <span class="n">calor</span><span class="p">,</span> <span class="n">advertencia</span><span class="o">.</span>
+  <span class="n">No</span> <span class="n">invertir</span> <span class="n">estas</span> <span class="n">convenciones</span> <span class="n">salvo</span> <span class="n">razon</span> <span class="n">muy</span> <span class="n">clara</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="contraste-y-legibilidad">
+<h3>3.3 Contraste y legibilidad<a class="headerlink" href="#contraste-y-legibilidad" title="Link to this heading">#</a></h3>
+<p>El ratio de contraste entre texto y fondo debe cumplir WCAG 2.1:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Nivel</span> <span class="n">AA</span> <span class="p">(</span><span class="n">minimo</span> <span class="n">recomendado</span><span class="p">):</span>
+  <span class="n">Texto</span> <span class="n">normal</span> <span class="p">(</span><span class="o">&lt;</span> <span class="mi">18</span><span class="n">pt</span><span class="p">):</span> <span class="n">ratio</span> <span class="n">minimo</span> <span class="mf">4.5</span><span class="p">:</span><span class="mi">1</span>
+  <span class="n">Texto</span> <span class="n">grande</span> <span class="p">(</span><span class="o">&gt;=</span> <span class="mi">18</span><span class="n">pt</span> <span class="n">o</span> <span class="n">negrita</span> <span class="o">&gt;=</span> <span class="mi">14</span><span class="n">pt</span><span class="p">):</span> <span class="n">ratio</span> <span class="n">minimo</span> <span class="mi">3</span><span class="p">:</span><span class="mi">1</span>
+
+<span class="n">Nivel</span> <span class="n">AAA</span> <span class="p">(</span><span class="n">optimo</span><span class="p">):</span>
+  <span class="n">Texto</span> <span class="n">normal</span><span class="p">:</span> <span class="n">ratio</span> <span class="n">minimo</span> <span class="mi">7</span><span class="p">:</span><span class="mi">1</span>
+  <span class="n">Texto</span> <span class="n">grande</span><span class="p">:</span> <span class="n">ratio</span> <span class="n">minimo</span> <span class="mf">4.5</span><span class="p">:</span><span class="mi">1</span>
+
+<span class="n">Ejemplos</span><span class="p">:</span>
+  <span class="n">Negro</span> <span class="p">(</span><span class="c1">#000000) sobre blanco (#FFFFFF): ratio 21:1 (maximo posible)</span>
+  <span class="n">Gris</span> <span class="n">oscuro</span> <span class="p">(</span><span class="c1">#595959) sobre blanco:     ratio 7:1 (AAA texto normal)</span>
+  <span class="n">Gris</span> <span class="n">claro</span> <span class="p">(</span><span class="c1">#767676) sobre blanco:      ratio 4.5:1 (AA texto normal)</span>
+  <span class="n">Blanco</span> <span class="n">sobre</span> <span class="n">azul</span> <span class="n">oscuro</span> <span class="p">(</span><span class="c1">#003f88):     ratio ~8:1</span>
+
+<span class="n">Herramienta</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">webaim</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">resources</span><span class="o">/</span><span class="n">contrastchecker</span><span class="o">/</span>
+</pre></div>
+</div>
+</section>
+<section id="numero-de-colores">
+<h3>3.4 Numero de colores<a class="headerlink" href="#numero-de-colores" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="o">-</span><span class="mi">2</span> <span class="n">colores</span><span class="p">:</span> <span class="n">ideal</span> <span class="n">para</span> <span class="n">graficas</span> <span class="n">simples</span> <span class="n">de</span> <span class="n">una</span> <span class="n">o</span> <span class="n">dos</span> <span class="n">series</span><span class="o">.</span>
+<span class="mi">3</span><span class="o">-</span><span class="mi">5</span> <span class="n">colores</span><span class="p">:</span> <span class="n">maximo</span> <span class="n">comodo</span> <span class="n">para</span> <span class="n">el</span> <span class="n">ojo</span> <span class="n">humano</span> <span class="n">sin</span> <span class="n">esfuerzo</span><span class="o">.</span>
+<span class="mi">6</span><span class="o">-</span><span class="mi">8</span> <span class="n">colores</span><span class="p">:</span> <span class="n">limite</span> <span class="n">practico</span> <span class="n">en</span> <span class="n">graficas</span> <span class="n">categoricas</span><span class="o">.</span>
+<span class="o">&gt;</span> <span class="mi">8</span> <span class="n">colores</span><span class="p">:</span> <span class="n">considerar</span> <span class="n">agrupar</span> <span class="n">categorias</span><span class="p">,</span> <span class="n">usar</span> <span class="n">facetas</span><span class="p">,</span> <span class="n">o</span> <span class="n">cambiar</span> <span class="n">el</span> <span class="n">tipo</span> <span class="n">de</span> <span class="n">grafica</span><span class="o">.</span>
+
+<span class="n">Alternativas</span> <span class="n">cuando</span> <span class="n">hay</span> <span class="n">muchas</span> <span class="n">categorias</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">Agrupar</span> <span class="n">los</span> <span class="n">menores</span> <span class="n">en</span> <span class="s2">&quot;Otros&quot;</span><span class="o">.</span>
+  <span class="o">-</span> <span class="n">Usar</span> <span class="n">facetas</span> <span class="p">(</span><span class="n">un</span> <span class="n">subplot</span> <span class="n">por</span> <span class="n">categoria</span><span class="p">)</span><span class="o">.</span>
+  <span class="o">-</span> <span class="n">Usar</span> <span class="n">interactividad</span> <span class="p">(</span><span class="n">highlight</span> <span class="n">on</span> <span class="n">hover</span><span class="p">)</span><span class="o">.</span>
+  <span class="o">-</span> <span class="n">Usar</span> <span class="n">etiquetas</span> <span class="n">directas</span> <span class="n">en</span> <span class="n">lugar</span> <span class="n">de</span> <span class="n">leyenda</span> <span class="n">con</span> <span class="n">muchos</span> <span class="n">colores</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="tipografia-y-texto">
+<h2>4. Tipografia y Texto<a class="headerlink" href="#tipografia-y-texto" title="Link to this heading">#</a></h2>
+<section id="jerarquia-tipografica">
+<h3>4.1 Jerarquia tipografica<a class="headerlink" href="#jerarquia-tipografica" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Jerarquia</span> <span class="n">recomendada</span> <span class="p">(</span><span class="n">de</span> <span class="n">mayor</span> <span class="n">a</span> <span class="n">menor</span><span class="p">):</span>
+  <span class="mf">1.</span> <span class="n">Titulo</span> <span class="n">principal</span> <span class="k">del</span> <span class="n">informe</span> <span class="o">/</span> <span class="n">dashboard</span><span class="p">:</span>  <span class="mi">18</span><span class="o">-</span><span class="mi">24</span><span class="n">pt</span><span class="p">,</span> <span class="n">negrita</span>
+  <span class="mf">2.</span> <span class="n">Titulo</span> <span class="n">de</span> <span class="n">grafica</span><span class="p">:</span>                         <span class="mi">13</span><span class="o">-</span><span class="mi">16</span><span class="n">pt</span><span class="p">,</span> <span class="n">negrita</span> <span class="n">o</span> <span class="n">semibold</span>
+  <span class="mf">3.</span> <span class="n">Etiquetas</span> <span class="n">de</span> <span class="n">eje</span><span class="p">:</span>                          <span class="mi">10</span><span class="o">-</span><span class="mi">12</span><span class="n">pt</span><span class="p">,</span> <span class="n">regular</span>
+  <span class="mf">4.</span> <span class="n">Valores</span> <span class="o">/</span> <span class="n">etiquetas</span> <span class="n">de</span> <span class="n">datos</span><span class="p">:</span>              <span class="mi">9</span><span class="o">-</span><span class="mi">11</span><span class="n">pt</span><span class="p">,</span> <span class="n">regular</span>
+  <span class="mf">5.</span> <span class="n">Anotaciones</span> <span class="n">y</span> <span class="n">notas</span> <span class="n">al</span> <span class="n">pie</span><span class="p">:</span>                <span class="mi">8</span><span class="o">-</span><span class="mi">10</span><span class="n">pt</span><span class="p">,</span> <span class="n">regular</span> <span class="n">o</span> <span class="n">italic</span>
+
+<span class="n">Regla</span><span class="p">:</span> <span class="n">no</span> <span class="n">usar</span> <span class="n">mas</span> <span class="n">de</span> <span class="mi">2</span> <span class="n">familias</span> <span class="n">tipograficas</span> <span class="n">en</span> <span class="n">un</span> <span class="n">mismo</span> <span class="n">informe</span><span class="o">.</span>
+<span class="n">Regla</span><span class="p">:</span> <span class="n">no</span> <span class="n">usar</span> <span class="n">mas</span> <span class="n">de</span> <span class="mi">3</span> <span class="n">tamaños</span> <span class="n">distintos</span> <span class="n">sin</span> <span class="n">razon</span> <span class="n">justificada</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="tipografias-recomendadas">
+<h3>4.2 Tipografias recomendadas<a class="headerlink" href="#tipografias-recomendadas" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Para</span> <span class="n">pantalla</span><span class="p">:</span>
+  <span class="n">Sans</span><span class="o">-</span><span class="n">serif</span><span class="p">:</span> <span class="n">Roboto</span><span class="p">,</span> <span class="n">Inter</span><span class="p">,</span> <span class="n">Source</span> <span class="n">Sans</span> <span class="n">Pro</span><span class="p">,</span> <span class="n">Lato</span><span class="p">,</span> <span class="n">Open</span> <span class="n">Sans</span><span class="p">,</span> <span class="n">Segoe</span> <span class="n">UI</span>
+  <span class="n">Monoespaciada</span> <span class="p">(</span><span class="n">valores</span> <span class="n">numericos</span> <span class="n">en</span> <span class="n">tablas</span><span class="p">):</span> <span class="n">Roboto</span> <span class="n">Mono</span><span class="p">,</span> <span class="n">Source</span> <span class="n">Code</span> <span class="n">Pro</span>
+
+<span class="n">Para</span> <span class="n">publicaciones</span> <span class="n">impresas</span><span class="p">:</span>
+  <span class="n">Serif</span><span class="p">:</span> <span class="n">Georgia</span><span class="p">,</span> <span class="n">Palatino</span><span class="p">,</span> <span class="n">Merriweather</span> <span class="p">(</span><span class="n">cuerpo</span> <span class="n">de</span> <span class="n">texto</span> <span class="n">con</span> <span class="n">datos</span><span class="p">)</span>
+  <span class="n">Sans</span><span class="o">-</span><span class="n">serif</span><span class="p">:</span> <span class="n">Helvetica</span><span class="p">,</span> <span class="n">Arial</span><span class="p">,</span> <span class="n">Gill</span> <span class="n">Sans</span> <span class="p">(</span><span class="n">titulos</span><span class="p">,</span> <span class="n">etiquetas</span><span class="p">)</span>
+
+<span class="n">Evitar</span> <span class="n">en</span> <span class="n">visualizacion</span><span class="p">:</span>
+  <span class="n">Comic</span> <span class="n">Sans</span><span class="p">,</span> <span class="n">Papyrus</span><span class="p">,</span> <span class="n">Curlz</span> <span class="p">(</span><span class="n">no</span> <span class="n">profesionales</span><span class="p">)</span>
+  <span class="n">Fuentes</span> <span class="n">decorativas</span> <span class="n">de</span> <span class="n">un</span> <span class="n">solo</span> <span class="n">peso</span> <span class="p">(</span><span class="n">poca</span> <span class="n">versatilidad</span><span class="p">)</span>
+  <span class="n">Fuentes</span> <span class="n">de</span> <span class="n">muy</span> <span class="n">bajo</span> <span class="n">contraste</span> <span class="n">entre</span> <span class="n">fino</span> <span class="n">y</span> <span class="n">grueso</span> <span class="n">en</span> <span class="n">tamaños</span> <span class="n">pequeños</span>
+</pre></div>
+</div>
+</section>
+<section id="etiquetas-de-datos">
+<h3>4.3 Etiquetas de datos<a class="headerlink" href="#etiquetas-de-datos" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>CUANDO INCLUIR VALORES EN LA GRAFICA:
+  Si hay pocos puntos (&lt; 10-15): anotar directamente.
+  Si la precision exacta importa mas que la tendencia: siempre anotar.
+  Si el lector no puede leer el eje con precision suficiente: anotar.
+
+CUANDO NO INCLUIR VALORES:
+  Graficas de tendencia con muchos puntos (valores saturan el espacio).
+  Cuando el eje es suficientemente legible.
+  Cuando los valores exactos no son el objetivo (la forma importa mas).
+
+FORMATO DE NUMEROS:
+  Enteros grandes: usar separador de miles -&gt; 1,250,000 (no 1250000).
+  Decimales: no mas de 2 decimales salvo que la precision sea critica.
+  Porcentajes: siempre con simbolo % y 1 decimal -&gt; 12.5%.
+  Moneda: simbolo delante, sin decimales si son enteros -&gt; $1,250.
+  Millones: abreviar cuando el espacio es limitado -&gt; $1.25M.
+</pre></div>
+</div>
+</section>
+<section id="titulos-y-subtitulos-efectivos">
+<h3>4.4 Titulos y subtitulos efectivos<a class="headerlink" href="#titulos-y-subtitulos-efectivos" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">TITULO</span> <span class="n">DESCRIPTIVO</span> <span class="p">(</span><span class="n">que</span> <span class="n">muestra</span><span class="p">):</span>
+  <span class="s2">&quot;Ventas mensuales 2024&quot;</span>
+  <span class="o">-&gt;</span> <span class="n">Describe</span> <span class="n">lo</span> <span class="n">que</span> <span class="n">se</span> <span class="n">muestra</span><span class="p">,</span> <span class="n">no</span> <span class="n">lo</span> <span class="n">que</span> <span class="n">significa</span><span class="o">.</span>
+
+<span class="n">TITULO</span> <span class="n">NARRATIVO</span> <span class="p">(</span><span class="n">que</span> <span class="n">dice</span><span class="p">):</span>
+  <span class="s2">&quot;Las ventas cayeron 18</span><span class="si">% e</span><span class="s2">n Q3 por la interrupcion de suministro&quot;</span>
+  <span class="o">-&gt;</span> <span class="n">Comunica</span> <span class="n">el</span> <span class="n">hallazgo</span><span class="o">.</span> <span class="n">Mas</span> <span class="n">efectivo</span> <span class="n">para</span> <span class="n">presentaciones</span> <span class="n">e</span> <span class="n">informes</span><span class="o">.</span>
+
+<span class="n">SUBTITULO</span> <span class="o">/</span> <span class="n">CAPTION</span><span class="p">:</span>
+  <span class="n">Explicar</span> <span class="n">la</span> <span class="n">fuente</span><span class="p">,</span> <span class="n">el</span> <span class="n">periodo</span><span class="p">,</span> <span class="n">las</span> <span class="n">unidades</span><span class="p">,</span> <span class="n">o</span> <span class="n">la</span> <span class="n">metodologia</span><span class="o">.</span>
+  <span class="s2">&quot;Fuente: Sistema ERP. Datos al 31/12/2024. Ventas en USD.&quot;</span>
+
+<span class="n">REGLA</span><span class="p">:</span> <span class="n">El</span> <span class="n">titulo</span> <span class="n">debe</span> <span class="n">ser</span> <span class="n">lo</span> <span class="n">primero</span> <span class="n">que</span> <span class="n">el</span> <span class="n">lector</span> <span class="n">lea</span> <span class="n">y</span> <span class="n">debe</span>
+       <span class="n">orientar</span> <span class="n">inmediatamente</span> <span class="n">sobre</span> <span class="n">lo</span> <span class="n">que</span> <span class="n">esta</span> <span class="n">viendo</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="ejes-escalas-y-proporciones">
+<h2>5. Ejes, Escalas y Proporciones<a class="headerlink" href="#ejes-escalas-y-proporciones" title="Link to this heading">#</a></h2>
+<section id="el-eje-y-y-el-cero">
+<h3>5.1 El eje Y y el cero<a class="headerlink" href="#el-eje-y-y-el-cero" title="Link to this heading">#</a></h3>
+<p><strong>Graficas de barras:</strong> el eje Y DEBE comenzar en cero. La longitud de la barra es el encoding; truncar el eje distorsiona la percepcion de magnitud relativa.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>CORRECTO (barra):            INCORRECTO (barra):
+  100 |                        98 |
+      | ██                        | ██ ██
+      | ██ ██                     | ██ ██
+    0 +─────                   96 +─────
+         A  B                       A  B
+
+  A parece el doble de B.     A parece 10 veces mayor que B (engañoso).
+</pre></div>
+</div>
+<p><strong>Graficas de lineas:</strong> el eje Y no necesita comenzar en cero. La pendiente de la linea es el encoding, y un rango ajustado a los datos muestra la variacion con mas detalle.</p>
+<p><strong>Graficas de dispersion:</strong> el rango de los ejes debe ajustarse a los datos con un margen moderado. No es necesario incluir el cero salvo que tenga significado para los datos.</p>
+</section>
+<section id="escalas-logaritmicas">
+<h3>5.2 Escalas logaritmicas<a class="headerlink" href="#escalas-logaritmicas" title="Link to this heading">#</a></h3>
+<p>Usar escala logaritmica cuando:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">Los</span> <span class="n">datos</span> <span class="n">abarcan</span> <span class="n">varios</span> <span class="n">ordenes</span> <span class="n">de</span> <span class="n">magnitud</span> <span class="p">(</span><span class="n">ej</span><span class="p">:</span> <span class="mi">100</span> <span class="n">a</span> <span class="mi">1</span><span class="p">,</span><span class="mi">000</span><span class="p">,</span><span class="mi">000</span><span class="p">)</span><span class="o">.</span>
+<span class="o">-</span> <span class="n">El</span> <span class="n">crecimiento</span> <span class="n">es</span> <span class="n">porcentual</span> <span class="p">(</span><span class="n">tasa</span> <span class="n">de</span> <span class="n">cambio</span> <span class="n">constante</span> <span class="o">=</span> <span class="n">linea</span> <span class="n">recta</span> <span class="n">en</span> <span class="n">log</span><span class="p">)</span><span class="o">.</span>
+<span class="o">-</span> <span class="n">Se</span> <span class="n">quiere</span> <span class="n">comparar</span> <span class="n">la</span> <span class="n">tasa</span> <span class="n">de</span> <span class="n">crecimiento</span><span class="p">,</span> <span class="n">no</span> <span class="n">el</span> <span class="n">valor</span> <span class="n">absoluto</span><span class="o">.</span>
+<span class="o">-</span> <span class="n">Hay</span> <span class="n">datos</span> <span class="n">muy</span> <span class="n">sesgados</span> <span class="n">donde</span> <span class="n">los</span> <span class="n">valores</span> <span class="n">grandes</span> <span class="n">aplanan</span> <span class="n">los</span> <span class="n">pequeños</span><span class="o">.</span>
+
+<span class="n">Anotar</span> <span class="n">claramente</span> <span class="n">cuando</span> <span class="n">se</span> <span class="n">usa</span> <span class="n">escala</span> <span class="n">log</span><span class="p">:</span>
+  <span class="s2">&quot;Eje Y en escala logaritmica (base 10)&quot;</span>
+  <span class="n">Mostrar</span> <span class="n">las</span> <span class="n">marcas</span> <span class="k">del</span> <span class="n">eje</span> <span class="n">como</span> <span class="n">valores</span> <span class="n">reales</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">),</span> <span class="n">no</span> <span class="n">los</span> <span class="n">exponentes</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="eje-secundario">
+<h3>5.3 Eje secundario<a class="headerlink" href="#eje-secundario" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>El eje secundario (doble eje Y) es controvertido:
+  - Puede facilitar comparar dos series con escalas muy diferentes.
+  - Puede manipular la percepcion ajustando las escalas independientemente.
+
+Usar con cuidado:
+  ✓ Cuando las dos series son conceptualmente relacionadas (ej: barras de volumen
+    y linea de precio, o linea de temperatura y barras de precipitacion).
+  ✓ Cuando queda claro que cada serie usa su propio eje.
+
+Evitar cuando:
+  ✗ La escala del eje secundario puede manipular la percepcion de correlacion.
+  ✗ Hay mas de dos series (considerar facetas o normalizar los datos).
+</pre></div>
+</div>
+</section>
+<section id="aspect-ratio-relacion-de-aspecto">
+<h3>5.4 Aspect ratio (relacion de aspecto)<a class="headerlink" href="#aspect-ratio-relacion-de-aspecto" title="Link to this heading">#</a></h3>
+<p>La pendiente percibida de una linea depende del aspect ratio. La regla de <strong>banking to 45 degrees</strong> (Cleveland, 1993) propone que el grafico debe tener un tamano tal que las lineas tengan una pendiente media de 45 grados, maximizando la percepcion de cambio.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Graficas</span> <span class="n">de</span> <span class="n">linea</span> <span class="n">muy</span> <span class="n">anchas</span> <span class="n">y</span> <span class="n">bajas</span><span class="p">:</span>
+  <span class="n">La</span> <span class="n">linea</span> <span class="n">parece</span> <span class="n">casi</span> <span class="n">plana</span><span class="p">;</span> <span class="n">los</span> <span class="n">cambios</span> <span class="n">parecen</span> <span class="n">insignificantes</span><span class="o">.</span>
+
+<span class="n">Graficas</span> <span class="n">de</span> <span class="n">linea</span> <span class="n">muy</span> <span class="n">altas</span> <span class="n">y</span> <span class="n">estrechas</span><span class="p">:</span>
+  <span class="n">La</span> <span class="n">linea</span> <span class="n">parece</span> <span class="n">vertical</span><span class="p">;</span> <span class="n">los</span> <span class="n">cambios</span> <span class="n">parecen</span> <span class="n">dramaticos</span><span class="o">.</span>
+
+<span class="n">Regla</span> <span class="n">practica</span><span class="p">:</span> <span class="n">para</span> <span class="n">series</span> <span class="n">temporales</span><span class="p">,</span> <span class="n">una</span> <span class="n">relacion</span> <span class="n">ancho</span><span class="p">:</span><span class="n">alto</span> <span class="n">de</span> <span class="mi">2</span><span class="p">:</span><span class="mi">1</span> <span class="n">a</span> <span class="mi">3</span><span class="p">:</span><span class="mi">1</span>
+<span class="n">suele</span> <span class="n">funcionar</span> <span class="n">bien</span> <span class="n">para</span> <span class="n">la</span> <span class="n">mayoria</span> <span class="n">de</span> <span class="n">datos</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="truncar-graficas-de-area">
+<h3>5.5 Truncar graficas de area<a class="headerlink" href="#truncar-graficas-de-area" title="Link to this heading">#</a></h3>
+<p>Las graficas de area y de barras apiladas deben comenzar siempre en cero. El area es el encoding; cualquier base distinta de cero hace que el area no sea proporcional al valor.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="reduccion-del-ruido-visual">
+<h2>6. Reduccion del Ruido Visual<a class="headerlink" href="#reduccion-del-ruido-visual" title="Link to this heading">#</a></h2>
+<section id="el-principio-de-eliminacion-progresiva">
+<h3>6.1 El principio de eliminacion progresiva<a class="headerlink" href="#el-principio-de-eliminacion-progresiva" title="Link to this heading">#</a></h3>
+<p>Para limpiar una visualizacion, aplicar en orden:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.</span> <span class="n">Eliminar</span> <span class="n">el</span> <span class="n">borde</span> <span class="k">del</span> <span class="n">grafico</span> <span class="p">(</span><span class="n">la</span> <span class="n">caja</span> <span class="n">exterior</span><span class="p">)</span><span class="o">.</span>
+<span class="mf">2.</span> <span class="n">Eliminar</span> <span class="n">o</span> <span class="n">atenuar</span> <span class="n">la</span> <span class="n">cuadricula</span><span class="o">.</span>
+<span class="mf">3.</span> <span class="n">Eliminar</span> <span class="n">las</span> <span class="n">marcas</span> <span class="p">(</span><span class="n">ticks</span><span class="p">)</span> <span class="k">del</span> <span class="n">eje</span><span class="o">.</span>
+<span class="mf">4.</span> <span class="n">Eliminar</span> <span class="n">el</span> <span class="n">fondo</span> <span class="n">de</span> <span class="n">color</span> <span class="n">si</span> <span class="n">no</span> <span class="n">aporta</span><span class="o">.</span>
+<span class="mf">5.</span> <span class="n">Eliminar</span> <span class="n">las</span> <span class="n">etiquetas</span> <span class="k">del</span> <span class="n">eje</span> <span class="n">si</span> <span class="n">estan</span> <span class="n">anotados</span> <span class="n">los</span> <span class="n">valores</span><span class="o">.</span>
+<span class="mf">6.</span> <span class="n">Reemplazar</span> <span class="n">la</span> <span class="n">leyenda</span> <span class="n">por</span> <span class="n">etiquetas</span> <span class="n">directas</span> <span class="n">en</span> <span class="n">las</span> <span class="n">series</span><span class="o">.</span>
+<span class="mf">7.</span> <span class="n">Eliminar</span> <span class="n">el</span> <span class="n">titulo</span> <span class="k">del</span> <span class="n">eje</span> <span class="n">si</span> <span class="n">el</span> <span class="n">titulo</span> <span class="n">de</span> <span class="n">la</span> <span class="n">grafica</span> <span class="n">lo</span> <span class="n">explica</span><span class="o">.</span>
+<span class="mf">8.</span> <span class="n">Verificar</span> <span class="n">que</span> <span class="n">cada</span> <span class="n">elemento</span> <span class="n">restante</span> <span class="n">justifica</span> <span class="n">su</span> <span class="n">presencia</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="cuadricula">
+<h3>6.2 Cuadricula<a class="headerlink" href="#cuadricula" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CUADRICULA</span> <span class="n">PRINCIPAL</span> <span class="p">(</span><span class="n">lineas</span> <span class="n">mayores</span><span class="p">):</span>
+  <span class="n">Color</span> <span class="n">gris</span> <span class="n">claro</span> <span class="p">(</span><span class="c1">#DDDDDD a #EEEEEE).</span>
+  <span class="n">Grosor</span> <span class="mf">0.5</span><span class="o">-</span><span class="mi">1</span><span class="n">pt</span><span class="o">.</span> <span class="n">Nunca</span> <span class="n">mas</span> <span class="n">oscura</span> <span class="n">o</span> <span class="n">gruesa</span> <span class="n">que</span> <span class="n">los</span> <span class="n">datos</span><span class="o">.</span>
+  <span class="n">Solo</span> <span class="n">horizontal</span> <span class="n">en</span> <span class="n">graficas</span> <span class="n">de</span> <span class="n">barras</span> <span class="n">verticales</span><span class="o">.</span>
+  <span class="n">Solo</span> <span class="n">vertical</span> <span class="n">en</span> <span class="n">graficas</span> <span class="n">de</span> <span class="n">barras</span> <span class="n">horizontales</span><span class="o">.</span>
+  <span class="n">Ambas</span> <span class="n">en</span> <span class="n">scatter</span> <span class="n">plots</span> <span class="p">(</span><span class="n">ayuda</span> <span class="n">a</span> <span class="n">leer</span> <span class="n">coordenadas</span><span class="p">)</span><span class="o">.</span>
+
+<span class="n">CUADRICULA</span> <span class="n">MENOR</span> <span class="p">(</span><span class="n">lineas</span> <span class="n">menores</span><span class="p">):</span>
+  <span class="n">Solo</span> <span class="n">cuando</span> <span class="n">se</span> <span class="n">necesita</span> <span class="n">leer</span> <span class="n">valores</span> <span class="n">intermedios</span> <span class="n">con</span> <span class="n">precision</span><span class="o">.</span>
+  <span class="n">Color</span> <span class="n">aun</span> <span class="n">mas</span> <span class="n">claro</span> <span class="n">que</span> <span class="n">la</span> <span class="n">cuadricula</span> <span class="n">mayor</span><span class="o">.</span>
+  <span class="n">Tipicamente</span> <span class="n">innecesaria</span> <span class="n">si</span> <span class="n">los</span> <span class="n">valores</span> <span class="n">estan</span> <span class="n">anotados</span><span class="o">.</span>
+
+<span class="n">SIN</span> <span class="n">CUADRICULA</span><span class="p">:</span>
+  <span class="n">Apropiado</span> <span class="n">cuando</span> <span class="n">los</span> <span class="n">valores</span> <span class="n">exactos</span> <span class="n">no</span> <span class="n">importan</span> <span class="n">y</span> <span class="n">la</span> <span class="n">forma</span> <span class="n">es</span> <span class="n">el</span> <span class="n">mensaje</span><span class="o">.</span>
+  <span class="n">Graficas</span> <span class="n">de</span> <span class="n">proporcion</span><span class="p">,</span> <span class="n">diagramas</span> <span class="n">de</span> <span class="n">flujo</span><span class="p">,</span> <span class="n">mapas</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="leyenda-vs-etiquetas-directas">
+<h3>6.3 Leyenda vs. Etiquetas directas<a class="headerlink" href="#leyenda-vs-etiquetas-directas" title="Link to this heading">#</a></h3>
+<p>Las leyendas requieren movimiento de ojos entre la leyenda y los datos, aumentando la carga cognitiva. Las etiquetas directas son superiores cuando el espacio lo permite.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ETIQUETAS</span> <span class="n">DIRECTAS</span> <span class="p">(</span><span class="n">preferir</span><span class="p">):</span>
+  <span class="o">-</span> <span class="n">La</span> <span class="n">etiqueta</span> <span class="n">va</span> <span class="n">junto</span> <span class="n">a</span> <span class="n">la</span> <span class="n">serie</span> <span class="n">o</span> <span class="n">barra</span><span class="o">.</span>
+  <span class="o">-</span> <span class="n">El</span> <span class="n">lector</span> <span class="n">no</span> <span class="n">necesita</span> <span class="n">buscar</span> <span class="n">en</span> <span class="n">la</span> <span class="n">leyenda</span><span class="o">.</span>
+  <span class="o">-</span> <span class="n">Funciona</span> <span class="n">bien</span> <span class="n">con</span> <span class="mi">2</span><span class="o">-</span><span class="mi">5</span> <span class="n">series</span><span class="o">.</span>
+
+<span class="n">LEYENDA</span> <span class="p">(</span><span class="n">cuando</span> <span class="n">la</span> <span class="n">etiqueta</span> <span class="n">directa</span> <span class="n">no</span> <span class="n">es</span> <span class="n">practica</span><span class="p">):</span>
+  <span class="o">-</span> <span class="n">Muchas</span> <span class="n">series</span> <span class="n">superpuestas</span> <span class="n">donde</span> <span class="n">las</span> <span class="n">etiquetas</span> <span class="n">se</span> <span class="n">solapan</span><span class="o">.</span>
+  <span class="o">-</span> <span class="n">Espacio</span> <span class="n">insuficiente</span> <span class="n">junto</span> <span class="n">a</span> <span class="n">los</span> <span class="n">elementos</span><span class="o">.</span>
+  <span class="o">-</span> <span class="n">Ubicar</span> <span class="n">la</span> <span class="n">leyenda</span> <span class="n">encima</span> <span class="n">o</span> <span class="n">debajo</span> <span class="p">(</span><span class="n">no</span> <span class="n">a</span> <span class="n">la</span> <span class="n">derecha</span> <span class="n">donde</span> <span class="n">compite</span> <span class="n">con</span> <span class="n">los</span> <span class="n">datos</span><span class="p">)</span><span class="o">.</span>
+  <span class="o">-</span> <span class="n">Ordenar</span> <span class="n">la</span> <span class="n">leyenda</span> <span class="n">en</span> <span class="n">el</span> <span class="n">mismo</span> <span class="n">orden</span> <span class="n">en</span> <span class="n">que</span> <span class="n">aparecen</span> <span class="n">las</span> <span class="n">series</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="sobreannotacion">
+<h3>6.4 Sobreannotacion<a class="headerlink" href="#sobreannotacion" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ANOTACIONES</span> <span class="n">UTILES</span><span class="p">:</span>
+  <span class="n">Señalar</span> <span class="n">el</span> <span class="n">punto</span> <span class="n">mas</span> <span class="n">alto</span> <span class="n">y</span> <span class="n">mas</span> <span class="n">bajo</span> <span class="n">de</span> <span class="n">una</span> <span class="n">serie</span><span class="o">.</span>
+  <span class="n">Marcar</span> <span class="n">eventos</span> <span class="n">importantes</span> <span class="p">(</span><span class="n">lanzamientos</span><span class="p">,</span> <span class="n">cambios</span> <span class="n">de</span> <span class="n">politica</span><span class="p">,</span> <span class="n">crisis</span><span class="p">)</span><span class="o">.</span>
+  <span class="n">Explicar</span> <span class="n">un</span> <span class="n">outlier</span> <span class="n">o</span> <span class="n">anomalia</span> <span class="n">visible</span><span class="o">.</span>
+  <span class="n">Indicar</span> <span class="n">la</span> <span class="n">tendencia</span> <span class="n">o</span> <span class="n">el</span> <span class="n">cambio</span> <span class="n">porcentual</span> <span class="n">clave</span><span class="o">.</span>
+
+<span class="n">ANOTACIONES</span> <span class="n">A</span> <span class="n">EVITAR</span><span class="p">:</span>
+  <span class="n">Anotar</span> <span class="n">todos</span> <span class="n">y</span> <span class="n">cada</span> <span class="n">uno</span> <span class="n">de</span> <span class="n">los</span> <span class="n">valores</span> <span class="p">(</span><span class="n">usar</span> <span class="n">una</span> <span class="n">tabla</span> <span class="n">en</span> <span class="n">su</span> <span class="n">lugar</span><span class="p">)</span><span class="o">.</span>
+  <span class="n">Anotaciones</span> <span class="n">que</span> <span class="n">repiten</span> <span class="n">lo</span> <span class="n">que</span> <span class="n">ya</span> <span class="n">dice</span> <span class="n">el</span> <span class="n">eje</span><span class="o">.</span>
+  <span class="n">Flechas</span> <span class="n">o</span> <span class="n">llamadas</span> <span class="n">sin</span> <span class="n">proposito</span> <span class="n">claro</span><span class="o">.</span>
+  <span class="n">Texto</span> <span class="n">de</span> <span class="n">mas</span> <span class="n">de</span> <span class="mi">2</span> <span class="n">lineas</span> <span class="n">en</span> <span class="n">el</span> <span class="n">canvas</span> <span class="k">del</span> <span class="n">grafico</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="accesibilidad">
+<h2>7. Accesibilidad<a class="headerlink" href="#accesibilidad" title="Link to this heading">#</a></h2>
+<section id="daltonismo">
+<h3>7.1 Daltonismo<a class="headerlink" href="#daltonismo" title="Link to this heading">#</a></h3>
+<p>Aproximadamente el 8% de los hombres y el 0.5% de las mujeres tienen algun grado de daltonismo. Los tipos mas comunes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Deuteranopia</span> <span class="o">/</span> <span class="n">deuteranomalia</span> <span class="p">(</span><span class="n">mas</span> <span class="n">comun</span><span class="p">):</span> <span class="n">confusion</span> <span class="n">rojo</span><span class="o">-</span><span class="n">verde</span><span class="o">.</span>
+<span class="n">Protanopia</span> <span class="o">/</span> <span class="n">protanomalia</span><span class="p">:</span>                 <span class="n">confusion</span> <span class="n">rojo</span><span class="o">-</span><span class="n">verde</span> <span class="p">(</span><span class="n">rojo</span> <span class="n">muy</span> <span class="n">oscuro</span><span class="p">)</span><span class="o">.</span>
+<span class="n">Tritanopia</span> <span class="o">/</span> <span class="n">tritanomalia</span> <span class="p">(</span><span class="n">rara</span><span class="p">):</span>          <span class="n">confusion</span> <span class="n">azul</span><span class="o">-</span><span class="n">amarillo</span><span class="o">.</span>
+
+<span class="n">Colores</span> <span class="n">problematicos</span><span class="p">:</span> <span class="n">combinaciones</span> <span class="n">rojo</span><span class="o">-</span><span class="n">verde</span> <span class="n">puras</span> <span class="p">(</span><span class="c1">#FF0000 + #00FF00).</span>
+
+<span class="n">Colores</span> <span class="n">seguros</span> <span class="n">para</span> <span class="n">daltonismo</span> <span class="n">rojo</span><span class="o">-</span><span class="n">verde</span><span class="p">:</span>
+  <span class="n">Azul</span> <span class="p">(</span><span class="c1">#0072B2), naranja (#E69F00), verde azulado (#009E73),</span>
+  <span class="n">amarillo</span> <span class="p">(</span><span class="c1">#F0E442), azul cielo (#56B4E9), rojo naranja (#D55E00),</span>
+  <span class="n">rosa</span> <span class="p">(</span><span class="c1">#CC79A7), negro (#000000).</span>
+  <span class="o">-&gt;</span> <span class="n">Esta</span> <span class="n">es</span> <span class="n">la</span> <span class="n">paleta</span> <span class="n">de</span> <span class="n">Wong</span> <span class="p">(</span><span class="mi">2011</span><span class="p">),</span> <span class="n">disenada</span> <span class="n">para</span> <span class="n">accesibilidad</span><span class="o">.</span>
+
+<span class="n">Paletas</span> <span class="n">seguras</span> <span class="n">predefinidas</span><span class="p">:</span>
+  <span class="n">ColorBrewer</span><span class="p">:</span> <span class="n">marcar</span> <span class="s2">&quot;colorblind safe&quot;</span> <span class="n">en</span> <span class="n">el</span> <span class="n">selector</span><span class="o">.</span>
+  <span class="n">Seaborn</span><span class="p">:</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;colorblind&quot;</span><span class="o">.</span>
+  <span class="n">Matplotlib</span><span class="p">:</span> <span class="n">estilo</span> <span class="s2">&quot;tableau-colorblind10&quot;</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="redundancia-visual-para-accesibilidad">
+<h3>7.2 Redundancia visual para accesibilidad<a class="headerlink" href="#redundancia-visual-para-accesibilidad" title="Link to this heading">#</a></h3>
+<p>No depender solo del color para codificar informacion. Usar siempre un segundo encoding:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Color</span> <span class="o">+</span> <span class="n">forma</span> <span class="k">del</span> <span class="n">marcador</span> <span class="p">(</span><span class="n">scatter</span><span class="p">)</span><span class="o">.</span>
+<span class="n">Color</span> <span class="o">+</span> <span class="n">patron</span> <span class="n">de</span> <span class="n">relleno</span> <span class="p">(</span><span class="n">barras</span><span class="p">:</span> <span class="n">solido</span><span class="p">,</span> <span class="n">rayado</span><span class="p">,</span> <span class="n">punteado</span><span class="p">)</span><span class="o">.</span>
+<span class="n">Color</span> <span class="o">+</span> <span class="n">etiqueta</span> <span class="n">directa</span> <span class="p">(</span><span class="n">lineas</span><span class="p">)</span><span class="o">.</span>
+<span class="n">Color</span> <span class="o">+</span> <span class="n">posicion</span> <span class="p">(</span><span class="n">con</span> <span class="n">facetas</span><span class="p">)</span><span class="o">.</span>
+<span class="n">Color</span> <span class="o">+</span> <span class="n">grosor</span> <span class="n">de</span> <span class="n">linea</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="tamanos-minimos">
+<h3>7.3 Tamanos minimos<a class="headerlink" href="#tamanos-minimos" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Texto</span> <span class="n">en</span> <span class="n">pantalla</span><span class="p">:</span>
+  <span class="n">Cuerpo</span> <span class="n">y</span> <span class="n">etiquetas</span><span class="p">:</span> <span class="n">minimo</span> <span class="mi">11</span><span class="n">px</span> <span class="p">(</span><span class="mi">8</span><span class="n">pt</span><span class="p">)</span><span class="o">.</span>
+  <span class="n">Tooltips</span> <span class="n">y</span> <span class="n">notas</span><span class="p">:</span> <span class="n">minimo</span> <span class="mi">10</span><span class="n">px</span> <span class="p">(</span><span class="mf">7.5</span><span class="n">pt</span><span class="p">)</span><span class="o">.</span>
+  <span class="n">Nada</span> <span class="n">por</span> <span class="n">debajo</span> <span class="n">de</span> <span class="mi">9</span><span class="n">px</span> <span class="n">es</span> <span class="n">legible</span> <span class="n">en</span> <span class="n">pantalla</span> <span class="n">a</span> <span class="n">distancia</span> <span class="n">normal</span><span class="o">.</span>
+
+<span class="n">Texto</span> <span class="n">en</span> <span class="n">presentaciones</span> <span class="p">(</span><span class="n">proyectadas</span><span class="p">):</span>
+  <span class="n">Minimo</span> <span class="mi">18</span><span class="n">pt</span> <span class="n">para</span> <span class="n">que</span> <span class="n">sea</span> <span class="n">legible</span> <span class="n">desde</span> <span class="n">el</span> <span class="n">fondo</span> <span class="n">de</span> <span class="n">la</span> <span class="n">sala</span><span class="o">.</span>
+  <span class="n">Titulos</span><span class="p">:</span> <span class="mi">28</span><span class="o">-</span><span class="mi">36</span><span class="n">pt</span><span class="o">.</span>
+
+<span class="n">Elementos</span> <span class="n">graficos</span><span class="p">:</span>
+  <span class="n">Puntos</span> <span class="n">en</span> <span class="n">scatter</span><span class="p">:</span> <span class="n">minimo</span> <span class="mi">4</span><span class="n">px</span> <span class="n">de</span> <span class="n">diametro</span><span class="o">.</span>
+  <span class="n">Lineas</span><span class="p">:</span> <span class="n">minimo</span> <span class="mf">1.5</span><span class="n">px</span> <span class="n">de</span> <span class="n">grosor</span> <span class="n">para</span> <span class="n">ser</span> <span class="n">legibles</span> <span class="n">con</span> <span class="n">claridad</span><span class="o">.</span>
+  <span class="n">Barras</span><span class="p">:</span> <span class="n">minimo</span> <span class="mi">4</span><span class="n">px</span> <span class="n">de</span> <span class="n">ancho</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="texto-alternativo-y-descripciones">
+<h3>7.4 Texto alternativo y descripciones<a class="headerlink" href="#texto-alternativo-y-descripciones" title="Link to this heading">#</a></h3>
+<p>En visualizaciones web y dashboards accesibles:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Añadir texto alternativo (alt text) a cada imagen de grafica.
+Formato recomendado del alt text:
+  &quot;[Tipo de grafica] de [variable] por [variable]. [Hallazgo principal].&quot;
+  
+Ejemplo:
+  &quot;Grafico de barras de ventas mensuales 2024. Las ventas alcanzaron su
+   maximo en diciembre con 2.3M USD, un 18% sobre el promedio anual.&quot;
+
+En Power BI: Panel de formato → General → Texto alternativo.
+En Plotly: fig.update_layout(annotations=[...]) o metadatos HTML.
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="narrativa-con-datos">
+<h2>8. Narrativa con Datos<a class="headerlink" href="#narrativa-con-datos" title="Link to this heading">#</a></h2>
+<section id="la-estructura-de-la-historia">
+<h3>8.1 La estructura de la historia<a class="headerlink" href="#la-estructura-de-la-historia" title="Link to this heading">#</a></h3>
+<p>Una visualizacion efectiva sigue una estructura narrativa:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>CONTEXTO:    Que estamos mirando? (titulo, subtitulo, fuente)
+TENSION:     Cual es el problema o pregunta? (lo que el lector quiere saber)
+RESOLUCION:  Cual es la respuesta? (el hallazgo destacado visualmente)
+ACCION:      Que debe hacer el lector? (llamada a la accion o conclusion)
+</pre></div>
+</div>
+</section>
+<section id="destacar-lo-que-importa">
+<h3>8.2 Destacar lo que importa<a class="headerlink" href="#destacar-lo-que-importa" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Tecnica 1 — Color selectivo:
+  Todo en gris excepto el elemento mas importante, que va en color saturado.
+
+Tecnica 2 — Anotacion directa:
+  Un cuadro de texto o flecha que dice exactamente lo que el grafico muestra.
+  &quot;Las ventas cayeron 23% en este periodo.&quot;
+
+Tecnica 3 — Orden:
+  Ordenar barras de mayor a menor (o viceversa) para que la jerarquia
+  sea inmediatamente visible. No usar orden alfabetico salvo que el lector
+  necesite buscar un elemento especifico.
+
+Tecnica 4 — Eliminacion:
+  Mostrar solo los N elementos mas relevantes. Si hay 50 categorias,
+  mostrar las 10 mas grandes y agrupar el resto en &quot;Otros&quot;.
+
+Tecnica 5 — Comparacion de referencia:
+  Añadir una linea de promedio, meta o periodo anterior como referencia.
+  El lector necesita un punto de comparacion para juzgar si algo es bueno o malo.
+</pre></div>
+</div>
+</section>
+<section id="el-orden-de-lectura">
+<h3>8.3 El orden de lectura<a class="headerlink" href="#el-orden-de-lectura" title="Link to this heading">#</a></h3>
+<p>Los lectores de culturas occidentales siguen el patron <strong>F</strong> o <strong>Z</strong> al escanear:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Patron Z (dashboards y slides):
+  [Inicio] → → → → → → [Fin]
+     ↓                ↙
+     ↓             ↙
+  [Siguiente linea] → → [Fin]
+
+Colocar el dato mas importante en la esquina superior izquierda.
+El segundo elemento mas importante, en la superior derecha.
+El resumen o conclusion, en la parte inferior.
+</pre></div>
+</div>
+</section>
+<section id="contexto-es-obligatorio">
+<h3>8.4 Contexto es obligatorio<a class="headerlink" href="#contexto-es-obligatorio" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Siempre incluir:
+  Unidades de medida en los ejes o en el titulo (&quot;USD&quot;, &quot;miles de usuarios&quot;, &quot;kg&quot;).
+  El periodo de tiempo cubierto (&quot;Enero-Diciembre 2024&quot;).
+  La fuente de los datos (&quot;Fuente: Sistema CRM, actualizado 2024-12-31&quot;).
+  Que significa cada color o forma (leyenda o etiquetas directas).
+  N o tamano de muestra en analisis estadisticos.
+
+Un numero sin contexto no comunica nada:
+  &quot;47%&quot; -&gt; de que? en que periodo? comparado con que?
+  &quot;47% de los clientes compraron mas de una vez en 2024,
+   frente al 38% en 2023&quot; -&gt; ahora si comunica.
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="errores-comunes">
+<h2>9. Errores Comunes<a class="headerlink" href="#errores-comunes" title="Link to this heading">#</a></h2>
+<section id="graficas-de-torta-con-demasiadas-categorias">
+<h3>9.1 Graficas de torta con demasiadas categorias<a class="headerlink" href="#graficas-de-torta-con-demasiadas-categorias" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PROBLEMA</span><span class="p">:</span>
+  <span class="n">Una</span> <span class="n">torta</span> <span class="n">con</span> <span class="mi">10</span> <span class="n">o</span> <span class="n">mas</span> <span class="n">sectores</span> <span class="n">es</span> <span class="n">inlegible</span><span class="o">.</span> <span class="n">Los</span> <span class="n">angulos</span> <span class="n">pequeños</span>
+  <span class="n">son</span> <span class="n">casi</span> <span class="n">imposibles</span> <span class="n">de</span> <span class="n">comparar</span> <span class="p">(</span><span class="n">jerarquia</span> <span class="n">de</span> <span class="n">percepcion</span><span class="p">:</span> <span class="n">angulo</span>
+  <span class="n">esta</span> <span class="n">en</span> <span class="n">el</span> <span class="n">puesto</span> <span class="mi">4</span><span class="p">,</span> <span class="n">por</span> <span class="n">debajo</span> <span class="n">de</span> <span class="n">posicion</span> <span class="n">y</span> <span class="n">longitud</span><span class="p">)</span><span class="o">.</span>
+
+<span class="n">SOLUCION</span><span class="p">:</span>
+  <span class="n">Usar</span> <span class="n">barras</span> <span class="n">horizontales</span> <span class="n">ordenadas</span> <span class="n">de</span> <span class="n">mayor</span> <span class="n">a</span> <span class="n">menor</span><span class="o">.</span>
+  <span class="n">Si</span> <span class="n">se</span> <span class="n">necesita</span> <span class="n">parte</span><span class="o">-</span><span class="n">todo</span><span class="p">,</span> <span class="n">usar</span> <span class="n">solo</span> <span class="n">con</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="n">categorias</span> <span class="n">y</span> <span class="n">cuando</span>
+  <span class="n">los</span> <span class="n">porcentajes</span> <span class="n">son</span> <span class="n">claramente</span> <span class="n">distintos</span> <span class="p">(</span><span class="n">no</span> <span class="n">comparar</span> <span class="mi">24</span><span class="o">%</span> <span class="n">vs</span> <span class="mi">26</span><span class="o">%</span><span class="p">)</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="graficas-3d-sin-justificacion">
+<h3>9.2 Graficas 3D sin justificacion<a class="headerlink" href="#graficas-3d-sin-justificacion" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PROBLEMA</span><span class="p">:</span>
+  <span class="n">El</span> <span class="mi">3</span><span class="n">D</span> <span class="n">añade</span> <span class="n">perspectiva</span> <span class="n">que</span> <span class="n">distorsiona</span> <span class="n">las</span> <span class="n">proporciones</span><span class="o">.</span>
+  <span class="n">En</span> <span class="n">una</span> <span class="n">torta</span> <span class="mi">3</span><span class="n">D</span><span class="p">,</span> <span class="n">los</span> <span class="n">sectores</span> <span class="n">frontales</span> <span class="n">parecen</span> <span class="n">mas</span> <span class="n">grandes</span> <span class="n">que</span> <span class="n">los</span> <span class="n">traseros</span>
+  <span class="n">aunque</span> <span class="n">sean</span> <span class="n">iguales</span><span class="o">.</span> <span class="n">En</span> <span class="n">barras</span> <span class="mi">3</span><span class="n">D</span><span class="p">,</span> <span class="n">la</span> <span class="n">profundidad</span> <span class="n">es</span> <span class="n">ruido</span> <span class="n">visual</span> <span class="n">puro</span><span class="o">.</span>
+
+<span class="n">SOLUCION</span><span class="p">:</span>
+  <span class="n">Usar</span> <span class="mi">3</span><span class="n">D</span> <span class="n">solo</span> <span class="n">cuando</span> <span class="n">los</span> <span class="n">datos</span> <span class="n">son</span> <span class="n">realmente</span> <span class="n">tridimensionales</span>
+  <span class="p">(</span><span class="n">superficie</span> <span class="n">matematica</span><span class="p">,</span> <span class="n">scatter</span> <span class="mi">3</span><span class="n">D</span> <span class="n">con</span> <span class="n">una</span> <span class="n">tercera</span> <span class="n">variable</span> <span class="n">real</span><span class="p">)</span><span class="o">.</span>
+  <span class="n">Nunca</span> <span class="n">usar</span> <span class="mi">3</span><span class="n">D</span> <span class="n">para</span> <span class="n">embellecer</span> <span class="n">datos</span> <span class="n">que</span> <span class="n">son</span> <span class="mi">2</span><span class="n">D</span> <span class="n">o</span> <span class="mi">1</span><span class="n">D</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="doble-eje-y-mal-usado">
+<h3>9.3 Doble eje Y mal usado<a class="headerlink" href="#doble-eje-y-mal-usado" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PROBLEMA</span><span class="p">:</span>
+  <span class="n">Dos</span> <span class="n">series</span> <span class="n">con</span> <span class="n">escalas</span> <span class="n">independientes</span> <span class="n">pueden</span> <span class="n">hacer</span> <span class="n">que</span> <span class="n">cualquier</span>
+  <span class="n">par</span> <span class="n">de</span> <span class="n">series</span> <span class="n">parezca</span> <span class="n">correlacionado</span> <span class="n">ajustando</span> <span class="n">las</span> <span class="n">escalas</span><span class="o">.</span>
+  <span class="n">Ejemplo</span> <span class="n">clasico</span><span class="p">:</span> <span class="n">correlacion</span> <span class="n">espuria</span> <span class="n">entre</span> <span class="n">el</span> <span class="n">consumo</span> <span class="n">de</span> <span class="n">helados</span>
+  <span class="n">y</span> <span class="n">la</span> <span class="n">temperatura</span><span class="p">,</span> <span class="n">en</span> <span class="n">el</span> <span class="n">mismo</span> <span class="n">grafico</span> <span class="n">que</span> <span class="n">las</span> <span class="n">ventas</span> <span class="n">de</span> <span class="n">paraguas</span><span class="o">.</span>
+
+<span class="n">SOLUCION</span><span class="p">:</span>
+  <span class="n">Normalizar</span> <span class="n">ambas</span> <span class="n">series</span> <span class="p">(</span><span class="n">z</span><span class="o">-</span><span class="n">score</span> <span class="n">o</span> <span class="n">indexar</span> <span class="n">a</span> <span class="mi">100</span> <span class="n">en</span> <span class="n">t</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span>
+  <span class="n">Usar</span> <span class="n">paneles</span> <span class="n">separados</span> <span class="p">(</span><span class="n">facetas</span><span class="p">)</span> <span class="n">con</span> <span class="n">el</span> <span class="n">mismo</span> <span class="n">eje</span> <span class="n">Y</span> <span class="n">si</span> <span class="n">es</span> <span class="n">posible</span><span class="o">.</span>
+  <span class="n">Si</span> <span class="n">se</span> <span class="n">usa</span> <span class="n">doble</span> <span class="n">eje</span><span class="p">,</span> <span class="n">que</span> <span class="n">quede</span> <span class="n">muy</span> <span class="n">claro</span> <span class="n">cuales</span> <span class="n">datos</span> <span class="n">usan</span> <span class="n">cual</span> <span class="n">eje</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="saturacion-de-informacion">
+<h3>9.4 Saturacion de informacion<a class="headerlink" href="#saturacion-de-informacion" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>PROBLEMA:
+  Un dashboard con 20 graficas en una pagina abruma al lector.
+  Nadie sabe donde mirar; ninguna metrica destaca.
+
+SOLUCION:
+  Regla de los 5-7 elementos: no mas de 5-7 graficas por pagina.
+  Organizar por jerarquia: KPIs clave arriba, detalles abajo.
+  Usar paginas o pestanas para organizar distintos niveles de detalle.
+  Preguntar: si el lector solo puede ver un dato, cual seria?
+             Ese dato debe ser el mas prominente.
+</pre></div>
+</div>
+</section>
+<section id="ordenacion-incorrecta">
+<h3>9.5 Ordenacion incorrecta<a class="headerlink" href="#ordenacion-incorrecta" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PROBLEMA</span><span class="p">:</span>
+  <span class="n">Barras</span> <span class="n">ordenadas</span> <span class="n">alfabeticamente</span> <span class="n">cuando</span> <span class="n">el</span> <span class="n">orden</span> <span class="n">de</span> <span class="n">magnitud</span> <span class="n">es</span> <span class="n">lo</span> <span class="n">que</span> <span class="n">importa</span><span class="o">.</span>
+  <span class="n">El</span> <span class="n">ojo</span> <span class="n">tiene</span> <span class="n">que</span> <span class="n">leer</span> <span class="n">todos</span> <span class="n">los</span> <span class="n">valores</span> <span class="n">para</span> <span class="n">encontrar</span> <span class="n">el</span> <span class="n">mayor</span><span class="o">.</span>
+
+<span class="n">SOLUCION</span><span class="p">:</span>
+  <span class="n">Ordenar</span> <span class="n">barras</span> <span class="n">de</span> <span class="n">mayor</span> <span class="n">a</span> <span class="n">menor</span> <span class="p">(</span><span class="n">o</span> <span class="n">viceversa</span><span class="p">)</span> <span class="n">salvo</span> <span class="n">que</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">Las</span> <span class="n">categorias</span> <span class="n">tienen</span> <span class="n">un</span> <span class="n">orden</span> <span class="n">natural</span> <span class="p">(</span><span class="n">meses</span><span class="p">,</span> <span class="n">dias</span><span class="p">,</span> <span class="n">edad</span><span class="p">)</span><span class="o">.</span>
+    <span class="o">-</span> <span class="n">El</span> <span class="n">lector</span> <span class="n">necesita</span> <span class="n">buscar</span> <span class="n">un</span> <span class="n">elemento</span> <span class="n">especifico</span> <span class="n">por</span> <span class="n">nombre</span><span class="o">.</span>
+    <span class="o">-</span> <span class="n">El</span> <span class="n">orden</span> <span class="n">temporal</span> <span class="n">es</span> <span class="n">el</span> <span class="n">mensaje</span> <span class="p">(</span><span class="n">evolucion</span> <span class="n">en</span> <span class="n">el</span> <span class="n">tiempo</span><span class="p">)</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="lineas-en-datos-no-continuos">
+<h3>9.6 Lineas en datos no continuos<a class="headerlink" href="#lineas-en-datos-no-continuos" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PROBLEMA</span><span class="p">:</span>
+  <span class="n">Conectar</span> <span class="n">con</span> <span class="n">lineas</span> <span class="n">datos</span> <span class="n">que</span> <span class="n">no</span> <span class="n">son</span> <span class="n">continuos</span> <span class="n">implica</span> <span class="n">que</span> <span class="n">los</span> <span class="n">valores</span>
+  <span class="n">intermedios</span> <span class="n">existen</span> <span class="n">e</span> <span class="n">interpolan</span> <span class="n">entre</span> <span class="n">los</span> <span class="n">puntos</span><span class="o">.</span>
+  <span class="n">Ejemplo</span><span class="p">:</span> <span class="n">conectar</span> <span class="n">con</span> <span class="n">linea</span> <span class="n">los</span> <span class="n">ingresos</span> <span class="n">de</span> <span class="n">distintos</span> <span class="n">departamentos</span>
+           <span class="n">implica</span> <span class="n">que</span> <span class="n">hay</span> <span class="n">un</span> <span class="n">continuo</span> <span class="n">entre</span> <span class="n">departamentos</span><span class="o">.</span>
+
+<span class="n">SOLUCION</span><span class="p">:</span>
+  <span class="n">Datos</span> <span class="n">continuos</span> <span class="p">(</span><span class="n">tiempo</span><span class="p">,</span> <span class="n">temperatura</span><span class="p">):</span> <span class="n">grafica</span> <span class="n">de</span> <span class="n">lineas</span><span class="o">.</span>
+  <span class="n">Datos</span> <span class="n">discretos</span> <span class="o">/</span> <span class="n">categoricos</span><span class="p">:</span> <span class="n">barras</span><span class="p">,</span> <span class="n">puntos</span> <span class="n">sin</span> <span class="n">lineas</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="escala-truncada-en-barras">
+<h3>9.7 Escala truncada en barras<a class="headerlink" href="#escala-truncada-en-barras" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PROBLEMA</span><span class="p">:</span>
+  <span class="n">Un</span> <span class="n">grafico</span> <span class="n">de</span> <span class="n">barras</span> <span class="n">que</span> <span class="n">no</span> <span class="n">empieza</span> <span class="n">en</span> <span class="mi">0</span> <span class="n">exagera</span> <span class="n">visualmente</span>
+  <span class="n">las</span> <span class="n">diferencias</span> <span class="n">entre</span> <span class="n">barras</span><span class="o">.</span>
+
+  <span class="n">Ejemplo</span><span class="p">:</span> <span class="n">barras</span> <span class="n">que</span> <span class="n">van</span> <span class="n">de</span> <span class="mi">95</span><span class="o">%</span> <span class="n">a</span> <span class="mi">100</span><span class="o">%</span> <span class="n">parecen</span> <span class="n">que</span> <span class="n">una</span> <span class="n">es</span>
+           <span class="n">el</span> <span class="n">doble</span> <span class="n">de</span> <span class="n">otra</span> <span class="n">cuando</span> <span class="n">en</span> <span class="n">realidad</span> <span class="n">difieren</span> <span class="n">en</span> <span class="mi">5</span> <span class="n">puntos</span><span class="o">.</span>
+
+<span class="n">SOLUCION</span><span class="p">:</span>
+  <span class="n">Barras</span> <span class="n">siempre</span> <span class="n">desde</span> <span class="mf">0.</span>
+  <span class="n">Si</span> <span class="n">el</span> <span class="n">rango</span> <span class="n">de</span> <span class="n">interes</span> <span class="n">es</span> <span class="mi">95</span><span class="o">-</span><span class="mi">100</span><span class="o">%</span><span class="p">,</span> <span class="n">usar</span> <span class="n">una</span> <span class="n">grafica</span> <span class="n">de</span> <span class="n">puntos</span>
+  <span class="p">(</span><span class="n">dot</span> <span class="n">plot</span><span class="p">)</span> <span class="n">o</span> <span class="n">anotar</span> <span class="n">la</span> <span class="n">diferencia</span> <span class="n">textualmente</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="lista-de-verificacion">
+<h2>10. Lista de Verificacion<a class="headerlink" href="#lista-de-verificacion" title="Link to this heading">#</a></h2>
+<section id="antes-de-construir-la-grafica">
+<h3>Antes de construir la grafica<a class="headerlink" href="#antes-de-construir-la-grafica" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="p">]</span> <span class="n">He</span> <span class="n">identificado</span> <span class="n">la</span> <span class="n">audiencia</span> <span class="n">y</span> <span class="n">su</span> <span class="n">nivel</span> <span class="n">tecnico</span><span class="o">.</span>
+<span class="p">[</span> <span class="p">]</span> <span class="n">He</span> <span class="n">definido</span> <span class="n">la</span> <span class="n">pregunta</span> <span class="n">o</span> <span class="n">decision</span> <span class="n">que</span> <span class="n">la</span> <span class="n">grafica</span> <span class="n">debe</span> <span class="n">facilitar</span><span class="o">.</span>
+<span class="p">[</span> <span class="p">]</span> <span class="n">Se</span> <span class="n">el</span> <span class="n">tipo</span> <span class="n">de</span> <span class="n">dato</span> <span class="n">que</span> <span class="n">tengo</span> <span class="p">(</span><span class="n">continuo</span><span class="p">,</span> <span class="n">discreto</span><span class="p">,</span> <span class="n">categorico</span><span class="p">,</span> <span class="n">temporal</span><span class="o">...</span><span class="p">)</span><span class="o">.</span>
+<span class="p">[</span> <span class="p">]</span> <span class="n">He</span> <span class="n">elegido</span> <span class="n">el</span> <span class="n">tipo</span> <span class="n">de</span> <span class="n">grafica</span> <span class="n">adecuado</span> <span class="n">para</span> <span class="n">el</span> <span class="n">tipo</span> <span class="n">de</span> <span class="n">dato</span> <span class="n">y</span> <span class="n">la</span> <span class="n">tarea</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="al-construir-la-grafica">
+<h3>Al construir la grafica<a class="headerlink" href="#al-construir-la-grafica" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="p">]</span> <span class="n">El</span> <span class="n">eje</span> <span class="n">Y</span> <span class="n">empieza</span> <span class="n">en</span> <span class="mi">0</span> <span class="p">(</span><span class="n">si</span> <span class="n">es</span> <span class="n">barra</span> <span class="n">o</span> <span class="n">area</span><span class="p">)</span><span class="o">.</span>
+<span class="p">[</span> <span class="p">]</span> <span class="n">Las</span> <span class="n">escalas</span> <span class="n">no</span> <span class="n">estan</span> <span class="n">truncadas</span> <span class="n">de</span> <span class="n">forma</span> <span class="n">engañosa</span><span class="o">.</span>
+<span class="p">[</span> <span class="p">]</span> <span class="n">Uso</span> <span class="n">maximo</span> <span class="mi">5</span><span class="o">-</span><span class="mi">6</span> <span class="n">colores</span> <span class="n">con</span> <span class="n">significado</span> <span class="n">claro</span><span class="o">.</span>
+<span class="p">[</span> <span class="p">]</span> <span class="n">Los</span> <span class="n">colores</span> <span class="n">son</span> <span class="n">accesibles</span> <span class="n">para</span> <span class="n">daltonismo</span><span class="o">.</span>
+<span class="p">[</span> <span class="p">]</span> <span class="n">El</span> <span class="n">color</span> <span class="n">no</span> <span class="n">es</span> <span class="n">el</span> <span class="n">unico</span> <span class="n">encoding</span> <span class="p">(</span><span class="n">hay</span> <span class="n">redundancia</span> <span class="n">con</span> <span class="n">forma</span><span class="p">,</span> <span class="n">posicion</span> <span class="n">o</span> <span class="n">etiqueta</span><span class="p">)</span><span class="o">.</span>
+<span class="p">[</span> <span class="p">]</span> <span class="n">La</span> <span class="n">cuadricula</span> <span class="n">es</span> <span class="n">mas</span> <span class="n">suave</span> <span class="n">que</span> <span class="n">los</span> <span class="n">datos</span><span class="o">.</span>
+<span class="p">[</span> <span class="p">]</span> <span class="n">He</span> <span class="n">eliminado</span> <span class="n">bordes</span><span class="p">,</span> <span class="n">sombras</span> <span class="n">y</span> <span class="n">efectos</span> <span class="n">decorativos</span> <span class="n">innecesarios</span><span class="o">.</span>
+<span class="p">[</span> <span class="p">]</span> <span class="n">Las</span> <span class="n">etiquetas</span> <span class="n">de</span> <span class="n">eje</span> <span class="n">son</span> <span class="n">legibles</span> <span class="p">(</span><span class="n">fuente</span><span class="p">,</span> <span class="n">tamaño</span><span class="p">,</span> <span class="n">angulo</span><span class="p">)</span><span class="o">.</span>
+<span class="p">[</span> <span class="p">]</span> <span class="n">El</span> <span class="n">titulo</span> <span class="n">describe</span> <span class="n">o</span> <span class="n">comunica</span> <span class="n">el</span> <span class="n">hallazgo</span> <span class="n">principal</span><span class="o">.</span>
+<span class="p">[</span> <span class="p">]</span> <span class="n">Las</span> <span class="n">unidades</span> <span class="n">estan</span> <span class="n">indicadas</span><span class="o">.</span>
+<span class="p">[</span> <span class="p">]</span> <span class="n">La</span> <span class="n">fuente</span> <span class="n">y</span> <span class="n">el</span> <span class="n">periodo</span> <span class="n">estan</span> <span class="n">indicados</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="al-revisar-la-grafica">
+<h3>Al revisar la grafica<a class="headerlink" href="#al-revisar-la-grafica" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="p">]</span> <span class="n">Puedo</span> <span class="n">leer</span> <span class="n">el</span> <span class="n">mensaje</span> <span class="n">principal</span> <span class="n">en</span> <span class="n">menos</span> <span class="n">de</span> <span class="mi">5</span> <span class="n">segundos</span><span class="o">.</span>
+<span class="p">[</span> <span class="p">]</span> <span class="n">Lo</span> <span class="n">mas</span> <span class="n">importante</span> <span class="n">visualmente</span> <span class="n">ES</span> <span class="n">lo</span> <span class="n">mas</span> <span class="n">importante</span> <span class="n">informativamente</span><span class="o">.</span>
+<span class="p">[</span> <span class="p">]</span> <span class="n">No</span> <span class="n">hay</span> <span class="n">elementos</span> <span class="n">que</span> <span class="n">compitan</span> <span class="n">con</span> <span class="n">el</span> <span class="n">mensaje</span> <span class="n">principal</span><span class="o">.</span>
+<span class="p">[</span> <span class="p">]</span> <span class="n">Si</span> <span class="n">imprimo</span> <span class="n">en</span> <span class="n">blanco</span> <span class="n">y</span> <span class="n">negro</span><span class="p">,</span> <span class="n">la</span> <span class="n">grafica</span> <span class="n">sigue</span> <span class="n">siendo</span> <span class="n">legible</span><span class="o">.</span>
+<span class="p">[</span> <span class="p">]</span> <span class="n">Si</span> <span class="n">muestro</span> <span class="n">solo</span> <span class="n">el</span> <span class="n">titulo</span> <span class="n">y</span> <span class="n">la</span> <span class="n">grafica</span> <span class="n">sin</span> <span class="n">contexto</span> <span class="n">adicional</span><span class="p">,</span> <span class="n">se</span> <span class="n">entiende</span> <span class="n">sola</span><span class="o">.</span>
+<span class="p">[</span> <span class="p">]</span> <span class="n">Alguien</span> <span class="n">que</span> <span class="n">no</span> <span class="n">conoce</span> <span class="n">los</span> <span class="n">datos</span> <span class="n">puede</span> <span class="n">entenderla</span> <span class="n">sin</span> <span class="n">explicacion</span> <span class="n">oral</span><span class="o">.</span>
+<span class="p">[</span> <span class="p">]</span> <span class="n">He</span> <span class="n">verificado</span> <span class="n">que</span> <span class="n">los</span> <span class="n">datos</span> <span class="n">representados</span> <span class="n">son</span> <span class="n">correctos</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="referencias">
+<h2>Referencias<a class="headerlink" href="#referencias" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Tufte, E. R. (1983). <em>The Visual Display of Quantitative Information</em>. Graphics Press.</p></li>
+<li><p>Cleveland, W. S., &amp; McGill, R. (1984). Graphical perception: Theory, experimentation, and application. <em>Journal of the American Statistical Association</em>, 79(387), 531-554.</p></li>
+<li><p>Cleveland, W. S. (1993). <em>Visualizing Data</em>. Hobart Press.</p></li>
+<li><p>Cairo, A. (2012). <em>The Functional Art: An Introduction to Information Graphics and Visualization</em>. New Riders.</p></li>
+<li><p>Knaflic, C. N. (2015). <em>Storytelling with Data</em>. Wiley.</p></li>
+<li><p>Few, S. (2012). <em>Show Me the Numbers: Designing Tables and Graphs to Enlighten</em>. Analytics Press.</p></li>
+<li><p>Miller, G. A. (1956). The magical number seven, plus or minus two. <em>Psychological Review</em>, 63(2), 81-97.</p></li>
+<li><p>Wong, B. (2011). Color blindness. <em>Nature Methods</em>, 8(6), 441.</p></li>
+<li><p>Ware, C. (2004). <em>Information Visualization: Perception for Design</em>. Morgan Kaufmann.</p></li>
+<li><p>WCAG 2.1: <a class="reference external" href="https://www.w3.org/TR/WCAG21/">https://www.w3.org/TR/WCAG21/</a></p></li>
+<li><p>ColorBrewer: <a class="reference external" href="https://colorbrewer2.org">https://colorbrewer2.org</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Unidad 2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="07_comparativa_y_casos.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">2.10: Comparativa y Casos de Uso</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="buenas_practicas_visualizacion.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">2.12 Buenas Prácticas de Visualización de Datos</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indice">Indice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principios-fundamentales">1. Principios Fundamentales</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-jerarquia-de-precision-perceptual">1.1 La jerarquia de precision perceptual</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-relacion-datos-tinta-data-ink-ratio">1.2 La relacion datos-tinta (Data-Ink Ratio)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-cognitiva">1.3 Carga cognitiva</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-proposito-de-la-visualizacion">1.4 El proposito de la visualizacion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#percepcion-visual-y-preatencion">2. Percepcion Visual y Preatencion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atributos-preatentivos">2.1 Atributos preatentivos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#codificacion-multiple">2.2 Codificacion multiple</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#efecto-de-figura-y-fondo">2.3 Efecto de figura y fondo</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eleccion-y-uso-del-color">3. Eleccion y Uso del Color</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#los-tres-tipos-de-paletas">3.1 Los tres tipos de paletas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principios-de-uso-del-color">3.2 Principios de uso del color</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contraste-y-legibilidad">3.3 Contraste y legibilidad</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numero-de-colores">3.4 Numero de colores</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipografia-y-texto">4. Tipografia y Texto</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jerarquia-tipografica">4.1 Jerarquia tipografica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tipografias-recomendadas">4.2 Tipografias recomendadas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#etiquetas-de-datos">4.3 Etiquetas de datos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#titulos-y-subtitulos-efectivos">4.4 Titulos y subtitulos efectivos</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejes-escalas-y-proporciones">5. Ejes, Escalas y Proporciones</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-eje-y-y-el-cero">5.1 El eje Y y el cero</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#escalas-logaritmicas">5.2 Escalas logaritmicas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eje-secundario">5.3 Eje secundario</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aspect-ratio-relacion-de-aspecto">5.4 Aspect ratio (relacion de aspecto)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#truncar-graficas-de-area">5.5 Truncar graficas de area</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reduccion-del-ruido-visual">6. Reduccion del Ruido Visual</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-principio-de-eliminacion-progresiva">6.1 El principio de eliminacion progresiva</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cuadricula">6.2 Cuadricula</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#leyenda-vs-etiquetas-directas">6.3 Leyenda vs. Etiquetas directas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sobreannotacion">6.4 Sobreannotacion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accesibilidad">7. Accesibilidad</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#daltonismo">7.1 Daltonismo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#redundancia-visual-para-accesibilidad">7.2 Redundancia visual para accesibilidad</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tamanos-minimos">7.3 Tamanos minimos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#texto-alternativo-y-descripciones">7.4 Texto alternativo y descripciones</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#narrativa-con-datos">8. Narrativa con Datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-estructura-de-la-historia">8.1 La estructura de la historia</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#destacar-lo-que-importa">8.2 Destacar lo que importa</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-orden-de-lectura">8.3 El orden de lectura</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contexto-es-obligatorio">8.4 Contexto es obligatorio</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errores-comunes">9. Errores Comunes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficas-de-torta-con-demasiadas-categorias">9.1 Graficas de torta con demasiadas categorias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficas-3d-sin-justificacion">9.2 Graficas 3D sin justificacion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#doble-eje-y-mal-usado">9.3 Doble eje Y mal usado</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#saturacion-de-informacion">9.4 Saturacion de informacion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ordenacion-incorrecta">9.5 Ordenacion incorrecta</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lineas-en-datos-no-continuos">9.6 Lineas en datos no continuos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#escala-truncada-en-barras">9.7 Escala truncada en barras</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lista-de-verificacion">10. Lista de Verificacion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#antes-de-construir-la-grafica">Antes de construir la grafica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#al-construir-la-grafica">Al construir la grafica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#al-revisar-la-grafica">Al revisar la grafica</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencias">Referencias</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Sergio Alejandro Holguin García
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
