@@ -18,6 +18,26 @@ chapters:
   - file: Unidad 1/18_agentes.md
   - file: Unidad 1/agentes_colab.ipynb
   - file: Unidad 1/frameworks_agentes.ipynb
+- file: Unidad2.md
+  sections:
+  - file: Unidad 2/Matplotlib.md
+  - file: Unidad 2/01_matplotlib_intro
+  - file: Unidad 2/02_matplotlib_avanzado
+  - file: Unidad 2/Seaborn
+  - file: Unidad 2/03_seaborn_intro
+  - file: Unidad 2/plotly
+  - file: Unidad 2/04_seaborn_avanzado 
+  - file: Unidad 2/05_plotly_intro
+  - file: Unidad 2/06_plotly_avanzado
+  - file: Unidad 2/07_comparativa_y_casos
+  - file: Unidad 2/Buenas_Practicas
+  - file: Unidad 2/buenas_practicas_visualizacion
+  - file: Unidad 2/Que_Escoger
+  - file: Unidad 2/Que Grafica escoger
+  - file: Unidad 2/caso_practico_fifa23
+  - file: Unidad 2/pbi
+  
+
 
 
 
