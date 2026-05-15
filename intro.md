@@ -154,7 +154,7 @@ Capacitar al estudiante en el diseño, desarrollo e implementación de solucione
 **Unidad 2**
 ^^^
 
-**Proyectos de Ciencia de Datos**
+**Visualización de datos**
 :::
 
 :::{grid-item-card}
